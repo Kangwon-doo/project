@@ -7,7 +7,7 @@ class Coffee(models.Model):
     CoffeeID = models.IntegerField(primary_key=True)
     Coffeename = models.CharField(max_length=45)
     RoasteryID = models.ForeignKey("Roastery", on_delete=models.CASCADE)
-    # info = models.CharField(max_length=3000)
+    info = models.CharField(max_length=3000)
 
     class Meta:
         db_table = "coffee"
@@ -24,7 +24,7 @@ class Roastery(models.Model):
 
 class Order(models.Model):
     OrderID = models.IntegerField(primary_key=True)
-    CumstomerID = models.ForeignKey("Customer", on_delete=models.CASCADE)
+    CustomerID = models.ForeignKey("Customer", on_delete=models.CASCADE)
     CoffeeID = models.ForeignKey("Coffee", on_delete=models.CASCADE)
     Amount = models.IntegerField(null=False)
     OrderDate = models.DateTimeField()
@@ -41,10 +41,10 @@ class Customer(models.Model):
         "F": "Female",
         "M": "Male",
     }
-    Gender = models.CharField(
+    '''Gender = models.CharField(
         max_length=1,
         choices=Gender_CHOICES,
-    )
+    )'''
 
     BirthDate = models.DateTimeField(default=datetime.date)
 
@@ -66,3 +66,4 @@ class Reviews():
     #Stars = models.
     content = models.TextField()
     created_date = models.DateTimeField()
+    
