@@ -37,17 +37,16 @@ class Customer(models.Model):
     CustomerID = models.CharField(primary_key=True, max_length=12, validators=[MinLengthValidator(8, '8자 이상으로 적어주세요!')])
     name = models.CharField(null=False, max_length=8)
     CustomerAddress = models.CharField(max_length=3000)
-    Gender_CHOICES = {
-        "F": "Female",
-        "M": "Male",
-    }
+    Gender_CHOICES = [
+        ("F", "여성"),
+        ("M", "남성"),
+    ]
     Gender = models.CharField(
         max_length=1,
         choices=Gender_CHOICES,
+        null=True
     )
-
     BirthDate = models.DateTimeField(default=datetime.date)
-
     # def age(self):
     #     import datetime
     #     dob = self.BirthDate

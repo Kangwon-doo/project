@@ -78,10 +78,10 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'test',  # DB name
+        'NAME': 'wondoodoo',  # DB name
         'USER' : 'root',  # account name
-        'PASSWORD' : 'MShw1214!',  # password
-        'HOST' : 'localhost',  # actual DB address
+        'PASSWORD' : 'seol0513',  # password
+        'HOST' : '127.0.0.1',  # actual DB address
         'PORT' : '3306',
     }
 }
