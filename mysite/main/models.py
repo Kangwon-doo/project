@@ -40,7 +40,7 @@ class Customer(models.Model):
     Gender_CHOICES = [
         ("F", "여성"),
         ("M", "남성"),
-
+        
     ]
         
     Gender = models.CharField(
