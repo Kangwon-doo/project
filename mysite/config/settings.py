@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'main.apps.MainConfig',
 ]
 
 MIDDLEWARE = [
@@ -75,16 +74,18 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'test',  # DB name
-        'USER' : 'root',  # account name
-        'PASSWORD' : 'MShw1214!',  # password
-        'HOST' : 'localhost',  # actual DB address
-        'PORT' : '3306',
+        'NAME': 'wondoodoo',
+        'USER': 'root',
+        'PASSWORD': '1234',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
     }
 }
+
 
 
 # Password validation
@@ -109,9 +110,11 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
+
 LANGUAGE_CODE = 'ko-kr'
 
 TIME_ZONE = 'Asia/Seoul'
+
 
 USE_I18N = True
 
