@@ -78,8 +78,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'wondoodoo',
-        'USER': 'root', 
-        'PASSWORD': '6618', 
+        'USER': 'root',
+        'PASSWORD': '1234',
         'HOST': '127.0.0.1',  # 서버주소
         'PORT': '3306', # MySQL 포트 번호: 기본값 3306
 }
