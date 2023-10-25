@@ -79,5 +79,9 @@ class Reviews():
     #Stars = models.
     content = models.TextField()
     created_date = models.DateTimeField()
+<<<<<<< HEAD
 
 class Subscription():
+=======
+    
+>>>>>>> 7e67ec689b016c4af7cf13ba415c19de87b17e69
