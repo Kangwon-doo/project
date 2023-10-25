@@ -8,15 +8,15 @@ class Coffee(models.Model):
     CoffeeName = models.CharField(max_length=45) # 커피 이름
     RoasteryID = models.ForeignKey("Roastery", on_delete=models.CASCADE) # 로스터리 ID
     Info = models.CharField(max_length=3000) # 커피 정보
-    CoffeeType = models.TextField() # 타입
-    RoastingPoint  = models.TextField() # 로스팅 포인트
-    Sustainability  = models.TextField() # 지속가능성
+    CoffeeType = models.CharField(max_length=5) # 타입
+    RoastingPoint  = models.CharField(max_length=5)  # 로스팅 포인트
+    Sustainability  = models.CharField(max_length=4)  # 지속가능성
     CupNote  = models.TextField() # 컵 노트/아로마
-    Body  = models.TextField() # 바디감
-    Sourness  = models.TextField() # 신맛
-    Sweetness  = models.TextField() # 단맛
-    Bitterness  = models.TextField() # 쓴맛
-    Caffeine  = models.TextField() # 디카페인/카페인
+    Body  = models.CharField(max_length=1) # 바디감
+    Sourness  = models.CharField(max_length=1) # 신맛
+    Sweetness  = models.CharField(max_length=1) # 단맛
+    Bitterness  = models.CharField(max_length=1) # 쓴맛
+    Caffeine  = models.CharField(max_length=1) # 디카페인/카페인
     CoffeeInfo  = models.TextField() # 커피 소개
     Country  = models.TextField() # 나라
     ProductType  = models.TextField() # 식품의 유형
@@ -68,9 +68,9 @@ class Customer(models.Model):
         null=True
     )
     BirthDate = models.DateTimeField(default=datetime.date) # 생년월일
-    email = models.EmailField(max_length = 254) # 이메일
-    Password = models.TextField() # 비밀번호
-    PhoneNumber = models.TextField() # 전화번호
+    email = models.EmailField(max_length = 40) # 이메일
+    Password = models.TextField(validators=[MinLengthValidator(8, '8자 이상으로 적어주세요!')]) # 비밀번호
+    PhoneNumber = models.TextField(validators=[MinLengthValidator(10, '')]) # 전화번호
     
 
 class Reviews():
