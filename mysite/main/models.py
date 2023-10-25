@@ -7,7 +7,7 @@ class Coffee(models.Model):
     CoffeeID = models.IntegerField(primary_key=True)
     Coffeename = models.CharField(max_length=45)
     RoasteryID = models.ForeignKey("Roastery", on_delete=models.CASCADE)
-    info = models.CharField(max_length=3000)
+    # info = models.CharField(max_length=3000)
 
     class Meta:
         db_table = "coffee"
@@ -24,7 +24,7 @@ class Roastery(models.Model):
 
 class Order(models.Model):
     OrderID = models.IntegerField(primary_key=True)
-    CustomerID = models.ForeignKey("Customer", on_delete=models.CASCADE)
+    CumstomerID = models.ForeignKey("Customer", on_delete=models.CASCADE)
     CoffeeID = models.ForeignKey("Coffee", on_delete=models.CASCADE)
     Amount = models.IntegerField(null=False)
     OrderDate = models.DateTimeField()
@@ -37,16 +37,13 @@ class Customer(models.Model):
     CustomerID = models.CharField(primary_key=True, max_length=12, validators=[MinLengthValidator(8, '8자 이상으로 적어주세요!')])
     name = models.CharField(null=False, max_length=8)
     CustomerAddress = models.CharField(max_length=3000)
-    Gender_CHOICES = [
-        ("F", "여성"),
-        ("M", "남성"),
-
-    ]
-        
+    Gender_CHOICES = {
+        "F": "Female",
+        "M": "Male",
+    }
     Gender = models.CharField(
         max_length=1,
         choices=Gender_CHOICES,
-        null=True
     )
 
     BirthDate = models.DateTimeField(default=datetime.date)
@@ -69,4 +66,3 @@ class Reviews():
     #Stars = models.
     content = models.TextField()
     created_date = models.DateTimeField()
-    
