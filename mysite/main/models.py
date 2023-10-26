@@ -2,7 +2,18 @@ from django.db import models
 from django.core.validators import MinLengthValidator, MaxValueValidator, MinValueValidator
 import datetime
 
-# Create your models here.
+
+
+class Roastery(models.Model):
+    RoasteryID = models.IntegerField(primary_key=True) # 로스터리 ID
+    RoasteryName = models.CharField(max_length=45) # 로스터리 이름
+    RoasteryAddress = models.CharField(max_length=3000) # 로스터리 주소
+    RoasteryInfo = models.TextField() # 로스터리 소개
+
+    class Meta:
+        db_table = "roastery"
+
+
 class Coffee(models.Model):
     CoffeeID = models.IntegerField(primary_key=True) # 커피 ID
     CoffeeName = models.CharField(max_length=45) # 커피 이름
@@ -31,16 +42,6 @@ class Coffee(models.Model):
 
     class Meta:
         db_table = "coffee"
-
-
-class Roastery(models.Model):
-    RoasteryID = models.IntegerField(primary_key=True) # 로스터리 ID
-    RoasterName = models.CharField(max_length=45) # 로스터리 이름
-    RoasteryAddress = models.CharField(max_length=3000) # 로스터리 주소
-    RoasteryInfo = models.TextField() # 로스터리 소개
-
-    class Meta:
-        db_table = "roastery"
 
 
 class Order(models.Model):
@@ -79,4 +80,5 @@ class Reviews():
     #Stars = models.
     content = models.TextField()
     created_date = models.DateTimeField()
+    
     
