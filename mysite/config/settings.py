@@ -37,9 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
     'main.apps.MainConfig',
-]
+    ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -78,12 +77,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'test',  # DB name
-        'USER' : 'root',  # account name
-        'PASSWORD' : 'MShw1214!',  # password
-        'HOST' : 'localhost',  # actual DB address
-        'PORT' : '3306',
-    }
+        'NAME': 'wondoodoo', # DB name
+        'USER': 'root', # account name
+        'PASSWORD': 'MShw1214!',
+        'HOST': '127.0.0.1',  # 서버주소
+        'PORT': '3306', # MySQL 포트 번호: 기본값 3306
+}
 }
 
 
