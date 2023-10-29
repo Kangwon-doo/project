@@ -77,15 +77,9 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-<<<<<<< HEAD
-        'NAME': 'wondoodoo', # DB name
-        'USER': 'root', # account name
-        'PASSWORD': '6618', 
-=======
         'NAME': 'wondoodoo',
         'USER': 'root',
         'PASSWORD': '1234',
->>>>>>> 7e67ec689b016c4af7cf13ba415c19de87b17e69
         'HOST': '127.0.0.1',  # 서버주소
         'PORT': '3306', # MySQL 포트 번호: 기본값 3306
 }
