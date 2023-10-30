@@ -13,7 +13,7 @@
 {% if wizard.form.forms %}
     {{ wizard.form.management_form }}
     {% for form in wizard.form.forms %}
-        {{ form.as_table }}
+        {{ form }}
     {% endfor %}
 {% else %}
     {{ wizard.form }}
