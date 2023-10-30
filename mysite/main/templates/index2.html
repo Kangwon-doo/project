@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <title>메인사이트</title>
+    <!-- css -->
+    <link rel="stylesheet" type="text/css" href="static/css/style.css">
+    
+{% endblock %}
+
+{% block content %}
+<form name="location" action="." method="GET">
+    <div>
+        <label for="lat">ss</label>
+        <input type="radio" name="lat" id="lat" class="lat" />
+    </div>
+    <div class='hm'>
+        <label for="lon">{{lat}}</label>
+        <input type="hidden" name="lon" id="lon" class="lon" />
+    </div>
+    <h5>안녕하세요</h5>
+    
+</form>
+
+
+{% endblock %}
