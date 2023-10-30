@@ -55,13 +55,13 @@ class Order(models.Model):
 
 
 class Customer(models.Model):
-    CustomerID = models.CharField(primary_key=True,max_length=12, validators=[MinLengthValidator(8, '8자 이상으로 적어주세요!')]) # 고객 ID
+    CustomerID = models.CharField(primary_key=True,max_length=20, validators=[MinLengthValidator(8, '8자 이상으로 적어주세요!')]) # 고객 ID
     name = models.CharField(null=False, max_length=8) # 닉네임
     CustomerAddress = models.CharField(max_length=3000) # 주소
     Gender_CHOICES = [
         ("F", "여성"),
         ("M", "남성"),
-        ('N', "없음"),
+        ('N', "선택 안함"),
     ]
     Gender = models.CharField(  # 성별
         max_length=1,
