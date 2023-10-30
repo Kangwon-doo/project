@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!--mypage start -->
+<section id="mypage" class="mypage">
+    <div class="container">
+        <div class = title>마이페이지</div>
+        <div id = 'mypage_header'>
+            <div id = 'img_box'><img src = '../../static/images/about/profile_image.jpg'></div>
+            <div id = 'idEmail_box'>
+                <div id = 'userid'><span>yjkang</span></div>
+                <div id = 'useremail'><span>yjkang@naver.com</span></div>
+            </div>
+        </div>
+        <div id = 'mypage_body'>
+            <div class = 'select_menu'>
+                <ul>
+                    <li>개인정보</li>
+                    <li>맞춤정보</li>
+                    <li>구매내역</li>
+                    <li>배송내역</li>
+                    <li>구독정보</li>
+                </ul>
+            </div>
+            <div class = 'content' id = 'private_info'>
+                <div>
+                    <span>아이디</span>
+                    <span><button>변경</button></span>
+                </div>
+                <div>
+                    <span>비밀번호</span>
+                </div>
+                <div><span>이메일</span></div>
+                <div><span>전화번호</span></div>
+                <div><span>주소</span></div>
+                <div><span>생년월일</span></div>
+                <div><span>성별</span></div>
+            </div>
+        </div>
+    </div><!-- /.container-->
+
+</section><!--/.mypage-->
+<!--mypage end -->
+
+{% endblock %}

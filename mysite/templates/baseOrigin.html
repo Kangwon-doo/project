@@ -1,0 +1,36 @@
+{% load static %}
+<!doctype html>
+<html lang=ko>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- css template   -->
+
+
+    <!-- bootstrap-->
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
+    <!-- css -->
+    <link rel= "stylesheet" type="text/css" href = "{% static 'style.css' %}">
+    <title>main</title>
+</head>
+<body>
+{% include "navbar.html" %}
+
+<!--기본 템플릿 안에 삽입될 내용 Start -->
+{% block content %}
+{% endblock %}
+<!--기본 템플릿 안에 삽입될 내용 End-->
+
+<!--Bootstrap js -->
+<!--<script src = "{% static 'bootstrap.min.js' %}"></script>-->
+
+<!-- javascript Start -->
+{% block script %}
+{% endblock %}
+<!-- javascript End -->
+
+</body>
+</html>
