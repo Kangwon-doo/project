@@ -4,10 +4,19 @@ from formtools.wizard.views import SessionWizardView
 from main.forms import TempForm
 
 # Create your views here.
+'''def index(request):
+    template_name = "index2.html"
+    
+    return render(request, template_name)'''
+    
 def index(request):
-
-    return HttpResponse("안녕하세요 여기는 메인 페이지입니다!")
-
+   # 위도 경도
+   lat = request.GET.get('lat')
+   lon = request.GET.get('lon')
+   context = {'lat':lat, 'lon':lon}
+   template_name = "index2.html"
+   return render(request, template_name, context)
+   
 class TempWizardView(SessionWizardView):
     form_list = [TempForm]
     template_name = "index.html"

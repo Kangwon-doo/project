@@ -6,5 +6,5 @@ class TempForm(forms.ModelForm):
     
     class Meta:
         model = Temp
-        fields = ("Coffee","Caffeine","Taste")
+        fields = ("Caffeine",)
 
