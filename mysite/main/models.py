@@ -2,14 +2,25 @@ from django.db import models
 from django.core.validators import MinLengthValidator, MaxValueValidator, MinValueValidator
 import datetime
 
-# Create your models here.
+
+
+class Roastery(models.Model):
+    RoasteryID = models.IntegerField(primary_key=True) # 로스터리 ID
+    RoasteryName = models.CharField(max_length=45) # 로스터리 이름
+    RoasteryAddress = models.CharField(max_length=3000) # 로스터리 주소
+    RoasteryInfo = models.TextField() # 로스터리 소개
+
+    class Meta:
+        db_table = "roastery"
+
+
 class Coffee(models.Model):
     CoffeeID = models.IntegerField(primary_key=True) # 커피 ID
-    CoffeeName = models.CharField(max_length=45) # 커피 이름
+    CoffeeName = models.CharField(max_length=50) # 커피 이름
     RoasteryID = models.ForeignKey("Roastery", on_delete=models.CASCADE) # 로스터리 ID
     Info = models.CharField(max_length=3000) # 커피 정보
-    CoffeeType = models.CharField(max_length=5) # 타입
-    RoastingPoint  = models.CharField(max_length=5)  # 로스팅 포인트
+    CoffeeType = models.TextField() # 타입
+    RoastingPoint  = models.TextField()  # 로스팅 포인트
     Sustainability  = models.CharField(max_length=4)  # 지속가능성
     CupNote  = models.TextField() # 컵 노트/아로마
     Body  = models.CharField(max_length=1) # 바디감
@@ -31,16 +42,6 @@ class Coffee(models.Model):
 
     class Meta:
         db_table = "coffee"
-
-
-class Roastery(models.Model):
-    RoasteryID = models.IntegerField(primary_key=True) # 로스터리 ID
-    RoasterName = models.CharField(max_length=45) # 로스터리 이름
-    RoasteryAddress = models.CharField(max_length=3000) # 로스터리 주소
-    RoasteryInfo = models.TextField() # 로스터리 소개
-
-    class Meta:
-        db_table = "roastery"
 
 
 class Order(models.Model):
@@ -79,6 +80,4 @@ class Reviews():
     #Stars = models.
     content = models.TextField()
     created_date = models.DateTimeField()
-
-
-# class Subscription():
+    
