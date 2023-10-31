@@ -77,23 +77,13 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-<<<<<<< HEAD
         'NAME': 'wondoodoo', # DB name
         'USER': 'root', # account name
-<<<<<<< HEAD
         'PASSWORD': 'MShw1214!',
-=======
-        'PASSWORD': '6618', 
-=======
-        'NAME': 'wondoodoo',
-        'USER': 'root',
-        'PASSWORD': '1234',
->>>>>>> 7e67ec689b016c4af7cf13ba415c19de87b17e69
->>>>>>> 882019022491ece409a59a6e5dd655136a5decfe
         'HOST': '127.0.0.1',  # 서버주소
-        'PORT': '3306', # MySQL 포트 번호: 기본값 3306
+        'PORT': '3306', # MySQ
 }
-}
+    };
 
 
 # Password validation
@@ -112,25 +102,25 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
-]
+];
 
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
-LANGUAGE_CODE = 'ko-kr'
+LANGUAGE_CODE = 'ko-kr';
 
-TIME_ZONE = 'Asia/Seoul'
+TIME_ZONE = 'Asia/Seoul';
 
-USE_I18N = True
+USE_I18N = True;
 
-USE_TZ = True
+USE_TZ = True;
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = 'static/';
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
