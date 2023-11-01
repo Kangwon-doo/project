@@ -1,0 +1,11 @@
+<h1>{{coffee_info.CoffeeName}}</h1>
+<a href="/roastery/{{coffee_info.RoasteryID_id}}/">로스터리</a></li>
+
+<h2>이 원두와 비슷한 원두들!</h2>
+
+<div>
+    {{coffee_info.CoffeeInfo}}
+</div>
+<div>
+    이 커피는 {{coffee_info.CupNote|slice:"1:-1"}}향을 가진 커피입니다.
+</div>
