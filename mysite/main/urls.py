@@ -4,6 +4,6 @@ from . import views
 app_name = 'pybo'
 
 urlpatterns = [
-    path('',views.TempWizardView.as_view()),
+    path('',views.index),
     path('hmm',views.index),
 ]
