@@ -6,5 +6,5 @@ app_name = 'pybo'
 urlpatterns = [
     path('', views.index),
     path('mypage/', views.mypage),
-    path('', views.index),
+    path('signin/', views.signin),
 ]

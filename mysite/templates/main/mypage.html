@@ -13,28 +13,44 @@
             </div>
         </div>
         <div id = 'mypage_body'>
-            <div class = 'select_menu'>
+            <div class = 'select_menu_box'>
                 <ul>
-                    <li>개인정보</li>
-                    <li>맞춤정보</li>
-                    <li>구매내역</li>
-                    <li>배송내역</li>
-                    <li>구독정보</li>
+                    <li class = 'select_menu' onclick = 'menuclick()'>개인정보</li>
+                    <li class = 'select_menu'>구매내역</li>
+                    <li class = 'select_menu'>구독정보</li>
+                    <li class = 'select_menu'>탈퇴하기</li>
                 </ul>
             </div>
             <div class = 'content' id = 'private_info'>
                 <div>
                     <span>아이디</span>
+                    <span><input type="text" class="form-control" placeholder="id_example"></span>
                     <span><button>변경</button></span>
                 </div>
                 <div>
                     <span>비밀번호</span>
+                    <span><input type="text" class="form-control" placeholder="id_example"></span>
                 </div>
-                <div><span>이메일</span></div>
-                <div><span>전화번호</span></div>
-                <div><span>주소</span></div>
-                <div><span>생년월일</span></div>
-                <div><span>성별</span></div>
+                <div>
+                    <span>이메일</span>
+                    <span><input type="text" class="form-control" placeholder="id_example"></span>
+                </div>
+                <div>
+                    <span>전화번호</span>
+                    <span><input type="text" class="form-control" placeholder="id_example"></span>
+                </div>
+                <div>
+                    <span>주소</span>
+                    <span><input type="text" class="form-control" placeholder="id_example"></span>
+                </div>
+                <div>
+                    <span>생년월일</span>
+                    <span><input type="text" class="form-control" placeholder="id_example"></span>
+                </div>
+                <div>
+                    <span>성별</span>
+                    <span><input type="text" class="form-control" placeholder="id_example"></span>
+                </div>
             </div>
         </div>
     </div><!-- /.container-->
@@ -43,3 +59,9 @@
 <!--mypage end -->
 
 {% endblock %}
+
+<script>
+function menuclick(){
+        document.querySelectorAll('.select_menu')
+}
+</script>

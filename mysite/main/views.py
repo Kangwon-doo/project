@@ -10,5 +10,8 @@ def index(request):
 
 def mypage(request):
 
-
     return render(request, 'main/mypage.html')
+
+def signin(request):
+
+    return render(request, 'main/signin.html')

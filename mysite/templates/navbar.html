@@ -11,7 +11,7 @@
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
                         <i class="fa fa-bars"></i>
                     </button>
-                    <a class="navbar-brand" href="/">Coffee</a>
+                    <a class="navbar-brand" href="/" style = 'color: rgb(255,165,63)'>Coffee</a>
                 </div><!--/.navbar-header-->
                 <!-- End Header Navigation -->
 
@@ -25,17 +25,22 @@
                         <li class="smooth-menu"><a href="#profiles">정기구독</a></li>
                     </ul><!--/.nav -->
                     <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-                        <li class=" smooth-menu active"></li>
-                        <li class=" smooth-menu">
-                            <a href="#education"><span class="material-icons">search</span></a>
+                        <li class="smooth-menu active"></li>
+                        <li class="smooth-menu" onclick="searchicon()">
+                            <a style="display: inline-flex; justify-content: center; align-items: center; }">
+                                <input type="text" class="form-control" placeholder="search">
+                                <span class="material-icons" style="border: 1px solid #ccc; padding: 5px; border-radius: 5px;">search</span>
+                            </a>
                         </li>
-                        <li class=" smooth-menu">
-                            <a href="/mypage/"><span class="material-icons">person</span></a>
+                        <li class="smooth-menu" onclick = 'goMypage()' style="cursor: pointer">
+                            <a><span class="material-icons">person</span></a>
                         </li>
-                        <li class=" smooth-menu">
+                        <li class="smooth-menu">
                             <a href="#education"><span class="material-icons">local_mall</span></a>
                         </li>
-                        <li class=" smooth-menu"><a href="#education">sign in</a></li>
+                        <li class=" smooth-menu" onclick = 'goSignin()' style="cursor: pointer">
+                            <a>sign in</a>
+                        </li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
             </div><!--/.container-->
@@ -47,3 +52,12 @@
 
 </header><!-- /.top-area-->
 <!-- top-area End -->
+
+<script type="text/javascript">
+    function goMypage() {
+        window.location = "/mypage/";
+    }
+    function goSignin() {
+        window.location = "/signin/";
+    }
+</script>

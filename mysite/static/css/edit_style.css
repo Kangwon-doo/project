@@ -40,7 +40,7 @@
     padding-left: 15px;
     margin-right: auto;
     margin-left: auto;
-    width: fit-content;
+
 }
 
 
@@ -74,7 +74,7 @@
 
   /* size */
   width: 100%;
-  height: 300px;
+  height: 500px;
   /* flex item의 flex-shrink는 기본값이 1이므로 컨테이너 크기에 맞게 줄어드는데, 슬라이드를 구현할 것이므로 줄어들지 않도록 0을 준다. */
   flex-shrink: 0;
 
@@ -111,19 +111,40 @@
 
 /* 각 슬라이드가 변경되는 것을 시각적으로 확인하기 쉽도록 각 슬라이드별 색상 적용 */
 #welcome-hero .slide_item.item1 {
-  background-color: darkgoldenrod;
+/*    height: 100vh;
+    width: 100vw;*/
+    background-image: url(../images/about/coffee_banner1.jpg);
+    background-repeat : no-repeat;
+    background-size : cover;
+
 }
 #welcome-hero .slide_item.item2 {
-  background-color: aqua;
+/*    height: 100vh;
+    width: 100vw;*/
+    background-image: url(../images/about/coffee_banner2.jpg);
+    background-repeat : no-repeat;
+    background-size : cover;
 }
 #welcome-hero .slide_item.item3 {
-  background-color: blueviolet;
+/*    height: 100vh;
+    width: 100vw;*/
+    background-image: url(../images/about/coffee_banner3.jpg);
+    background-repeat : no-repeat;
+    background-size : cover;
 }
 #welcome-hero .slide_item.item4 {
-  background-color: burlywood;
+/*    height: 100vh;
+    width: 100vw;*/
+    background-image: url(../images/about/coffee_banner4.jpg);
+    background-repeat : no-repeat;
+    background-size : cover;
 }
 #welcome-hero .slide_item.item5 {
-  background-color: cornflowerblue;
+/*    height: 100vh;
+    width: 100vw;*/
+    background-image: url(../images/about/coffee_banner5.jpg);
+    background-repeat : no-repeat;
+    background-size : cover;
 }
 
 /* 페이지네이션 스타일 */
@@ -173,14 +194,13 @@
     padding-right: 15px;
     padding-left: 15px;
     margin: 100px;
-    width: fit-content;
 }
 #mypage .container {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
 }
-#mypage div.title {
+ #mypage div.title {
     font-size: xx-large;
     margin-top: 2em;
     margin-right: 2em;
@@ -221,13 +241,13 @@
 #mypage #mypage_body {
     display: flex;
 }
-#mypage #mypage_body .select_menu ul {
+#mypage #mypage_body .select_menu_box ul {
     border: 1px solid black;
     padding: 2em;
     border-radius: 2em;
     margin: 2em 0em;
 }
-#mypage #mypage_body .select_menu ul > li {
+#mypage #mypage_body .select_menu_box ul > li {
     padding: 1em;
 }
 #mypage #mypage_body .content {
@@ -240,6 +260,21 @@
     padding: 10px;
     margin: 15px;
 }
+
+/* signin 시작 */
+#signin {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin: 100px;
+
+}
+#signin div.title {
+    font-size: xx-large;
+    margin-top: 2em;
+    margin-right: 2em;
+    margin-bottom: 2em;
+}
+
 
 
 
