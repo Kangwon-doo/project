@@ -11,7 +11,11 @@ from django.http import HttpResponse
 def index(request):
 
    caf = request.GET.get('caf')
-   context = {'caf':caf}
+   blend = request.GET.get('blend')
+   notes = request.GET.get('notes')
+   
+   context = {'caf':caf,'blend':blend,'notes':notes}
    print(context)
+   
    template_name = "index2.html"
    return render(request, template_name, context)

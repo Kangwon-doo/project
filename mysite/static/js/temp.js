@@ -113,3 +113,18 @@ slider4.oninput = function() {
     output4.innerHTML = this.value;
     console.log(this.value)
 }
+
+/* 변수 값 제출하기 */
+function send_result(){
+
+    $.ajax({
+        url: '/',
+        type: 'GET',
+        data: {
+            'caf':caf,
+            'blend':blend,
+            'notes':notes
+        },
+        datatype: 'json',
+    });
+}
