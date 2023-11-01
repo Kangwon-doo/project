@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from main.models import Coffee, Roastery, Order, Customer, Reviews
-import MySQLdb
+from .cosine import most_similar
 
 
 # Create your views here.
@@ -17,8 +17,9 @@ def MD(request):
 
 def coffee_detail(request, coffee_id):
     coffee_info = Coffee.objects.get(CoffeeID = coffee_id)
-    # similarity =
-    context = {'coffee_info' : coffee_info}
+    similarity_ids = most_similar(coffee_id)
+    # similarity = Coffee.objects.get
+    context = {'coffee_info' : coffee_info, 'cosine_sim' : similarity_ids}
     return render(request, 'products/coffee_detail.html', context)
 
 

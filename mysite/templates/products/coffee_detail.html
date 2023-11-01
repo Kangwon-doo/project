@@ -2,7 +2,13 @@
 <a href="/roastery/{{coffee_info.RoasteryID_id}}/">로스터리</a></li>
 
 <h2>이 원두와 비슷한 원두들!</h2>
-
+<div> {{cosine_sim}}
+<!--    <ul>-->
+<!--        {% for rec in cosine_sim %}-->
+<!--        <li>{{rec.CoffeeID}}</li>-->
+<!--        {% endfor %}-->
+<!--    </ul>-->
+</div>
 <div>
     {{coffee_info.CoffeeInfo}}
 </div>
