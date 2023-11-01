@@ -70,20 +70,45 @@
                     <button class="next-1 next" id="btn">다음</button>
                 </div>
             </div>
-
+            
             <!-- 세번째 질문 -->
             <div class="page">
-                <div class="title">질문 3</div>
-                <div class="field">
-                    <label for="decaf">싱글오리진</label>
-                    <input type="hidden" name="decaffeine" id="decaf" class="decaf" value="0"/>
-                </div>
-                <div class="field">
-                    <label for="caf">블렌드</label>
-                    <input type="hidden" name="caffeine" id="caf" class="caf" value="1"/>
+                <div class="title">원하시는 컵노트를 고르세요</div>
+                <div class="fieldbox">
+                    <button class="field" onclick="change_thirbtn(event)" type="button" id="flower" value="꽃">꽃</button>
+                    <button class="field" onclick="change_thirbtn(event)" type="button" id="choco" value="초콜릿">초콜릿</button>
+                    <button class="field" onclick="change_thirbtn(event)" type="button" id="nutty" value="고소한">고소한</button>
                 </div>
                 <div class="field-btns">
                     <button class="prev-2 prev" id="btn">이전</button>
+                    <button class="next-2 next" id="btn">다음</button>
+                </div>
+            </div>
+
+            <!-- 네번째 질문 -->
+            <div class="page">
+                <div class="title">맛의 강도를 골라주세요</div>
+                <!--슬라이드 바-->
+                <div class="fieldbox">
+                    <div class="slidecontainer">
+                        <input type="range" id="sour" min="1" max="5" value="3" class="slider">
+                        <p>신맛: <span id="sour-value"></span></p>
+                    </div>
+                    <div class="slidecontainer">
+                        <input type="range" id="sweet" min="1" max="5" value="3" class="slider">
+                        <p>단맛: <span id="sweet-value"></span></p>
+                    </div>
+                    <div class="slidecontainer">
+                        <input type="range" id="bitter" min="1" max="5" value="3" class="slider">
+                        <p>쓴맛: <span id="bitter-value"></span></p>
+                    </div>
+                    <div class="slidecontainer">
+                        <input type="range" id="body" min="1" max="5" value="3" class="slider">
+                        <p>바디감: <span id="body-value"></span></p>
+                    </div>
+                </div>
+                <div class="field-btns">
+                    <button class="prev-3 prev" id="btn">이전</button>
                     <button class="Submit" id="btn">제출</button>
                 </div>
             </div>
