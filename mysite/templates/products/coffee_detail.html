@@ -1,13 +1,13 @@
 <h1>{{coffee_info.CoffeeName}}</h1>
-<a href="/roastery/{{coffee_info.RoasteryID_id}}/">로스터리</a></li>
+<a href="/roastery/{{coffee_info.RoasteryID_id}}/">로스터리</a>
 
 <h2>이 원두와 비슷한 원두들!</h2>
-<div> {{cosine_sim}}
-<!--    <ul>-->
-<!--        {% for rec in cosine_sim %}-->
-<!--        <li>{{rec.CoffeeID}}</li>-->
-<!--        {% endfor %}-->
-<!--    </ul>-->
+<div>
+    <ul>
+        {% for rec in cosine_sim %}
+        <li><a href="/coffee/{{rec.CoffeeID}}/">{{rec.CoffeeName}}</a></li>
+        {% endfor %}
+    </ul>
 </div>
 <div>
     {{coffee_info.CoffeeInfo}}

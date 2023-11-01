@@ -18,8 +18,8 @@ def MD(request):
 def coffee_detail(request, coffee_id):
     coffee_info = Coffee.objects.get(CoffeeID = coffee_id)
     similarity_ids = most_similar(coffee_id)
-    # similarity = Coffee.objects.get
-    context = {'coffee_info' : coffee_info, 'cosine_sim' : similarity_ids}
+    similarity = Coffee.objects.filter(CoffeeID__in=similarity_ids)
+    context = {'coffee_info' : coffee_info, 'cosine_sim' : similarity}
     return render(request, 'products/coffee_detail.html', context)
 
 
