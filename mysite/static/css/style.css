@@ -144,7 +144,7 @@ body {
 }
 
 .slider {
-  transform: rotate(2706deg);
+  transform: rotate(270deg);
   -webkit-appearance: none; /* 기본 CSS 스타일을 적용하지 않기 위해서 */
   width: 100%; /* 슬라이더 길이 */
   height: 13px; /* 슬라이더 두께 */
