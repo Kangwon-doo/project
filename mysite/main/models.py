@@ -81,18 +81,3 @@ class Reviews():
     content = models.TextField()
     created_date = models.DateTimeField()
     
-
-class Temp(models.Model):
-    
-    Coffee = models.TextField()
-    Caffeine_CHOICES = [
-        ("디카페인", "디카페인"),
-        ("카페인", "카페인"),
-    ] 
-    Caffeine = models.CharField(  
-        max_length=4,
-        choices=Caffeine_CHOICES,
-        null=True
-    )
-    Taste = models.TextField()
-    
