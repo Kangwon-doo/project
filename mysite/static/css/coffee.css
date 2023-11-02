@@ -18,17 +18,20 @@
 }
 
 .section1 {
-    width: 200px;
-    height: 250px;
-    background: #e2cccc;
-    border-radius: 20px;
-    border: 1px solid rgb(77,77,77);
+
     display: flex;
     align-items: center;
     position: relative;
     margin: 0px auto;
     margin-right: -5px;
 }
+
+img {
+    width: 300px;
+    height: auto;
+    margin: 0px;
+}
+
 .section2 {
     width: 500px;
     height:100%;
