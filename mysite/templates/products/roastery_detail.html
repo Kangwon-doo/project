@@ -10,7 +10,7 @@
 {% block content %}
 <div class="upper">
     <div class="section1">
-        로스터리 로고 들어갈 자리
+        <img class=".roastery_img" src="/static/roastery_img/{{roastery_info.RoasteryName}}.jpg" alt="{{roastery_info.RoasteryName}}">
     </div>
     <div class="section2">
         <div class="section2-1">
@@ -29,6 +29,9 @@
                     <span>전화번호 예시</span>
                 </p>
             </div>
+        </div>
+        <div class="info-title">
+            <span class="info-header-text">소개</span>
         </div>
         <div class="section2-3">
                 {{roastery_info.RoasteryInfo}}
