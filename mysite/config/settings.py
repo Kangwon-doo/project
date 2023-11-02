@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main.apps.MainConfig',
+    'products.apps.ProductsConfig',
     ]
 
 MIDDLEWARE = [
@@ -55,7 +56,11 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+<<<<<<< HEAD
         'DIRS': [ BASE_DIR / 'templates'],
+=======
+        'DIRS': [BASE_DIR / 'templates'],
+>>>>>>> b5f6266ee0ad2386a0f28d94abd714b005b5d607
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -79,7 +84,11 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'wondoodoo', # DB name
         'USER': 'root', # account name
+<<<<<<< HEAD
         'PASSWORD': '1111',
+=======
+        'PASSWORD': 'MShw1214!', 
+>>>>>>> b5f6266ee0ad2386a0f28d94abd714b005b5d607
         'HOST': '127.0.0.1',  # 서버주소
         'PORT': '3306', # MySQL 포트 번호: 기본값 3306
 }
