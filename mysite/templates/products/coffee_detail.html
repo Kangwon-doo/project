@@ -1,17 +1,77 @@
-<h1>{{coffee_info.CoffeeName}}</h1>
-<a href="/roastery/{{coffee_info.RoasteryID_id}}/">로스터리</a>
+{% extends "base.html" %}
+{% load static %}
 
-<h2>이 원두와 비슷한 원두들!</h2>
-<div>
-    <ul>
-        {% for rec in cosine_sim %}
-        <li><a href="/coffee/{{rec.CoffeeID}}/">{{rec.CoffeeName}}</a></li>
-        {% endfor %}
-    </ul>
+{% block head %}
+    <title>메인사이트</title>
+    <!-- css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/coffee.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="upper">
+    <div class="section1">
+        원두 이미지가 들어갈 자리
+    </div>
+    <div class="section2">
+        <div class="section2-1">
+            <h1>{{coffee_info.CoffeeName}}</h1>
+        </div>
+        <div class="section2-2">
+            <div class="section2-2-1">
+                <p>
+                    원산지 <br>
+                    용량 <br>
+                    가격 <br>
+                </p>
+            </div>
+            <div class="section2-2-2">
+                <p>
+                    <span>{{coffee_info.Country}}</span><br>
+                    <span>용량예시</span><br>
+                    <span>가격예시</span><br>
+                </p>
+            </div>
+        </div>
+        <div class="section2-3">
+            <div class="section2-3-1">
+                로고
+            </div>
+            <div class="section2-3-1">
+                <h4><a href="/roastery/{{coffee_info.RoasteryID_id}}/">로스터리 이름</a></h4>
+            </div>
+        </div>
+        <div class="section2-4">
+            <button>장바구니에 담기</button>
+            <button>원두 구독하기</button>
+        </div>
+    </div>
 </div>
-<div>
-    {{coffee_info.CoffeeInfo}}
+
+<hr/>
+
+<div class="wrapper">
+    <h2>이 제품과 비슷한 상품</h2>
+    <div class="item">
+        <ul>
+            {% for rec in cosine_sim %}
+            <li><a href="/coffee/{{rec.CoffeeID}}/">{{rec.CoffeeName}}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
 </div>
-<div>
-    이 커피는 {{coffee_info.CupNote|slice:"1:-1"}}향을 가진 커피입니다.
+
+<hr/>
+
+<div class="wrapper">
+    <div class="info-header">
+        <span class="info-header-text">원두 특징</span>
+    </div>
+    <div class="info">
+        <span>{{coffee_info.CoffeeInfo}}</span>
+    </div>
+    <div class="info">
+        <span>{{coffee_info.CupNote|slice:"1:-1"}}향</span>
+    </div>
 </div>
+
+{% endblock %}

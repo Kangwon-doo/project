@@ -1,13 +1,52 @@
-<h1>{{roastery_info.RoasteryName}}</h1>
-<div>
-    {{roastery_info.RoasteryInfo}}
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+<title>메인사이트</title>
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="{% static 'css/coffee.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="upper">
+    <div class="section1">
+        로스터리 로고 들어갈 자리
+    </div>
+    <div class="section2">
+        <div class="section2-1">
+            <h1>{{roastery_info.RoasteryName}}</h1>
+        </div>
+        <div class="section2-2">
+            <div class="section2-2-1">
+                <p>
+                    <span>주소</span><br>
+                    <span>전화번호</span>
+                </p>
+            </div>
+            <div class="section2-2-2">
+                <p>
+                    <span>{{roastery_info.RoasteryAddress}}</span><br>
+                    <span>전화번호 예시</span>
+                </p>
+            </div>
+        </div>
+        <div class="section2-3">
+                {{roastery_info.RoasteryInfo}}
+        </div>
+    </div>
 </div>
-<div>
-    {{roastery_info.RoasteryAddress}}
+
+<hr/>
+
+<div class="wrapper">
+    <h2>이 로스터리의 원두들</h2>
+    <div class="item">
+        {% for coffee in coffees %}
+        <li><a href="/coffee/{{coffee.CoffeeID}}/">{{coffee.CoffeeName}}</a></li>
+        {% endfor %}
+    </div>
 </div>
-<h3>이 로스터리의 원두들</h3>
-<ul>
-    {% for coffee in coffees %}
-    <li><a href="/coffee/{{coffee.CoffeeID}}/">{{coffee.CoffeeName}}</a></li>
-    {% endfor %}
-</ul>
+
+<hr/>
+
+{% endblock %}
