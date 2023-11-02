@@ -9,6 +9,7 @@ class Roastery(models.Model):
     RoasteryName = models.CharField(max_length=45) # 로스터리 이름
     RoasteryAddress = models.CharField(max_length=3000) # 로스터리 주소
     RoasteryInfo = models.TextField() # 로스터리 소개
+    RoasteryPhone = models.TextField(validators=[MinLengthValidator(9, '')]) # 전화번호
 
     class Meta:
         db_table = "roastery"

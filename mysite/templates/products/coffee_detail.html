@@ -1,5 +1,11 @@
 <h1>{{coffee_info.CoffeeName}}</h1>
-<a href="/roastery/{{coffee_info.RoasteryID_id}}/">로스터리</a>
+    <ul>
+    {% for roastery in roastery_name %}
+        {% if roastery.RoasteryID == coffee_info.RoasteryID_id %}
+        <li><a href="/roastery/{{coffee_info.RoasteryID_id}}/">{{roastery.RoasteryName}}</a></li>
+        {%endif%}
+    {%endfor%}
+    </ul>
 
 <h2>이 원두와 비슷한 원두들!</h2>
 <div>
