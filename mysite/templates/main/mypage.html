@@ -14,12 +14,12 @@
         </div>
         <div id = 'mypage_body'>
             <div class = 'select_menu_box'>
-                <ul>
-                    <li class = 'select_menu' onclick = 'menuclick()'>개인정보</li>
-                    <li class = 'select_menu'>구매내역</li>
-                    <li class = 'select_menu'>구독정보</li>
-                    <li class = 'select_menu'>탈퇴하기</li>
-                </ul>
+                <div class="list-group">
+                  <a href="#" class="list-group-item active">개인정보</a>
+                  <a href="#" class="list-group-item">구매내역</a>
+                  <a href="#" class="list-group-item">구독정보</a>
+                  <a href="#" class="list-group-item">탈퇴하기</a>
+                </div>
             </div>
             <div class = 'content' id = 'private_info'>
                 <div>
@@ -104,6 +104,7 @@
             }
         }).open();
     }
+    
 </script>
 <!-- kakao 주소찾기 api -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

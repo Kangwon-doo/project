@@ -48,11 +48,11 @@ body{
 }
 
 a,a:hover,a:active,a:focus {
-	display:inline-block;
+/*	display:inline-block;
 	text-decoration:none;
 	color: #6a708e;
 	font-size:16px;
-	padding:0;
+	padding:0;*/
 }
 h1,h2,h3,h4,h5,h6 { 
 	margin: 0;

@@ -241,21 +241,45 @@
 #mypage #mypage_body {
     display: flex;
 }
-#mypage #mypage_body .select_menu_box ul {
-    border: 1px solid black;
-    padding: 2em;
-    border-radius: 2em;
-    margin: 2em 0em;
+#mypage #mypage_body .select_menu_box {
+    position: relative;
+    display: table-cell;
+    width: 295px;
+    background-color: #fff;
+    box-shadow: 5px 1px 8px 0 rgba(0,0,0,.06);
+    border-left: 1px solid rgba(0,0,0,.08);
+    vertical-align: top;
+    z-index: 1;
+    margin: 30px 40px 0px 0px;
 }
-#mypage #mypage_body .select_menu_box ul > li {
-    padding: 1em;
+#mypage #mypage_body .select_menu_box div.list-group {
+    text-align: center;
 }
+#mypage #mypage_body .select_menu_box div.list-group .list-group-item {
+    padding: 20px;
+}
+#mypage #mypage_body .select_menu_box div.list-group .list-group-item:active {
+    padding: 20px;
+    background-color: rgb(255, 165, 63);
+    border-color: rgb(255, 165, 63);
+}
+#mypage #mypage_body .select_menu_box div.list-group .list-group-item a:hover{
+    display: flow;
+
+}
+
+
 #mypage #mypage_body .content {
-    padding: 2em;
-    border-radius: 2em;
-    margin: 2em;
-    width: 70%;
+    position: relative;
+    display: table-cell;
+    width: 700px;
+    background-color: #fff;
+    box-shadow: 5px 1px 8px 0 rgba(0,0,0,.06);
+    border-left: 1px solid rgba(0,0,0,.08);
+    vertical-align: top;
+    z-index: 1;
 }
+
 #mypage #mypage_body .content > div{
     padding: 10px;
     margin: 15px;
