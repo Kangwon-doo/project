@@ -14,7 +14,6 @@
     margin-top: 40px;
     margin-bottom: 40px;
     align-items: center;
-    /* background: #e8e8e8; */
 }
 
 .section1 {
@@ -139,3 +138,67 @@ a {
     text-align: center;
     margin-bottom: 10px;
   }
+
+  .rec_img {
+    width: 150px;
+  }
+
+  .rec-btn {
+    width: 100px;
+    height: 70px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: rgb(249, 160, 37);
+    color: #fff;
+    font-size: 12px;
+    cursor: pointer;
+    margin: auto;
+    margin-bottom: 10px;
+  }
+
+  .rec-name {
+    margin-bottom: 25px;
+    margin-right: 20px;
+    background: #fff;
+  }
+
+
+      .swiper-container {
+        max-width: 700px;
+        width: 100%;
+        height: auto;
+        padding: 20px;
+        padding-right: 29px;
+        margin: auto;
+        overflow: hidden;
+      }
+
+      .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+
+        border-radius: 20px;
+        border: 1.8px solid rgb(212, 212, 212);
+
+        /* Center slide text vertically */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+      }
+
+      .swiper-slide img {
+        height: 200px;
+        object-fit: cover;
+      }
+

@@ -5,6 +5,7 @@
     <title>메인사이트</title>
     <!-- css -->
     <link rel="stylesheet" type="text/css" href="{% static 'css/coffee.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/swiper-bundle.min.css' %}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="shortcut icon" href="#">
 {% endblock %}
@@ -58,16 +59,26 @@
 
 <hr/>
 
-<div class="wrapper">
+<div class="wrapper" style="position=relative;">
     <h2>이 제품과 비슷한 상품</h2>
-    <div class="item">
-        <ul>
-            {% for rec in cosine_sim %}
-            <li><a href="/coffee/{{rec.CoffeeID}}/">{{rec.CoffeeName}}</a></li>
-            {% endfor %}
-        </ul>
+    <div class="swiper-container mySwiper">
+        <div class="slide-content">
+            <div class="swiper-wrapper">
+                {% for rec in cosine_sim %}
+                    <div class="item swiper-slide">
+                        <img class="rec_img" src="/static/coffee_img/{{rec.CoffeeID}}.jpg">
+                        <h4 class="rec-name">{{rec.CoffeeName}}</h4>
+                        <a class="rec-btn" href="/coffee/{{rec.CoffeeID}}/">보러가기</a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div> 
     </div>
+    <div class="swiper-button-prev swiper-nextBtn"></div>
+    <div class="swiper-button-next swiper-prevBtn"></div>
+    <div class="swiper-pagination"></div>
 </div>
+
 
 <hr/>
 
@@ -83,4 +94,12 @@
     </div>
 </div>
 
+
+
+
+
+<!-- 자바스크립트 파일 -->
+
+<script src="{% static 'js/swiper-bundle.min.js' %}"></script>
+<script src="{% static 'js/coffee.js' %}"></script>
 {% endblock %}
