@@ -78,7 +78,7 @@ class Customer(models.Model):
 class Reviews():
     CoffeeID = models.ForeignKey(Coffee, on_delete=models.CASCADE) 
     CustomerID = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    #Stars = models.
+    # Stars = models.CharField(max_length=1, default=0) # 별점. 1~5점. 0점은 아직 리뷰를 남기지 않은 커피
     content = models.TextField()
     created_date = models.DateTimeField()
     
