@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from main.models import Coffee, Roastery, Order, Customer, Reviews
 from .cosine import most_similar
+import random
 
 
 # Create your views here.
@@ -30,3 +31,9 @@ def roastery_detail(request, roastery_id): #로스터리ID
     context = {'roastery_info': roastery_info, 'coffees' : coffees}
 
     return render(request, 'products/roastery_detail.html', context)
+
+def reviews(request):
+    ids = [i.CoffeeID for i in Coffee.objects.order_by('CoffeeID')]
+    random.shuffle(ids)
+    shuffled = [Coffee.objects.get(CoffeeID=i) for i in ids]
+    return render(request, 'products/coffee_list.html', shuffled)
