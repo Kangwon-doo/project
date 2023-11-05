@@ -1,21 +1,29 @@
 body {
-    background-color: rgb(228, 226, 232);
+    background-color: rgb(255, 255, 255);
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
-.container {
+.container { /* 폼 전체 */
   width: 800px;
   text-align: center;
-  background: #fff;
+  background: #ffd5d5;
 }
 
-.container header {
-  font-size: 20px;
+.bar {
+  height: 100px;
 }
 
-#btn {
+.title {
+  height: 70px;
+  text-align: center;
+  line-height: 70px;
+  margin-bottom: 30px;
+  background-color: #ffffff;
+}
+
+#btn { /* 이동 버튼 */
   width: 100px;
   height: 50px;
   margin-top: 30px;
@@ -29,20 +37,30 @@ body {
   transition: 0.3s ease;
 }
 
-.fieldbox {
+.fieldbox { /* 선택 박스 container */
   display: flex;
+  margin: auto;
+  background-color: rgb(255, 255, 255);
+  margin-bottom: 30px;
 }
 
-.field:active,
-.field.active {
+.field1:active,
+.field1.active,
+.field2:active,
+.field2.active,
+.field3:active,
+.field3.active {
   background-color: rgb(181, 147, 203);
   color: #fff;
   transition: 0.4s ease;
 }
 
-.field {
-  width: 150px;
-  height: 200px;
+.field1,
+.field2,
+.field3 {
+  width: 200px;
+  height: 300px;
+  margin: auto;
   background: #f4f5f7;
   border: 1px solid rgb(77,77,77);
   border-radius: 20px;
@@ -51,11 +69,14 @@ body {
   cursor: pointer;
   align-items: center;
   justify-content: center;
+  position: relative;
+  animation: fadeInUp 1s;
 }
 
 .container .form-outer {
   width: 100%;
   overflow: hidden;
+  background-color: rgb(227, 227, 227)
 }
 
 .form-outer form {
@@ -65,74 +86,27 @@ body {
 
 .form-outer form .page {
   width: 25%;
-  transition: margin-left 0.3s ease-in-out;
+  transition: 1s ease;
 }
 
-.progress-bar {
-  display: flex;
-  margin: 40px 0;
-}
-
-.step {
-  text-align: center;
-  width: 100%;
-}
-
-.progress-bar .step .bullet {
-  height: 25px;
-  width: 25px;
-  border: 2px solid #000;
-  border-radius: 50%;
-  font-weight: 500;
-  font-size: 17px;
-  position: relative;
-}
-
-.progress-bar .step p {
-  color: #000;
-  font-weight: 500;
-  font-size: 18px;
-  margin-bottom: 8px;
-}
-
-.progress-bar .step:last-child .bullet:before,
-.progress-bar .step:last-child .bullet:after{
-  display: none;
-}
-
-.progress-bar .step .bullet:before,
-.progress-bar .step .bullet:after{
-  position: absolute;
-  content: '';
-  bottom: 11px;
-  right: -65px;
-  height: 3px;
-  width: 47px;
-  background: #262626;
-}
-
-.progress-bar .step .bullet:after{
-  background: #bd4cff;
-  transform: scaleX(0);
-  transform-origin: left;
-  animation: animate 0.3s linear forwards;
-}
-@keyframes animate {
-  100%{
-    transform: scaleX(1)
+@keyframes fadeInUp {
+  0% {
+      opacity: 0;
+      transform: translate3d(100%, 0, 0);
+  }
+  to {
+      opacity: 1;
+      transform: translateZ(0);
   }
 }
 
-.progress-bar .step span {
-  font-weight: 500;
-  font-size: 17px;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+.field-btns {
+  display: flex;
+  justify-content: space-between;
 }
 
-.progress-bar .step .check {
-  display: none;
+.hiddenbtn {
+  visibility: hidden;
 }
 
 
@@ -169,3 +143,4 @@ Firefox 브라우저를 위해서는 -moz- 를 사용하세요 */
 p {
   margin-top: 100px;
 }
+

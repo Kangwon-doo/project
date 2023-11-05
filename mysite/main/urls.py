@@ -4,5 +4,6 @@ from . import views
 app_name = 'pybo'
 
 urlpatterns = [
-    path('',views.index),
+     path('test/', views.index),
+     path('test/result/', views.result,name='result'),
 ]
