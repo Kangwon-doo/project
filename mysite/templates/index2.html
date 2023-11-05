@@ -20,16 +20,16 @@
 
     <!-- 질문 폼 -->
     <div class="form-outer">
-        <form action="result/" method="POST">
-            {% csrf_token %}
+        <form action="result/" method="GET">
+            
             <!-- 첫번째 질문 -->
             <div class="page slidepage">
                 <div class="title">
                     <h2>카페인을 원하시나요?</h2>
                 </div>
                 <div class="fieldbox">
-                    <button class="field1" onclick="change_firbtn(event)" name="decaf" type="button" id="decaf" value="0">디카페인</button>
-                    <button class="field1" onclick="change_firbtn(event)" type="button" id="caf" value="1">카페인</button>
+                    <button class="field1 hidden" onclick="change_firbtn(event)" name="decaf" type="button" id="valbtn" value="0">디카페인</button>
+                    <button class="field1 hidden" onclick="change_firbtn(event)" type="button" id="valbtn" value="1">카페인</button>
                 </div>
                 <div class="field-btns">
                     <button class="hiddenbtn" type="button">이전</button>
@@ -43,8 +43,8 @@
                     <h2>원하시는 원두 타입을 고르세요</h2>
                     </div>
                 <div class="fieldbox">
-                    <button class="field2" onclick="change_secbtn(event)" type="button" id="single" value="싱글오리진">싱글오리진</button>
-                    <button class="field2" onclick="change_secbtn(event)" type="button" id="blend" value="블렌드">블렌드</button>
+                    <button class="field2" onclick="change_secbtn(event)" type="button" id="valbtn" value="싱글오리진">싱글오리진</button>
+                    <button class="field2" onclick="change_secbtn(event)" type="button" id="valbtn" value="블렌드">블렌드</button>
                 </div>
                 <div class="field-btns">
                     <button class="prev-1 prev" id="btn" type="button">이전</button>
@@ -58,13 +58,13 @@
                     <h2>원하시는 컵노트를 고르세요</h2>
                 </div>
                 <div class="fieldbox">
-                    <button class="field3" onclick="change_thirbtn(this)" type="button" value="꽃">꽃</button>
-                    <button class="field3" onclick="change_thirbtn(this)" type="button" value="초콜릿">초콜릿</button>
-                    <button class="field3" onclick="change_thirbtn(this)" type="button" value="고소한">고소한</button>
-                    <button class="field3" onclick="change_thirbtn(this)" type="button" value="달콤한">달콤한</button>
-                    <button class="field3" onclick="change_thirbtn(this)" type="button" value="허브">허브</button>
-                    <button class="field3" onclick="change_thirbtn(this)" type="button" value="과일">과일</button>
-                    <button class="field3" onclick="change_thirbtn(this)" type="button" value="향료">향료</button>
+                    <button class="field3" onclick="change_thirbtn(this)" type="button" id="valbtn" value="꽃">꽃</button>
+                    <button class="field3" onclick="change_thirbtn(this)" type="button" id="valbtn" value="초콜릿">초콜릿</button>
+                    <button class="field3" onclick="change_thirbtn(this)" type="button" id="valbtn" value="고소한">고소한</button>
+                    <button class="field3" onclick="change_thirbtn(this)" type="button" id="valbtn" value="달콤한">달콤한</button>
+                    <button class="field3" onclick="change_thirbtn(this)" type="button" id="valbtn" value="허브">허브</button>
+                    <button class="field3" onclick="change_thirbtn(this)" type="button" id="valbtn" value="과일">과일</button>
+                    <button class="field3" onclick="change_thirbtn(this)" type="button" id="valbtn" value="향료">향료</button>
                 </div>
                 <div class="field-btns">
                     <button class="prev-2 prev" id="btn" type="button">이전</button>
@@ -78,7 +78,7 @@
                     <h2>맛의 강도를 골라주세요</h2>
                 </div>
                 <!--슬라이드 바-->
-                <div class="fieldbox">
+                <div class="fieldbox tohide hidden">
                     <div class="slidecontainer">
                         <input type="range" id="sour" min="1" max="5" value="3" class="slider">
                         <p>신맛: <span id="sour-value"></span></p>

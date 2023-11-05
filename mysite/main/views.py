@@ -4,8 +4,13 @@ from django.http import HttpResponse
 
 # Create your views here.
 
-def index(request):
+def temp(request):
+    return HttpResponse("제품 준비 중입니다.")
 
+context = {}
+
+def index(request):
+   global context
    caf = request.GET.get('caf')
    blend = request.GET.get('blend')
    notes = request.GET.getlist('notes[]')
@@ -18,10 +23,12 @@ def index(request):
    print(context)
    
    template_name = "index2.html"
-   return render(request, template_name, context)
+   return render(request, template_name,context)
 
 def result(request):
-
+   global context
+   print(request)
+   print("오오오오",context)
    
    template_name = "result.html"
    return render(request, template_name)

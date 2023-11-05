@@ -7,11 +7,6 @@ const nextBtnThir = document.querySelector(".next-2");
 const prevBtnFour = document.querySelector(".prev-3");
 const submitBtn = document.querySelector(".submit");
 
-
-nextBtnFir.addEventListener("click", function(){
-  slidePage.style.marginLeft = "-25%";
-});
-
 /* 페이지 넘기기*/
 nextBtnFir.addEventListener("click", function(){
     slidePage.style.marginLeft = "-25%";
@@ -33,6 +28,46 @@ prevBtnThir.addEventListener("click", function(){
 prevBtnFour.addEventListener("click", function(){
     slidePage.style.marginLeft = "-50%";
 });
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  const fadeMeElements = document.querySelectorAll("#valbtn");
+  const fadeInButtons = document.querySelectorAll("#btn");
+  const fadeMeElements2 = document.querySelectorAll(".tohide");
+
+  fadeInButtons.forEach((button) => {
+      button.addEventListener("click", function () {
+          fadeMeElements.forEach((element) => {
+              element.style.transition = "none"; // Remove transition temporarily
+              element.style.opacity = "0";
+              element.style.transform = "translateY(20px)";
+              element.classList.remove("hidden");
+
+              setTimeout(function () {
+                  element.style.transition = "opacity 1s, transform 1s"; // Restore transition
+                  element.style.opacity = "1";
+                  element.style.transform = "translateY(0)";
+              }, 10);
+          });
+
+          fadeMeElements2.forEach((element) => {
+            element.style.transition = "none"; // Remove transition temporarily
+            element.style.opacity = "0";
+            element.style.transform = "translateY(20px)";
+            element.classList.remove("hidden");
+
+            setTimeout(function () {
+                element.style.transition = "opacity 1s, transform 1s"; // Restore transition
+                element.style.opacity = "1";
+                element.style.transform = "translateY(0)";
+            }, 10);
+        });
+      });
+  });
+  fadeInButtons[0].click();
+  fadeInButtons[1].click();
+});
+
 
 
 /* 1번째 질문 페이지 버튼 클릭 시 배경 변경 및 값 저장*/ 
@@ -161,5 +196,5 @@ function send_result(){
         },
         datatype: 'json',
     });
-    alert('hello world');
+    alert('결과 페이지로 이동합니다.');
 }

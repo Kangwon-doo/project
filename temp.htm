@@ -1,90 +1,48 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-
+    <title>Fade In and Up</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
-
-        #wrapper {
-            border: 1px solid #7289b7;
-          
-            display: inline-block;
-            padding: 8px 12px;
-          }
-          
-          #label {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-          
-          }
-          
-          #hiddenCheckbox {
-            display: none;
-          }
-          
-          #hiddenCheckbox:checked + #showCheckbox {
-            background: url("꽃선택.png") no-repeat;
-            background-size: contain;
-            transition: all 0.3s ease-out;
-          }
-          
-          #showCheckbox {
-            width: 200px;
-            height: 300px;
-            cursor: pointer;
-            background: url("꽃.png") no-repeat;
-            background-size: contain;
-          }
-
+      .fade-me {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 1s, transform 1s;
+    }
     </style>
-
 </head>
 <body>
-    <form action="">
-        <div id="wrapper">
-            <label id="label">
-              <input id="hiddenCheckbox" type="checkbox" name="temp" value="1" onclick="limitclick(this)"/>
-              <div id="showCheckbox"></div>
-            </label>
-        </div>
-        <div id="wrapper">
-            <label id="label">
-              <input id="hiddenCheckbox" type="checkbox" name="temp" value="2" onclick="limitclick(this)"/>
-              <div id="showCheckbox"></div>
-            </label>
-        </div>
-        <div id="wrapper">
-            <label id="label">
-              <input id="hiddenCheckbox" type="checkbox" name="temp" value="3" onclick="limitclick(this)"/>
-              <div id="showCheckbox"></div>
-            </label>
-        </div>
-    </form>
+  <div class="fade-me">This is the first element to fade and slide up</div>
+  <button class="fade-in-button">Fade In and Slide Up</button>
+  <div class="fade-me">Another element to fade and slide up</div>
+  <button class="fade-in-button">Another Fade In and Slide Up</button>
+
 
     <script>
-        function limitclick(elem){
-            var values = document.getElementsByName("temp");
-            var count = 0;
-            
-
-            for (var i=0;i<values.length;i++){
-                if(values[i].checked){
-                    count++;
-                    console.log(values[i].value)
-                }
-            }
-
-            if (count>2){
-                console.log(elem);
-                elem.checked = false;
-            }
-            
-        }
+      document.addEventListener("DOMContentLoaded", function () {
+        const fadeMeElements = document.querySelectorAll(".fade-me");
+        const fadeInButtons = document.querySelectorAll(".fade-in-button");
+    
+        fadeInButtons.forEach((button) => {
+            button.addEventListener("click", function () {
+                fadeMeElements.forEach((element) => {
+                    element.style.transition = "none"; // Remove transition temporarily
+                    element.style.opacity = "0";
+                    element.style.transform = "translateY(20px)";
+    
+                    setTimeout(function () {
+                        element.style.transition = "opacity 1s, transform 1s"; // Restore transition
+                        element.style.opacity = "1";
+                        element.style.transform = "translateY(0)";
+                    }, 10);
+                });
+            });
+        });
+    });
+    
         
-
     </script>
 </body>
 </html>
