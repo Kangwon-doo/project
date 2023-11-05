@@ -1,122 +1,90 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Swiper demo</title>
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"
-    />
-    <!-- Link Swiper's CSS -->
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/swiper/swiper-bundle.min.css"
-    />
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 
-    <!-- Demo styles -->
-<style>
-  .swiper-container {
-    max-width: 1120px;
-    width: 100%;
-    background-color: rgb(188, 140, 140);
-    margin: auto;
-  }
+    <style>
 
+        #wrapper {
+            border: 1px solid #7289b7;
+          
+            display: inline-block;
+            padding: 8px 12px;
+          }
+          
+          #label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+          
+          }
+          
+          #hiddenCheckbox {
+            display: none;
+          }
+          
+          #hiddenCheckbox:checked + #showCheckbox {
+            background: url("꽃선택.png") no-repeat;
+            background-size: contain;
+            transition: all 0.3s ease-out;
+          }
+          
+          #showCheckbox {
+            width: 200px;
+            height: 300px;
+            cursor: pointer;
+            background: url("꽃.png") no-repeat;
+            background-size: contain;
+          }
 
-    html,
-    body {
-      position: relative;
-      height: 100%;
-    }
+    </style>
 
-    body {
-      background: #eee;
-      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-      font-size: 14px;
-      color: #000;
-      margin: 0;
-      padding: 0;
-    }
+</head>
+<body>
+    <form action="">
+        <div id="wrapper">
+            <label id="label">
+              <input id="hiddenCheckbox" type="checkbox" name="temp" value="1" onclick="limitclick(this)"/>
+              <div id="showCheckbox"></div>
+            </label>
+        </div>
+        <div id="wrapper">
+            <label id="label">
+              <input id="hiddenCheckbox" type="checkbox" name="temp" value="2" onclick="limitclick(this)"/>
+              <div id="showCheckbox"></div>
+            </label>
+        </div>
+        <div id="wrapper">
+            <label id="label">
+              <input id="hiddenCheckbox" type="checkbox" name="temp" value="3" onclick="limitclick(this)"/>
+              <div id="showCheckbox"></div>
+            </label>
+        </div>
+    </form>
 
-    .swiper-container {
-      width: 100%;
-      height: 60%;
-    }
-
-    .swiper-slide {
-      text-align: center;
-      font-size: 18px;
-      background: #fff;
-
-      /* Center slide text vertically */
-      display: -webkit-box;
-      display: -ms-flexbox;
-      display: -webkit-flex;
-      display: flex;
-      -webkit-box-pack: center;
-      -ms-flex-pack: center;
-      -webkit-justify-content: center;
-      justify-content: center;
-      -webkit-box-align: center;
-      -ms-flex-align: center;
-      -webkit-align-items: center;
-      align-items: center;
-    }
-
-    .swiper-slide img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .swiper-button-prev {
-      background-color: aquamarine;
-      margin: 300px;
-    }
-</style>
-  </head>
-
-  <body>
-    <!-- Swiper -->
-    <div class="swiper-container mySwiper">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide">Slide 1</div>
-        <div class="swiper-slide">Slide 2</div>
-        <div class="swiper-slide">Slide 3</div>
-        <div class="swiper-slide">Slide 4</div>
-        <div class="swiper-slide">Slide 5</div>
-        <div class="swiper-slide">Slide 6</div>
-        <div class="swiper-slide">Slide 7</div>
-        <div class="swiper-slide">Slide 8</div>
-        <div class="swiper-slide">Slide 9</div>
-        <div class="swiper-button-prev"></div>
-      </div>
-      <div class="swiper-button-next"></div>
-      <div class="swiper-button-prev"></div>
-      <div class="swiper-pagination"></div>
-    </div>
-
-    <!-- Swiper JS -->
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-
-    <!-- Initialize Swiper -->
     <script>
-      var swiper = new Swiper(".mySwiper", {
-        slidesPerView: 3,
-        spaceBetween: 30,
-        slidesPerGroup: 3,
-        loop: true,
-        loopFillGroupWithBlank: true,
-        pagination: {
-          el: ".swiper-pagination",
-          clickable: true,
-        },
-        navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
-        },
-      });
+        function limitclick(elem){
+            var values = document.getElementsByName("temp");
+            var count = 0;
+            
+
+            for (var i=0;i<values.length;i++){
+                if(values[i].checked){
+                    count++;
+                    console.log(values[i].value)
+                }
+            }
+
+            if (count>2){
+                console.log(elem);
+                elem.checked = false;
+            }
+            
+        }
+        
+
     </script>
-  </body>
+</body>
 </html>

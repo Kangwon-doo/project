@@ -32,14 +32,13 @@ prevBtnFour.addEventListener("click", function(){
 
 
 /* 1번째 질문 페이지 버튼 클릭 시 배경 변경 및 값 저장*/ 
-var caf = 3;
+var caf = 0;
 function change_firbtn(e) {
     var btns = document.querySelectorAll(".field");
     btns.forEach(function (btn, i) {
       if (e.currentTarget == btn) {
         btn.classList.add("active");
         caf = e.target.value 
-        console.log(caf); // 콘솔에 선택한 값 출력하기
       } else {
         btn.classList.remove("active");
       }
@@ -54,7 +53,6 @@ function change_secbtn(e) {
       if (e.currentTarget == btn) {
         btn.classList.add("active");
         blend = e.target.value
-        console.log(blend); // 콘솔에 선택한 값 출력하기
       } else {
         btn.classList.remove("active");
       }
@@ -78,40 +76,45 @@ function change_thirbtn(e) {
 
 /* 4번째 질문 페이지 슬라이드 바 값 저장*/ 
 /* 신맛 */
+var sour = 0;
 var slider1 = document.getElementById("sour");
 var output1 = document.getElementById("sour-value");
 output1.innerHTML = slider1.value;
         
 slider1.oninput = function() {
     output1.innerHTML = this.value;
-    console.log(this.value)
+    sour = this.value
+
 }
 /* 단맛 */
+var sweet = 0;
 var slider2 = document.getElementById("sweet");
 var output2 = document.getElementById("sweet-value");
 output2.innerHTML = slider2.value;
         
 slider2.oninput = function() {
     output2.innerHTML = this.value;
-    console.log(this.value)
+    sweet = this.value
 }
 /* 쓴맛 */
+var bitter = 0;
 var slider3 = document.getElementById("bitter");
 var output3 = document.getElementById("bitter-value");
 output3.innerHTML = slider3.value;
         
 slider3.oninput = function() {
     output3.innerHTML = this.value;
-    console.log(this.value)
+    bitter = this.value
 }
 /* 바디감 */
+var body = 0;
 var slider4 = document.getElementById("body");
 var output4 = document.getElementById("body-value");
 output4.innerHTML = slider4.value;
         
 slider4.oninput = function() {
     output4.innerHTML = this.value;
-    console.log(this.value)
+    body = this.value
 }
 
 /* 변수 값 제출하기 */
@@ -123,8 +126,13 @@ function send_result(){
         data: {
             'caf':caf,
             'blend':blend,
-            'notes':notes
+            'notes':notes,
+            'sour':sour,
+            'sweet':sweet,
+            'bitter':bitter,
+            'body':body
         },
         datatype: 'json',
     });
+    alert('제출됨')
 }
