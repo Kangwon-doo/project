@@ -32,6 +32,7 @@ def roastery_detail(request, roastery_id): #로스터리ID
 
     return render(request, 'products/roastery_detail_s.html', context)
 
+
 def reviews(request):
     ids = [i.CoffeeID for i in Coffee.objects.all()]
     random_coffees = random.sample(ids, 10)
@@ -42,4 +43,3 @@ def reviews(request):
     # random_coffees = dict(random_coffees)
     context = {'coffee_info' : shuffled}
     return render(request, 'products/review_radio2.html', context)
-
