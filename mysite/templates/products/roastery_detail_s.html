@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+<title>메인사이트</title>
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="{% static 'css/coffee.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="upper">
+    <div class="section1">
+        <img class=".roastery_img" src="/static/roastery_img/{{roastery_info.RoasteryName}}.jpg" alt="{{roastery_info.RoasteryName}}">
+    </div>
+    <div class="section2">
+        <div class="section2-1">
+            <h1>{{roastery_info.RoasteryName}}</h1>
+        </div>
+        <div class="section2-2">
+            <div class="section2-2-1">
+                <p>
+                    <span>주소</span><br>
+                    <span>전화번호</span>
+                </p>
+            </div>
+            <div class="section2-2-2">
+                <p>
+                    <span>{{roastery_info.RoasteryAddress}}</span><br>
+                    <span>전화번호 예시</span>
+                </p>
+            </div>
+        </div>
+        <div class="info-title">
+            <span class="info-header-text">소개</span>
+        </div>
+        <div class="section2-3">
+                {{roastery_info.RoasteryInfo}}
+        </div>
+    </div>
+</div>
+
+<hr/>
+
+<div class="wrapper">
+    <h2>이 로스터리의 원두들</h2>
+    <div class="item">
+        {% for coffee in coffees %}
+        <li><a href="/coffee/{{coffee.CoffeeID}}/">{{coffee.CoffeeName}}</a></li>
+        {% endfor %}
+    </div>
+</div>
+
+<hr/>
+
+{% endblock %}

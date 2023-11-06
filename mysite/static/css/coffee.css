@@ -1,0 +1,204 @@
+.upper {
+    width: 800px;
+    display: flex;
+    margin: 0 auto;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    align-items: center;
+    /* background: #e8e8e8; */
+}
+
+.wrapper {
+    width: 800px;
+    margin: 0 auto;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    align-items: center;
+}
+
+.section1 {
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin: 0px auto;
+    margin-right: -5px;
+
+}
+
+.coffee_img {
+    height: 250px;
+    margin: 0px;
+}
+
+.roastery_img {
+    width: 300px;
+    height: auto;
+    margin: 0px;
+}
+
+.roas_img {
+    width: 30px;
+    height: auto;
+    margin: 10px 10px -10px 0px;
+}
+
+.section2 {
+    width: 500px;
+    height:100%;
+    padding-left: 20px;
+    padding-bottom: 20px;
+    padding-right: 20px;
+    position: relative;
+    margin: 0px auto;
+}
+
+.section2-2 {
+    display: flex;
+}
+
+.section2-2-1 {
+    width: 100px;
+}
+
+.section2-3 {
+    display: flex;
+}
+
+
+h4 {
+    margin:0px;
+    margin-left: 20px;
+}
+
+h1 {
+    margin-bottom: 0%;
+}
+
+.section2-4 {
+    display: flex;
+}
+
+.roas-btn {
+    height: 45px;
+    border: 1.5px solid rgb(255, 255, 255);
+    border-radius: 10px;
+    background: rgb(255, 255, 255);
+    color: #000000;
+    font-size: 15px;
+    line-height: 45px;
+    cursor: pointer;
+  }
+
+a {
+    text-decoration-line: none; 
+}
+
+.btn {
+    width: 50%;
+    height: 50px;
+    margin: 20px 20px 0px 0px;
+    border: none;
+    border-radius: 5px;
+    background: rgb(249, 160, 37);
+    color: #fff;
+    font-size: 15px;
+    letter-spacing: 1px;
+    cursor: pointer;
+  }
+
+  hr {
+    width: 800px;
+  }
+
+  .info-header {
+    width: 230px;
+    height: 50px;
+    background: rgb(249, 160, 37);
+    color: #fff;
+    border-radius: 20px;
+    line-height: 50px;
+    display: block;
+    text-align: center;
+    margin: auto;
+  }
+
+  .info {
+    width: 500px;
+    text-align: center;
+    margin: 20px auto;
+  }
+
+  .info-title {
+    width: 70px;
+    height: 30px;
+    background: rgb(249, 160, 37);
+    color: #fff;
+    border-radius: 20px;
+    line-height: 30px;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .rec_img {
+    width: 150px;
+  }
+
+  .rec-btn {
+    width: 100px;
+    height: 70px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: rgb(249, 160, 37);
+    color: #fff;
+    font-size: 12px;
+    cursor: pointer;
+    margin: auto;
+    margin-bottom: 10px;
+  }
+
+  .rec-name {
+    margin-bottom: 25px;
+    margin-right: 20px;
+    background: #fff;
+  }
+
+
+      .swiper-container {
+        max-width: 700px;
+        width: 100%;
+        height: auto;
+        padding: 20px;
+        padding-right: 29px;
+        margin: auto;
+        overflow: hidden;
+      }
+
+      .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+
+        border-radius: 20px;
+        border: 1.8px solid rgb(212, 212, 212);
+
+        /* Center slide text vertically */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+      }
+
+      .swiper-slide img {
+        height: 200px;
+        object-fit: cover;
+      }
+
