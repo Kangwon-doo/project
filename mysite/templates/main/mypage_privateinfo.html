@@ -8,8 +8,8 @@
         <div id = 'mypage_header'>
             <div id = 'img_box'><img src = '../../static/images/about/profile_image.jpg'></div>
             <div id = 'idEmail_box'>
-                <div id = 'userid'><span>yjkang</span></div>
-                <div id = 'useremail'><span>yjkang@naver.com</span></div>
+                <div id = 'userid'><span>{{request.user}}</span></div>
+                <div id = 'useremail'><span>{{request.email}}</span></div>
             </div>
         </div>
         <div id = 'mypage_body'>
@@ -22,26 +22,26 @@
                 </div>
             </div>
             <div class = 'content' id = 'private_info'>
-                <div>
-                    <span>아이디</span>
-                    <span><input type="text" class="form-control" placeholder="id_example"></span>
+                <div class = 'private_info_item'>
+                    <span>닉네임</span>
+                    <span><input type="text" class="form-control" placeholder="nickname_example"></span>
                     <span><button>변경</button></span>
                 </div>
-                <div>
+                <div class = 'private_info_item'>
                     <span>비밀번호</span>
                     <span>
                         <input type="password" class="form-control" placeholder="password" />
                     </span>
                 </div>
-                <div>
+                <div class = 'private_info_item'>
                     <span>이메일</span>
-                    <span><input type="email" class="form-control" placeholder="id_example"></span>
+                    <span><input type="email" class="form-control" placeholder="email_example"></span>
                 </div>
-                <div>
+                <div class = 'private_info_item'>
                     <span>전화번호</span>
                     <span><input type="tel" class="form-control" placeholder="id_example"></span>
                 </div>
-                <div>
+                <div class = 'private_info_item'>
                     <span>주소</span>
                     <span>
                           <input id="member_post"  type="text" placeholder="Zip Code" readonly onclick="findAddr()">
@@ -49,18 +49,22 @@
                           <input type="text" placeholder="Detailed Address">
                     </span>
                 </div>
-                <div>
+                <div class = 'private_info_item'>
                     <span>생년월일</span>
                     <span><input type="date" class="form-control" id="Date" min="1901-01-01"></span>
                 </div>
-                <div>
+                <div class = 'private_info_item'>
                     <span>성별</span>
                     <span>
-                        <select name="sex">
-                            <option value="여성">여성</option>
-                            <option value="남성">남성</option>
+                        <select name="gender" id="gender">
+                            <option value="w">여성</option>
+                            <option value="m">남성</option>
+                            <option value="none">선택안함</option>
                         </select>
                     </span>
+                </div>
+                <div id="mypage_submit_box" class = 'private_info_item'>
+                    <button id="mypage_submit">변경사항 저장</button>
                 </div>
             </div>
         </div>
@@ -104,7 +108,7 @@
             }
         }).open();
     }
-    
+
 </script>
 <!-- kakao 주소찾기 api -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

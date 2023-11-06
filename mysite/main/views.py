@@ -6,12 +6,14 @@ def index(request):
 
     return render(request, 'main/mainpage.html')
 
-
 def mypage(request):
-    return render(request, 'main/mypage.html')
+    return render(request, 'main/mypage_privateinfo.html')
+
+def servicePopup(request):
+    return render(request, 'main/popup.html')
 
 def signin(request):
     return render(request, 'main/signin.html')
 
-def cartlist(request):
-    return render(request, 'main/cartlist.html')
+def basket(request):
+    return render(request, 'main/basket.html')
