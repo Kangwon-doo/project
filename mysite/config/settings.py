@@ -38,7 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main.apps.MainConfig',
-    'account.apps.AccountConfig',
+    'users.apps.UsersConfig',
+    # 'django.contrib.sites',#사이트,url정보 관리 해주는 기능
+    # 'allauth',#설치한앱
+    # 'allauth.account',#소셜로그인한 계정관리
+    # 'allauth.socialaccount',#소셜account 정보관리
+    # 'allauth.socialaccount.providers.naver',
     ]
 
 MIDDLEWARE = [
@@ -123,16 +128,20 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'account/templates/registration/static'),
+    BASE_DIR / 'static',
 ]
+
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGOUT_REDIRECT_URL='/'
-LOGOUT_REDIRECT_URL='/'
-
+# AUTHENTICATION_BACKENDS=[
+#     'django.contrib.auth.backends.ModelBackend',#기본장고 유저
+#     'allauth.account.auth_backends.AuthenticationBackend',#소셜로그인 인증체계
+# ]
+#
+# SITE_ID=1

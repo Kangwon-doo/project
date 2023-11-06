@@ -1,7 +1,6 @@
 
 from django.db import models
 from datetime import date
-from .choice import *
 
 class Users(models.Model):
     user_id = models.CharField(max_length=25,unique=True)
@@ -13,7 +12,7 @@ GENDER_CHOICES = (
     (2, 'Not to disclose')
 )
 
-class register(models.Model):
+class signup(models.Model):
     name = models.CharField(max_length=8)
     user_id = models.CharField(max_length=25, unique=True)
     password = models.CharField(max_length=100)
