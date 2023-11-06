@@ -27,7 +27,7 @@ def cos_recommendation(user_input, top_n=5):
     df.rename(columns=column_mapping, inplace=True)
 
     # Create a new dictionary
-    new_dict = user_input.copy()git 
+    new_dict = user_input.copy()
     # Add other keys with initial values
     new_keys = ['꽃', '과일', '달콤한', '허브', '고소한', '향료', '초콜릿']
     for key in new_keys:
