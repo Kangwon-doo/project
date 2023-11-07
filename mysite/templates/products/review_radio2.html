@@ -1,7 +1,7 @@
 <h1>예상 선호도를 선택해 주세요!</h1>
 <h3>다음 원두들의 설명을 읽고 예상되는 선호도를 입력해주세요. </h3>
 
-<form action="#" method="POST">
+<form action="{%  %}" method="POST">
     {% csrf_token %}
     <h5>좋아하지 않을 것 같다 : 1 ~ 즐겨 마실 것 같다 : 5</h5>
     {%for i in coffee_info%}

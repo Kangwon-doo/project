@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from main.models import Coffee, Roastery, Order, Customer, Reviews
+from main.models import Coffee, Roastery, Order, Customer, Reviews, test_Reviews
 from .cosine import most_similar
 import random
 
@@ -22,7 +22,7 @@ def coffee_detail(request, coffee_id):
     similarity_ids = most_similar(coffee_id, 5)
     similarity = Coffee.objects.filter(CoffeeID__in=similarity_ids)
     context = {'coffee_info' : coffee_info, 'cosine_sim' : similarity, 'roastery_name': roastery_name}
-    return render(request, 'products/coffee_detail_s.html', context)
+    return render(request, 'products/coffee_detail.html', context)
 
 
 def roastery_detail(request, roastery_id): #로스터리ID
@@ -30,7 +30,7 @@ def roastery_detail(request, roastery_id): #로스터리ID
     coffees = Coffee.objects.filter(RoasteryID = roastery_id)
     context = {'roastery_info': roastery_info, 'coffees' : coffees}
 
-    return render(request, 'products/roastery_detail_s.html', context)
+    return render(request, 'products/roastery_detail.html', context)
 
 
 def reviews(request):
@@ -43,3 +43,6 @@ def reviews(request):
     # random_coffees = dict(random_coffees)
     context = {'coffee_info' : shuffled}
     return render(request, 'products/review_radio2.html', context)
+
+def review_create(request, test_reviews_id):
+    test_Reviews.create()
