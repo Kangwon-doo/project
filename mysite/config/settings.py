@@ -39,16 +39,17 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main.apps.MainConfig',
     'users.apps.UsersConfig',
-    # 'django.contrib.sites',#사이트,url정보 관리 해주는 기능
-    # 'allauth',#설치한앱
-    # 'allauth.account',#소셜로그인한 계정관리
-    # 'allauth.socialaccount',#소셜account 정보관리
-    # 'allauth.socialaccount.providers.naver',
+    'django.contrib.sites',#사이트,url정보 관리 해주는 기능
+    'allauth',#설치한앱
+    'allauth.account',#소셜로그인한 계정관리
+    'allauth.socialaccount',#소셜account 정보관리
+    'allauth.socialaccount.providers.naver',
     ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -139,9 +140,23 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# AUTHENTICATION_BACKENDS=[
-#     'django.contrib.auth.backends.ModelBackend',#기본장고 유저
-#     'allauth.account.auth_backends.AuthenticationBackend',#소셜로그인 인증체계
-# ]
-#
-# SITE_ID=1
+
+SITE_ID=1
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',  # 기본장고 유저
+    'allauth.account.auth_backends.AuthenticationBackend',  # 소셜로그인 인증체계
+]
+LOGIN_REDIRECT_URL = '/'   # social login redirect
+ACCOUNT_LOGOUT_REDIRECT_URL = '/'  # logout redirect
+
+SOCIALACCOUNT_PROVIDERS = {
+    'naver': {
+        'APP': {
+            'client_id': '',
+            'secret': '',
+            'key': ''
+        },
+        'SCOPE': ['profile', 'email'],
+    }
+}

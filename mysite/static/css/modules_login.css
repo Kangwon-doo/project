@@ -13,16 +13,6 @@
     cursor: pointer;
 }
 
-.btn-close {
-    width: 16px;
-    height: 16px;
-    background-color: #fff;
-    border: none;
-    cursor: pointer;
-    -webkit-box-sizing: content-box;
-    box-sizing: content-box;
-}
-
 /* 인풋 모듈 */
 .module-inp .inp-login {
     display: block;
@@ -49,7 +39,6 @@
 
 .module-inp.error .inp-error {
     display: block;
-
 }
 
 .module-inp~.module-inp {
@@ -69,31 +58,14 @@
     color: #767676;
 }
 
-[class^="icon"]::before {
-    float: left;
-    display: block;
-    content: "";
-    width: 22px;
-    height: 22px;
-    background-image: url(images_login/css_sprites.png);
-}
-
 .link-sns-login.icon-naver {
     border: 1px solid #00BF18;
+    background: url("icon_naver.png") no-repeat;
+    background-position: -10px -52px;
 }
 
 .link-sns-login.icon-kakao {
     border: 1px solid #F2C94C;
-}
-
-.icon-naver::before {
-   /* background: url("images_login/icon_naver.png") no-repeat;*/
-   background-position: -10px -52px;
-}
-
-.icon-kakao::before {
-    /*background: url("images_login/icon_kakao.png") no-repeat;*/
+    background: url("icon_kakao.png") no-repeat;
     background-position: -52px -10px;
-
 }
-
