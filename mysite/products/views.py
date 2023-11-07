@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.utils import timezone
 from django.http import HttpResponse
 from main.models import Coffee, Roastery, Order, Customer, Reviews, test_Reviews
@@ -23,7 +23,7 @@ def coffee_detail(request, coffee_id):
     similarity_ids = most_similar(coffee_id, 5)
     similarity = Coffee.objects.filter(CoffeeID__in=similarity_ids)
     context = {'coffee_info' : coffee_info, 'cosine_sim' : similarity, 'roastery_name': roastery_name}
-    return render(request, 'products/coffee_detail.html', context)
+    return render(request, 'products/coffee_detail_s.html', context)
 
 
 def roastery_detail(request, roastery_id): #로스터리ID
