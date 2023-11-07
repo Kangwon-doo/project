@@ -1,3 +1,4 @@
+{% load humanize %}
 <h1>{{coffee_info.CoffeeName}}</h1>
     <ul>
     {% for roastery in roastery_name %}
@@ -23,3 +24,4 @@
 </div>
 <h5>원산지 : {{coffee_info.Country}}</h5>
 <h5>용량 : {{coffee_info.Capacity}}</h5>
+<h5>가격 : {{ coffee_info.Price|intcomma }}원 </h5>
