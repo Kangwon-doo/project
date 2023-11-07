@@ -91,15 +91,14 @@ class test_Reviews(models.Model):
     CoffeeID = models.ForeignKey(Coffee, on_delete=models.CASCADE)
     ######## 사용자 입력값 ########
     email = models.EmailField(max_length=40)  # 이메일
-    Caffeine = models.CharField(max_length=1)  # 디카페인/카페인
-    CoffeeType = models.TextField()  # 타입
-    CupNoteCategories = models.PositiveSmallIntegerField()  # 선호 컵 노트 카테고리
-    Body = models.CharField(max_length=1)  # 바디감
-    Sourness = models.CharField(max_length=1)  # 신맛
-    Sweetness = models.CharField(max_length=1)  # 단맛
-    Bitterness = models.CharField(max_length=1)  # 쓴맛
-    Stars = models.CharField(max_length=1, default=0) # 별점. 1~5점. 0점은 아직 리뷰를 남기지 않은 커피
-
+    # Caffeine = models.CharField(max_length=1)  # 디카페인/카페인
+    # CoffeeType = models.TextField()  # 타입
+    # CupNoteCategories = models.PositiveSmallIntegerField()  # 선호 컵 노트 카테고리
+    # Body = models.CharField(max_length=1)  # 바디감
+    # Sourness = models.CharField(max_length=1)  # 신맛
+    # Sweetness = models.CharField(max_length=1)  # 단맛
+    # Bitterness = models.CharField(max_length=1)  # 쓴맛
+    Stars = models.IntegerField(default=0) # 별점. 1~5점. 0점은 아직 리뷰를 남기지 않은 커피
     created_date = models.DateTimeField()
     class Meta:
         db_table = "mockreview"

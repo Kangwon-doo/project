@@ -1,36 +1,37 @@
 <h1>예상 선호도를 선택해 주세요!</h1>
 <h3>다음 원두들의 설명을 읽고 예상되는 선호도를 입력해주세요. </h3>
 
-<form action="{%  %}" method="POST">
+<form action="/review-submit/" method="POST">
     {% csrf_token %}
     <h5>좋아하지 않을 것 같다 : 1 ~ 즐겨 마실 것 같다 : 5</h5>
+    <input type="email" name = "email">
     {%for i in coffee_info%}
         <div class="fieldbox">
-            <div class="slidecontainer">
+            <div class="radiobtn">
                 <p>{{i.CoffeeName}}: </p>
                 <fieldset>
-                    <label for="score_{{ forloop.counter }}_1">
-                        <input type="radio" name="score_{{ forloop.counter }}" value="1" id="score_{{ forloop.counter }}_1">
+                    <label for="{{ i.CoffeeID }}_1">
+                        <input type="radio" name="{{ i.CoffeeID }}" value="1" id="{{ i.CoffeeID }}_1">
                         <span>1</span>
                     </label>
 
-                    <label for="score_{{ forloop.counter }}_2">
-                        <input type="radio" name="score_{{ forloop.counter }}" value="2" id="score_{{ forloop.counter }}_2">
+                    <label for="{{ i.CoffeeID }}_2">
+                        <input type="radio" name="{{ i.CoffeeID }}" value="2" id="{{ i.CoffeeID }}_2">
                         <span>2</span>
                     </label>
 
-                    <label for="score_{{ forloop.counter }}_3">
-                        <input type="radio" name="score_{{ forloop.counter }}" value="3" id="score_{{ forloop.counter }}_3" checked>
+                    <label for="{{ i.CoffeeID }}_3">
+                        <input type="radio" name="{{ i.CoffeeID }}" value="3" id="{{ i.CoffeeID }}_3" checked>
                         <span>3</span>
                     </label>
 
-                    <label for="score_{{ forloop.counter }}_4">
-                        <input type="radio" name="score_{{ forloop.counter }}" value="4" id="score_{{ forloop.counter }}_4">
+                    <label for="{{ i.CoffeeID }}_4">
+                        <input type="radio" name="{{ i.CoffeeID }}" value="4" id="{{ i.CoffeeID }}_4">
                         <span>4</span>
                     </label>
 
-                    <label for="score_{{ forloop.counter }}_5">
-                        <input type="radio" name="score_{{ forloop.counter }}" value="5" id="score_{{ forloop.counter }}_5">
+                    <label for="{{ i.CoffeeID }}_5">
+                        <input type="radio" name="{{ i.CoffeeID }}" value="5" id="{{ i.CoffeeID }}_5">
                         <span>5</span>
                     </label>
                 </fieldset>
