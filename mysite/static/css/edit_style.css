@@ -194,6 +194,12 @@ footer {
   flex-shrink: 0;
   transition: left 0.15s;
 }
+/* mainpage content */
+.about .container .about-content .col-sm-3 {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
 
 
 /* mypage 시작*/
@@ -278,7 +284,6 @@ footer {
 
 }
 
-
 #mypage #mypage_body .content {
     position: relative;
     display: table-cell;
@@ -321,6 +326,20 @@ footer {
     margin-right: 2em;
     margin-bottom: 2em;
 }
+
+
+/* MD상품 시작*/
+#MD .container {
+    margin-top: 85px;
+}
+#MD .container #img_box {
+    justify-content: center;
+    display: flex;
+    margin: 65px;
+}
+
+/* 구매내역 */
+
 
 
 

@@ -8,11 +8,11 @@ from .cosine import most_similar
 def coffee(request):
     coffee_list = Coffee.objects.order_by('CoffeeID')
     context = {'coffee_list': coffee_list}
-    return render(request, 'products/coffee_list.html', context)
+    return render(request, 'main/MD.html', context)
 
 
 def MD(request):
-    return HttpResponse("제품 준비 중입니다.")
+    return render(request, 'main/MD.html')
 
 
 def coffee_detail(request, coffee_id):

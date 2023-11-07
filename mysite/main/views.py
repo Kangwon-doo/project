@@ -7,7 +7,7 @@ def index(request):
     return render(request, 'main/mainpage.html')
 
 def mypage(request):
-    return render(request, 'main/mypage_privateinfo.html')
+    return render(request, 'main/mypage_privateinfo_origin.html')
 
 def servicePopup(request):
     return render(request, 'main/popup.html')
@@ -17,3 +17,8 @@ def signin(request):
 
 def basket(request):
     return render(request, 'main/basket.html')
+
+
+def purchase(request):
+
+    return render(request, 'main/mypage_purchase.html')

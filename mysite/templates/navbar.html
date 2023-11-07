@@ -42,9 +42,15 @@
                             <a href="#education"><span class="material-icons">local_mall</span></a>
                         </li>
 
+                        {% if user.is_authenticated %}
+                        <li class=" smooth-menu" style="cursor: pointer">
+                            <a>로그아웃</a>
+                        </li>
+                        {% else %}
                         <li class=" smooth-menu" onclick = 'goSignin()' style="cursor: pointer">
                             <a>sign in</a>
                         </li>
+                        {% endif %}
                     </ul>
                 </div><!-- /.navbar-collapse -->
             </div><!--/.container-->
