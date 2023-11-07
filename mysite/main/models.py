@@ -9,6 +9,7 @@ class Roastery(models.Model):
     RoasteryName = models.CharField(max_length=45) # 로스터리 이름
     RoasteryAddress = models.CharField(max_length=3000) # 로스터리 주소
     RoasteryInfo = models.TextField() # 로스터리 소개
+    # RoasteryPhone = models.TextField(validators=[MinLengthValidator(9, '')]) # 전화번호
 
     class Meta:
         db_table = "roastery"
@@ -77,7 +78,15 @@ class Customer(models.Model):
 class Reviews():
     CoffeeID = models.ForeignKey(Coffee, on_delete=models.CASCADE) 
     CustomerID = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    #Stars = models.
+    # Stars = models.CharField(max_length=1, default=0) # 별점. 1~5점. 0점은 아직 리뷰를 남기지 않은 커피
     content = models.TextField()
     created_date = models.DateTimeField()
-    
+
+class test_Reviews():
+    CoffeeID = models.ForeignKey(Coffee, on_delete=models.CASCADE)
+    email = models.EmailField(max_length=40)  # 이메일
+    # CustomerID = models.ForeignKey(Customer, on_delete=models.CASCADE)
+
+    Stars = models.CharField(max_length=1, default=0) # 별점. 1~5점. 0점은 아직 리뷰를 남기지 않은 커피
+    # content = models.TextField()
+    created_date = models.DateTimeField()

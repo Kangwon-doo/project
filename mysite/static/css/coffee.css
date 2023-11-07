@@ -202,3 +202,99 @@ a {
         object-fit: cover;
       }
 
+    .info-section {
+        display: flex;
+        justify-content: center;
+    }
+
+    .info-wrapper {
+        width: 150px;
+        height: 200px;
+        text-align: center;
+        margin: 10px;
+    }
+
+    .material-symbols-outlined {
+        font-variation-settings:
+        'FILL' 0,
+        'wght' 200,
+        'GRAD' 0,
+        'opsz' 50;
+      }
+
+      .text-box {
+        display: none;
+        position: relative;
+        background: rgb(249, 160, 37);
+        opacity: 50%;
+        width: 300px;
+        height: 150px;
+        padding: 10px;
+
+        left: -58%;
+        z-index: 1;
+    }
+
+    .text-box:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border: 13px solid transparent;
+        border-bottom-color: rgb(249, 160, 37);
+        border-top: 0;
+        margin-left: -13px;
+        margin-top: -10px;
+    }
+    
+    .info-wrapper:hover .text-box {
+        display: block; 
+    }
+    progress[value] {
+        --color: rgb(249, 160, 37); /* the progress color */
+        --background: rgb(230, 230, 230); /* the background color */
+      
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        border: none;
+        width: 20em;
+        margin: 0 10px;
+        border-radius: 0px;
+        background: var(--background);
+      }
+      progress[value]::-webkit-progress-bar {
+        border-radius: 10em;
+        background: var(--background);
+      }
+      progress[value]::-webkit-progress-value {
+        border-radius: 0px;
+        background: var(--color);
+      }
+      progress[value]::-moz-progress-bar {
+        border-radius: 10em;
+        background: var(--color);
+      }
+
+      .bar-label {
+        width: 100px;
+        text-align: center;
+      }
+
+      .bar {
+        display: flex;
+        margin: 10px auto;
+      }
+      
+      .bar-wrapper {
+        width: 80%;
+        margin: auto;
+        border: 2px solid #c3c3c3;
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        padding-top: 30px;
+        padding-bottom: 30px;
+      }

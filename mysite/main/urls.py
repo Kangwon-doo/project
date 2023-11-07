@@ -5,6 +5,5 @@ app_name = 'pybo'
 
 urlpatterns = [
      path('test/', views.index),
-     path('', views.temp),
-     path('test/result/', views.result,name='result'),
+     path('test/result/', views.result),
 ]

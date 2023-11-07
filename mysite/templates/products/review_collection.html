@@ -1,0 +1,24 @@
+<h1>예상 선호도를 선택해 주세요!</h1>
+<h3>다음 원두들의 설명을 읽고 예상되는 선호도를 입력해주세요. </h3>
+
+<form action="#" method="POST">
+    {% csrf_token %}
+    <div>좋아하지 않을 것 같다 : 1 ~ 즐겨 마실 것 같다 : 5</div>
+        <!--슬라이드 바-->
+        <div class="fieldbox">
+            {%for i in coffee_info%}
+            <div class="slidecontainer">
+                <p>{{i.CoffeeName}}: <span id="sour-value"></span></p>
+                <input type="range" id="sour" min="1" max="5" value="3" class="slider">
+                <p>{{i.CoffeeInfo}}</p>
+                <p>{{i.CoffeeType}}, {{i.RoastingPoint}}</p>
+                <p>Body : {{i.Body}}, Sourness : {{i.Sourness}}, Sweetness : {{i.Sweetness}}, Bitterness : {{i.Bitterness}}</p>
+                <p>이 원두의 컵 노트 : {{i.CupNote}}</p>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="field-btns">
+            <button class="prev-3 prev" id="btn">이전</button>
+            <button class="Submit" onclick="send_result()" id="btn">제출</button>
+        </div>
+    </div>
