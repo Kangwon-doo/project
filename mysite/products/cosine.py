@@ -7,8 +7,6 @@ features = df.loc[:, df.columns != 'id']
 
 # Create your tests here.
 def most_similar(coffee_id, top_n=10):
-    # df = pd.read_csv('data/features.csv')
-    # test = df.loc[:, df.columns != 'id']
     embeddings = features.values
     cosine_similarity_matrix = cosine_similarity(embeddings, embeddings)
 
@@ -16,15 +14,11 @@ def most_similar(coffee_id, top_n=10):
     idx = df[df['id'] == coffee_id].index[0]
 
     df_copy['cosine_similarity'] = cosine_similarity_matrix[idx]
-    # result_df = df_copy.sort_values(by='cosine_similarity', ascending=False)[:top_n]
     result_df = df_copy[df_copy['id'] != coffee_id].sort_values(by='cosine_similarity', ascending=False)[:top_n]
     return result_df['id'].tolist()
 
 
 def cos_recommendation(user_input, top_n=5):
-    column_mapping = {'바디감': 'body', '신맛': 'sour', '단맛': 'sweet', '쓴맛': 'bitter', '타입_디카페인': 'caf', '타입_블렌드': 'blend'}  # 'notes'
-    df.rename(columns=column_mapping, inplace=True)
-
     # Create a new dictionary
     new_dict = user_input.copy()
     # Add other keys with initial values
@@ -37,8 +31,8 @@ def cos_recommendation(user_input, top_n=5):
     del new_dict['notes']
     df.loc[len(df)] = new_dict
 
-    features_df = df[
-        ['body', 'sour', 'sweet', 'bitter', 'caf', 'blend', '꽃', '과일', '허브', '달콤함', '고소함', '향료', '초콜릿']]  # '타입_싱글오리진'
+    features_df = features[
+        ['body', 'sour', 'sweet', 'bitter', 'caf', 'blend', '꽃', '과일', '허브', '달콤함', '고소함', '향료', '초콜릿']]
 
     embeddings = features_df.values
     cosine_similarity_matrix = cosine_similarity(embeddings, embeddings)
