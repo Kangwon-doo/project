@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from main.models import Coffee, Roastery, Order, Customer, Reviews, test_Reviews
 from .cosine import most_similar
 import random
+import json
 
 
 # Create your views here.
@@ -38,19 +39,10 @@ def reviews(request):
     ids = [i.CoffeeID for i in Coffee.objects.all()]
     random_coffees = random.sample(ids, 10)
     shuffled = Coffee.objects.filter(CoffeeID__in=random_coffees)
-    # random.shuffle(shuffled)
-    # shuffled = Coffee.objects.get(CoffeeID=d_shuffled)
-
-    # random_coffees = dict(random_coffees)
     context = {'coffee_info' : shuffled}
     return render(request, 'products/review_radio2.html', context)
 
 def review_create(request):
-    # if request.method == 'POST':
-    #     email = request.POST['email']
-    #     coffee_id = request.POST['coffee_id']
-    #     coffee_score = request.POST['score_{{ i.CoffeeID }}']
-    #     reviews = test_Reviews.objects.create(email=email, CoffeeID_id=coffee_id, Stars=coffee_score)
     if request.method == 'POST':
         data = dict(request.POST)
         del data['csrfmiddlewaretoken']
@@ -59,10 +51,44 @@ def review_create(request):
         coffee_ids = list(score.keys())
         scores = list(score.values())
         for i in range(10):
-            test_Reviews.objects.create(
-                email = data['email'][0],
-                CoffeeID_id = coffee_ids[i],
-                Stars = scores[i][0],
-                created_date = timezone.now()
+            # test_Reviews.objects.create(
+            print( data
+                # email = data['email'][0],
+                # CoffeeID_id = coffee_ids[i],
+                # Stars = scores[i][0],
+                # created_date = timezone.now(),
+                # caf = request.GET.get('caf'),
+                # single = request.GET.get('single'),
+                # blend = request.GET.get('blend'),
+                # notes = request.GET.getlist('notes[]'),
+                # sour = request.GET.get('sour'),
+                # sweet = request.GET.get('sweet'),
+                # bitter = request.GET.get('bitter'),
+                # body = request.GET.get('body'),
             )
     return render(request, 'products/review_suceess.html')
+
+# context = {}
+def mock_preference(request):
+    template_name = "index2.html"
+    global context
+    caf = request.GET.get('caf')
+    single = request.GET.get('single')
+    blend = request.GET.get('blend')
+    notes = request.GET.getlist('notes[]')
+    sour = request.GET.get('sour')
+    sweet = request.GET.get('sweet')
+    bitter = request.GET.get('bitter')
+    body = request.GET.get('body')
+
+    context = {'caf': caf, 'single': single, 'blend': blend, 'notes': notes, 'sour': sour, 'sweet': sweet,
+               'bitter': bitter, 'body': body}
+
+    return render(request, template_name, context)
+
+
+def survey_submitted(request):
+    global context
+    print(context)
+
+    return render(request, 'products/review_suceess.html', context)
