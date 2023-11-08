@@ -1,154 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <link rel="shortcut icon" href="#">
+    <title>Sample Table</title>
     <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
 
-        .info-container {
-            background-color: rgb(255, 255, 255);
-        }
-        .info-section {
-            display: flex;
-            margin: auto;
-            width: 56%;
-            background-color: rgb(255, 255, 255);
-        }
-        .info-wrapper {
-            width: 150px;
-            height: 200px;
-            text-align: center;
-            margin: 10px;
-        }
-        .material-symbols-outlined {
-            font-variation-settings:
-            'FILL' 0,
-            'wght' 250,
-            'GRAD' 0,
-            'opsz' 50;
-            font-size: 100px;
-          }
-
-          .text-box {
-            display: none;
-            position: relative;
-            background: rgb(255, 212, 55); 
-            opacity: 50%;
-            width: 300px;
-            height: 150px;
+        th, td {
+            border: 2px solid #d7d7d7;
             padding: 10px;
-            left: -58%;
-            z-index: 1;
+            padding-left: 15px;
+            text-align: left;
         }
-
-        .text-box:after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border: 13px solid transparent;
-            border-bottom-color: rgb(255, 212, 55); 
-            border-top: 0;
-            margin-left: -13px;
-            margin-top: -13px;
+        .static {
+            background-color: #f1f1f1;
+            width: 25%;
         }
-        
-        .info-wrapper:hover .text-box {
-            display: block; 
-        }
-        progress[value] {
-            --color: rgb(255, 212, 55); /* the progress color */
-            --background: rgb(230, 230, 230); /* the background color */
-          
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-            border: none;
-            width: 400px;
-            margin: 0 10px;
-            border-radius: 0px;
-            background: var(--background);
-          }
-          progress[value]::-webkit-progress-bar {
-            border-radius: 10em;
-            background: var(--background);
-          }
-          progress[value]::-webkit-progress-value {
-            border-radius: 0px;
-            background: var(--color);
-          }
-          progress[value]::-moz-progress-bar {
-            border-radius: 10em;
-            background: var(--color);
-          }
-
-          .bar-label {
-            width: 100px;
-            text-align: center;
-          }
-
-          .bar {
-            display: flex;
-            margin: 10px auto;
-          }
-          .bar-wrapper {
-            width: 55%;
-            margin: auto;
-            background-color: rgb(255, 255, 255);
-            border: 2px solid #969696;
-            border-radius: 20px;
-            display: flex;
-            flex-direction: column;
-            padding-top: 30px;
-            padding-bottom: 30px;
-          }
     </style>
 </head>
 <body>
-    <div class="info-container">
-        <div class="info">
-            <div class="info-wrapper">
-                <h5>싱글블렌드</h5>
-                <span class="material-symbols-outlined">local_cafe</span>
-            </div>
-            <div class="info-wrapper">
-                <h5>다크로스팅</h5>
-                <span class="material-symbols-outlined">local_cafe</span>
-            </div>
-            <div class="info-wrapper">
-                <h5>유기농</h5>
-                <span class="material-symbols-outlined">local_cafe</span>
-            </div>
-            <div class="info-wrapper" id="cupnote-wrapper">
-                <h5>과일,허브</h5>
-                <span class="material-symbols-outlined">local_cafe</span>
-                <div class="text-box">This is additional information.</div>
-            </div>
-        </div>
-        <div class="bar-wrapper">
-            <div class="bar">
-                <div class="bar-label">단맛</div>
-                <progress value="2" max="5"></progress>
-            </div>
-            <div class="bar">
-                <div class="bar-label">신맛</div>
-                <progress value="1" max="5"></progress>
-            </div>
-            <div class="bar">
-                <div class="bar-label">쓴맛</div>
-                <progress value="5" max="5"></progress>
-            </div>
-            <div class="bar">
-                <div class="bar-label">바디감</div>
-                <progress value="4" max="5"></progress>
-            </div>
-        </div>
-    </div>
-    
+    <table>
+        <tr>
+            <td class="static">식품의 유형</td>
+            <td>Row 1, Cell 2</td>
+            <td class="static">유통기한</td>
+            <td>Row 1, Cell 4</td>
+        </tr>
+        <tr>
+            <td class="static">제조원 및 소재지</td>
+            <td>Row 2, Cell 2</td>
+            <td class="static">제조일자</td>
+            <td>Row 2, Cell 4</td>
+        </tr>
+        <tr>
+            <td class="static">내용량</td>
+            <td>Row 3, Cell 2</td>
+            <td class="static">보관방법</td>
+            <td>Row 3, Cell 4</td>
+        </tr>
+        <tr>
+            <td class="static">원재료 및 함량</td>
+            <td>Row 3, Cell 2</td>
+            <td class="static">제품문의 관련 주소 및 전화번호</td>
+            <td>Row 3, Cell 4</td>
+        </tr>
+
+    </table>
 </body>
 </html>
