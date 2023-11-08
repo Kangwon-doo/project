@@ -31,4 +31,5 @@ def result(request):
    template_name = "result.html"
    global context
 
+
    return render(request, template_name, context)
