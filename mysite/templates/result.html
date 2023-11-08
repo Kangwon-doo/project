@@ -3,10 +3,59 @@
 
 {% block head %}
     <title>메인사이트</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="shortcut icon" href="#">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/result.css' %}">
     <!-- css -->
 {% endblock %}
 
-
 {% block content %}
-result page
+<div class="container">
+    <div class="coffee">
+        <img class="main-img" src="/static/coffee_img/2.jpg">
+        <div class="coffee-name">
+            <div class="content">
+                <span class="material-symbols-outlined">spa</span>
+                <h2>콜롬비아 디카페인</h2>
+            </div>
+        </div>
+        <div class="info-header">
+            <div class="info-btn">
+                소개
+            </div>
+        </div>
+        <div class="coffee-info">
+            <div class="info-content">
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis suscipit sunt possimus nulla perspiciatis provident hic maiores a doloribus! Obcaecati vero accusantium, deleniti aut distinctio error repudiandae officia est nostrum?
+            </div>
+        </div>
+    </div>
+    <div class="btn-section">
+        <a class="btn" href="">원두 자세히 보러가기</a>
+        <a class="btn" href="">친구한테 공유하기</a>
+        <a class="btn" href="">이 원두 구독하기</a>
+    </div>
+    <div class="etc">
+        <div class="guide">
+            <h3>회원님에게 맞는 다른 원두들도 보고 가세요</h3>
+        </div>
+        <div class="etc-coffee">
+            <a class="coffee-wrapper" href="">
+                <img class="etc-img" src="/static/coffee_img/2.jpg">
+                <p>커피이름1</p>
+            </a>
+            <a class="coffee-wrapper" href="">
+                <img class="etc-img" src="/static/coffee_img/2.jpg">
+                <p>커피이름2</p>
+            </a>
+            <a class="coffee-wrapper" href="">
+                <img class="etc-img" src="/static/coffee_img/2.jpg">  
+                <p>커피이름3</p>
+            </a>
+        </div>
+    </div>
+    <div class="again">
+        <a class="again-btn" href="/test">테스트 다시하기</a>
+    </div>
+</div>
 {% endblock %}

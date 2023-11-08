@@ -28,8 +28,8 @@
                     <h2>카페인을 원하시나요?</h2>
                 </div>
                 <div class="fieldbox">
-                    <button class="field1 hidden" onclick="change_firbtn(event)" name="decaf" type="button" id="valbtn" value="0">디카페인</button>
-                    <button class="field1 hidden" onclick="change_firbtn(event)" type="button" id="valbtn" value="1">카페인</button>
+                    <button class="field1 hidden" onclick="change_firbtn(event)" name="decaf" type="button" id="valbtn" value="1">디카페인</button>
+                    <button class="field1 hidden" onclick="change_firbtn(event)" type="button" id="valbtn" value="0">카페인</button>
                 </div>
                 <div class="field-btns">
                     <button class="hiddenbtn" type="button">이전</button>
@@ -98,7 +98,7 @@
                 </div>
                 <div class="field-btns">
                     <button class="prev-3 prev" id="btn" type="button">이전</button>
-                    <input type="submit" onclick="send_result()" id="btn" value="추천받기"></input>
+                    <input type="submit" onclick="send_result(event)" id="subbtn" value="추천받기"></input>
                 </div>
             </div>
 

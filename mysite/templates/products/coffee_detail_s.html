@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/swiper-bundle.min.css' %}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="shortcut icon" href="#">
+
 {% endblock %}
 
 {% block content %}
@@ -47,7 +48,7 @@
                         {{roastery.RoasteryName}}
                     {%endif%}
                 {%endfor%}
-                <span class="material-symbols-outlined" >navigate_next</span>
+                <span class="material-symbols-outlined" style="padding-top:10px">navigate_next</span>
             </a>
         </div>
         <div class="section2-4">
@@ -74,9 +75,7 @@
             </div>
         </div> 
     </div>
-    <div class="swiper-button-prev swiper-nextBtn"></div>
-    <div class="swiper-button-next swiper-prevBtn"></div>
-    <div class="swiper-pagination"></div>
+    
 </div>
 
 
@@ -89,14 +88,55 @@
     <div class="info">
         <span>{{coffee_info.CoffeeInfo}}</span>
     </div>
-    <div class="info">
-        <span>{{coffee_info.CupNote|slice:"1:-1"}}향</span>
+
+    <div class="info-section">
+        {% if coffee_info.CoffeeType %}
+        <div class="info-wrapper">
+            <h5>{{coffee_info.CoffeeType}}</h5>
+            <span class="material-symbols-outlined" style="font-size:100px;">local_cafe</span>
+        </div>
+        {% endif %}
+        {% if coffee_info.RoastingPoint %}
+        <div class="info-wrapper">
+            <h5>{{coffee_info.RoastingPoint}}</h5>
+            <span class="material-symbols-outlined" style="font-size:100px;">local_cafe</span>
+        </div>
+        {% endif %}
+        {% if coffee_info.Sustainability %}
+        <div class="info-wrapper">
+            <h5>{{coffee_info.Sustainability}}</h5>
+            <span class="material-symbols-outlined" style="font-size:100px;">local_cafe</span>
+        </div>
+        {% endif %}
+        {% if coffee_info.CupNote %}
+        <div class="info-wrapper" id="cupnote-wrapper">
+            <h5>과일,허브</h5>
+            <span class="material-symbols-outlined" style="font-size:100px;">local_cafe</span>
+            <div class="text-box">{{coffee_info.CupNote}}</div>
+        </div>
+        {% endif %}
     </div>
+
+    <div class="bar-wrapper">
+        <div class="bar">
+            <div class="bar-label">단맛</div>
+            <progress value={{coffee_info.Sweetness}} max="5"></progress>
+        </div>
+        <div class="bar">
+            <div class="bar-label">신맛</div>
+            <progress value={{coffee_info.Sourness}} max="5"></progress>
+        </div>
+        <div class="bar">
+            <div class="bar-label">쓴맛</div>
+            <progress value={{coffee_info.Bitterness}} max="5"></progress>
+        </div>
+        <div class="bar">
+            <div class="bar-label">바디감</div>
+            <progress value={{coffee_info.Body}} max="5"></progress>
+        </div>
+    </div>
+
 </div>
-
-
-
-
 
 <!-- 자바스크립트 파일 -->
 

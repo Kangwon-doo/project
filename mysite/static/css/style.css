@@ -23,7 +23,8 @@ body {
   background-color: #ffffff;
 }
 
-#btn { /* 이동 버튼 */
+#btn,
+#subbtn { /* 이동 버튼 */
   width: 100px;
   height: 50px;
   margin-top: 30px;
@@ -50,7 +51,7 @@ body {
 .field2.active,
 .field3:active,
 .field3.active {
-  background-color: rgb(181, 147, 203);
+  background-color:rgb(255, 187, 85);
   color: #fff;
   transition: 0.4s ease;
 }
@@ -65,13 +66,12 @@ body {
   border: 1px solid rgb(77,77,77);
   border-radius: 20px;
   font-size: 15px;
-  color: #692b8e;
+  color: #000;
   cursor: pointer;
   align-items: center;
   justify-content: center;
   position: relative;
 }
-
 
 .hidden {
   display: none;
@@ -103,7 +103,6 @@ body {
 
 
 /* 커스텀 슬라이드 바 */
-
 .slidecontainer {
   width: 100%;
   margin-top: 15%;
@@ -128,7 +127,7 @@ Firefox 브라우저를 위해서는 -moz- 를 사용하세요 */
   width: 25px; /* 슬라이더 핸들 길이 */
   height: 25px; /* 슬라이더 핸들 높이 */
   border-radius: 50%; /* 핸들 모양을 원모양으로 만들기 위함 */
-  background: rgb(78, 72, 187); /* 슬라이더 핸들 색상 */
+  background: rgb(255, 187, 85); /* 슬라이더 핸들 색상 */
   cursor: pointer; /* 슬라이더 핸들에 마우스를 갖다대면 포인터로 변경 */
 }
 

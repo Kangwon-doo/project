@@ -10,25 +10,25 @@ def temp(request):
 context = {}
 
 def index(request):
+   template_name = "index2.html"
    global context
    caf = request.GET.get('caf')
+   single = request.GET.get('single')
    blend = request.GET.get('blend')
    notes = request.GET.getlist('notes[]')
    sour = request.GET.get('sour')
    sweet = request.GET.get('sweet')
    bitter = request.GET.get('bitter')
    body = request.GET.get('body')
-   
-   context = {'caf':caf,'blend':blend,'notes':notes,'sour':sour,'sweet':sweet,'bitter':bitter,'body':body}
-   print(context)
-   
-   template_name = "index2.html"
-   return render(request, template_name,context)
+
+   context = {'caf': caf, 'single': single, 'blend': blend, 'notes': notes, 'sour': sour, 'sweet': sweet,
+              'bitter': bitter, 'body': body}
+
+   return render(request, template_name, context)
+
 
 def result(request):
-   global context
-   print(request)
-   print("오오오오",context)
-   
    template_name = "result.html"
-   return render(request, template_name)
+   global context
+
+   return render(request, template_name, context)

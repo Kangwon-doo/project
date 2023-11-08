@@ -30,6 +30,7 @@ prevBtnFour.addEventListener("click", function(){
 });
 
 
+
 document.addEventListener("DOMContentLoaded", function () {
   const fadeMeElements = document.querySelectorAll("#valbtn");
   const fadeInButtons = document.querySelectorAll("#btn");
@@ -70,6 +71,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
+
 /* 1번째 질문 페이지 버튼 클릭 시 배경 변경 및 값 저장*/ 
 var caf = 0;
 function change_firbtn(e) {
@@ -77,7 +79,7 @@ function change_firbtn(e) {
     btns.forEach(function (btn, i) {
       if (e.currentTarget == btn) {
         btn.classList.add("active");
-        caf = e.target.value 
+        caf = e.target.value; 
       } else {
         btn.classList.remove("active");
       }
@@ -85,13 +87,21 @@ function change_firbtn(e) {
 }
 
 /* 2번째 질문 페이지 버튼 클릭 시 배경 변경 및 값 저장*/ 
+var single = '';
 var blend = '';
 function change_secbtn(e) {
     var btns = document.querySelectorAll(".field2");
     btns.forEach(function (btn, i) {
       if (e.currentTarget == btn) {
         btn.classList.add("active");
-        blend = e.target.value
+        if (e.target.value == '싱글오리진') {
+          single = 1;
+          blend = 0;
+        }
+        else {
+          single = 0;
+          blend = 1;
+        }
       } else {
         btn.classList.remove("active");
       }
@@ -168,33 +178,37 @@ slider4.oninput = function() {
     body = this.value;
 }
 
-/* 변수 값 제출하기 */
-function send_result(){
+function send_result(e) {
   var values = document.getElementsByClassName("field3");
   var index = 0;
   const notes = [];
 
-  for (var i=0;i<values.length;i++){
-      if(values[i].classList.contains('active')){
-          notes[index] = values[i].value;
-          index++;
-      }
+  for (var i = 0; i < values.length; i++) {
+    if (values[i].classList.contains('active')) {
+      notes[index] = values[i].value;
+      index++;
+    }
   }
   console.log(notes);
 
-    $.ajax({
-        url: '/',
-        type: 'GET',
-        data: {
-            'caf':caf,
-            'blend':blend,
-            'notes':notes,
-            'sour':sour,
-            'sweet':sweet,
-            'bitter':bitter,
-            'body':body
-        },
-        datatype: 'json',
-    });
-    alert('결과 페이지로 이동합니다.');
+  $.ajax({
+    url: '/test',
+    type: 'GET',
+    data: {
+      'caf': caf,
+      'single': single,
+      'blend':blend,
+      'notes': notes,
+      'sour': sour,
+      'sweet': sweet,
+      'bitter': bitter,
+      'body': body
+    },
+    dataType: 'json'
+  });
+  alert('결과 페이지로 이동합니다.');
 }
+
+
+
+
