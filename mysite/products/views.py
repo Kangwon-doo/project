@@ -1,6 +1,7 @@
 from django.shortcuts import render
+from django.utils import timezone
 from django.http import HttpResponse
-from main.models import Coffee, Roastery, Order, Customer, Reviews
+from main.models import Coffee, Roastery, Order, Customer, Reviews, test_Reviews
 from .cosine import most_similar
 import random
 
@@ -45,3 +46,25 @@ def reviews(request):
     # random_coffees = dict(random_coffees)
     context = {'coffee_info' : shuffled}
     return render(request, 'products/review_radio2.html', context)
+
+def review_create(request):
+    # if request.method == 'POST':
+    #     email = request.POST['email']
+    #     coffee_id = request.POST['coffee_id']
+    #     coffee_score = request.POST['score_{{ i.CoffeeID }}']
+    #     reviews = test_Reviews.objects.create(email=email, CoffeeID_id=coffee_id, Stars=coffee_score)
+    if request.method == 'POST':
+        data = dict(request.POST)
+        del data['csrfmiddlewaretoken']
+        print({i: j[0] for i, j in data.items()})
+        score = dict(list(data.items())[-10:])
+        coffee_ids = list(score.keys())
+        scores = list(score.values())
+        for i in range(10):
+            test_Reviews.objects.create(
+                email = data['email'][0],
+                CoffeeID_id = coffee_ids[i],
+                Stars = scores[i][0],
+                created_date = timezone.now()
+            )
+    return render(request, 'products/review_suceess.html')

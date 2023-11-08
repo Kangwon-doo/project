@@ -21,7 +21,7 @@ def index(request):
    context = {'caf':caf,'single':single,'blend':blend,'notes':notes,'sour':sour,'sweet':sweet,'bitter':bitter,'body':body}
    
    
-   return render(request, template_name,context)
+   return render(request,template_name,context)
 
 def result(request):
    template_name = "result.html"
@@ -29,4 +29,4 @@ def result(request):
    
    
    
-   return render(request, template_name,context)
+   return render(request,template_name,context)

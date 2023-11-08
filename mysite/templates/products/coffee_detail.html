@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load humanize %}
 
 {% block head %}
     <title>메인사이트</title>
@@ -31,8 +32,8 @@
             <div class="section2-2-2">
                 <p>
                     <span>{{coffee_info.Country}}</span><br>
-                    <span>용량예시</span><br>
-                    <span>가격예시</span><br>
+                    <span>{{coffee_info.Capacity}}</span><br>
+                    <span> {{coffee_info.Price|intcomma}}</span><br>
                 </p>
             </div>
         </div>
