@@ -43,7 +43,8 @@ with open(coffee_csv, newline='', encoding='utf-8') as csvfile:
     for row in data_reader:
         try:
             Coffee.objects.create(		# Model class에 입력된 데이터 이름 / CSV에 입력된 데이터베이스의 이름
-                CoffeeID  = row['id'],
+                OriginalID = row['id'],
+                CoffeeID  = row['new_id'],
                 CoffeeName  = row['이름'],
                 RoasteryID  = Roastery.objects.get(RoasteryID=row['로스터리ID']),
                 CoffeeInfo  = row['커피 소개'],
