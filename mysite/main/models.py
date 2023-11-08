@@ -15,6 +15,7 @@ class Roastery(models.Model):
 
 
 class Coffee(models.Model):
+    OriginalID = models.IntegerField(primary_key=True)  # 커피 oroginal ID
     CoffeeID = models.IntegerField(primary_key=True)  # 커피 ID
     CoffeeName = models.CharField(max_length=50)  # 커피 이름
     RoasteryID = models.ForeignKey("Roastery", on_delete=models.CASCADE)  # 로스터리 ID
