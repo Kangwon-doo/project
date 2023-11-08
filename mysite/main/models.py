@@ -39,7 +39,7 @@ class Coffee(models.Model):
     StorageMethod   = models.TextField() # 보관 방법
     RawMaterial  = models.TextField() # 원재료 및 함량
     ProductInfo   = models.TextField() # 제품문의 관련 주소 및 전화번호
-    
+    Price = models.IntegerField()  # 가격 정보
 
     class Meta:
         db_table = "coffee"
