@@ -13,6 +13,8 @@
 {% endblock %}
 
 {% block content %}
+
+<!-- 원두 메인 정보란 -->
 <div class="upper">
     <div class="section1">
         <img class="coffee_img" src="/static/coffee_img/{{coffee_info.CoffeeID}}.jpg" alt="{{coffee_info.CoffeeID}}">
@@ -23,20 +25,19 @@
         </div>
         <div class="section2-2">
             <div class="section2-2-1">
-                <p>
-                    원산지 <br>
+                <p> 원산지 <br>
                     용량 <br>
-                    가격 <br>
-                </p>
+                    가격 <br></p>
             </div>
             <div class="section2-2-2">
                 <p>
                     <span>{{coffee_info.Country}}</span><br>
                     <span>{{coffee_info.Capacity}}</span><br>
-                    <span> {{coffee_info.Price|intcomma}}</span><br>
+                    <span> {{coffee_info.Price|intcomma}} ₩</span><br>
                 </p>
             </div>
         </div>
+        <!-- 로스터리로 넘어가기 -->
         <div class="section2-3">
             <a class="roas-btn" href="/roastery/{{coffee_info.RoasteryID_id}}/">
                 {% for roastery in roastery_name %}
@@ -46,21 +47,24 @@
                 {%endfor%}
                 {% for roastery in roastery_name %}
                     {% if roastery.RoasteryID == coffee_info.RoasteryID_id %}
-                        {{roastery.RoasteryName}}
+                        <p class="roas-name">{{roastery.RoasteryName}}<p>
                     {%endif%}
                 {%endfor%}
-                <span class="material-symbols-outlined" style="padding-top:10px">navigate_next</span>
+                <div class="material-symbols-outlined" id="nav-btn">navigate_next</div>
             </a>
         </div>
+        <!-- 관련 버튼 -->
         <div class="section2-4">
-            <button class="btn">장바구니에 담기</button>
-            <button class="btn">원두 구독하기</button>
+            <button class="btn1">장바구니에 담기</button>
+            <button class="btn2">원두 구독하기</button>
         </div>
     </div>
 </div>
 
+<!-- 구분선 -->
 <hr/>
 
+<!-- 알고리즘 란 -->
 <div class="wrapper" style="position=relative;">
     <h2>이 제품과 비슷한 상품</h2>
     <div class="swiper-container mySwiper">
@@ -76,12 +80,12 @@
             </div>
         </div> 
     </div>
-    
 </div>
 
-
+<!-- 구분선 -->
 <hr/>
 
+<!-- 원두 상세 정보란 -->
 <div class="wrapper">
     <div class="info-header">
         <span class="info-header-text">원두 특징</span>
@@ -90,34 +94,36 @@
         <span>{{coffee_info.CoffeeInfo}}</span>
     </div>
 
+    <!-- 원두 정보란 -->
     <div class="info-section">
         {% if coffee_info.CoffeeType %}
         <div class="info-wrapper">
-            <h5>{{coffee_info.CoffeeType}}</h5>
+            <h5 class="info-val">{{coffee_info.CoffeeType}}</h5>
             <span class="material-symbols-outlined" style="font-size:100px;">local_cafe</span>
         </div>
         {% endif %}
         {% if coffee_info.RoastingPoint %}
         <div class="info-wrapper">
-            <h5>{{coffee_info.RoastingPoint}}</h5>
-            <span class="material-symbols-outlined" style="font-size:100px;">local_cafe</span>
+            <h5 class="info-val">{{coffee_info.RoastingPoint}} 로스팅</h5>
+            <span class="material-symbols-outlined" style="font-size:100px;">emoji_food_beverage</span>
         </div>
         {% endif %}
-        {% if coffee_info.Sustainability %}
+        {% if coffee_info.Sustainability != '0' %}
         <div class="info-wrapper">
-            <h5>{{coffee_info.Sustainability}}</h5>
-            <span class="material-symbols-outlined" style="font-size:100px;">local_cafe</span>
+            <h5 class="info-val">{{coffee_info.Sustainability}}</h5>
+            <span class="material-symbols-outlined" style="font-size:100px;">psychiatry</span>
         </div>
         {% endif %}
         {% if coffee_info.CupNote %}
         <div class="info-wrapper" id="cupnote-wrapper">
-            <h5>과일,허브</h5>
-            <span class="material-symbols-outlined" style="font-size:100px;">local_cafe</span>
+            <h5 class="info-val">과일,허브</h5>
+            <span class="material-symbols-outlined" style="font-size:100px;">nutrition</span>
             <div class="text-box">{{coffee_info.CupNote}}</div>
         </div>
         {% endif %}
     </div>
 
+    <!-- 맛 표기 정보란 -->
     <div class="bar-wrapper">
         <div class="bar">
             <div class="bar-label">단맛</div>
@@ -136,11 +142,43 @@
             <progress value={{coffee_info.Body}} max="5"></progress>
         </div>
     </div>
-
 </div>
 
-<!-- 자바스크립트 파일 -->
+<hr>
 
+<!-- 상품 필수 표기 정보란 -->
+<div class="wrapper">
+    <h2>상품 필수 표기 정보</h2>
+    <table>
+        <tr>
+            <td class="static">식품의 유형</td>
+            <td>{{coffee_info.ProductType}}</td>
+            <td class="static">유통기한</td>
+            <td>{{coffee_info.ExpirationDate}}</td>
+        </tr>
+        <tr>
+            <td class="static">제조원 및 소재지</td>
+            <td>{{coffee_info.Manufacturer}}</td>
+            <td class="static">제조일자</td>
+            <td>{{coffee_info.ManufacturingDate}}</td>
+        </tr>
+        <tr>
+            <td class="static">내용량</td>
+            <td>{{coffee_info.Capacity}}</td>
+            <td class="static">보관방법</td>
+            <td>{{coffee_info.StorageMethod}}</td>
+        </tr>
+        <tr>
+            <td class="static">원재료 및 함량</td>
+            <td>{{coffee_info.RawMaterial}}</td>
+            <td class="static">제품문의 관련 주소 및 전화번호</td>
+            <td>{{coffee_info.ProductInfo}}</td>
+        </tr>
+    </table>
+</div>
+
+
+<!-- 자바스크립트 파일 -->
 <script src="{% static 'js/swiper-bundle.min.js' %}"></script>
 <script src="{% static 'js/coffee.js' %}"></script>
 {% endblock %}

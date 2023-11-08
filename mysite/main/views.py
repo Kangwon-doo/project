@@ -26,7 +26,7 @@ def index(request):
 def result(request):
    template_name = "result.html"
    global context
-   
+   print(context)
    
    
    return render(request,template_name,context)

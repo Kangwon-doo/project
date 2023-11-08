@@ -20,8 +20,8 @@
 
     <!-- 질문 폼 -->
     <div class="form-outer">
-        <form action="result/" method="GET">
-            
+        <form action="result/" method="POST">
+            {% csrf_token %}
             <!-- 첫번째 질문 -->
             <div class="page slidepage">
                 <div class="title">

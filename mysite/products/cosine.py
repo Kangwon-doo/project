@@ -6,7 +6,7 @@ features = df.loc[:, df.columns != 'id']
 
 
 # Create your tests here.
-def most_similar(coffee_id, top_n=10):
+def most_similar(coffee_id, top_n=9):
     # df = pd.read_csv('data/features.csv')
     # test = df.loc[:, df.columns != 'id']
     embeddings = features.values

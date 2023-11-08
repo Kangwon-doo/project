@@ -36,12 +36,6 @@
     margin: 0px;
 }
 
-.roas_img {
-    width: 30px;
-    height: auto;
-    margin: 10px 10px -10px 0px;
-}
-
 .section2 {
     width: 500px;
     height:100%;
@@ -80,20 +74,53 @@ h1 {
 
 .roas-btn {
     height: 45px;
-    border: 1.5px solid rgb(255, 255, 255);
     border-radius: 10px;
     background: rgb(255, 255, 255);
     color: #000000;
     font-size: 15px;
-    line-height: 45px;
     cursor: pointer;
+    display: flex;
+  }
+
+  .roas-name {
+    height: 45px;
+    text-align: center;
+    margin: auto;
+    margin-left: 10px;
+    line-height: 45px;
+  }
+
+#nav-btn {
+  margin: auto;
+  font-size: 30px;
+  color: #474747;
+}
+
+  .roas_img {
+    width: 30px;
+    height: auto;
+    margin: auto;
   }
 
 a {
     text-decoration-line: none; 
 }
 
-.btn {
+.btn1 {
+  width: 50%;
+  height: 50px;
+  margin: 20px 20px 0px 0px;
+  border: none;
+  border-radius: 5px;
+  background: rgb(255, 255, 255);
+  color: rgb(249, 160, 37);
+  border: 2px solid rgb(249, 160, 37);;
+  font-size: 15px;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.btn2 {
     width: 50%;
     height: 50px;
     margin: 20px 20px 0px 0px;
@@ -123,9 +150,11 @@ a {
   }
 
   .info {
-    width: 500px;
+    width: 700px;
     text-align: center;
-    margin: 20px auto;
+    margin: auto;
+    margin-top: 40px;
+    margin-bottom: 10px;
   }
 
   .info-title {
@@ -212,6 +241,13 @@ a {
         height: 200px;
         text-align: center;
         margin: 10px;
+        position: relative;
+    }
+
+    .info-val {
+      height: 40px;
+      line-height: 40px;
+      margin-bottom: 0px;
     }
 
     .material-symbols-outlined {
@@ -227,12 +263,14 @@ a {
         position: relative;
         background: rgb(249, 160, 37);
         opacity: 50%;
-        width: 300px;
-        height: 150px;
-        padding: 10px;
-
-        left: -58%;
+        width: 150px;
+        color: #000000;
+        height: auto;
+        padding: 20px;
+        top: -2%;
+        left: -13%;
         z-index: 1;
+        border-radius: 10px;
     }
 
     .text-box:after {
@@ -297,4 +335,22 @@ a {
         flex-direction: column;
         padding-top: 30px;
         padding-bottom: 30px;
+        margin-bottom: 50px;
       }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        border: 1px solid #d7d7d7;
+        padding: 10px;
+        padding-left: 15px;
+        text-align: left;
+        font-size: 14px;
+    }
+    .static {
+        background-color: #f6f6f6;
+        width: 20%;
+    }
