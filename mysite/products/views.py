@@ -4,7 +4,6 @@ from django.http import HttpResponse
 from main.models import Coffee, Roastery, Order, Customer, Reviews, test_Reviews
 from .cosine import most_similar
 import random
-import ast
 
 
 # Create your views here.
@@ -23,11 +22,10 @@ def coffee_detail(request, coffee_id):
     roastery_name = Roastery.objects.all()
     similarity_ids = most_similar(coffee_id, 5)
     similarity = Coffee.objects.filter(CoffeeID__in=similarity_ids)
-    coffee_info.Country = coffee_info.Country.join(", ")
     context = {'coffee_info' : coffee_info, 
                'cosine_sim' : similarity, 
                'roastery_name': roastery_name }
-    coffee_info.Country = coffee_info.Country.replace(",[", "").replace("]", "").replace("'", "")
+    coffee_info.Country = coffee_info.Country.replace("[", "").replace("]", "").replace("'", "")
     coffee_info.CupNote = coffee_info.CupNote.replace("[", "").replace("]", "").replace("'", "")
     return render(request, 'products/coffee_detail.html', context)
 

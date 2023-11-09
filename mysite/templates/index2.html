@@ -28,8 +28,8 @@
                     <h2>카페인을 원하시나요?</h2>
                 </div>
                 <div class="fieldbox">
-                    <button class="field1 hidden" onclick="change_firbtn(event)" name="decaf" type="button" id="valbtn" value="1">디카페인</button>
-                    <button class="field1 hidden" onclick="change_firbtn(event)" type="button" id="valbtn" value="0">카페인</button>
+                    <button class="field1 hidden" onclick="change_firbtn(event)" name="decaf" type="button" id="valbtn" value="0">디카페인</button>
+                    <button class="field1 hidden" onclick="change_firbtn(event)" type="button" id="valbtn" value="1">카페인</button>
                 </div>
                 <div class="field-btns">
                     <button class="hiddenbtn" type="button">이전</button>
@@ -43,8 +43,8 @@
                     <h2>원하시는 원두 타입을 고르세요</h2>
                     </div>
                 <div class="fieldbox">
-                    <button class="field2" onclick="change_secbtn(event)" type="button" id="valbtn" value="싱글오리진">싱글오리진</button>
-                    <button class="field2" onclick="change_secbtn(event)" type="button" id="valbtn" value="블렌드">블렌드</button>
+                    <button class="field2" onclick="change_secbtn(event)" type="button" id="valbtn" value="0">싱글오리진</button>
+                    <button class="field2" onclick="change_secbtn(event)" type="button" id="valbtn" value="1">블렌드</button>
                 </div>
                 <div class="field-btns">
                     <button class="prev-1 prev" id="btn" type="button">이전</button>
@@ -60,8 +60,8 @@
                 <div class="fieldbox">
                     <button class="field3" onclick="change_thirbtn(this)" type="button" id="valbtn" value="꽃">꽃</button>
                     <button class="field3" onclick="change_thirbtn(this)" type="button" id="valbtn" value="초콜릿">초콜릿</button>
-                    <button class="field3" onclick="change_thirbtn(this)" type="button" id="valbtn" value="고소한">고소한</button>
-                    <button class="field3" onclick="change_thirbtn(this)" type="button" id="valbtn" value="달콤한">달콤한</button>
+                    <button class="field3" onclick="change_thirbtn(this)" type="button" id="valbtn" value="고소함">고소한</button>
+                    <button class="field3" onclick="change_thirbtn(this)" type="button" id="valbtn" value="달콤함">달콤한</button>
                     <button class="field3" onclick="change_thirbtn(this)" type="button" id="valbtn" value="허브">허브</button>
                     <button class="field3" onclick="change_thirbtn(this)" type="button" id="valbtn" value="과일">과일</button>
                     <button class="field3" onclick="change_thirbtn(this)" type="button" id="valbtn" value="향료">향료</button>
@@ -110,6 +110,6 @@
 <!-- 자바스크립트 파일 -->
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<script src="{% static 'js/temp.js' %}"></script>
+<script src="{% static 'js/temp .js' %}"></script>
 <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" data-auto-a11y="true" ></script>
 {% endblock %}

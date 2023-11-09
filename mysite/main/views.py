@@ -1,16 +1,16 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from products.cosine import cos_recommendation
+from .models import Coffee, Roastery
 
 
 # Create your views here.
 
-context = {}
+favor = {}
 
 def index(request):
    template_name = "index2.html"
-   global context
+   global favor
    caf = request.GET.get('caf')
-   single = request.GET.get('single')
    blend = request.GET.get('blend')
    notes = request.GET.getlist('notes[]')
    sour = request.GET.get('sour')
@@ -18,15 +18,18 @@ def index(request):
    bitter = request.GET.get('bitter')
    body = request.GET.get('body')
    
-   context = {'caf':caf,'single':single,'blend':blend,'notes':notes,'sour':sour,'sweet':sweet,'bitter':bitter,'body':body}
+   favor = {'caf':caf,'blend':blend,'notes':notes,'sour':sour,'sweet':sweet,'bitter':bitter,'body':body}
    
    
-   return render(request,template_name,context)
+   return render(request,template_name)
 
 def result(request):
    template_name = "result.html"
-   global context
-   print(context)
-   
+   global favor
+   print('아으아으',favor)
+   similarity_ids = cos_recommendation(favor, 4)
+   similarity = Coffee.objects.filter(CoffeeID__in=similarity_ids)
+
+   context = {'main_coffee':similarity[0],'sub_coffee':similarity[1:]}
    
    return render(request,template_name,context)
