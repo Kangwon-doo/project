@@ -1,9 +1,132 @@
-{% if coffee_list %}
-    <ul>
-        {% for coffee in coffee_list %}
-        <li><a href="/coffee/{{coffee.CoffeeID}}/">{{coffee.CoffeeID}}</a></li>
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+<title>메인사이트</title>
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="{% static 'css/coffee_list.css' %}">
+{% endblock %}
+
+{% block content %}
+    <h2> Total Number of Coffee: {{count}}</h2>
+    <h2> Page number: {{page.paginator.num_pages}}</h2>
+
+    <form id="coffeeForm" method="GET" action="{% url 'coffee' %}">
+        <!-- 카페인 -->
+        <div class="checklist">
+            <input class="checkval" type="checkbox" id="cafCheckbox" name="caf">
+            <input type="hidden" name="caf_hidden" id="cafHidden" value="{% if request.GET.caf == 'on' %}on{% endif %}">
+            <label for="caf">
+                카페인
+            </label>
+        </div>
+        <div class="checklist">
+            <input class="checkval" type="checkbox" id="decafCheckbox" name="decaf">
+            <input type="hidden" name="decaf_hidden" id="decafHidden" value="{% if request.GET.decaf == 'on' %}on{% endif %}">
+            <label for="decaf">
+                디카페인
+            </label>
+        </div>
+        
+        <!-- 커피타입 -->
+        <div class="checklist">
+            <input class="checkval" type="checkbox" id="singleCheckbox" name="single">
+            <input type="hidden" name="single_hidden" id="singleHidden" value="{% if request.GET.single == 'on' %}on{% endif %}">
+            <label for="single">
+                싱글오리진
+            </label>
+        </div>
+        <div class="checklist">
+            <input class="checkval" type="checkbox" id="blendCheckbox" name="blend">
+            <input type="hidden" name="blend_hidden" id="blendHidden" value="{% if request.GET.blend == 'on' %}on{% endif %}">
+            <label for="blend">
+                블렌드
+            </label>
+        </div>
+
+        <!-- 로스팅 강도 -->
+        <div class="checklist">
+            <input class="checkval" type="checkbox" id="lightCheckbox" name="light">
+            <input type="hidden" name="light_hidden" id="lightHidden" value="{% if request.GET.light == 'on' %}on{% endif %}">
+            <label for="light">
+                라이트
+            </label>
+        </div>
+        <div class="checklist">
+            <input class="checkval" type="checkbox" id="lightmediumCheckbox" name="lightmedium">
+            <input type="hidden" name="lightmedium_hidden" id="lightmediumHidden" value="{% if request.GET.lightmedium == 'on' %}on{% endif %}">
+            <label for="lightmedium">
+                라이트미디엄
+            </label>
+        </div>
+        <div class="checklist">
+            <input class="checkval" type="checkbox" id="singleCheckbox" name="medium">
+            <input type="hidden" name="single_hidden" id="mediumHidden" value="{% if request.GET.medium == 'on' %}on{% endif %}">
+            <label for="single">
+                미디엄
+            </label>
+        </div>
+        <div class="checklist">
+            <input class="checkval" type="checkbox" id="blendCheckbox" name="blend">
+            <input type="hidden" name="blend_hidden" id="blendHidden" value="{% if request.GET.blend == 'on' %}on{% endif %}">
+            <label for="blend">
+                미디엄다크
+            </label>
+        </div>
+        <div class="checklist">
+            <input class="checkval" type="checkbox" id="singleCheckbox" name="single">
+            <input type="hidden" name="single_hidden" id="singleHidden" value="{% if request.GET.single == 'on' %}on{% endif %}">
+            <label for="single">
+                다크
+            </label>
+        </div>        
+    </form>
+
+    <div class="paginator">
+        {% for coffee in page.object_list %}
+        <a class="block" href="/coffee/{{coffee.CoffeeID}}/">
+            <img src="/static/coffee_img/{{coffee.CoffeeID}}.jpg">
+            <h2>{{coffee.CoffeeName}}</h2>
+            <p>{{coffee.Price}}</p>
+        </a>
         {% endfor %}
-    </ul>
-{% else %}
-<p>커피 준비 중 입니다.</p>
-{% endif %}
+    </div>
+        <div class="page-links"> 
+            {% if page.has_previous %}
+            <a href="/coffee/?page={{page.previous_page_number}}">Previous Page</a>
+            {% endif %}
+
+            
+            {% if page.has_next %}
+            <a href="/coffee/?page={{page.next_page_number}}">Next Page</a>
+            {% endif %}
+        </div>
+
+<script>
+    // 값 저장
+    document.getElementById('singleCheckbox').checked = document.getElementById('singleHidden').value === 'on';
+    document.getElementById('blendCheckbox').checked = document.getElementById('blendHidden').value === 'on';
+    document.getElementById('cafCheckbox').checked = document.getElementById('cafHidden').value === 'on';
+    document.getElementById('decafCheckbox').checked = document.getElementById('decafHidden').value === 'on';
+
+    // 제출
+    function updateAndSubmit(checkbox, hiddenInput) {
+        hiddenInput.value = checkbox.checked ? 'on' : '';
+        document.getElementById('coffeeForm').submit();
+    }
+
+    document.getElementById('cafCheckbox').addEventListener('change', function() {
+        updateAndSubmit(this, document.getElementById('cafHidden'));
+    });
+    document.getElementById('decafCheckbox').addEventListener('change', function() {
+        updateAndSubmit(this, document.getElementById('decafHidden'));
+    });
+    document.getElementById('singleCheckbox').addEventListener('change', function() {
+        updateAndSubmit(this, document.getElementById('singleHidden'));
+    });
+    document.getElementById('blendCheckbox').addEventListener('change', function() {
+        updateAndSubmit(this, document.getElementById('blendHidden'));
+    });
+    
+</script>
+{% endblock %}
