@@ -12,5 +12,4 @@ urlpatterns = [
 
     path('main/popup.html', views.servicePopup),
     path('basket/', views.basket),
-    path('signin/', views.signin),
 ]

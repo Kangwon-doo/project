@@ -44,11 +44,11 @@
 
                         {% if user.is_authenticated %}
                         <li class=" smooth-menu" style="cursor: pointer">
-                            <a>로그아웃</a>
+                            <a class="nav-link" href="{% url 'common:logout' %}">{{ user.username }}로그아웃</a>
                         </li>
                         {% else %}
-                        <li class=" smooth-menu" onclick = 'goSignin()' style="cursor: pointer">
-                            <a>sign in</a>
+                        <li class=" smooth-menu" style="cursor: pointer">
+                            <a href="{% url 'common:login' %}">로그인</a>
                         </li>
                         {% endif %}
                     </ul>
