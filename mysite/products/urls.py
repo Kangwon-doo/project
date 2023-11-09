@@ -6,6 +6,8 @@ urlpatterns = [
     #path('MD/', views.MD),
     path('coffee/<int:coffee_id>/', views.coffee_detail, name = 'coffee_detail'),
     path('roastery/<int:roastery_id>/', views.roastery_detail, name = 'roastery_detail'),
-    path('review/', views.reviews, name = 'review test'),
+    path('survey/', views.mock_preference, name='survey'),
+    path('survey-review/', views.survey_reviews, name = 'review test'),
     path('review-submit/', views.review_create, name='review-submit'),
+    # path('survey-submit/', views.survey_submitted, name='survey-submit')
 ]

@@ -18,6 +18,7 @@ class Migration(migrations.Migration):
             name='Coffee',
             fields=[
                 ('CoffeeID', models.IntegerField(primary_key=True, serialize=False)),
+                ('NewID', models.IntegerField(unique=True)),
                 ('CoffeeName', models.CharField(max_length=50)),
                 ('Info', models.CharField(max_length=3000)),
                 ('CoffeeType', models.TextField()),
@@ -72,6 +73,23 @@ class Migration(migrations.Migration):
             ],
             options={
                 'db_table': 'roastery',
+            },
+        ),
+        migrations.CreateModel(
+            name='test_preference',
+            fields=[
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('email', models.EmailField(max_length=40)),
+                ('Caffeine', models.CharField(max_length=1)),
+                ('CoffeeType', models.TextField()),
+                ('CupNoteCategories', models.PositiveSmallIntegerField()),
+                ('Body', models.CharField(max_length=1)),
+                ('Sourness', models.CharField(max_length=1)),
+                ('Sweetness', models.CharField(max_length=1)),
+                ('Bitterness', models.CharField(max_length=1)),
+            ],
+            options={
+                'db_table': 'mockuserinfo',
             },
         ),
         migrations.CreateModel(
