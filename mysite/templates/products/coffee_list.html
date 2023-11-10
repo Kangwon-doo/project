@@ -60,23 +60,23 @@
             </label>
         </div>
         <div class="checklist">
-            <input class="checkval" type="checkbox" id="singleCheckbox" name="medium">
-            <input type="hidden" name="single_hidden" id="mediumHidden" value="{% if request.GET.medium == 'on' %}on{% endif %}">
-            <label for="single">
+            <input class="checkval" type="checkbox" id="mediumCheckbox" name="medium">
+            <input type="hidden" name="medium_hidden" id="mediumHidden" value="{% if request.GET.medium == 'on' %}on{% endif %}">
+            <label for="medium">
                 미디엄
             </label>
         </div>
         <div class="checklist">
-            <input class="checkval" type="checkbox" id="blendCheckbox" name="blend">
-            <input type="hidden" name="blend_hidden" id="blendHidden" value="{% if request.GET.blend == 'on' %}on{% endif %}">
-            <label for="blend">
+            <input class="checkval" type="checkbox" id="mediumdarkCheckbox" name="mediumdark">
+            <input type="hidden" name="mediumdark_hidden" id="mediumdarkHidden" value="{% if request.GET.mediumdark == 'on' %}on{% endif %}">
+            <label for="mediumdark">
                 미디엄다크
             </label>
         </div>
         <div class="checklist">
-            <input class="checkval" type="checkbox" id="singleCheckbox" name="single">
-            <input type="hidden" name="single_hidden" id="singleHidden" value="{% if request.GET.single == 'on' %}on{% endif %}">
-            <label for="single">
+            <input class="checkval" type="checkbox" id="darkCheckbox" name="dark">
+            <input type="hidden" name="dark_hidden" id="darkHidden" value="{% if request.GET.dark == 'on' %}on{% endif %}">
+            <label for="dark">
                 다크
             </label>
         </div>        
