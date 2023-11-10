@@ -40,9 +40,18 @@ INSTALLED_APPS = [
     'main.apps.MainConfig',
     'products.apps.ProductsConfig',
     'django.contrib.humanize',
+<<<<<<< HEAD
     'django_filters',
     'common.apps.CommonConfig',
+=======
+
+    'crispy_forms',
+    'crispy_bootstrap4',
+    'formtools',
+>>>>>>> heewon
     ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
