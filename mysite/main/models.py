@@ -105,7 +105,7 @@ class test_preference(models.Model):
     email = models.EmailField(max_length=40)  # 이메일
     Caffeine = models.CharField(max_length=1)  # 디카페인1/카페인0
     CoffeeType = models.TextField()  # 타입
-    CupNoteCategories = models.PositiveSmallIntegerField()  # 선호 컵 노트 카테고리
+    CupNoteCategories = models.TextField()  # 선호 컵 노트 카테고리
     Body = models.CharField(max_length=1)  # 바디감
     Sourness = models.CharField(max_length=1)  # 신맛
     Sweetness = models.CharField(max_length=1)  # 단맛
