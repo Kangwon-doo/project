@@ -7,15 +7,13 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Coffee',
+            name="Coffee",
             fields=[
                 ('CoffeeID', models.IntegerField(primary_key=True, serialize=False)),
                 ('NewID', models.IntegerField(unique=True)),
@@ -43,11 +41,11 @@ class Migration(migrations.Migration):
                 ('Price', models.IntegerField()),
             ],
             options={
-                'db_table': 'coffee',
+                "db_table": "coffee",
             },
         ),
         migrations.CreateModel(
-            name='Customer',
+            name="Customer",
             fields=[
                 ('CustomerID', models.CharField(max_length=12, primary_key=True, serialize=False, validators=[django.core.validators.MinLengthValidator(8, '8자 이상으로 적어주세요!')])),
                 ('name', models.CharField(max_length=8)),
@@ -63,7 +61,7 @@ class Migration(migrations.Migration):
             },
         ),
         migrations.CreateModel(
-            name='Roastery',
+            name="Roastery",
             fields=[
                 ('RoasteryID', models.IntegerField(primary_key=True, serialize=False)),
                 ('RoasteryName', models.CharField(max_length=45)),
@@ -72,7 +70,7 @@ class Migration(migrations.Migration):
                 ('RoasteryPhone', models.TextField(validators=[django.core.validators.MinLengthValidator(9, '')])),
             ],
             options={
-                'db_table': 'roastery',
+                "db_table": "roastery",
             },
         ),
         migrations.CreateModel(
@@ -128,12 +126,14 @@ class Migration(migrations.Migration):
                 ('CustomerID', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='main.customer')),
             ],
             options={
-                'db_table': 'order',
+                "db_table": "order",
             },
         ),
         migrations.AddField(
-            model_name='coffee',
-            name='RoasteryID',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='main.roastery'),
+            model_name="coffee",
+            name="RoasteryID",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, to="main.roastery"
+            ),
         ),
     ]

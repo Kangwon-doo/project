@@ -70,5 +70,5 @@ with open(coffee_csv, newline='', encoding='utf-8') as csvfile:
             )
         except:
             pass
-        
+
 print('성공적으로 처리됐습니다.')

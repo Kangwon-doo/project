@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'products.apps.ProductsConfig',
     'django.contrib.humanize',
     'django_filters',
+    'common.apps.CommonConfig',
     ]
 
 MIDDLEWARE = [
@@ -58,7 +59,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [ BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -136,3 +137,8 @@ STATICFILES_DIRS = (
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#로그인/로그아웃 성공 시 자동으로 이동할 URL
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDICT_URL = '/'
+

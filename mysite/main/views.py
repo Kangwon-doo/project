@@ -7,7 +7,7 @@ from .models import Coffee, Roastery
 
 favor = {}
 
-def index(request):
+def test(request):
    template_name = "index2.html"
    global favor
    caf = request.GET.get('caf')
@@ -33,3 +33,20 @@ def result(request):
    context = {'main_coffee':similarity[0],'sub_coffee':similarity[1:]}
    
    return render(request,template_name,context)
+
+def index(request):
+    return render(request, 'main/mainpage.html')
+
+def mypage(request):
+    return render(request, 'main/mypage_privateinfo.html')
+
+def servicePopup(request):
+    return render(request, 'main/popup.html')
+
+def basket(request):
+    return render(request, 'main/basket.html')
+
+
+def purchase(request):
+
+    return render(request, 'main/mypage_purchase.html')

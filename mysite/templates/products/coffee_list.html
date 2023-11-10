@@ -108,6 +108,11 @@
     document.getElementById('blendCheckbox').checked = document.getElementById('blendHidden').value === 'on';
     document.getElementById('cafCheckbox').checked = document.getElementById('cafHidden').value === 'on';
     document.getElementById('decafCheckbox').checked = document.getElementById('decafHidden').value === 'on';
+    document.getElementById('lightCheckbox').checked = document.getElementById('lightHidden').value === 'on';
+    document.getElementById('lightmediumCheckbox').checked = document.getElementById('lightmediumHidden').value === 'on';
+    document.getElementById('mediumCheckbox').checked = document.getElementById('mediumHidden').value === 'on';
+    document.getElementById('mediumdarkCheckbox').checked = document.getElementById('mediumdarkHidden').value === 'on';
+    document.getElementById('darkCheckbox').checked = document.getElementById('darkHidden').value === 'on';
 
     // 제출
     function updateAndSubmit(checkbox, hiddenInput) {
@@ -126,6 +131,21 @@
     });
     document.getElementById('blendCheckbox').addEventListener('change', function() {
         updateAndSubmit(this, document.getElementById('blendHidden'));
+    });
+    document.getElementById('lightCheckbox').addEventListener('change', function() {
+        updateAndSubmit(this, document.getElementById('lightHidden'));
+    });
+    document.getElementById('lightmediumCheckbox').addEventListener('change', function() {
+        updateAndSubmit(this, document.getElementById('lightmediumHidden'));
+    });
+    document.getElementById('mediumCheckbox').addEventListener('change', function() {
+        updateAndSubmit(this, document.getElementById('mediumHidden'));
+    });
+    document.getElementById('mediumdarkCheckbox').addEventListener('change', function() {
+        updateAndSubmit(this, document.getElementById('mediumdarkHidden'));
+    }); 
+    document.getElementById('darkCheckbox').addEventListener('change', function() {
+        updateAndSubmit(this, document.getElementById('darkHidden'));
     });
     
 </script>

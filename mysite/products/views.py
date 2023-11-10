@@ -16,22 +16,41 @@ def coffee(request):
     blend = request.GET.get('blend')
     caf = request.GET.get('caf')
     decaf = request.GET.get('decaf')
-
+    light = request.GET.get('light')
+    lightmedium = request.GET.get('lightmedium')
+    medium = request.GET.get('medium')
+    mediumdark = request.GET.get('mediumdark')
+    dark = request.GET.get('dark')
+    
     caffeine_filter = Q()
     blend_filter = Q()
+    roasting_filter = Q()
 
     # 카페인 ( 카페인 / 디카페인 )
     if caf == 'on':
         caffeine_filter |= Q(Caffeine='1')
     if decaf == 'on':
         caffeine_filter |= Q(Caffeine='0')
+    # 커피 타입 ( 싱글오리진 / 블렌드 )
     if single == 'on':
         blend_filter |= Q(CoffeeType='싱글오리진')
     if blend == 'on':
         blend_filter |= Q(CoffeeType='블렌드')
+    # 커피 타입 ( 싱글오리진 / 블렌드 )
+    if light == 'on':
+        roasting_filter |= Q(RoastingPoint='라이트')
+    if lightmedium == 'on':
+        roasting_filter |= Q(RoastingPoint='라이트미디엄')
+    if medium == 'on':
+        roasting_filter |= Q(RoastingPoint='미디엄')
+    if mediumdark == 'on':
+        roasting_filter |= Q(RoastingPoint='미디엄다크')
+    if dark == 'on':
+        roasting_filter |= Q(RoastingPoint='다크')
         
     coffee_list = coffee_list.filter(caffeine_filter)
     coffee_list = coffee_list.filter(blend_filter)
+    coffee_list = coffee_list.filter(roasting_filter)
 
     # 원두 리스트 출력값
     coffee_paginator = Paginator(coffee_list, 12)
@@ -54,7 +73,7 @@ def coffee(request):
 
 
 def MD(request):
-    return HttpResponse("제품 준비 중입니다.")
+    return render(request, 'main/MD.html')
 
 
 def coffee_detail(request, coffee_id):
