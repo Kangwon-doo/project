@@ -39,103 +39,55 @@ def roastery_detail(request, roastery_id):  # 로스터리ID
     return render(request, 'products/roastery_detail.html', context)
 
 
-data = {}
+class SurveyWizardView(SessionWizardView):
+    form_list = [EmailForm, PreferenceForm]
+    template_name = 'products/wizardview.html'
+
+    def done(self, form_list, **kwargs):
+        form_data = [form.cleaned_data for form in form_list]
+        email = form_data[0]['email']
+        decaf = form_data[1]['Decaf']
+        CoffeeType = form_data[1]['CoffeeType']
+        CupNotes = form_data[1]['CupNotes']
+        Sourness = form_data[1]['Sourness']
+        Sweetness = form_data[1]['Sweetness']
+        Bitterness = form_data[1]['Bitterness']
+        Body = form_data[1]['Body']
+
+        test_preference.objects.get_or_create(email=email, Caffeine=decaf, CoffeeType=CoffeeType, CupNoteCategories=CupNotes,
+                            Sourness=Sourness, Sweetness=Sweetness,  Bitterness=Bitterness, Body=Body)
+        obj = test_preference.objects.get(email=email)
+        userid = obj.id
+        url = '/survey-review/' + str(userid)
+        return redirect(url)
 
 
-def mock_preference(request):
-    template_name = "products/index2.html"
-    global data
-    email = request.GET.get('email')
-    Caffeine=request.GET.get('caf')
-    CoffeeType=request.GET.get('blend')
-    notes = request.GET.getlist('notes[]'),
-    Sourness=request.GET.get('sour')
-    Sweetness=request.GET.get('sweet')
-    Bitterness=request.GET.get('bitter')
-    Body=request.GET.get('body')
-
-    data = {'email': email, 'caf': Caffeine, 'blend': CoffeeType, 'notes': notes, 'sour': Sourness,
-             'sweet': Sweetness, 'bitter': Bitterness, 'body': Body}
-    context = {'data':data}
-    return render(request, template_name, context)
-
-
-def survey_reviews(request):
-    # test_preference.objects.create(
-    #     email=email,
-    #     Caffeine=request.GET.get('caf'),
-    #     CoffeeType=request.GET.get('blend'),
-    #     # CupNoteCategories = request.GET.getlist('notes[]'),
-    #     Sourness=request.GET.get('sour'),
-    #     Sweetness=request.GET.get('sweet'),
-    #     Bitterness=request.GET.get('bitter'),
-    #     Body=request.GET.get('body')
-    # )
+def survey_reviews(request, userid):
+    userinfo = test_preference.objects.get(id=userid)
     ids = [i.CoffeeID for i in Coffee.objects.all()]
     random_coffees = random.sample(ids, 10)
     shuffled = Coffee.objects.filter(CoffeeID__in=random_coffees)
-    context = {'coffee_info': shuffled}
+    context = {'coffee_info': shuffled, 'userinfo':userinfo} #
     return render(request, 'products/review_radio2.html', context)
 
 
-def review_create(request):
+def review_create(request, userid):
     if request.method == 'POST':
+        userinfo = test_preference.objects.get(id=userid)
+        userinfo = userinfo.__dict__
+        email = userinfo['email']
         review = dict(request.POST)
         del review['csrfmiddlewaretoken']
-        review['email'] = email
-        print({i: j[0] for i, j in review.items()})
+        # print({i: j[0] for i, j in review.items()})
         score = dict(list(review.items())[-10:])
         coffee_ids = list(score.keys())
         scores = list(score.values())
         for i in range(10):
-            # test_Reviews.objects.create(
-            print(review
-                  # email = data['email'][0],
-                  # CoffeeID_id = coffee_ids[i],
-                  # Stars = scores[i][0],
-                  # created_date = timezone.now(),
-                  # caf = request.GET.get('caf'),
-                  # single = request.GET.get('single'),
-                  # blend = request.GET.get('blend'),
-                  # notes = request.GET.getlist('notes[]'),
-                  # sour = request.GET.get('sour'),
-                  # sweet = request.GET.get('sweet'),
-                  # bitter = request.GET.get('bitter'),
-                  # body = request.GET.get('body'),
+            test_Reviews.objects.create(
+                  email = email,
+                  CoffeeID_id = coffee_ids[i],
+                  Stars = scores[i][0],
+                  created_date = timezone.now()
                   )
     return render(request, 'products/review_suceess.html')
 
-
-# FORMS = [("email", EmailForm),
-#          ("preference", PreferenceForm),
-#          ("review", PredictionForm)]
-#
-# TEMPLATES = {"email": "products/wizardview.html",
-#              "preference": "products/wizardview.html",
-#              "review": "products/wizardview.html"}
-
-
-class SurveyWizardView(SessionWizardView):
-    form_list = [EmailForm, PreferenceForm, PredictionForm]
-    template_name = 'products/wizardview.html'
-
-    def done(self, form_dict, **kwargs): #form_list,
-        # form_data = [form.cleaned_data for form in form_list]
-        # form_data = {'form_data': form_data}
-        # print(form_data)
-        # {'form_data': [{'email': 'hwhj1214@naver.com'},
-        #                {'Decaf': '1', 'CoffeeType': '0', 'CupNotes': ['과일', '초콜릿', '향료'], 'Sourness': 2, 'Sweetness': 4,
-        #                 'Bitterness': 3, 'Body': 2}
-        #                ]}
-        email = form_dict.cleaned_data['email']
-        decaf = form_dict.cleaned_data['Decaf']
-        CoffeeType = form_dict.cleaned_data['CoffeeType']
-        CupNotes = form_dict.cleaned_data['CupNotes']
-        Sourness = form_dict.cleaned_data['Sourness']
-        Sweetness = form_dict.cleaned_data['Sweetness']
-        Bitterness = form_dict.cleaned_data['Bitterness']
-        Body = form_dict.cleaned_data['Body']
-        p = test_preference(email=email, Caffeine=decaf, CoffeeType=CoffeeType, CupNoteCategories=CupNotes)
-        p.save()
-
-        return HttpResponse('done')

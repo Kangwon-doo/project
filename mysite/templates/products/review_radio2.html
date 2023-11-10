@@ -1,19 +1,10 @@
-{% extends "base.html" %}
-{% load static %}
+<h1>예상 선호도를 선택해 주세요!</h1>
+<h3>다음 원두들의 설명을 읽고 예상되는 선호도를 입력해주세요. </h3>
+{{userinfo.email}}
 
-{% block head %}
-    <title>설문조사</title>
-    <!-- css -->
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <link rel="shortcut icon" href="#">
-{% endblock %}
-
-<form action="survey-submit/" method="POST">{% csrf_token %}
-    <h1>예상 선호도를 선택해 주세요!</h1>
-    <h3>다음 원두들의 설명을 읽고 예상되는 선호도를 입력해주세요. </h3>
+<form action="/review-submit/{{userinfo.id}}" method="POST">
+    {% csrf_token %}
     <h5>좋아하지 않을 것 같다 : 1 ~ 즐겨 마실 것 같다 : 5</h5>
-<!--    <input type="email" name = "email">-->
     {%for i in coffee_info%}
         <div class="fieldbox">
             <div class="radiobtn">
