@@ -39,7 +39,6 @@ with open(roastery_csv, newline='', encoding='utf-8') as csvfile:
         
 with open(coffee_csv, newline='', encoding='utf-8') as csvfile:
     data_reader = csv.DictReader(csvfile)
-    
     for row in data_reader:
         try:
             Coffee.objects.create(		# Model class에 입력된 데이터 이름 / CSV에 입력된 데이터베이스의 이름
