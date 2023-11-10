@@ -28,6 +28,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -38,13 +39,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main.apps.MainConfig',
-    'users.apps.UsersConfig',
-    'django.contrib.sites',#사이트,url정보 관리 해주는 기능
-    'allauth',#설치한앱
-    'allauth.account',#소셜로그인한 계정관리
-    'allauth.socialaccount',#소셜account 정보관리
+    'common',
+    'django.contrib.sites',
+    # allauth 관련 앱 목록 추가
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
     'allauth.socialaccount.providers.naver',
-    ]
+    'allauth.socialaccount.providers.kakao',
+]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -127,36 +130,60 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
 
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
 
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-SITE_ID=1
 
-AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',  # 기본장고 유저
-    'allauth.account.auth_backends.AuthenticationBackend',  # 소셜로그인 인증체계
-]
 LOGIN_REDIRECT_URL = '/'   # social login redirect
 ACCOUNT_LOGOUT_REDIRECT_URL = '/'  # logout redirect
+ACCOUNT_LOGOUT_ON_GET = True
+SOCIALACCOUNT_LOGIN_ON_GET = True
 
 SOCIALACCOUNT_PROVIDERS = {
     'naver': {
         'APP': {
-            'client_id': '',
-            'secret': '',
+            'client_id': 'Dbzg6QTeSU86m_TrAXRO',
+            'secret': '_tlzW4aBti',
             'key': ''
         },
         'SCOPE': ['profile', 'email'],
     }
 }
+
+EMAIL_HOST = 'smtp.naver.com'
+
+# gmail과의 통신하는 포트
+EMAIL_PORT = '587'
+
+# 발신할 이메일
+EMAIL_HOST_USER = ''
+
+
+# 발신할 메일의 비밀번호
+EMAIL_HOST_PASSWORD = ''
+# TLS 보안 방법
+EMAIL_USE_TLS = True
+
+# 사이트와 관련한 자동응답을 받을 이메일 주소
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+
+
+SITE_ID = 1
+
