@@ -26,7 +26,6 @@ def test(request):
 def result(request):
    template_name = "result.html"
    global favor
-   print('아으아으',favor)
    similarity_ids = cos_recommendation(favor, 4)
    similarity = Coffee.objects.filter(CoffeeID__in=similarity_ids)
 
