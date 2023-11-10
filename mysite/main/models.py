@@ -2,18 +2,6 @@ from django.db import models
 from django.core.validators import MinLengthValidator, MaxValueValidator, MinValueValidator
 import datetime
 
-
-
-class Roastery(models.Model):
-    RoasteryID = models.IntegerField(primary_key=True) # 로스터리 ID
-    RoasteryName = models.CharField(max_length=45) # 로스터리 이름
-    RoasteryAddress = models.CharField(max_length=3000) # 로스터리 주소
-    RoasteryInfo = models.TextField() # 로스터리 소개
-
-    class Meta:
-        db_table = "roastery"
-
-
 class Coffee(models.Model):
     CoffeeID = models.IntegerField(primary_key=True) # 커피 ID
     CoffeeName = models.CharField(max_length=50) # 커피 이름
@@ -38,10 +26,16 @@ class Coffee(models.Model):
     StorageMethod   = models.TextField() # 보관 방법
     RawMaterial  = models.TextField() # 원재료 및 함량
     ProductInfo   = models.TextField() # 제품문의 관련 주소 및 전화번호
-    
+    Price = models.IntegerField()  # 가격 정보
+
+class Roastery(models.Model):
+    RoasteryID = models.IntegerField(primary_key=True) # 로스터리 ID
+    RoasteryName = models.CharField(max_length=45) # 로스터리 이름
+    RoasteryAddress = models.CharField(max_length=3000) # 로스터리 주소
+    RoasteryInfo = models.TextField() # 로스터리 소개
 
     class Meta:
-        db_table = "coffee"
+        db_table = "roastery"
 
 
 class Order(models.Model):
@@ -68,16 +62,28 @@ class Customer(models.Model):
         choices=Gender_CHOICES,
         null=True
     )
+
     BirthDate = models.DateTimeField(default=datetime.date) # 생년월일
     email = models.EmailField(max_length = 40) # 이메일
     Password = models.TextField(validators=[MinLengthValidator(8, '8자 이상으로 적어주세요!')]) # 비밀번호
     PhoneNumber = models.TextField(validators=[MinLengthValidator(10, '')]) # 전화번호
     
+    # def age(self):
+    #     import datetime
+    #     dob = self.BirthDate
+    #     tod = datetime.date.today()
+    #     my_age = (tod.year - dob.year) - int((tod.month, tod.day) < (dob.month, dob.day))
+    #     return my_age
+    #
+    # def birthday(self):
+
+    email = models.EmailField(max_length = 254)
+    # 기호 정보
+
 
 class Reviews():
     CoffeeID = models.ForeignKey(Coffee, on_delete=models.CASCADE) 
     CustomerID = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    #Stars = models.
+    Stars = models.IntegerField(default=0, help_text='별점을 1부터 5까지 입력하세요.')
     content = models.TextField()
     created_date = models.DateTimeField()
-    

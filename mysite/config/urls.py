@@ -15,19 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from django.urls import path,include
+from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-<<<<<<< HEAD
+
 
     path('', include('main.urls'), name='main_page'),
-
-=======
-<<<<<<< HEAD
-    path('', include('main.urls'), name='main_page'),
-=======
-    path('/', include('main.urls'), name='main_page'),
->>>>>>> 7e67ec689b016c4af7cf13ba415c19de87b17e69
->>>>>>> a7878e88c4e5e213c989b50d3c63e0883a890735
-]
+    path('products/', include('products.urls'), name = 'products')
+    ]
