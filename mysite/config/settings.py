@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -42,17 +42,25 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'django_filters',
     'common.apps.CommonConfig',
-
     'crispy_forms',
     'crispy_bootstrap4',
     'formtools',
-    ]
+    'common',
+    'django.contrib.sites',
+    # allauth 관련 앱 목록 추가
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.naver',
+    'allauth.socialaccount.providers.kakao',
+]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -89,7 +97,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'wondoodoo', # DB name
         'USER': 'root', # account name
-        'PASSWORD': '6618', 
+        'PASSWORD': '1234',
         'HOST': '127.0.0.1',  # 서버주소
         'PORT': '3306', # MySQL 포트 번호: 기본값 3306
 }
@@ -130,20 +138,58 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
-import os 
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+]
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-) 
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
 
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-#로그인/로그아웃 성공 시 자동으로 이동할 URL
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDICT_URL = '/'
+
+
+LOGIN_REDIRECT_URL = '/'   # social login redirect
+ACCOUNT_LOGOUT_REDIRECT_URL = '/'  # logout redirect
+ACCOUNT_LOGOUT_ON_GET = True
+SOCIALACCOUNT_LOGIN_ON_GET = True
+
+SOCIALACCOUNT_PROVIDERS = {
+    'naver': {
+        'APP': {
+            'client_id': 'Dbzg6QTeSU86m_TrAXRO',
+            'secret': '_tlzW4aBti',
+            'key': ''
+        },
+        'SCOPE': ['profile', 'email'],
+    }
+}
+
+EMAIL_HOST = 'smtp.naver.com'
+
+# gmail과의 통신하는 포트
+EMAIL_PORT = '587'
+
+# 발신할 이메일
+EMAIL_HOST_USER = ''
+
+
+# 발신할 메일의 비밀번호
+EMAIL_HOST_PASSWORD = ''
+# TLS 보안 방법
+EMAIL_USE_TLS = True
+
+# 사이트와 관련한 자동응답을 받을 이메일 주소
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+SITE_ID = 1
+

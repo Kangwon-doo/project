@@ -1,3 +1,4 @@
+from django.contrib.auth.models import PermissionsMixin
 from django.db import models
 from django.core.validators import MinLengthValidator, MaxValueValidator, MinValueValidator
 import datetime

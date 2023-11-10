@@ -1,6 +1,14 @@
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.hashers import check_password
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from common.forms import UserForm
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
+from django.contrib import messages
+from django.utils.decorators import method_decorator
+from requests import auth
+from django.views.generic import View
 
 
 # Create your views here.
