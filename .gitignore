@@ -2,4 +2,8 @@
 db.sqlite3
 *.pyc
 __pycache__
+<<<<<<< HEAD
 secrets.json
+=======
+*.jpg
+>>>>>>> 055b021e45672f9ae3c93a3ae8ec4facdd8d91c5
