@@ -35,6 +35,13 @@
   font-feature-settings: 'liga';
 }
 
+/* footer start */
+footer {
+    padding-top: 50px;
+    background-color: antiquewhite;
+}
+
+
 #welcome-hero{
     padding-right: 15px;
     padding-left: 15px;
@@ -187,6 +194,12 @@
   flex-shrink: 0;
   transition: left 0.15s;
 }
+/* mainpage content */
+.about .container .about-content .col-sm-3 {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
 
 
 /* mypage 시작*/
@@ -221,59 +234,112 @@
     border-radius: 50%;
 }
 #mypage #mypage_header #idEmail_box{
-    border: 1px solid black;
+    border: 3px solid #d2cdc5;
     border-radius: 2em;
     height: 100px;
     position: absolute;
     width: 100%;
     margin-top: 85px;
 }
-#mypage #mypage_header div#userid {
+#mypage #mypage_header #userid {
     display: flex;
     flex-direction: row-reverse;
     padding: 20px 20px 5px 20px;
 }
-#mypage #mypage_header div#useremail {
+#mypage #mypage_header #useremail {
     display: flex;
     flex-direction: row-reverse;
     padding: 5px 20px 20px 20px;
 }
 #mypage #mypage_body {
     display: flex;
+    margin: 50px;
 }
-#mypage #mypage_body .select_menu_box ul {
-    border: 1px solid black;
-    padding: 2em;
-    border-radius: 2em;
-    margin: 2em 0em;
+#mypage #mypage_body .select_menu_box {
+    margin-right: 30px;
 }
-#mypage #mypage_body .select_menu_box ul > li {
-    padding: 1em;
+#mypage #mypage_body .select_menu_box .list-group {
+    text-align: center;
+
+    position: relative;
+    display: table-cell;
+    width: 295px;
+    background-color: #fff;
+    box-shadow: 5px 1px 8px 0 rgba(0,0,0,.06);
+    border-left: 1px solid rgba(0,0,0,.08);
+    vertical-align: top;
+    z-index: 1;
+    margin: 30px 40px 0px 0px;
 }
+#mypage #mypage_body .select_menu_box .list-group .list-group-item {
+    padding: 20px;
+}
+#mypage #mypage_body .select_menu_box .list-group .list-group-item:active {
+    padding: 20px;
+    background-color: rgb(255, 165, 63);
+    border-color: rgb(255, 165, 63);
+}
+#mypage #mypage_body .select_menu_box .list-group .list-group-item a:hover{
+    display: flow;
+
+}
+
 #mypage #mypage_body .content {
-    padding: 2em;
-    border-radius: 2em;
-    margin: 2em;
-    width: 70%;
+    position: relative;
+    display: table-cell;
+    width: 700px;
+    background-color: #fff;
+    box-shadow: 5px 3px 8px 5px rgba(255,165,63,.6);
+    border-left: 1px solid rgba(255,165,63,.8);
+/*    box-shadow: 5px 1px 8px 0 rgba(0,0,0,.06);
+    border-left: 1px solid rgba(0,0,0,.08);*/
+    vertical-align: top;
+    z-index: 1;
+    margin-left: 30px;
 }
-#mypage #mypage_body .content > div{
+
+#mypage #mypage_body .content > div.private_info_item {
     padding: 10px;
     margin: 15px;
 }
+#mypage #mypage_body .content div#mypage_submit_box {
+    display: flex;
+    flex-direction: row-reverse;
+}
+#mypage #mypage_body .content div#mypage_submit_box button{
+    background-color: rgb(255,165,63);
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+}
 
 /* signin 시작 */
-#signin {
+.signin {
     padding-right: 15px;
     padding-left: 15px;
     margin: 100px;
 
 }
-#signin div.title {
+.signin div.title {
     font-size: xx-large;
     margin-top: 2em;
     margin-right: 2em;
     margin-bottom: 2em;
 }
+
+
+/* MD상품 시작*/
+#MD .container {
+    margin-top: 85px;
+}
+#MD .container #img_box {
+    justify-content: center;
+    display: flex;
+    margin: 65px;
+}
+
+/* 구매내역 */
+
 
 
 

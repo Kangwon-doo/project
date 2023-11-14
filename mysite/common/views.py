@@ -29,24 +29,3 @@ def signup(request):
     else:
         form = UserForm()
     return render(request, 'common/signup.html', {'form': form})
-
-# def change_password(request):
-#   if request.method == "POST":
-#     user = request.user
-#     origin_password = request.POST["origin_password"]
-#     if check_password(origin_password, user.password):
-#       new_password = request.POST["new_password"]
-#       confirm_password = request.POST["confirm_password"]
-#       if new_password == confirm_password:
-#         user.set_password(new_password)
-#         user.save()
-#         auth.login(request, user, backend='django.contrib.auth.backends.ModelBackend')
-#         return redirect('profile')
-#       else:
-#         messages.error(request, 'Password not same')
-#     else:
-#       messages.error(request, 'Password not correct')
-#     return render(request, 'change_password.html')
-#   else:
-#     return render(request, 'change_password.html')
-

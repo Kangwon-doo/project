@@ -25,7 +25,6 @@ font-family: 'Poppins', sans-serif;
 /*-------------------------------------
 		1.General css (Reset code)
 --------------------------------------*/
-
 *{
     padding: 0;
     margin: 0;
@@ -49,11 +48,11 @@ body{
 }
 
 a,a:hover,a:active,a:focus {
-	display:inline-block;
+/*	display:inline-block;
 	text-decoration:none;
 	color: #6a708e;
 	font-size:16px;
-	padding:0;
+	padding:0;*/
 }
 h1,h2,h3,h4,h5,h6 { 
 	margin: 0;
@@ -140,7 +139,7 @@ nav.navbar.bootsnav ul.nav > li > a {
     transition: 0.3s linear;
 }
 nav.navbar.bootsnav ul.nav > li > a {padding: 35px 20px;}
-nav.navbar.bootsnav ul.nav > li > a:hover,nav.navbar.bootsnav ul.nav > li > a:focus,nav.navbar.bootsnav ul.nav > li.active>a{color: #d92cf9;}
+nav.navbar.bootsnav ul.nav > li > a:hover,nav.navbar.bootsnav ul.nav > li > a:focus,nav.navbar.bootsnav ul.nav > li.active>a{color: rgb(255, 165, 63);}
 
 nav.navbar.bootsnav ul.nav > li.dropdown > a.dropdown-toggle:after {
     content: "";
@@ -854,7 +853,4 @@ span.single-timeline-horizontal.spacial-horizontal-line {width: 88px;}
     0%   {bottom:0px;}
     100%  {bottom:7px;}
 }
-
-
 /*========================Thank you=================
-
