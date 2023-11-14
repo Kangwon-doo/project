@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from products.cosine import cos_recommendation
-from .models import Coffee, Roastery
+from .models import Coffee, Roastery, Order, OrderItem
+from django.contrib.auth.models import User
 
 
 # Create your views here.
@@ -47,5 +48,12 @@ def basket(request):
 
 
 def purchase(request):
+    userinfo = User.objects.get(username=request.user)
+    userinfo = userinfo.__dict__
+    email = userinfo['email']
+    orderinfo = Order.objects.filter(emailAddress=email)
+    orderinfo = orderinfo.__dict__
 
-    return render(request, 'main/mypage_purchase.html')
+    # orderitems = OrderItem.objects.filter(OrderID_id=orderinfo['OrderID'])
+    context = {'userinfo':userinfo} #'orderitems': orderitems,
+    return render(request, 'main/mypage_purchase.html', context)

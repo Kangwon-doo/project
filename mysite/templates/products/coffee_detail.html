@@ -55,7 +55,7 @@
         </div>
         <!-- 관련 버튼 -->
         <div class="section2-4">
-            <button class="btn1">장바구니에 담기</button>
+            <button class="btn1"><a href="{% url 'cart:add_cart' coffee_info.CoffeeID %}">장바구니에 담기</a></button>
             <button class="btn2">원두 구독하기</button>
         </div>
     </div>

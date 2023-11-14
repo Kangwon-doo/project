@@ -11,7 +11,7 @@
     <h2> Total Number of Coffee: {{count}}</h2>
     <h2> Page number: {{page.paginator.num_pages}}</h2>
 
-    <form id="coffeeForm" method="GET" action="{% url 'coffee' %}">
+    <form id="coffeeForm" method="GET" action="{% url 'products:coffee' %}">
         <!-- 카페인 -->
         <div class="checklist">
             <input class="checkval" type="checkbox" id="cafCheckbox" name="caf">

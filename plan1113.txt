@@ -1,0 +1,31 @@
+협업 필터링 : 설문 조사 배포 하고 싶음
+구매 내역 :  모델 만들고 update하는 코드
+페이징으로! 
+주문번호, 주문 날짜(생성일), 
+장바구니에서 구매하기 버튼으로 저장되는 아이템 정보(원두 이름 및 수량)
+해당 상품 이비지, 로스터리 로고
+리뷰하기 버튼
+탈퇴하기 버튼 : 회원 정보 DB table에서 delete
+
+
+{% if cart_item.quantity < cart_item.product.stock %}
+                        <td>
+                            <a href="{% url 'cart:add_cart' cart_item.product.CoffeeID %}" class="custom_a">
+                                <i class = "fas fa-plus-circle custom_icon"></i>
+                            </a>&nbsp;
+                            <a href="{% url 'cart:cart_remove' cart_item.product.CoffeeID %}" class="custom_a">
+                                <i class = "fas fa-minus-circle custom_icon"></i>
+                            </a>&nbsp;
+                            <a href="{% url 'cart:full_remove' cart_item.product.CoffeeID %}" class="custom_a">
+                                <i class = "fas fa-trash-alt custom_icon"></i>
+                            </a>&nbsp;
+                        {% else %}
+                            <td>
+                            &nbsp;<a href="{% url 'cart:cart_remove' cart_item.product.CoffeeID %}" class="custom_a">
+                                    <i class = "fas fa-plus-circle custom_icon"></i></a>&nbsp;
+                            <a href="{% url 'cart:full_remove' cart_item.product.CoffeeID %}" class="custom_a"><i class="fas fa-trash-alt custom_icon"></i></a>
+                            </td>
+                            <td></td>
+                        {% endif %}
+
+<button class="Submit" type="submit" id="btn">제출</button>
