@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+    <!-- css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/subscription/guide.css' %}">
+    <link rel="shortcut icon" href="#">
+{% endblock %}
+
+{% block content %}
+  <div class="guide">
+    <div class="guide-info">
+      <h1>정기구독</h1>
+      <p>어쩌고 저쩌고 정기구독에 대한 설명을 적습니다.</p>
+    </div>
+  </div>
+
+  <div class="flip-wrapper">
+    <div class="flip">
+      <div class="card">
+        <!-- 앞면 -->
+        <div class="front">
+          <h1>일반</h1>
+          <p>3개월</p>
+          <h3>₩50,000</h3>
+          <p>더 알아보기 ></p>
+        </div>
+        <!-- 뒷면 -->
+        <div class="back">
+          <form action="result" method="POST">
+            {% csrf_token %}
+            <h3>혜택</h3>
+            <p class="subscribe-info">Lorem, ipsum dolor sit amet consectetur
+              adipisicing elit. Magni laboriosam eligendi optio voluptates totam
+              tenetur eum debitis sit dolorum! Aliquam animi inventore libero
+              earum repudiandae cumque accusamus, aut quos saepe!</p>
+            <input type="hidden" name="status" value="일반">
+            <input type="submit" value="구독하기" class="subscribe-btn"></input>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="flip">
+      <div class="card">
+        <!-- 앞면 -->
+        <div class="front">
+          <h1>프리미엄</h1>
+          <p>12개월</p>
+          <h3>₩100,000</h3>
+          <p>더 알아보기 ></p>
+        </div>
+        <!-- 뒷면 -->
+        <div class="back">
+          <form action="result?next={{ request.path }}" method="POST">
+            {% csrf_token %}
+            <h3>혜택</h3>
+            <p class="subscribe-info">Lorem, ipsum dolor sit amet consectetur
+              adipisicing elit. Magni laboriosam eligendi optio voluptates totam
+              tenetur eum debitis sit dolorum! Aliquam animi inventore libero
+              earum repudiandae cumque accusamus, aut quos saepe!</p>
+            <input type="hidden" name="status" value="프리미엄">
+            <input type="submit" value="구독하기" class="subscribe-btn"></input>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="flip">
+      <div class="card">
+        <!-- 앞면 -->
+        <div class="front">
+          <h1>블랙라벨</h1>
+          <p>연회비 납부</p>
+          <h3>₩150,000</h3>
+          <p>더 알아보기 ></p>
+        </div>
+        <!-- 뒷면 -->
+        <div class="back">
+          <form action="result" method="POST">
+            {% csrf_token %}
+            <h3>혜택</h3>
+            <p class="subscribe-info">Lorem, ipsum dolor sit amet consectetur
+              adipisicing elit. Magni laboriosam eligendi optio voluptates totam
+              tenetur eum debitis sit dolorum! Aliquam animi inventore libero
+              earum repudiandae cumque accusamus, aut quos saepe!</p>
+            <input type="hidden" name="status" value="블랙라벨">
+            <input type="submit" value="구독하기" class="subscribe-btn"></input>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="{% static 'js/subscription/guide.js' %}"></script>
+{% endblock %}

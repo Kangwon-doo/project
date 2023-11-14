@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'django_filters',
     'common.apps.CommonConfig',
     'formtools',
-
+    'subscribe.apps.SubscribeConfig',
     'django.contrib.sites',
     # allauth 관련 앱 목록 추가
     'allauth',
@@ -153,7 +153,6 @@ AUTHENTICATION_BACKENDS = [
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
 
 
 LOGIN_REDIRECT_URL = '/'   # social login redirect
