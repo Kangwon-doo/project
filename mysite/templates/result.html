@@ -12,11 +12,11 @@
 {% block content %}
 <div class="container">
     <div class="coffee">
-        <img class="main-img" src="/static/coffee_img/2.jpg">
+        <img class="main-img" src="/static/coffee_img/{{main_coffee.CoffeeID}}.jpg">
         <div class="coffee-name">
             <div class="content">
                 <span class="material-symbols-outlined">spa</span>
-                <h2>콜롬비아 디카페인</h2>
+                <h2>{{main_coffee.CoffeeName}}</h2>
             </div>
         </div>
         <div class="info-header">
@@ -26,12 +26,12 @@
         </div>
         <div class="coffee-info">
             <div class="info-content">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis suscipit sunt possimus nulla perspiciatis provident hic maiores a doloribus! Obcaecati vero accusantium, deleniti aut distinctio error repudiandae officia est nostrum?
+                {{main_coffee.CoffeeInfo}}
             </div>
         </div>
     </div>
     <div class="btn-section">
-        <a class="btn" href="">원두 자세히 보러가기</a>
+        <a class="btn" href="/coffee/{{main_coffee.CoffeeID}}">원두 자세히 보러가기</a>
         <a class="btn" href="">친구한테 공유하기</a>
         <a class="btn" href="">이 원두 구독하기</a>
     </div>
@@ -40,18 +40,12 @@
             <h3>회원님에게 맞는 다른 원두들도 보고 가세요</h3>
         </div>
         <div class="etc-coffee">
-            <a class="coffee-wrapper" href="">
-                <img class="etc-img" src="/static/coffee_img/2.jpg">
-                <p>커피이름1</p>
-            </a>
-            <a class="coffee-wrapper" href="">
-                <img class="etc-img" src="/static/coffee_img/2.jpg">
-                <p>커피이름2</p>
-            </a>
-            <a class="coffee-wrapper" href="">
-                <img class="etc-img" src="/static/coffee_img/2.jpg">  
-                <p>커피이름3</p>
-            </a>
+            {% for coffee in sub_coffee %}
+                <a class="coffee-wrapper" href="/coffee/{{coffee.CoffeeID}}">
+                    <img class="etc-img" src="/static/coffee_img/{{coffee.CoffeeID}}.jpg">
+                    <p>{{coffee.CoffeeName}}</p>
+                </a>
+            {% endfor %}
         </div>
     </div>
     <div class="again">

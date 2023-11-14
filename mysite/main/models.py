@@ -1,3 +1,4 @@
+from django.contrib.auth.models import PermissionsMixin
 from django.db import models
 from django.core.validators import MinLengthValidator, MaxValueValidator, MinValueValidator
 import datetime
@@ -15,8 +16,8 @@ class Roastery(models.Model):
 
 
 class Coffee(models.Model):
-    CoffeeID = models.IntegerField(primary_key=True)  # 커피 oroginal ID
-    NewID = models.IntegerField(unique=True)  # 커피 ID
+    CoffeeID = models.IntegerField(primary_key=True)  # 커피 ID
+    NewID = models.IntegerField(unique=True)  # 커피 뉴ID
     CoffeeName = models.CharField(max_length=50)  # 커피 이름
     RoasteryID = models.ForeignKey("Roastery", on_delete=models.CASCADE)  # 로스터리 ID
     Info = models.CharField(max_length=3000)  # 커피 정보
@@ -40,7 +41,7 @@ class Coffee(models.Model):
     RawMaterial = models.TextField()  # 원재료 및 함량
     ProductInfo = models.TextField()  # 제품문의 관련 주소 및 전화번호
     Price = models.IntegerField()  # 가격 정보
-
+    
     class Meta:
         db_table = "coffee"
 

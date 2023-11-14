@@ -1,0 +1,92 @@
+{% extends 'main/mypage.html' %}
+{% block mypageContent %}
+
+<!--mypage start -->
+    <div class = 'content' id = 'private_info'>
+        <div class = 'private_info_item'>
+            <span>닉네임</span>
+            <span><input type="text" class="form-control" placeholder="nickname_example"></span>
+            <span><button>변경</button></span>
+        </div>
+        <div class = 'private_info_item'>
+            <span>비밀번호</span>
+            <span>
+                <input type="password" class="form-control" placeholder="password" />
+            </span>
+        </div>
+        <div class = 'private_info_item'>
+            <span>이메일</span>
+            <span><input type="email" class="form-control" placeholder="email_example"></span>
+        </div>
+        <div class = 'private_info_item'>
+            <span>전화번호</span>
+            <span><input type="tel" class="form-control" placeholder="id_example"></span>
+        </div>
+        <div class = 'private_info_item'>
+            <span>주소</span>
+            <span>
+                  <input id="member_post"  type="text" placeholder="우편번호" readonly onclick="findAddr()">
+                  <input id="member_addr" type="text" placeholder="주소" readonly> <br>
+                  <input type="text" placeholder="상세주소">
+            </span>
+        </div>
+        <div class = 'private_info_item'>
+            <span>생년월일</span>
+            <span><input type="date" class="form-control" id="Date" min="1901-01-01"></span>
+        </div>
+        <div class = 'private_info_item'>
+            <span>성별</span>
+            <span>
+                <select name="gender" id="gender">
+                    <option value="w">여성</option>
+                    <option value="m">남성</option>
+                    <option value="none">선택안함</option>
+                </select>
+            </span>
+        </div>
+        <div id="mypage_submit_box" class = 'private_info_item'>
+            <button id="mypage_submit">변경사항 저장</button>
+        </div>
+    </div>
+<!--mypage privateinfo end -->
+
+
+<script>
+    function menuclick(){
+            document.querySelectorAll('.select_menu')
+    }
+    var now_utc = Date.now() // 지금 날짜를 밀리초로
+    // getTimezoneOffset()은 현재 시간과의 차이를 분 단위로 반환
+    var timeOff = new Date().getTimezoneOffset()*60000; // 분단위를 밀리초로 변환
+    // new Date(now_utc-timeOff).toISOString()은 '2022-05-11T18:09:38.134Z'를 반환
+	var today = new Date(now_utc-timeOff).toISOString().split("T")[0];
+    document.getElementById("Date").setAttribute("max", today);
+
+    function findAddr(){
+        new daum.Postcode({
+            oncomplete: function(data) {
+
+                console.log(data);
+
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+                // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var roadAddr = data.roadAddress; // 도로명 주소 변수
+                var jibunAddr = data.jibunAddress; // 지번 주소 변수
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('member_post').value = data.zonecode;
+                if(roadAddr !== ''){
+                    document.getElementById("member_addr").value = roadAddr;
+                }
+                else if(jibunAddr !== ''){
+                    document.getElementById("member_addr").value = jibunAddr;
+                }
+            }
+        }).open();
+    }
+
+</script>
+<!-- kakao 주소찾기 api -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+{% endblock %}

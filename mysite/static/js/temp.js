@@ -87,21 +87,14 @@ function change_firbtn(e) {
 }
 
 /* 2번째 질문 페이지 버튼 클릭 시 배경 변경 및 값 저장*/ 
-var single = '';
 var blend = '';
 function change_secbtn(e) {
     var btns = document.querySelectorAll(".field2");
     btns.forEach(function (btn, i) {
       if (e.currentTarget == btn) {
         btn.classList.add("active");
-        if (e.target.value == '싱글오리진') {
-          single = 1;
-          blend = 0;
-        }
-        else {
-          single = 0;
-          blend = 1;
-        }
+        blend = e.currentTarget.value;
+        
       } else {
         btn.classList.remove("active");
       }
@@ -196,7 +189,6 @@ function send_result(e) {
     type: 'GET',
     data: {
       'caf': caf,
-      'single': single,
       'blend':blend,
       'notes': notes,
       'sour': sour,
