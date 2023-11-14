@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from products.cosine import cos_recommendation
-from .models import Coffee, Roastery
+from .models import Coffee
 
 
 # Create your views here.

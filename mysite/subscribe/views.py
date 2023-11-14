@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from main.models import Coffee
 from datetime import datetime, timedelta
 from django.contrib.auth.decorators import login_required
+from main.models import Subscription
 
 # Create your views here.
 def guide(request):
@@ -10,6 +10,8 @@ def guide(request):
 
 @login_required(login_url='/common/login')
 def result(request):
+    user = request.user
+
     context = {}
     if request.method == 'POST':
         status = request.POST.get('status')
@@ -24,11 +26,15 @@ def result(request):
         else:
             until = datetime.today() + timedelta(365)
             next = datetime.today() + timedelta(365)
-            
-        context = {'status':status,
-                   'today':today.strftime("%Y-%m-%d"),
-                   'until':until.strftime("%Y-%m-%d"),
-                   'next':next.strftime("%Y-%m-%d")}
+        
+        subscription = Subscription.objects.create(
+                                        user=user,
+                                        status=status,
+                                        startDate=today.strftime("%Y-%m-%d"),
+                                        endDate=until.strftime("%Y-%m-%d"),
+                                        payDate=next.strftime("%Y-%m-%d"))
+        subscription.save()
+        context = {'info':subscription,'user':user}
     else:
         pass
 

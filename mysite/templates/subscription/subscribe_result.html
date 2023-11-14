@@ -13,9 +13,9 @@
       <h1>정기구독</h1>
       <p>구독해주셔서 감사합니다.</p>
       <div class="member-info">
-        <h2>현재 회원님의 등급: {{status}}</h2>
-        <p>구독기간: {{today}} - {{until}}<br>
-          다음 결제일: {{next}}
+        <h2>현재 {{user.username}} 회원님의 등급: {{info.status}}</h2>
+        <p>구독기간: {{info.startDate}} ~ {{info.endDate}}<br>
+          다음 결제일: {{info.payDate}}
         </p>
       </div>
     </div>
