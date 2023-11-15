@@ -11,7 +11,6 @@ urlpatterns = [
     path('mypage/private_info/', views.mypage, name='mypage'),
     path('mypage/purchase/', views.purchase, name='purchase'),
     path('mypage/subscribe/', views.mypage),
-
     path('main/popup.html', views.servicePopup),
     path('basket/', views.basket),
 ]
