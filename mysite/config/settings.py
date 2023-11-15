@@ -25,13 +25,12 @@ SECRET_KEY = 'django-insecure-2k@b6obpk+regleb6n-myoq*n$@s&wywf_v@jjmofff^!1dled
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
 INSTALLED_APPS = [
-    #'django.contrib.admin',
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -43,7 +42,6 @@ INSTALLED_APPS = [
     'django_filters',
     'common.apps.CommonConfig',
     'formtools',
-    'subscribe.apps.SubscribeConfig',
     'django.contrib.sites',
     # allauth 관련 앱 목록 추가
     'allauth',
@@ -154,7 +152,7 @@ AUTHENTICATION_BACKENDS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = "main.CustomUser"
+
 
 LOGIN_REDIRECT_URL = '/'   # social login redirect
 ACCOUNT_LOGOUT_REDIRECT_URL = '/'  # logout redirect
@@ -169,8 +167,52 @@ SOCIALACCOUNT_PROVIDERS = {
             'key': ''
         },
         'SCOPE': ['profile', 'email'],
+    },
+    'kakao': {
+        'APP': {
+            'client_id': 'e9d0ada26ad976a23e15ac22c1e31f46',
+            'secret': '2RO6FIusRV8TnlJHZInt273ZEeESnQDU',
+        }
     }
 }
+
+# 시크릿 키 가져오기
+import os
+import json
+from django.core.exceptions import ImproperlyConfigured
+
+# 현재 파일의 디렉토리를 기반으로 secrets.json 파일의 경로 생성
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+SECRET_FILE = os.path.join(BASE_DIR,  'secrets.json')
+
+# secrets.json 파일에서 시크릿 키 및 기타 설정 로드
+with open(SECRET_FILE) as f:
+    secrets = json.load(f)
+
+def get_secret(*settings):
+    """
+    get_secret('setting_name') or get_secret('setting_name_1', 'setting_name_2')
+    """
+    secret_file = os.path.join(BASE_DIR, 'secrets.json')
+
+    if os.path.isfile(secret_file):
+        with open(secret_file) as f:
+            secrets = json.load(f)
+
+        if len(settings) == 1:
+            return secrets.get(settings[0], None)
+        else:
+            return [secrets.get(setting, None) for setting in settings]
+    else:
+        error_msg = f"Set the {', '.join(settings)} environment variable(s) in the secrets.json file."
+        raise ImproperlyConfigured(error_msg)
+
+# 사용 예시
+EMAIL_HOST_USER, EMAIL_HOST_PASSWORD = get_secret("EMAIL_HOST_USER", "EMAIL_HOST_PASSWORD")
+
+# -----------------------------------------------#
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 EMAIL_HOST = 'smtp.naver.com'
 
