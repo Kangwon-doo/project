@@ -4,7 +4,7 @@
 {% block head %}
 <title>메인사이트</title>
 <!-- css -->
-<link rel="stylesheet" type="text/css" href="{% static 'css/coffee_list.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/products/coffee_list.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -147,6 +147,5 @@
     document.getElementById('darkCheckbox').addEventListener('change', function() {
         updateAndSubmit(this, document.getElementById('darkHidden'));
     });
-    
 </script>
 {% endblock %}

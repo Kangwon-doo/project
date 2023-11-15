@@ -82,6 +82,17 @@ class Subscription(models.Model):
     payDate = models.DateField(null=False)
 
 
+class Preference(models.Model):
+    user = models.ForeignKey("CustomUser", on_delete=models.CASCADE)
+    caf = models.CharField(null=False,max_length=1,default='')
+    blend = models.CharField(null=False,max_length=1,default='')
+    notes = models.TextField(null=False,default='')
+    sour = models.CharField(null=False,max_length=1,default='')
+    sweet = models.CharField(null=False,max_length=1,default='')
+    bitter = models.CharField(null=False,max_length=1,default='')
+    body = models.CharField(null=False,max_length=1,default='')
+    
+
 class Reviews(models.Model):
     CoffeeID = models.ForeignKey(Coffee, on_delete=models.CASCADE)
     CustomerID = models.ForeignKey(CustomUser, on_delete=models.CASCADE)

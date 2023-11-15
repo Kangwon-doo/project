@@ -5,7 +5,7 @@
 {% block head %}
     <title>메인사이트</title>
     <!-- css -->
-    <link rel="stylesheet" type="text/css" href="{% static 'css/test.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/test/test.css' %}">
     <link rel="shortcut icon" href="#">
 {% endblock %}
 
@@ -20,7 +20,7 @@
 
     <!-- 질문 폼 -->
     <div class="form-outer">
-        <form action="result/" method="POST">
+        <form action="result" method="GET">
             {% csrf_token %}
             <!-- 첫번째 질문 -->
             <div class="page slidepage">
@@ -110,6 +110,6 @@
 <!-- 자바스크립트 파일 -->
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<script src="{% static 'js/temp.js' %}"></script>
+<script src="{% static 'js/test/test.js' %}"></script>
 <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" data-auto-a11y="true" ></script>
 {% endblock %}

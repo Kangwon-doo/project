@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 from django.contrib.auth.decorators import login_required
 from main.models import Subscription
 
-# Create your views here.
+
 def guide(request):
 
     return render(request, 'subscription/subscribe_guide.html')
@@ -26,6 +26,13 @@ def result(request):
         else:
             until = datetime.today() + timedelta(365)
             next = datetime.today() + timedelta(365)
+            
+        # 이미 존재하는 데이터 삭제
+        try:
+            userinfo = Subscription.objects.get(user=user)
+            userinfo.delete()
+        except:
+            pass
         
         subscription = Subscription.objects.create(
                                         user=user,
