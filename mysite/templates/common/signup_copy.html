@@ -1,4 +1,22 @@
 {% extends "base.html" %}
+<<<<<<< HEAD
+{% block head %}
+<style>
+    .maargin{
+        margin: 100px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<h1 class="maargin">회원가입</h1>
+<form method="POST">
+ {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="회원가입">
+</form>
+
+=======
 {% block content %}
 
 <!-- signup start -->
@@ -98,6 +116,7 @@
 </script>
 <!-- kakao 주소찾기 api -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+>>>>>>> heewon
 
 {% endblock %}
 

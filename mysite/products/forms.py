@@ -14,13 +14,13 @@ class PreferenceForm(forms.Form):
         ('0', '카페인'),
         ('1', '디카페인'),
     ]
-    Decaf = forms.ChoiceField(widget=forms.RadioSelect, choices=Caffeine_Choice)
+    Decaf = forms.ChoiceField(label='카페인/디카페인', widget=forms.RadioSelect, choices=Caffeine_Choice)
 
     CoffeeType_Choice = [
         ('0', '싱글 오리진'),
         ('1', '블렌드'),
     ]
-    CoffeeType = forms.ChoiceField(widget=forms.RadioSelect, choices=CoffeeType_Choice)
+    CoffeeType = forms.ChoiceField(label='커피 타입', widget=forms.RadioSelect, choices=CoffeeType_Choice)
 
     NOTE_CHOICES = (
         ("꽃", "꽃"),
@@ -31,18 +31,18 @@ class PreferenceForm(forms.Form):
         ("고소함", "고소함"),
         ("허브", "허브"),
     )
-    CupNotes = forms.MultipleChoiceField(choices=NOTE_CHOICES, widget=forms.CheckboxSelectMultiple)
+    CupNotes = forms.MultipleChoiceField(label='커피 향 노트', choices=NOTE_CHOICES, widget=forms.CheckboxSelectMultiple)
 
-    Sourness = forms.IntegerField(
+    Sourness = forms.IntegerField(label='신맛',
         widget=forms.NumberInput(attrs={'type': 'range', 'step': '1', 'min': '1', 'max': '5', 'value': '3'}))
 
-    Sweetness = forms.IntegerField(
+    Sweetness = forms.IntegerField(label='단맛',
         widget=forms.NumberInput(attrs={'type': 'range', 'step': '1', 'min': '1', 'max': '5', 'value': '3'}))
 
-    Bitterness = forms.IntegerField(
+    Bitterness = forms.IntegerField(label='쓴맛',
         widget=forms.NumberInput(attrs={'type': 'range', 'step': '1', 'min': '1', 'max': '5', 'value': '3'}))
 
-    Body = forms.IntegerField(
+    Body = forms.IntegerField(label='바디감',
         widget=forms.NumberInput(attrs={'type': 'range', 'step': '1', 'min': '1', 'max': '5', 'value': '3'}))
 
 

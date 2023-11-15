@@ -1,0 +1,14 @@
+{%load static %}
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/cart.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+</head>
+{% block title %}
+    Order Success!
+{% endblock %}
+
+{% block content %}
+<div class="mx-auto">
+    <a href="{% url 'pybo:purchase' %}" class="btn btn-secondary btn-block my_custom_button">구매내역</a>
+</div>
+{% endblock %}
