@@ -223,11 +223,11 @@ EMAIL_HOST = 'smtp.naver.com'
 EMAIL_PORT = '587'
 
 # 발신할 이메일
-EMAIL_HOST_USER = ''
+EMAIL_HOST_USER = get_secret('EMAIL_HOST_USER')
 
 
 # 발신할 메일의 비밀번호
-EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST_PASSWORD = get_secret('EMAIL_HOST_PASSWORD')
 # TLS 보안 방법
 EMAIL_USE_TLS = True
 
