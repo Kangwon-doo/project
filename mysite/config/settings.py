@@ -154,6 +154,7 @@ AUTHENTICATION_BACKENDS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+AUTH_USER_MODEL = 'main.CustomUser'
 
 AUTH_USER_MODEL = 'main.CustomUser'
 

@@ -1,0 +1,198 @@
+/* 첫번째 페이지 */
+#survey_page {
+    margin-top: 200px;
+    text-align: center;
+    font-size: 30px;
+}
+form#survey_form {
+    text-align: -webkit-center;
+    margin: 50px;
+}
+form#survey_form table tbody tr th {
+    padding: 10px;
+    color: orange;
+}
+form#survey_form table tbody tr td input {
+    border: 1px solid orange;
+    padding: 5px;
+}
+form#survey_form > input {
+    margin: 20px;
+    padding: 15px 20px;
+    background-color: orange;
+    border: 2px solid #eee;
+    color: white;
+}
+
+/* 두번째 페이지 */
+/* Decaf */
+form#survey_form tbody td > div {   /* 공통 */
+    padding: 15px 10px;
+    display: flex;
+}
+form#survey_form tbody td > div > div {     /* 공통 */
+    margin: 0 20px;
+}
+#id_1-Decaf input[type=radio]{
+    display: none;
+}
+#id_1-Decaf label{        /* input[type=radio]+label */
+    display: inline-block;
+    cursor: pointer;
+    height: 24px;
+    width: 90px;
+    border: 1px solid gray;
+    line-height: 24px;
+    text-align: center;
+    font-weight:bold;
+    font-size:13px;
+    border-radius: 8px;
+}
+.label_background {         /* 공통 */
+    background-color: orange;       /* #333 */
+    color: #fff;
+}
+
+/* Coffeetype */
+#id_1-CoffeeType input[type=radio]{
+    display: none;
+}
+#id_1-CoffeeType label{        /* input[type=radio]+label */
+    display: inline-block;
+    cursor: pointer;
+    height: 24px;
+    width: 90px;
+    border: 1px solid gray;
+    line-height: 24px;
+    text-align: center;
+    font-weight:bold;
+    font-size:13px;
+    border-radius: 8px;
+}
+/* Cupnotes */
+#id_1-CupNotes input[type=checkbox]{
+    display: none;
+}
+#id_1-CupNotes label{        /* input[type=radio]+label */
+    display: inline-block;
+    cursor: pointer;
+    height: 24px;
+    width: 90px;
+    border: 1px solid gray;
+    line-height: 24px;
+    text-align: center;
+    font-weight:bold;
+    font-size:13px;
+    border-radius: 8px;
+}
+
+/* button */    /* 공통*/
+button{
+  background:#ffa53f;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:40px;
+  font-size:1.0em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+button:hover{
+  background:#fff;
+  color:#ffa53f;
+}
+button:before,button:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #ffa53f;
+  transition:400ms ease all;
+}
+button:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+button:hover:before,button:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+
+/* 세번째 페이지 */
+div#survey_review {
+    margin: 110px 40px 20px 40px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+div#survey_review #survey_review_head{
+    padding: 50px 35px;
+}
+div#survey_review #survey_review_head #survey_guide {
+    display: flex;
+    flex-direction: column;
+}
+div#survey_review #survey_review_head #survey_guide span{
+    font-size: 30px;
+}
+div#survey_review #survey_review_body {
+    /*border: 1px solid black;*/
+    padding: 35px;
+}
+
+/* 라디오 버튼*/
+div#survey_review #survey_review_body label {
+  font-size: 18px;
+  line-height: 2rem;
+  padding: 0.2em 0.4em;
+}
+
+div#survey_review #survey_review_body [type="radio"], span {
+  vertical-align: middle;
+}
+
+div#survey_review #survey_review_body [type="radio"] {
+  appearance: none;
+  border: max(2px, 0.1em) solid gray;
+  border-radius: 50%;
+  width: 1.25em;
+  height: 1.25em;
+  transition: border 0.5s ease-in-out;
+}
+
+div#survey_review #survey_review_body [type="radio"]:checked {
+  border: 0.4em solid tomato;
+}
+
+/* font design */
+div#survey_review #survey_review_body h1.first span{
+  position: relative;
+  font-weight: 400;
+}
+
+div#survey_review #survey_review_body h1.first span:before {
+  content: '';
+  display: inline-block;
+  position: absolute;
+  top: calc(50% + 2px); left: -10px;
+  width: calc(100% + 20px);
+  height: 70%;
+  transform: translateY(-50%);
+  z-index: -1;
+  background-color: rgba(255,165,63,.7);
+}
+div#survey_review #survey_review_body .fieldbox { }
+div#survey_review #survey_review_body .fieldbox .radiobtn { display: flex; }
+div#survey_review #survey_review_body .fieldbox .radiobtn span{ font-size: 25px; }
+div#survey_review #survey_review_body .fieldbox .radiobtn fieldset { margin: 7px 0 0 10px; }
+div#survey_review #survey_review_body .fieldbox .wrapper .info { margin: 10px 0 0 20px;}
+div#survey_review #survey_review_body .fieldbox .wrapper .info span { padding-right: 20px; }
+
+
+
+
