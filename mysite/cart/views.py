@@ -85,7 +85,7 @@ def full_remove(request, coffee_id):
 
 
 @login_required(login_url='common:login')
-def add_order(request, order_id):
+def add_order(request):
     userinfo = User.objects.get(username=request.user)
     userinfo = userinfo.__dict__
     email = userinfo['email']  # Order.emailAddress
