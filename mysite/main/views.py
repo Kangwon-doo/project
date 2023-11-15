@@ -3,7 +3,7 @@ from products.cosine import cos_recommendation
 from django.contrib.auth.decorators import login_required
 from .models import Coffee
 import json
-from .models import Coffee, Roastery, Order, OrderItem, Preference
+from .models import Coffee, Order, OrderItem, Preference
 from django.contrib.auth.models import User
 
 

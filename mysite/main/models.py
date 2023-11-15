@@ -48,17 +48,6 @@ class Coffee(models.Model):
         db_table = "coffee"
 
 
-# class Order(models.Model):
-#     OrderID = models.IntegerField(primary_key=True)  # 주문 ID
-#     CustomerID = models.ForeignKey("Customer", on_delete=models.CASCADE)  # 고객 ID
-#     CoffeeID = models.ForeignKey("Coffee", on_delete=models.CASCADE)  # 커피 ID
-#     Amount = models.IntegerField(null=False)  # 수량
-#     OrderDate = models.DateTimeField()  # 주문 날짜
-#
-#     class Meta:
-#         db_table = "order"
-
-
 class CustomUser(AbstractUser):
     name = models.CharField(null=False, max_length=8)  # 닉네임
     CustomerAddress = models.CharField(null=True, max_length=3000)  # 주소
@@ -129,6 +118,7 @@ class test_preference(models.Model):
     class Meta:
         db_table = "mockuserinfo"
 
+
 class Cart(models.Model):
     cart_id = models.CharField(max_length=250, blank=True)
     date_added = models.DateField(auto_now_add=True)
@@ -165,7 +155,6 @@ class Order(models.Model):
 
     def __str__(self):
         return str(self.id)
-
 
 class OrderItem(models.Model):
     email = models.EmailField()
