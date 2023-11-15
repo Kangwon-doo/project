@@ -5,7 +5,11 @@
 {% block head %}
     <title>메인사이트</title>
     <!-- css -->
+<<<<<<< HEAD:mysite/templates/test/test.html
     <link rel="stylesheet" type="text/css" href="{% static 'css/test/test.css' %}">
+=======
+    <link rel="stylesheet" type="text/css" href="{% static 'css/test.css' %}">
+>>>>>>> heewon:mysite/templates/index2.html
     <link rel="shortcut icon" href="#">
 {% endblock %}
 
@@ -20,7 +24,11 @@
 
     <!-- 질문 폼 -->
     <div class="form-outer">
+<<<<<<< HEAD:mysite/templates/test/test.html
         <form action="result" method="GET">
+=======
+        <form action="result/" method="POST">
+>>>>>>> heewon:mysite/templates/index2.html
             {% csrf_token %}
             <!-- 첫번째 질문 -->
             <div class="page slidepage">

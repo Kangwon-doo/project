@@ -2,7 +2,11 @@ from django.contrib.auth.models import PermissionsMixin
 from django.db import models
 from django.core.validators import MinLengthValidator, MaxValueValidator, MinValueValidator
 import datetime
+<<<<<<< HEAD
 from django.contrib.auth.models import AbstractUser
+=======
+import uuid
+>>>>>>> heewon
 
 
 class Roastery(models.Model):
@@ -47,15 +51,15 @@ class Coffee(models.Model):
         db_table = "coffee"
 
 
-class Order(models.Model):
-    OrderID = models.IntegerField(primary_key=True)  # 주문 ID
-    CustomerID = models.ForeignKey("CustomUser", on_delete=models.CASCADE)  # 고객 ID
-    CoffeeID = models.ForeignKey("Coffee", on_delete=models.CASCADE)  # 커피 ID
-    Amount = models.IntegerField(null=False)  # 수량
-    OrderDate = models.DateTimeField()  # 주문 날짜
-
-    class Meta:
-        db_table = "order"
+# class Order(models.Model):
+#     OrderID = models.IntegerField(primary_key=True)  # 주문 ID
+#     CustomerID = models.ForeignKey("Customer", on_delete=models.CASCADE)  # 고객 ID
+#     CoffeeID = models.ForeignKey("Coffee", on_delete=models.CASCADE)  # 커피 ID
+#     Amount = models.IntegerField(null=False)  # 수량
+#     OrderDate = models.DateTimeField()  # 주문 날짜
+#
+#     class Meta:
+#         db_table = "order"
 
 
 class CustomUser(AbstractUser):
@@ -127,3 +131,52 @@ class test_preference(models.Model):
 
     class Meta:
         db_table = "mockuserinfo"
+
+class Cart(models.Model):
+    cart_id = models.CharField(max_length=250, blank=True)
+    date_added = models.DateField(auto_now_add=True)
+    class Meta:
+        db_table = 'Cart'
+        ordering = ['date_added']
+
+    def __str__(self):
+        return self.cart_id
+
+
+class CartItem(models.Model):
+    product = models.ForeignKey(Coffee, on_delete=models.CASCADE)
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
+    quantity = models.IntegerField()
+    active = models.BooleanField(default=True)
+    class Meta:
+        db_table = 'CartItem'
+
+    def sub_total(self):
+        return self.product.Price * self.quantity
+
+    def __str__(self):
+        return self.product
+
+
+class Order(models.Model):
+    OrderID = models.UUIDField(default=uuid.uuid4, primary_key=True, editable=False)
+    emailAddress = models.EmailField(max_length=250, blank=True)
+    created = models.DateTimeField(auto_now_add=True)
+    class Meta:
+        db_table = 'coffee_order'
+        ordering = ['-created']
+
+    def __str__(self):
+        return str(self.id)
+
+
+class OrderItem(models.Model):
+    email = models.EmailField()
+    OrderID = models.ForeignKey(Order, related_name='order_id', on_delete=models.CASCADE)
+    product = models.ForeignKey(Coffee, on_delete=models.CASCADE)
+    quantity = models.IntegerField()
+    class Meta:
+        db_table = 'OrderItem'
+
+    def __str__(self):
+        return self.product

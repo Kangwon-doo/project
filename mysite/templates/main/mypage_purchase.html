@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% extends 'base.html' %}
 {% block content %}
 
@@ -9,3 +10,61 @@
 
 </script>
 {% endblock %}
+=======
+{%load static %}
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/cart.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+</head>
+{% block content %}
+{{userinfo.username}}님의 구매내역
+{% for order in orderinfo %}
+<div>
+    <div class="text-center">
+        <br>
+        <h4 class="text-left my_title">
+            주문 번호: {{order.OrderID}}
+        </h4>
+        <h4 class="text-right my_title">
+            구매 일자 : {{order.created}}
+        </h4>
+        <br>
+    </div>
+</div>
+<div class="row mx-auto">
+    <div class="col-12 cool-sm-12 col-md-12 col-lg-6 text-center">
+        <table class="table my_customer_table">
+            <thead class="my_custom_thread">
+            <tr>
+                <th colspan="5">
+                    Your items
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in orderitems %}
+            {%if item.OrderID_id == order.OrderID%}
+            <tr>
+                <td>
+                    <a href="{{item.product.get_absolute_url}}"><img src="/static/coffee_img/{{item.product.CoffeeID}}.jpg" alt="" class="float-left rounded custom_image"></a>
+                </td>
+                <td class="text-left">
+                    {{item.product.CoffeeName}}
+                    <br>
+                    Unit Price : {{item.product.Price}}
+                    <br>
+                    Quantity : {{item.quantity}} x {{item.product.Price}}
+                </td>
+                <td>
+                    {% widthratio item.quantity 1 item.product.Price %}
+                </td>
+                {%endif%}
+                {%endfor%}
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}
+>>>>>>> heewon

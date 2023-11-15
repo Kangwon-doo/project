@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from products.cosine import cos_recommendation
 from django.contrib.auth.decorators import login_required
-from .models import Coffee,Preference
+from .models import Coffee
 import json
+from .models import Coffee, Roastery, Order, OrderItem, Preference
+from django.contrib.auth.models import User
 
 
 @login_required(login_url='/common/login')
@@ -64,8 +66,6 @@ def result(request):
    
     return render(request,"test/result.html",context)
 
-
-
 def index(request):
     return render(request, 'main/mainpage.html')
 
@@ -79,4 +79,12 @@ def basket(request):
     return render(request, 'main/basket.html')
 
 def purchase(request):
-    return render(request, 'main/mypage_purchase.html')
+    userinfo = User.objects.get(username=request.user)
+    userinfo = userinfo.__dict__
+    email = userinfo['email']
+
+    orderinfo = Order.objects.filter(emailAddress=email)
+
+    orderitems = OrderItem.objects.filter(email=email)
+    context = {'orderinfo': orderinfo, 'userinfo':userinfo, 'orderitems':orderitems}
+    return render(request, 'main/mypage_purchase.html', context)

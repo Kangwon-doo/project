@@ -5,7 +5,11 @@
 {% block head %}
     <title>메인사이트</title>
     <!-- css -->
+<<<<<<< HEAD
     <link rel="stylesheet" type="text/css" href="{% static 'css/products/coffee.css' %}">
+=======
+    <link rel="stylesheet" type="text/css" href="{% static 'css/coffee.css' %}">
+>>>>>>> heewon
     <link rel="stylesheet" type="text/css" href="{% static 'css/swiper-bundle.min.css' %}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="shortcut icon" href="#">
@@ -55,7 +59,11 @@
         </div>
         <!-- 관련 버튼 -->
         <div class="section2-4">
+<<<<<<< HEAD
             <button class="btn1">장바구니에 담기</button>
+=======
+            <button class="btn1"><a href="{% url 'cart:add_cart' coffee_info.CoffeeID %}">장바구니에 담기</a></button>
+>>>>>>> heewon
             <button class="btn2">원두 구독하기</button>
         </div>
     </div>
@@ -180,5 +188,9 @@
 
 <!-- 자바스크립트 파일 -->
 <script src="{% static 'js/swiper-bundle.min.js' %}"></script>
+<<<<<<< HEAD
 <script src="{% static 'js/products/coffee.js' %}"></script>
+=======
+<script src="{% static 'js/coffee.js' %}"></script>
+>>>>>>> heewon
 {% endblock %}

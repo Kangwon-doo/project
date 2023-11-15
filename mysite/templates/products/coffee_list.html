@@ -4,14 +4,22 @@
 {% block head %}
 <title>메인사이트</title>
 <!-- css -->
+<<<<<<< HEAD
 <link rel="stylesheet" type="text/css" href="{% static 'css/products/coffee_list.css' %}">
+=======
+<link rel="stylesheet" type="text/css" href="{% static 'css/coffee_list.css' %}">
+>>>>>>> heewon
 {% endblock %}
 
 {% block content %}
     <h2> Total Number of Coffee: {{count}}</h2>
     <h2> Page number: {{page.paginator.num_pages}}</h2>
 
+<<<<<<< HEAD
     <form id="coffeeForm" method="GET" action="{% url 'coffee' %}">
+=======
+    <form id="coffeeForm" method="GET" action="{% url 'products:coffee' %}">
+>>>>>>> heewon
         <!-- 카페인 -->
         <div class="checklist">
             <input class="checkval" type="checkbox" id="cafCheckbox" name="caf">
@@ -147,5 +155,9 @@
     document.getElementById('darkCheckbox').addEventListener('change', function() {
         updateAndSubmit(this, document.getElementById('darkHidden'));
     });
+<<<<<<< HEAD
+=======
+    
+>>>>>>> heewon
 </script>
 {% endblock %}

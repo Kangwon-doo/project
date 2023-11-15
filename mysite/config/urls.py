@@ -25,4 +25,5 @@ urlpatterns = [
     path('', include('subscribe.urls'), name = 'subscribe'),
     path('common/', include('common.urls')),
     path('accounts/', include('allauth.urls')),
+    path('cart/', include('cart.urls')),
 ]
