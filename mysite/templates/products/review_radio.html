@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div id="survey_review">
+    <div id="survey_review_head">
+        <div id="survey_guide">
+            <span>다음 원두들의 설명을 읽고 예상되는 선호도를 입력해주세요. </span>
+        </div>
+        <div>{{userinfo.email}}</div>
+    </div>
+    <div id="survey_review_body">
+        <form action="/review-submit/{{userinfo.id}}" method="POST">
+            {% csrf_token %}
+            <div>
+                <span style="color: red">좋아하지 않을 것 같다 : 1 </span><br>
+                <span style="color: red">즐겨 마실 것 같다 : 5</span>
+            </div>
+            <div style="border: 1px solid orange"></div>
+            {%for i in coffee_info%}
+                <div class="fieldbox">
+                    <div class="radiobtn">
+                        <h1 class="first"><span>{{i.CoffeeName}}: </span></h1>
+                        <fieldset>
+                            <label for="{{ i.CoffeeID }}_1">
+                                <input type="radio" name="{{ i.CoffeeID }}" value="1" id="{{ i.CoffeeID }}_1">
+                                <span>1</span>
+                            </label>
+
+                            <label for="{{ i.CoffeeID }}_2">
+                                <input type="radio" name="{{ i.CoffeeID }}" value="2" id="{{ i.CoffeeID }}_2">
+                                <span>2</span>
+                            </label>
+
+                            <label for="{{ i.CoffeeID }}_3">
+                                <input type="radio" name="{{ i.CoffeeID }}" value="3" id="{{ i.CoffeeID }}_3" checked>
+                                <span>3</span>
+                            </label>
+
+                            <label for="{{ i.CoffeeID }}_4">
+                                <input type="radio" name="{{ i.CoffeeID }}" value="4" id="{{ i.CoffeeID }}_4">
+                                <span>4</span>
+                            </label>
+
+                            <label for="{{ i.CoffeeID }}_5">
+                                <input type="radio" name="{{ i.CoffeeID }}" value="5" id="{{ i.CoffeeID }}_5">
+                                <span>5</span>
+                            </label>
+                        </fieldset>
+                    </div>
+
+                    <div class="wrapper">
+                        <div class="info-header">
+                            <h1 class="first"><span class="info-header-text">원두 특징</span></h1>
+                        </div>
+                        <div class="info">
+                            <span> <strong>커피 타입</strong> : {{i.CoffeeType}}</span><br>
+                            <span> <strong>로스팅 포인트</strong> : {{i.RoastingPoint}}</span><br>
+                        </div>
+                        <div class="info">
+                            <span>{{i.CoffeeInfo}}</span>
+                        </div>
+                        <div class = "info">
+                            <span>바디감 : {{i.Body}} / 5</span>
+                            <span>산미 : {{i.Sourness}} / 5</span>
+                            <span>단맛 : {{i.Sweetness}} / 5</span>
+                            <span>쓴맛 : {{i.Bitterness}} / 5</span>
+                        </div>
+                        <div class="info">
+                            {% if i.CupNote %}
+                            <span>이 원두의 컵 노트 : {{i.CupNote|slice:"1:-1"}} 향</span>
+                            {%else%}
+                            <span>이 원두의 컵 노트 정보가 없습니다.</span>
+                            {% endif %}
+                        </div>
+                        <div style="border: 1px solid orange"></div>
+                    {% endfor %}
+                    </div>
+
+                </div>
+
+        </form>
+    </div>
+    <div class="field-btns">
+        <button class="prev-3 prev" id="btn">이전</button>
+        <button class="Submit" onclick="send_result()" id="btn">제출</button>
+    </div>
+</div>
+{% endblock %}

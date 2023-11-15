@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
 from main.models import Coffee, Cart, CartItem, Order, OrderItem
 from django.core.exceptions import ObjectDoesNotExist
 
@@ -86,15 +85,14 @@ def full_remove(request, coffee_id):
 
 @login_required(login_url='common:login')
 def add_order(request):
-    userinfo = User.objects.get(username=request.user)
-    userinfo = userinfo.__dict__
-    email = userinfo['email']  # Order.emailAddress
+    email = request.user.email
     Order.objects.create(
         emailAddress=email
     )
     orderinfo = Order.objects.filter(emailAddress=email).latest('created')
     orderinfo = orderinfo.__dict__
     orderid = orderinfo['OrderID']
+    print(orderid)
     cart = Cart.objects.get(cart_id=_cart_id(request))
     cart_items = CartItem.objects.filter(cart=cart, active=True)
     for cart_item in cart_items:
