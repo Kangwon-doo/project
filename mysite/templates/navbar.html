@@ -42,6 +42,10 @@
                         <li class="smooth-menu" onclick = 'gobasket()'>
                             <a href="{% url 'cart:cart_detail' %}"><span class="material-icons">local_mall</span>({{item_count}})</a>
                         </li>
+                        {% else %}
+                        <li>
+                            <a href="{% url 'cart:cart_detail' %}"><span class="material-icons">local_mall</span></a>
+                        </li>
                         {% endif %}
 
                         {% if user.is_authenticated %}

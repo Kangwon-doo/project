@@ -48,12 +48,47 @@ def basket(request):
 
 
 def purchase(request):
-    userinfo = User.objects.get(username=request.user)
-    userinfo = userinfo.__dict__
-    email = userinfo['email']
+    userinfo = request.user
+    email = request.user.email
 
     orderinfo = Order.objects.filter(emailAddress=email)
 
     orderitems = OrderItem.objects.filter(email=email)
     context = {'orderinfo': orderinfo, 'userinfo':userinfo, 'orderitems':orderitems}
     return render(request, 'main/mypage_purchase.html', context)
+
+def review(request, coffee_id):
+    user = request.user
+    if request.method == 'POST':
+        starRating = request.POST.get('starRating')
+        today = datetime.today()
+
+        if status == '일반':
+            until = datetime.today() + timedelta(90)
+            next = datetime.today() + timedelta(30)
+        elif status == '프리미엄':
+            until = datetime.today() + timedelta(365)
+            next = datetime.today() + timedelta(30)
+        else:
+            until = datetime.today() + timedelta(365)
+            next = datetime.today() + timedelta(365)
+
+        # 이미 존재하는 데이터 삭제
+        try:
+            userinfo = Subscription.objects.get(user=user)
+            userinfo.delete()
+        except:
+            pass
+
+        subscription = Subscription.objects.create(
+            user=user,
+            status=status,
+            startDate=today.strftime("%Y-%m-%d"),
+            endDate=until.strftime("%Y-%m-%d"),
+            payDate=next.strftime("%Y-%m-%d"))
+        subscription.save()
+        context = {'info': subscription, 'user': user}
+    else:
+        pass
+
+
