@@ -38,11 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main.apps.MainConfig',
     'products.apps.ProductsConfig',
+    'cart.apps.CartConfig',
     'django.contrib.humanize',
     'django_filters',
     'common.apps.CommonConfig',
     'formtools',
-
     'django.contrib.sites',
     # allauth 관련 앱 목록 추가
     'allauth',
@@ -78,6 +78,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'cart.product_counter.counter'
             ],
         },
     },
@@ -154,6 +155,7 @@ AUTHENTICATION_BACKENDS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+AUTH_USER_MODEL = 'main.CustomUser'
 
 LOGIN_REDIRECT_URL = '/'   # social login redirect
 ACCOUNT_LOGOUT_REDIRECT_URL = '/'  # logout redirect
@@ -176,8 +178,6 @@ SOCIALACCOUNT_PROVIDERS = {
         }
     }
 }
-
-
 
 # 시크릿 키 가져오기
 import os
