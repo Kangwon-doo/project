@@ -104,7 +104,7 @@ def roastery_detail(request, roastery_id): #로스터리ID
 
 class SurveyWizardView(SessionWizardView):
     form_list = [EmailForm, PreferenceForm]
-    template_name = 'products/wizardview.html'
+    template_name = 'products/wizardview_yj.html'
 
     def done(self, form_list, **kwargs):
         form_data = [form.cleaned_data for form in form_list]
@@ -130,8 +130,8 @@ def survey_reviews(request, userid):
     ids = [i.CoffeeID for i in Coffee.objects.all()]
     random_coffees = random.sample(ids, 10)
     shuffled = Coffee.objects.filter(CoffeeID__in=random_coffees)
-    context = {'coffee_info': shuffled, 'userinfo':userinfo} #
-    return render(request, 'products/review_radio2.html', context)
+    context = {'coffee_info': shuffled, 'userinfo':userinfo}
+    return render(request, 'products/review_radio.html', context)
 
 
 def review_create(request, userid):
