@@ -19,9 +19,9 @@
                 <div class="collapse navbar-collapse menu-ui-design" id="navbar-menu">
                     <ul class="nav navbar-nav navbar-left" data-in="fadeInDown" data-out="fadeOutUp">
                         <li class=" smooth-menu active"></li>
-                        <li class=" smooth-menu"><a href="#education">원두</a></li>
+                        <li class=" smooth-menu"><a href="/coffee">원두</a></li>
                         <li class="smooth-menu" onclick="goMD()"><a>MD상품</a></li>
-                        <li class="smooth-menu"><a href="#experience">원두추천받기</a></li>
+                        <li class="smooth-menu"><a href="/test">원두추천받기</a></li>
                         <li class="smooth-menu"><a href="#profiles">정기구독</a></li>
                         <li class="smooth-menu" onclick="servicePopup()">
                             <a>서비스소개</a>
@@ -35,11 +35,11 @@
                                 <span class="material-icons" style="border: 1px solid #ccc; padding: 5px; border-radius: 5px;">search</span>
                             </a>
                         </li>
-                        <li class="smooth-menu" onclick = 'goMypage()' style="cursor: pointer">       <!-- onclick = 'goMypage()' -->
-                            <a><span class="material-icons">person</span></a>
+                        <li class="smooth-menu" style="cursor: pointer">       <!-- onclick = 'goMypage()' -->
+                            <a href="{% url 'main:mypage' %}"><span class="material-icons">person</span></a>
                         </li>
-                        <li class="smooth-menu" onclick = 'gobasket()'>
-                            <a href="#education"><span class="material-icons">local_mall</span></a>
+                        <li class="smooth-menu">
+                            <a href="{% url 'main:cart' %}"><span class="material-icons">local_mall</span></a>
                         </li>
 
                         {% if user.is_authenticated %}
@@ -64,9 +64,6 @@
 <!-- top-area End -->
 
 <script type="text/javascript">
-    function goMypage() {
-        window.location = "/mypage/";
-    }
     function goSignin() {
         window.location = "/signin/";
     }
@@ -78,8 +75,5 @@
         if(newWin == null){     //팝업이 차단되어 있다면 if문 실행
             alert("팝업이 차단되어 있습니다. 팝업차단을 해제하고 새로고침해 주세요.");
         }
-    }
-    function gobasket(){
-        window.location = "/basket/";
     }
 </script>

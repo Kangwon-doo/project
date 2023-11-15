@@ -1,3 +1,4 @@
+from django.contrib.auth.models import PermissionsMixin
 from django.db import models
 from django.core.validators import MinLengthValidator, MaxValueValidator, MinValueValidator
 import datetime
@@ -8,6 +9,7 @@ class Roastery(models.Model):
     RoasteryName = models.CharField(max_length=45)  # 로스터리 이름
     RoasteryAddress = models.CharField(max_length=3000)  # 로스터리 주소
     RoasteryInfo = models.TextField()  # 로스터리 소개
+    RoasteryPhone = models.TextField(validators=[MinLengthValidator(9, '')])  # 전화번호
 
     class Meta:
         db_table = "roastery"
@@ -15,6 +17,7 @@ class Roastery(models.Model):
 
 class Coffee(models.Model):
     CoffeeID = models.IntegerField(primary_key=True)  # 커피 ID
+    NewID = models.IntegerField(unique=True)  # 커피 뉴ID
     CoffeeName = models.CharField(max_length=50)  # 커피 이름
     RoasteryID = models.ForeignKey("Roastery", on_delete=models.CASCADE)  # 로스터리 ID
     Info = models.CharField(max_length=3000)  # 커피 정보
@@ -37,7 +40,8 @@ class Coffee(models.Model):
     StorageMethod = models.TextField()  # 보관 방법
     RawMaterial = models.TextField()  # 원재료 및 함량
     ProductInfo = models.TextField()  # 제품문의 관련 주소 및 전화번호
-
+    Price = models.IntegerField()  # 가격 정보
+    
     class Meta:
         db_table = "coffee"
 
@@ -72,24 +76,41 @@ class Customer(models.Model):
     Password = models.TextField(validators=[MinLengthValidator(8, '8자 이상으로 적어주세요!')])  # 비밀번호
     PhoneNumber = models.TextField(validators=[MinLengthValidator(10, '')])  # 전화번호
 
+    class Meta:
+        db_table = "customer"
 
-class Reviews():
+
+class Reviews(models.Model):
     CoffeeID = models.ForeignKey(Coffee, on_delete=models.CASCADE)
     CustomerID = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    # Stars = models.
+    # Stars = models.CharField(max_length=1, default=0) # 별점. 1~5점. 0점은 아직 리뷰를 남기지 않은 커피
     content = models.TextField()
     created_date = models.DateTimeField()
 
+    class Meta:
+        db_table = "review"
 
-class Temp(models.Model):
-    Coffee = models.TextField()
-    Caffeine_CHOICES = [
-        ("디카페인", "디카페인"),
-        ("카페인", "카페인"),
-    ]
-    Caffeine = models.CharField(
-        max_length=4,
-        choices=Caffeine_CHOICES,
-        null=True
-    )
-    Taste = models.TextField()
+
+class test_Reviews(models.Model):
+    CoffeeID = models.ForeignKey(Coffee, on_delete=models.CASCADE)
+    ######## 사용자 입력값 ########
+    email = models.EmailField(max_length=40)  # 이메일
+    Stars = models.IntegerField(default=0)  # 별점. 1~5점. 0점은 아직 리뷰를 남기지 않은 커피
+    created_date = models.DateTimeField()
+
+    class Meta:
+        db_table = "mockreview"
+
+
+class test_preference(models.Model):
+    email = models.EmailField(max_length=40)  # 이메일
+    Caffeine = models.CharField(max_length=1)  # 디카페인1/카페인0
+    CoffeeType = models.TextField()  # 타입
+    CupNoteCategories = models.TextField()  # 선호 컵 노트 카테고리
+    Body = models.CharField(max_length=1)  # 바디감
+    Sourness = models.CharField(max_length=1)  # 신맛
+    Sweetness = models.CharField(max_length=1)  # 단맛
+    Bitterness = models.CharField(max_length=1)  # 쓴맛
+
+    class Meta:
+        db_table = "mockuserinfo"
