@@ -1,38 +1,7 @@
-{% extends 'base.html' %}
-{% block content %}
-
-<!--purchase start -->
-
-<!--purchase end -->
-<script>
-
-
-</script>
-{% endblock %}
-=======
-{%load static %}
-<head>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/cart.css' %}">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-</head>
-{% block content %}
-{{userinfo.username}}님의 구매내역
-{% for order in orderinfo %}
-<div>
-    <div class="text-center">
-        <br>
-        <h4 class="text-left my_title">
-            주문 번호: {{order.OrderID}}
-        </h4>
-        <h4 class="text-right my_title">
-            구매 일자 : {{order.created}}
-        </h4>
-        <br>
-=======
 {% extends 'main/mypage.html' %}
 {% load static %}
 {% block mypageContent %}
-
+​
 <!--mypage start -->
 <div class="content" id="private_info">
     <div class="title">{{userinfo.username}}님의 구매내역</div>
@@ -94,14 +63,13 @@
                 </table>
             </div>
         </div>
->>>>>>> heewon
     </div>
 {% endfor %}
-
+​
 </div><!-- /.container-->
 </section><!--/.mypage-->
 <!--purchase end -->
-
+​
 <script>
     function toggleReviewForm(button) {
         $(button).siblings('.reviewbox').toggle();
@@ -112,18 +80,18 @@
         $('.star_rating > .star').click(function() {
             $(this).parent().children('span').removeClass('on');
             $(this).addClass('on').prevAll('span').addClass('on');
-
+​
             var starValue = $(this).attr('value');
             $('#starRatingInput').val(starValue);
         });
-
+​
         // 리뷰 폼 제출 시 동작
         $('#reviewForm').submit(function(e) {
            // e.preventDefault(); // 기본 폼 제출 동작 막기 (테스트용) //
-
+​
             var formData = $(this).serialize();
             console.log(formData); // 서버에 데이터 전송 (테스트용)
-
+​
             // 실제로는 여기서 AJAX를 사용하여 서버에 데이터를 전송할 수 있습니다.
             // 예를 들어:
             
@@ -141,15 +109,9 @@
             
         });
     });
-
-
-
+​
+​
 </script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- jQuery 라이브러리 -->
 <script src="{% static 'js/scripts.js' %}"></script> <!-- 사용자 정의 JavaScript 파일 -->
 {% endblock %}
-<<<<<<< HEAD
->>>>>>> heewon
-=======
-
->>>>>>> heewon
