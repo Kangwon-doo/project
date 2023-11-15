@@ -103,7 +103,7 @@
             </form>
             <div class="mx-auto">
                 <a href="{% url 'products:coffee' %}" class="btn btn-secondary btn-block my_custom_button">Continue Shopping</a>
-                <a href="{% url 'cart:order-created' cart.id %}" class="btn btn-secondary btn-block my-custom_button">구매하기</a>
+                <a href="{% url 'cart:order-created'%}" class="btn btn-secondary btn-block my-custom_button">구매하기</a>
             </div>
         </div>
     {% endif %}
