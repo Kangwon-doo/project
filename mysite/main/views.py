@@ -51,9 +51,9 @@ def purchase(request):
     userinfo = User.objects.get(username=request.user)
     userinfo = userinfo.__dict__
     email = userinfo['email']
-    orderinfo = Order.objects.filter(emailAddress=email)
-    orderinfo = orderinfo.__dict__
 
-    # orderitems = OrderItem.objects.filter(OrderID_id=orderinfo['OrderID'])
-    context = {'userinfo':userinfo} #'orderitems': orderitems,
+    orderinfo = Order.objects.filter(emailAddress=email)
+
+    orderitems = OrderItem.objects.filter(email=email)
+    context = {'orderinfo': orderinfo, 'userinfo':userinfo, 'orderitems':orderitems}
     return render(request, 'main/mypage_purchase.html', context)

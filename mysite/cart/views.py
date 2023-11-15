@@ -89,19 +89,24 @@ def add_order(request, order_id):
     userinfo = User.objects.get(username=request.user)
     userinfo = userinfo.__dict__
     email = userinfo['email']  # Order.emailAddress
-    Order.objects.get_or_create(
-        emailAddress = email
+    Order.objects.create(
+        emailAddress=email
     )
-    orderinfo= Order.objects.get(emailAddress=email)
+    orderinfo = Order.objects.filter(emailAddress=email).latest('created')
     orderinfo = orderinfo.__dict__
+    orderid = orderinfo['OrderID']
     cart = Cart.objects.get(cart_id=_cart_id(request))
     cart_items = CartItem.objects.filter(cart=cart, active=True)
-    for order_item in cart_items:
+    for cart_item in cart_items:
+        item = cart_item.__dict__
+        coffee_id = item['product_id']
+        print(coffee_id)
+        product = coffee_id
         OrderItem.objects.create(
-            OrderID_id=orderinfo['OrderID'],
-            product = order_item.product.CoffeeID,
-            quantity = order_item.quantity,
-            price = order_item.product.Price
+            email=email,
+            OrderID_id=orderid,
+            product_id=product,
+            quantity=item['quantity']
         )
     # 장바구니 비우기
     cart = Cart.objects.get(cart_id=_cart_id(request))
@@ -110,7 +115,3 @@ def add_order(request, order_id):
 
     context = {'order_detail': orderinfo, 'cart_items': cart_items}
     return render(request, 'cart/order_success.html', context)
-
-
-
-

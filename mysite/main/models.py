@@ -145,7 +145,7 @@ class CartItem(models.Model):
 
 class Order(models.Model):
     OrderID = models.UUIDField(default=uuid.uuid4, primary_key=True, editable=False)
-    emailAddress = models.EmailField(max_length=250, blank=True, verbose_name='Email Address')
+    emailAddress = models.EmailField(max_length=250, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     class Meta:
         db_table = 'coffee_order'
@@ -156,15 +156,12 @@ class Order(models.Model):
 
 
 class OrderItem(models.Model):
-    OrderID = models.ForeignKey(Order, on_delete=models.CASCADE)
-    product = models.CharField(max_length=250)
+    email = models.EmailField()
+    OrderID = models.ForeignKey(Order, related_name='order_id', on_delete=models.CASCADE)
+    product = models.ForeignKey(Coffee, on_delete=models.CASCADE)
     quantity = models.IntegerField()
-    price = models.IntegerField(verbose_name='Price')
     class Meta:
         db_table = 'OrderItem'
-
-    def sub_total(self):
-        return self.quantity * self.price
 
     def __str__(self):
         return self.product
