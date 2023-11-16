@@ -22,7 +22,7 @@ class Coffee(models.Model):
     NewID = models.IntegerField(unique=True)  # 커피 뉴ID
     CoffeeName = models.CharField(max_length=50)  # 커피 이름
     RoasteryID = models.ForeignKey("Roastery", on_delete=models.CASCADE)  # 로스터리 ID
-    Info = models.CharField(max_length=3000)  # 커피 정보
+    # Info = models.CharField(max_length=3000)  # 커피 정보
     CoffeeType = models.TextField()  # 타입
     RoastingPoint = models.TextField()  # 로스팅 포인트
     Sustainability = models.CharField(max_length=4)  # 지속가능성
