@@ -18,7 +18,7 @@ django.setup()
 from main.models import *  # App이름.models
 
 # DB에 넣을 csv파일
-coffee_csv = 'data/coffeeDB2.csv'
+coffee_csv = 'data/coffeeDB.csv'
 roastery_csv = 'data/roasteryDB.csv'
 
 with open(roastery_csv, newline='', encoding='utf-8') as csvfile:
