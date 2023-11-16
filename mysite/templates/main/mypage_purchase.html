@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
@@ -48,6 +49,50 @@
                         <div class="reviewbox" style="display: none;">
                             <h2>소중한 의견</h2>
                             <form id="reviewForm" action="/submit_review" method="post">
+=======
+{% extends 'main/mypage.html' %}
+{% load static %}
+{% block mypageContent %}
+​
+<!--mypage start -->
+<div class="content" id="private_info">
+    <div class="title">{{userinfo.username}}님의 구매내역</div>
+    {% for order in orderinfo %}
+    <div style="border: 1px solid black; margin-bottom:10px;">
+        <div class = 'private_info_item'><br>
+            <h4 class="text-left my_title">주문 번호: {{order.OrderID}}</h4>
+            <h4 class="text-left my_title">구매 일자 : {{order.created}}</h4><br>
+        </div>
+        <div class="row mx-auto">
+            <div class="col-20 col-sm-20 col-md-20 col-lg-10 text-center">
+                <table class="table my_customer_table">
+                    <thead class="my_custom_thread">
+                    <tr><th colspan="10">Your items</th></tr>
+                    </thead>
+                    <tbody>
+                    {% for item in orderitems %}
+                    {% if item.OrderID_id == order.OrderID %}
+                    <tr>
+                        <td>
+                            <a href="{{item.product.get_absolute_url}}"><img src="/static/coffee_img/{{item.product.CoffeeID}}.jpg" alt="" class="float-left rounded custom_image"></a>
+                        </td>
+                        <td class="text-left">
+                            {{item.product.CoffeeName}}
+                            <br>
+                            Unit Price : {{item.product.Price}}
+                            <br>
+                            Quantity : {{item.quantity}} x {{item.product.Price}}
+                        </td>
+                        <td>
+                            {% widthratio item.quantity 1 item.product.Price %}
+                        </td>
+                        <td>
+                        <button onclick="toggleReviewForm(this)">리뷰쓰기</button>
+                        <div class="reviewbox" style="display: none;">
+                            <h2>소중한 의견</h2>
+                            <form id="reviewForm" action="{% url 'pybo:submit' item.product.CoffeeID %}" method="POST">
+                                {% csrf_token %}
+>>>>>>> 7c74a337878871921a1648c2342bcaa36a8eef0a
                                 <div class ="star_rating">
                                     <span class="star on" value="1"> </span>
                                     <span class="star" value="2"> </span>
@@ -56,6 +101,7 @@
                                     <span class="star" value="5"> </span>
                                     <input type="hidden" name="starRating" id="starRatingInput" value="" />
                                 </div>
+<<<<<<< HEAD
                                 <textarea class="star_box" placeholder="리뷰 내용을 작성해주세요." ></textarea>
                                 <input type="submit" class="btn02" value="리뷰 등록"/>
                             </form>
@@ -69,6 +115,30 @@
 </section><!--/.mypage-->
 <!--purchase end -->
 
+=======
+                                <div></div>
+                                <textarea class="star_box" placeholder="리뷰 내용을 작성해주세요." ></textarea>
+                                <div></div>
+                                <input type="submit" class="btn02" value="리뷰 등록"/>
+                                <div></div>
+                            </form>
+                        </div>
+                        </td>
+                    </tr>
+                    {%endif%}
+                    {%endfor%}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+​
+</div><!-- /.container-->
+</section><!--/.mypage-->
+<!--purchase end -->
+​
+>>>>>>> 7c74a337878871921a1648c2342bcaa36a8eef0a
 <script>
     function toggleReviewForm(button) {
         $(button).siblings('.reviewbox').toggle();
@@ -79,6 +149,7 @@
         $('.star_rating > .star').click(function() {
             $(this).parent().children('span').removeClass('on');
             $(this).addClass('on').prevAll('span').addClass('on');
+<<<<<<< HEAD
 
             var starValue = $(this).attr('value');
             $('#starRatingInput').val(starValue);
@@ -97,6 +168,26 @@
             $.ajax({
                 type: "POST",
                 url: $(this).attr('action'),
+=======
+​
+            var starValue = $(this).attr('value');
+            $('#starRatingInput').val(starValue);
+        });
+​
+        // 리뷰 폼 제출 시 동작
+        $('#reviewForm').submit(function(e) {
+           // e.preventDefault(); // 기본 폼 제출 동작 막기 (테스트용) //
+​
+            var formData = $(this).serialize();
+            console.log(formData); // 서버에 데이터 전송 (테스트용)
+​
+            // 실제로는 여기서 AJAX를 사용하여 서버에 데이터를 전송할 수 있습니다.
+            // 예를 들어:
+            
+            $.ajax({
+                type: "POST",
+                url: $(this).attr('action'),        
+>>>>>>> 7c74a337878871921a1648c2342bcaa36a8eef0a
                 data: formData,
                 success: function(response) {
                     // 서버 응답 처리
@@ -105,12 +196,20 @@
                     // 오류 처리
                 }
             });
+<<<<<<< HEAD
 
         });
     });
 
 
 
+=======
+            
+        });
+    });
+​
+​
+>>>>>>> 7c74a337878871921a1648c2342bcaa36a8eef0a
 </script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- jQuery 라이브러리 -->
 <script src="{% static 'js/scripts.js' %}"></script> <!-- 사용자 정의 JavaScript 파일 -->

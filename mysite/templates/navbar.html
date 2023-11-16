@@ -22,7 +22,11 @@
                         <li class=" smooth-menu"><a href="/coffee">원두</a></li>
                         <li class="smooth-menu" onclick="goMD()"><a>MD상품</a></li>
                         <li class="smooth-menu"><a href="/test">원두추천받기</a></li>
+<<<<<<< HEAD
                         <li class="smooth-menu"><a href="#profiles">정기구독</a></li>
+=======
+                        <li class="smooth-menu"><a href="/subscribe">정기구독</a></li>
+>>>>>>> 7c74a337878871921a1648c2342bcaa36a8eef0a
                         <li class="smooth-menu" onclick="servicePopup()">
                             <a>서비스소개</a>
                         </li>
@@ -38,9 +42,20 @@
                         <li class="smooth-menu" style="cursor: pointer">       <!-- onclick = 'goMypage()' -->
                             <a href="{% url 'main:mypage' %}"><span class="material-icons">person</span></a>
                         </li>
+<<<<<<< HEAD
                         <li class="smooth-menu">
                             <a href="{% url 'main:cart' %}"><span class="material-icons">local_mall</span></a>
+=======
+                        {% if item_count > 0 %}
+                        <li class="smooth-menu" onclick = 'gobasket()'>
+                            <a href="{% url 'cart:cart_detail' %}"><span class="material-icons">local_mall</span>({{item_count}})</a>
+>>>>>>> 7c74a337878871921a1648c2342bcaa36a8eef0a
                         </li>
+                        {% else %}
+                        <li>
+                            <a href="{% url 'cart:cart_detail' %}"><span class="material-icons">local_mall</span></a>
+                        </li>
+                        {% endif %}
 
                         {% if user.is_authenticated %}
                         <li class=" smooth-menu" style="cursor: pointer">
