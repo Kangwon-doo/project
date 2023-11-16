@@ -43,6 +43,7 @@ class Coffee(models.Model):
     RawMaterial = models.TextField()  # 원재료 및 함량
     ProductInfo = models.TextField()  # 제품문의 관련 주소 및 전화번호
     Price = models.IntegerField()  # 가격 정보
+    Stock = models.IntegerField()  # 판매량
     
     class Meta:
         db_table = "coffee"
