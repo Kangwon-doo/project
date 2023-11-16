@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from products.cosine import cos_recommendation
 from django.contrib.auth.decorators import login_required
-from .models import Coffee
+import random
 import json
 from .models import Coffee, Order, OrderItem, Preference
 from django.contrib.auth.models import User
@@ -66,8 +66,13 @@ def result(request):
    
     return render(request,"test/result.html",context)
 
-def index(request):
-    return render(request, 'main/mainpage.html')
+def index(request):  # main page
+    ids = [i.CoffeeID for i in Coffee.objects.all()]
+    random_coffees = random.sample(ids, 8)
+    shuffled = Coffee.objects.filter(CoffeeID__in=random_coffees)
+    top5 = Coffee.objects.order_by('Stock')[0:5]
+    context = {'coffee_info': shuffled, 'top5':top5}
+    return render(request, 'main/mainpage.html', context)
 
 def mypage(request):
     return render(request, 'main/mypage_privateinfo.html')
@@ -92,34 +97,4 @@ def review(request, coffee_id):
     user = request.user
     if request.method == 'POST':
         starRating = request.POST.get('starRating')
-        today = datetime.today()
-
-        if status == '일반':
-            until = datetime.today() + timedelta(90)
-            next = datetime.today() + timedelta(30)
-        elif status == '프리미엄':
-            until = datetime.today() + timedelta(365)
-            next = datetime.today() + timedelta(30)
-        else:
-            until = datetime.today() + timedelta(365)
-            next = datetime.today() + timedelta(365)
-
-        # 이미 존재하는 데이터 삭제
-        try:
-            userinfo = Subscription.objects.get(user=user)
-            userinfo.delete()
-        except:
-            pass
-
-        subscription = Subscription.objects.create(
-            user=user,
-            status=status,
-            startDate=today.strftime("%Y-%m-%d"),
-            endDate=until.strftime("%Y-%m-%d"),
-            payDate=next.strftime("%Y-%m-%d"))
-        subscription.save()
-        context = {'info': subscription, 'user': user}
-    else:
         pass
-
-
