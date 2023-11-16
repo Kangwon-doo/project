@@ -43,7 +43,7 @@ class Coffee(models.Model):
     RawMaterial = models.TextField()  # 원재료 및 함량
     ProductInfo = models.TextField()  # 제품문의 관련 주소 및 전화번호
     Price = models.IntegerField()  # 가격 정보
-    
+
     class Meta:
         db_table = "coffee"
 
@@ -63,18 +63,10 @@ class CustomUser(AbstractUser):
     BirthDate = models.DateField(null=True)  # 생년월일
     PhoneNumber = models.TextField(null=True, validators=[MinLengthValidator(10, '')])  # 전화번호
 
-    class Meta:
-        db_table = "customer"
 
-<<<<<<< HEAD
-
-class Reviews(models.Model):
-    CoffeeID = models.ForeignKey(Coffee, on_delete=models.CASCADE)
-    CustomerID = models.ForeignKey(Customer, on_delete=models.CASCADE)
-=======
 class Subscription(models.Model):
     user = models.ForeignKey("CustomUser", on_delete=models.CASCADE)
-    status = models.CharField(null=False,max_length=4,default='')
+    status = models.CharField(null=False, max_length=4, default='')
     startDate = models.DateField(null=False)
     endDate = models.DateField(null=False)
     payDate = models.DateField(null=False)
@@ -82,19 +74,18 @@ class Subscription(models.Model):
 
 class Preference(models.Model):
     user = models.ForeignKey("CustomUser", on_delete=models.CASCADE)
-    caf = models.CharField(null=False,max_length=1,default='')
-    blend = models.CharField(null=False,max_length=1,default='')
-    notes = models.TextField(null=False,default='')
-    sour = models.CharField(null=False,max_length=1,default='')
-    sweet = models.CharField(null=False,max_length=1,default='')
-    bitter = models.CharField(null=False,max_length=1,default='')
-    body = models.CharField(null=False,max_length=1,default='')
-    
+    caf = models.CharField(null=False, max_length=1, default='')
+    blend = models.CharField(null=False, max_length=1, default='')
+    notes = models.TextField(null=False, default='')
+    sour = models.CharField(null=False, max_length=1, default='')
+    sweet = models.CharField(null=False, max_length=1, default='')
+    bitter = models.CharField(null=False, max_length=1, default='')
+    body = models.CharField(null=False, max_length=1, default='')
+
 
 class Reviews(models.Model):
     CoffeeID = models.ForeignKey(Coffee, on_delete=models.CASCADE)
     user = models.ForeignKey("CustomUser", on_delete=models.CASCADE)
->>>>>>> 7c74a337878871921a1648c2342bcaa36a8eef0a
     # Stars = models.CharField(max_length=1, default=0) # 별점. 1~5점. 0점은 아직 리뷰를 남기지 않은 커피
     content = models.TextField()
     created_date = models.DateTimeField()
@@ -126,13 +117,12 @@ class test_preference(models.Model):
 
     class Meta:
         db_table = "mockuserinfo"
-<<<<<<< HEAD
-=======
 
 
 class Cart(models.Model):
     cart_id = models.CharField(max_length=250, blank=True)
     date_added = models.DateField(auto_now_add=True)
+
     class Meta:
         db_table = 'Cart'
         ordering = ['date_added']
@@ -146,6 +136,7 @@ class CartItem(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
     quantity = models.IntegerField()
     active = models.BooleanField(default=True)
+
     class Meta:
         db_table = 'CartItem'
 
@@ -160,6 +151,7 @@ class Order(models.Model):
     OrderID = models.UUIDField(default=uuid.uuid4, primary_key=True, editable=False)
     emailAddress = models.EmailField(max_length=250, blank=True)
     created = models.DateTimeField(auto_now_add=True)
+
     class Meta:
         db_table = 'coffee_order'
         ordering = ['-created']
@@ -167,14 +159,15 @@ class Order(models.Model):
     def __str__(self):
         return str(self.id)
 
+
 class OrderItem(models.Model):
     email = models.EmailField()
     OrderID = models.ForeignKey(Order, related_name='order_id', on_delete=models.CASCADE)
     product = models.ForeignKey(Coffee, on_delete=models.CASCADE)
     quantity = models.IntegerField()
+
     class Meta:
         db_table = 'OrderItem'
 
     def __str__(self):
         return self.product
->>>>>>> 7c74a337878871921a1648c2342bcaa36a8eef0a

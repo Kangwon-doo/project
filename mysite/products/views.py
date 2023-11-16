@@ -5,11 +5,7 @@ from formtools.wizard.views import SessionWizardView
 
 # import products
 from .forms import EmailForm, PreferenceForm, PredictionForm
-<<<<<<< HEAD
-from main.models import Coffee, Roastery, Order, Customer, Reviews, test_Reviews, test_preference
-=======
 from main.models import Coffee, Roastery, Order, Reviews, test_Reviews, test_preference
->>>>>>> 7c74a337878871921a1648c2342bcaa36a8eef0a
 from .cosine import most_similar
 import random
 import json
@@ -108,11 +104,7 @@ def roastery_detail(request, roastery_id): #로스터리ID
 
 class SurveyWizardView(SessionWizardView):
     form_list = [EmailForm, PreferenceForm]
-<<<<<<< HEAD
-    template_name = 'products/wizardview.html'
-=======
     template_name = 'products/wizardview_yj.html'
->>>>>>> 7c74a337878871921a1648c2342bcaa36a8eef0a
 
     def done(self, form_list, **kwargs):
         form_data = [form.cleaned_data for form in form_list]
@@ -138,13 +130,8 @@ def survey_reviews(request, userid):
     ids = [i.CoffeeID for i in Coffee.objects.all()]
     random_coffees = random.sample(ids, 10)
     shuffled = Coffee.objects.filter(CoffeeID__in=random_coffees)
-<<<<<<< HEAD
-    context = {'coffee_info': shuffled, 'userinfo':userinfo} #
-    return render(request, 'products/review_radio2.html', context)
-=======
     context = {'coffee_info': shuffled, 'userinfo':userinfo}
     return render(request, 'products/review_radio.html', context)
->>>>>>> 7c74a337878871921a1648c2342bcaa36a8eef0a
 
 
 def review_create(request, userid):
