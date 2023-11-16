@@ -2,6 +2,7 @@ import csv
 import os
 import django
 import sys
+from random import randint
 
 os.chdir(".")
 print("Current dir=", end=""), print(os.getcwd())
@@ -39,6 +40,7 @@ with open(coffee_csv, newline='', encoding='utf-8') as csvfile:
     data_reader = csv.DictReader(csvfile)
     for row in data_reader:
         try:
+            number = randint(1,100)
             Coffee.objects.create(  # Model class에 입력된 데이터 이름 / CSV에 입력된 데이터베이스의 이름
                 CoffeeID=row['id'],
                 NewID=row['new_id'],
@@ -63,8 +65,8 @@ with open(coffee_csv, newline='', encoding='utf-8') as csvfile:
                 StorageMethod=row['보관 방법'],
                 RawMaterial=row['원재료 및 함량'],
                 ProductInfo=row['제품문의 관련 주소 및 전화번호'],
-                Price=row['price']
-                Stock = 
+                Price=row['price'],
+                Stock =number
             )
         except:
             pass

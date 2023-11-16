@@ -98,7 +98,6 @@ def add_order(request):
     for cart_item in cart_items:
         item = cart_item.__dict__
         coffee_id = item['product_id']
-        print(coffee_id)
         product = coffee_id
         OrderItem.objects.create(
             email=email,
@@ -106,6 +105,12 @@ def add_order(request):
             product_id=product,
             quantity=item['quantity']
         )
+        prod = Coffee.objects.get(CoffeeID=coffee_id)
+        print('bfore : ', prod.Stock)
+        print('+ : ', item['quantity'])
+        prod.Stock = int(prod.Stock + item['quantity'])
+        prod.save()
+        print('after : ', prod.Stock)
     # 장바구니 비우기
     cart = Cart.objects.get(cart_id=_cart_id(request))
     CartItem.objects.filter(cart=cart, active=True).delete()
