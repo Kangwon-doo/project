@@ -1,14 +1,10 @@
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.hashers import check_password
-from django.http import HttpResponse
+from django.contrib.auth.views import PasswordResetView
 from django.shortcuts import render, redirect
-from common.forms import UserForm
-from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib.auth import update_session_auth_hash
-from django.contrib import messages
-from django.utils.decorators import method_decorator
-from requests import auth
-from django.views.generic import View
+from django.urls import reverse_lazy
+from .forms import UserForm, PasswordResetForm
+from django.contrib.auth import views as auth_views
+
 
 
 # Create your views here.
@@ -29,5 +25,21 @@ def signup(request):
     else:
         form = UserForm()
     return render(request, 'common/signup.html', {'form': form})
+
+
+# 비밀번호 초기화(ID, email 입력)
+class PasswordResetView(auth_views.PasswordResetView):
+    template_name = 'common/password_reset.html'
+
+# 메일 전송
+class PasswordResetDoneView(auth_views.PasswordResetDoneView):
+    template_name = "common/password_reset_done.html"
+
+# new 비밀번호 입력
+class PasswordResetConfirmView(auth_views.PasswordResetConfirmView):
+    template_name = "common/password_reset_confirm.html"
+    success_url = reverse_lazy('login')
+
+
 
 
