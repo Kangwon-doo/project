@@ -185,7 +185,7 @@ function send_result(e) {
   console.log(notes);
 
   $.ajax({
-    url: '/test',
+    url: '/test/result',
     type: 'GET',
     data: {
       'caf': caf,
