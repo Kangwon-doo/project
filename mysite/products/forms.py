@@ -31,7 +31,7 @@ class PreferenceForm(forms.Form):
         ("고소함", "고소함"),
         ("허브", "허브"),
     )
-    CupNotes = forms.MultipleChoiceField(label='커피 향 노트', choices=NOTE_CHOICES, widget=forms.CheckboxSelectMultiple)
+    CupNotes = forms.MultipleChoiceField(label='커피 향 노트 (중복 선택 가능)', choices=NOTE_CHOICES, widget=forms.CheckboxSelectMultiple)
 
     Sourness = forms.IntegerField(label='신맛',
         widget=forms.NumberInput(attrs={'type': 'range', 'step': '1', 'min': '1', 'max': '5', 'value': '3'}))
