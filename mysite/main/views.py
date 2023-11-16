@@ -3,7 +3,7 @@ from products.cosine import cos_recommendation
 from django.contrib.auth.decorators import login_required
 import random
 import json
-from .models import Coffee, Order, OrderItem, Preference
+from .models import Coffee, Order, OrderItem, Preference, Roastery
 from django.contrib.auth.models import User
 
 
@@ -88,9 +88,20 @@ def purchase(request):
     email = request.user.email
 
     orderinfo = Order.objects.filter(emailAddress=email)
-
     orderitems = OrderItem.objects.filter(email=email)
-    context = {'orderinfo': orderinfo, 'userinfo':userinfo, 'orderitems':orderitems}
+    Roasteryid = []
+    total = {}
+    for cart_item in orderitems:
+        Roasteryid.append(cart_item.product.RoasteryID_id)
+    Roasteryinfo = Roastery.objects.filter(RoasteryID__in=Roasteryid)
+
+    for order in orderinfo:
+        total[order.OrderID] = 0
+        for item in orderitems:
+            if item.OrderID_id == order.OrderID:
+                total[order.OrderID] += (item.product.Price * item.quantity)
+
+    context = {'total': total, 'Roasteryinfo': Roasteryinfo, 'orderinfo': orderinfo, 'userinfo':userinfo, 'orderitems':orderitems}
     return render(request, 'main/mypage_purchase.html', context)
 
 def review(request, coffee_id):

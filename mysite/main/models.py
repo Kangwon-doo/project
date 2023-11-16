@@ -165,5 +165,8 @@ class OrderItem(models.Model):
     class Meta:
         db_table = 'OrderItem'
 
+    def sub_total(self):
+        return self.product.Price * self.quantity
+
     def __str__(self):
         return self.product
