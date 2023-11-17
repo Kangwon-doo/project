@@ -1,0 +1,8 @@
+{% extends 'main/mypage.html' %}
+
+{% block mypageContent %}
+
+{{user.name}}의 회원등급: {{info.status}} <br>
+구독기간: {{info.startDate}} ~ {{info.endDate}}
+
+{% endblock %}
