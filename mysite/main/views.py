@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from products.cosine import cos_recommendation
 from django.contrib.auth.decorators import login_required
 import random
@@ -100,10 +100,34 @@ def purchase(request):
                 total[order.OrderID] += (item.product.Price * item.quantity)
 
     context = {'total': total, 'Roasteryinfo': Roasteryinfo, 'orderinfo': orderinfo, 'userinfo':userinfo, 'orderitems':orderitems}
-    return render(request, 'main/mypage_purchase.html', context)
+    return render(request, 'main/mypage_purchase.html', context) #main/mypage_purchase2.html
 
 def review(request, coffee_id):
     user = request.user
     if request.method == 'POST':
         starRating = request.POST.get('starRating')
         pass
+
+
+def review_create(request, coffee_id):
+    if request.method == 'POST':
+        user = request.user
+        userinfo = user.__dict__
+        email = userinfo['email']
+        print(email)
+        review = dict(request.POST)
+        del review['csrfmiddlewaretoken']
+        print('coffee : ', coffee_id)
+        print(review)
+        # print({i: j[0] for i, j in review.items()})
+        # score = dict(list(review.items())[-10:])
+        # coffee_ids = list(score.keys())
+        # scores = list(score.values())
+        # for i in range(10):
+        #     test_Reviews.objects.create(
+        #           email = email,
+        #           CoffeeID_id = coffee_ids[i],
+        #           Stars = scores[i][0],
+        #           created_date = timezone.now()
+        #           )
+    return redirect('main:purchase')

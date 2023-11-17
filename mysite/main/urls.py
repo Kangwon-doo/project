@@ -13,5 +13,6 @@ urlpatterns = [
     path('mypage/subscribe/', views.mypage),
     path('main/popup.html', views.servicePopup),
     path('basket/', views.basket),
+    path('add/<int:coffee_id>', views.review_create, name='add'),
     path('review/create/<int:coffee_id>', views.review, name='submit')
 ]

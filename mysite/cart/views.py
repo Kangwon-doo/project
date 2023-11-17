@@ -10,16 +10,8 @@ def _cart_id(request):
     if not cart and request.user.is_authenticated:
         user = request.user
         cart = user
-    # if not cart and not request.user.is_authenticated:
-    #     cart = request.session.create()
     return cart
-    # if request.user.is_authenticated:
-    #     cart = request.user
-    # else:
-    #     cart = request.session.session_key
-    # if not cart and not request.user.is_authenticated:
-    #     cart = request.session.create()
-    # return cart
+
 
 
 @login_required(login_url='common:login')
