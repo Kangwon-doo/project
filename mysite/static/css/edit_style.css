@@ -314,13 +314,13 @@ footer {
 }
 
 /* signin 시작 */
-#signin {
+.signin {
     padding-right: 15px;
     padding-left: 15px;
     margin: 100px;
 
 }
-#signin div.title {
+.signin div.title {
     font-size: xx-large;
     margin-top: 2em;
     margin-right: 2em;

@@ -19,8 +19,8 @@ django.setup()
 from main.models import *	# App이름.models
 
 # DB에 넣을 csv파일
-coffee_csv = 'data/coffeeDB.csv'	
-roastery_csv = 'data/roasteryDB.csv'	
+coffee_csv = 'data/coffeeDB2.csv'
+roastery_csv = 'data/roasteryDB.csv'
 
 with open(roastery_csv, newline='', encoding='utf-8') as csvfile:
     data_reader = csv.DictReader(csvfile)
@@ -32,17 +32,18 @@ with open(roastery_csv, newline='', encoding='utf-8') as csvfile:
                 RoasteryName  = row['로스터리'],
                 RoasteryAddress  = row['로스터리 주소'],
                 RoasteryInfo  = row['로스터리 소개'],
+                RoasteryPhone = row['phone_numbers']
             )
         except:
             pass
         
 with open(coffee_csv, newline='', encoding='utf-8') as csvfile:
     data_reader = csv.DictReader(csvfile)
-    
     for row in data_reader:
         try:
             Coffee.objects.create(		# Model class에 입력된 데이터 이름 / CSV에 입력된 데이터베이스의 이름
-                CoffeeID  = row['id'],
+                CoffeeID = row['id'],
+                NewID  = row['new_id'],
                 CoffeeName  = row['이름'],
                 RoasteryID  = Roastery.objects.get(RoasteryID=row['로스터리ID']),
                 CoffeeInfo  = row['커피 소개'],
@@ -64,8 +65,8 @@ with open(coffee_csv, newline='', encoding='utf-8') as csvfile:
                 StorageMethod  = row['보관 방법'],
                 RawMaterial  = row['원재료 및 함량'],
                 ProductInfo   = row['제품문의 관련 주소 및 전화번호'],
+                Price = row['price']
             )
         except:
             pass
-        
 print('성공적으로 처리됐습니다.')
