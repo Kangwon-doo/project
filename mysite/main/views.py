@@ -3,7 +3,8 @@ from products.cosine import cos_recommendation
 from django.contrib.auth.decorators import login_required
 from .models import Coffee
 import json
-from .models import Coffee, Order, OrderItem, Preference, Subscription
+from .models import Coffee, Order, OrderItem, Preference, Subscription, Roastery
+import random
 from django.contrib.auth.models import User
 from common.forms import CustomUserChangeForm
 
@@ -73,8 +74,13 @@ def result(request):
 
 # 메인페이지
 
-def index(request):
-    return render(request, 'main/mainpage.html')
+def index(request):  # main page
+    ids = [i.CoffeeID for i in Coffee.objects.all()]
+    random_coffees = random.sample(ids, 8)
+    shuffled = Coffee.objects.filter(CoffeeID__in=random_coffees)
+    top5 = Coffee.objects.order_by('Stock')[0:5]
+    context = {'coffee_info': shuffled, 'top5':top5}
+    return render(request, 'main/mainpage.html', context)
 
 
 
@@ -125,9 +131,20 @@ def purchase(request):
     email = request.user.email
 
     orderinfo = Order.objects.filter(emailAddress=email)
-
     orderitems = OrderItem.objects.filter(email=email)
-    context = {'orderinfo': orderinfo, 'userinfo':userinfo, 'orderitems':orderitems}
+    Roasteryid = []
+    total = {}
+    for cart_item in orderitems:
+        Roasteryid.append(cart_item.product.RoasteryID_id)
+    Roasteryinfo = Roastery.objects.filter(RoasteryID__in=Roasteryid)
+
+    for order in orderinfo:
+        total[order.OrderID] = 0
+        for item in orderitems:
+            if item.OrderID_id == order.OrderID:
+                total[order.OrderID] += (item.product.Price * item.quantity)
+
+    context = {'total': total, 'Roasteryinfo': Roasteryinfo, 'orderinfo': orderinfo, 'userinfo':userinfo, 'orderitems':orderitems}
     return render(request, 'main/mypage_purchase.html', context)
 
 

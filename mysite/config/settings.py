@@ -78,7 +78,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'cart.product_counter.counter'
             ],
         },
     },
@@ -154,7 +153,6 @@ AUTHENTICATION_BACKENDS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'main.CustomUser'
 
 AUTH_USER_MODEL = 'main.CustomUser'
 
@@ -179,6 +177,8 @@ SOCIALACCOUNT_PROVIDERS = {
         }
     }
 }
+
+
 
 # 시크릿 키 가져오기
 import os
@@ -224,11 +224,11 @@ EMAIL_HOST = 'smtp.naver.com'
 EMAIL_PORT = '587'
 
 # 발신할 이메일
-EMAIL_HOST_USER = ''
+EMAIL_HOST_USER = get_secret('EMAIL_HOST_USER')
 
 
 # 발신할 메일의 비밀번호
-EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST_PASSWORD = get_secret('EMAIL_HOST_PASSWORD')
 # TLS 보안 방법
 EMAIL_USE_TLS = True
 
@@ -237,3 +237,4 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 SITE_ID = 1
 
+AUTH_USER_MODEL = 'main.CustomUser'

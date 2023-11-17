@@ -65,6 +65,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Coffee',
             fields=[
+<<<<<<< HEAD
                 ('CoffeeID', models.IntegerField(primary_key=True, serialize=False)),
                 ('NewID', models.IntegerField(unique=True)),
                 ('CoffeeName', models.CharField(max_length=50)),
@@ -89,6 +90,33 @@ class Migration(migrations.Migration):
                 ('RawMaterial', models.TextField()),
                 ('ProductInfo', models.TextField()),
                 ('Price', models.IntegerField()),
+=======
+                ("CoffeeID", models.IntegerField(primary_key=True, serialize=False)),
+                ("NewID", models.IntegerField(unique=True)),
+                ("CoffeeName", models.CharField(max_length=50)),
+                ("Info", models.CharField(max_length=3000)),
+                ("CoffeeType", models.TextField()),
+                ("RoastingPoint", models.TextField()),
+                ("Sustainability", models.CharField(max_length=4)),
+                ("CupNote", models.TextField()),
+                ("Body", models.CharField(max_length=1)),
+                ("Sourness", models.CharField(max_length=1)),
+                ("Sweetness", models.CharField(max_length=1)),
+                ("Bitterness", models.CharField(max_length=1)),
+                ("Caffeine", models.CharField(max_length=1)),
+                ("CoffeeInfo", models.TextField()),
+                ("Country", models.TextField()),
+                ("ProductType", models.TextField()),
+                ("Manufacturer", models.TextField()),
+                ("ExpirationDate", models.TextField()),
+                ("ManufacturingDate", models.TextField()),
+                ("Capacity", models.TextField()),
+                ("StorageMethod", models.TextField()),
+                ("RawMaterial", models.TextField()),
+                ("ProductInfo", models.TextField()),
+                ("Price", models.IntegerField()),
+                ("Stock", models.IntegerField()),
+>>>>>>> heewon
             ],
             options={
                 'db_table': 'coffee',
