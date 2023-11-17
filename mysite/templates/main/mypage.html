@@ -1,6 +1,13 @@
 {% extends 'base.html' %}
-{% block content %}
 
+{% block head %}
+    <!--안에 삽입될 내용 Start -->
+    {% block mypageHead %}
+    {% endblock %}
+    <!--삽입될 내용 End-->
+{% endblock %}
+
+{% block content %}
 <!--mypage start -->
 <section id="mypage_privateinfo" class="mypage">
     <div class="container">

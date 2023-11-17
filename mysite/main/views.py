@@ -7,6 +7,7 @@ from .models import Coffee, Order, OrderItem, Preference, Subscription, Roastery
 import random
 from django.contrib.auth.models import User
 from common.forms import CustomUserChangeForm
+from datetime import datetime
 
 
 # 원두 추천 받기 서비스
@@ -101,21 +102,62 @@ def update(request):
     context = {'form':form}
     return render(request, 'main/mypage/update.html',context)
 
+
 # 구독 정보
 @login_required(login_url='/common/login')
 def subscribe(request):
     user = request.user
+    jsonDec = json.decoder.JSONDecoder()
+    coffee_info = request.GET.get('coffee_info')
     context = {}
+    alert = 0
+    guide = 0
     
     # 구독 유무 확인
     try:
         info = Subscription.objects.get(user=user)
-        context = {'user':user,'info':info}
+        subscribed_coffee = jsonDec.decode(info.coffee)
+        
+        # 원두 구독하기를 눌렀을 시
+        if coffee_info:
+            print(coffee_info)
+            # 구독한 원두 개수 확인
+            if len(subscribed_coffee) < 3 and coffee_info not in subscribed_coffee:
+                # 3개 미만일 시 / 중복이 아닐 시 구독 원두에 선택한 원두 추가하기
+                subscribed_coffee.append(coffee_info)
+                info.coffee = json.dumps(subscribed_coffee)
+                info.save()
+            elif len(subscribed_coffee) >= 3 and coffee_info not in subscribed_coffee:
+                # 3개 초과일 시 / 중복이 아닐 시 창 띄우기
+                alert = 1
+            
+        # 구독 원두 추출하기
+        coffee = []
+        for id in subscribed_coffee:
+            coffee.append(Coffee.objects.get(CoffeeID=id))
+        
+        # 구독한 원두가 없을 시 문구 띄우기
+        if len(coffee) == 0:
+            guide = 1      
+        
+        # 배송 받기
+        print('------1111')
+        if request.method == "POST":
+            order_val = request.POST.get('ordered')
+            if order_val=='1':
+                print('------22222')
+                # 배송된 구독 정보로 처리
+                info.ordered = order_val
+                info.orderDate = datetime.today()
+                info.save()
+                
+        context = {'user':user,'info':info,'coffee':coffee,'alert':alert,'guide':guide}
         template = 'main/mypage/subscription.html'
     except:
         template = 'main/mypage/subscription_none.html'
 
     return render(request,template,context)
+
 
 # 구매 정보
 @login_required(login_url='/common/login')
