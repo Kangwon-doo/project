@@ -4,7 +4,7 @@
 <!--mypage start -->
 <section id="mypage" class="mypage">
     <div class="container">
-        <div class = title>마이페이지</div>
+        <div id = title>마이페이지</div>
         <div id = 'mypage_header'>
             <div id = 'img_box'><img src = '../../static/images/about/profile_image.jpg'></div>
             <div id = 'idEmail_box'>
@@ -23,6 +23,9 @@
             </div>
             
             <div class = 'content' id = 'private_info'>
+                <div class = 'subtitle'>
+                    <span>개인정보</span>
+                </div>
                 <div class = 'private_info_item'>
                     <span>닉네임</span>
                     <span><input type="text" class="form-control" placeholder="nickname_example"></span>
@@ -40,10 +43,10 @@
                 </div>
                 <div class = 'private_info_item'>
                     <span>전화번호</span>
-                    <span><input type="tel" class="form-control" placeholder="id_example"></span>
+                    <span><input type="tel" class="form-control" placeholder="tel"></span>
                 </div>
                 <div class = 'private_info_item'>
-                    <span>주소</span>
+                    <div>주소</div>
                     <span>
                           <input id="member_post"  type="text" placeholder="우편번호" readonly onclick="findAddr()">
                           <input id="member_addr" type="text" placeholder="주소" readonly> <br>

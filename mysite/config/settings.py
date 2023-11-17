@@ -38,11 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main.apps.MainConfig',
     'products.apps.ProductsConfig',
-    'cart.apps.CartConfig',
     'django.contrib.humanize',
     'django_filters',
     'common.apps.CommonConfig',
     'formtools',
+
     'django.contrib.sites',
     # allauth 관련 앱 목록 추가
     'allauth',
@@ -154,7 +154,6 @@ AUTHENTICATION_BACKENDS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-AUTH_USER_MODEL = 'main.CustomUser'
 
 LOGIN_REDIRECT_URL = '/'   # social login redirect
 ACCOUNT_LOGOUT_REDIRECT_URL = '/'  # logout redirect

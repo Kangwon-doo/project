@@ -66,7 +66,7 @@ with open(coffee_csv, newline='', encoding='utf-8') as csvfile:
                 RawMaterial=row['원재료 및 함량'],
                 ProductInfo=row['제품문의 관련 주소 및 전화번호'],
                 Price=row['price'],
-                Stock =number
+                Stock = number
             )
         except:
             pass

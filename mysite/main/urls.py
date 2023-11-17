@@ -1,7 +1,8 @@
 from django.urls import path
-from . import views
 
-app_name = 'pybo'
+from main import views
+
+app_name = 'main'
 
 urlpatterns = [
     path('test/', views.test, name='test'),
@@ -12,6 +13,5 @@ urlpatterns = [
     path('mypage/purchase/', views.purchase, name='purchase'),
     path('mypage/subscribe/', views.subscribe, name='subscribe'),
     path('main/popup.html', views.servicePopup),
-    path('basket/', views.basket),
     path('review/create/<int:coffee_id>', views.review, name='submit')
 ]
