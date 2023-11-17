@@ -31,7 +31,7 @@
                         <li class="smooth-menu active"></li>
                         <li class="smooth-menu" onclick="searchicon()">
                             <a style="display: inline-flex; justify-content: center; align-items: center; }">
-                                <input type="text" class="form-control" placeholder="search">
+                                <input type="text" class="form-control" placeholder="search" style="">
                                 <span class="material-icons" style="border: 1px solid #ccc; padding: 5px; border-radius: 5px;">search</span>
                             </a>
                         </li>
@@ -54,7 +54,7 @@
 
                         {% if user.is_authenticated %}
                         <li class=" smooth-menu" style="cursor: pointer">
-                            <a class="nav-link" href="{% url 'common:logout' %}">{{ user.username }}로그아웃</a>
+                            <a class="nav-link" href="{% url 'common:logout' %}"><span class="material-icons">logout</span></a>
                         </li>
                         {% else %}
                         <li class=" smooth-menu" style="cursor: pointer">
