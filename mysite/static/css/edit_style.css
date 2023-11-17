@@ -407,43 +407,7 @@ footer {
   text-align: center;
   background: rgb(222, 138, 11);
 }
-#purchase table {
-    position: static;
-        width: 100%;
-    clear: both;
-    line-height: 17px;
-        font-size: 12px;
-    font-family: dotum;
-    color: #666;
-    border-collapse: collapse;
-        display: table;
-    border-collapse: separate;
-    box-sizing: border-box;
-    text-indent: initial;
-    line-height: normal;
-    font-weight: normal;
-    font-size: medium;
-    font-style: normal;
-    color: -internal-quirk-inherit;
-    text-align: start;
-    border-spacing: 2px;
-    border-color: gray;
-    white-space: normal;
-    font-variant: normal;
-}
-#purchase table colgroup {
-    display: table-column-group;
-        line-height: 17px;
-}
-#purchase table colgroup col {
-    width: 23px;
 
-}
-#purchase table tbody {
-    display: table-row-group;
-    vertical-align: middle;
-    border-color: inherit;
-}
 
 
 

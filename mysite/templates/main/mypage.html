@@ -9,22 +9,16 @@
             <div id = 'img_box'><img src = '../../static/images/about/profile_image.jpg'></div>
             <div id = 'idEmail_box'>
                 <div id = 'userid'><span>{{request.user}}</span></div>
-                <div id = 'useremail'><span>{{request.email}}</span></div>
+                <div id = 'useremail'><span>{{request.user.email}}</span></div>
             </div>
         </div>
         <div id = 'mypage_body'>
             <div class = 'select_menu_box'>
                 <div class="list-group">
-<<<<<<< HEAD
                     <a id="privateinfo" class="list-group-item active">개인정보</a>
                     <a id="purchase" class="list-group-item">구매내역</a>
                     <a id="subscribe" class="list-group-item">구독정보</a>
                     <a id="resign" class="list-group-item">회원탈퇴</a>
-=======
-                  <a id="privateinfo" class="list-group-item active">개인정보</a>
-                  <a id="purchase" class="list-group-item">구매내역</a>
-                  <a id="subscribe" class="list-group-item">구독정보</a>
->>>>>>> 7c74a337878871921a1648c2342bcaa36a8eef0a
                 </div>
             </div>
 
@@ -32,10 +26,9 @@
             {% block mypageContent %}
             {% endblock %}
             <!--삽입될 내용 End-->
-                <ul>
-                    <li class = 'select_menu' onclick = 'menuclick()'>개인정보</li>
-                    <li class = 'select_menu'>구매내역</li>
-                    <li class = 'select_menu'>구독정보</li>
+        </div>
+    </div>
+</section>
 
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 <script>

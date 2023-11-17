@@ -1,7 +1,5 @@
-<<<<<<< HEAD
+
 {% extends 'base.html' %}
-=======
->>>>>>> 7c74a337878871921a1648c2342bcaa36a8eef0a
 
 {% load i18n %}
 
@@ -10,13 +8,8 @@
 {% endblock %}
 
 {% block content %}
-<<<<<<< HEAD
 <p id="survey_page">Step {{ wizard.steps.step1 }} of {{ wizard.steps.count }}</p>
 <form action="" method="post" id="survey_form">{% csrf_token %}
-=======
-<p>Step {{ wizard.steps.step1 }} of {{ wizard.steps.count }}</p>
-<form action="" method="post">{% csrf_token %}
->>>>>>> 7c74a337878871921a1648c2342bcaa36a8eef0a
 <table>
 {{ wizard.management_form }}
 {% if wizard.form.forms %}
@@ -29,7 +22,6 @@
 {% endif %}
 </table>
 {% if wizard.steps.prev %}
-<<<<<<< HEAD
     
 <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.first }}">{% translate "first step" %}</button>
 <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}">{% translate "prev step" %}</button>
@@ -56,11 +48,9 @@
 
 </script>
 
-=======
 <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.first }}">{% translate "first step" %}</button>
 <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}">{% translate "prev step" %}</button>
 {% endif %}
 <input type="submit" value="{% translate "submit" %}"/>
 </form>
->>>>>>> 7c74a337878871921a1648c2342bcaa36a8eef0a
 {% endblock %}
