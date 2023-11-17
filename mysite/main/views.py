@@ -117,14 +117,8 @@ def subscribe(request):
 
     return render(request,template,context)
 
-
-
-
-
-
-def servicePopup(request):
-    return render(request, 'main/popup.html')
-
+# 구매 정보
+@login_required(login_url='/common/login')
 def purchase(request):
     userinfo = request.user
     email = request.user.email
@@ -153,4 +147,12 @@ def review(request, coffee_id):
         starRating = request.POST.get('starRating')
     else:
         pass
+
+
+
+
+def servicePopup(request):
+    return render(request, 'main/popup.html')
+
+
 
