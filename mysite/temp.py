@@ -2,7 +2,9 @@ import csv
 import os
 import django
 import sys
+import random
 from random import randint
+from datetime import date
 
 os.chdir(".")
 print("Current dir=", end=""), print(os.getcwd())
@@ -20,6 +22,7 @@ from main.models import *  # App이름.models
 # DB에 넣을 csv파일
 coffee_csv = 'data/coffeeDB.csv'
 roastery_csv = 'data/roasteryDB.csv'
+empty_csv = 'data/empty.csv'
 
 with open(roastery_csv, newline='', encoding='utf-8') as csvfile:
     data_reader = csv.DictReader(csvfile)
@@ -66,8 +69,20 @@ with open(coffee_csv, newline='', encoding='utf-8') as csvfile:
                 RawMaterial=row['원재료 및 함량'],
                 ProductInfo=row['제품문의 관련 주소 및 전화번호'],
                 Price=row['price'],
-                Stock =number
+                Stock =number,
+                Created_date=date(2023, 10, 20)
             )
+            print('성공적으로 처리됐습니다.')
         except:
             pass
-print('성공적으로 처리됐습니다.')
+
+# Retrieve all coffee IDs
+all_coffee_ids = Coffee.objects.values_list('CoffeeID', flat=True)
+
+# Get 8 random coffee IDs
+random_coffee_ids = random.sample(list(all_coffee_ids), 8)
+
+# Update created_date based on conditions
+Coffee.objects.filter(CoffeeID__in=random_coffee_ids).update(Created_date=date(2023, 10, 31))
+
+print('성공적으로 처리됐습니다-2.')
