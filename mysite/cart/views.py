@@ -10,8 +10,8 @@ def _cart_id(request):
     if not cart and request.user.is_authenticated:
         user = request.user
         cart = user
-    if not cart and not request.user.is_authenticated:
-        cart = request.session.create()
+    # if not cart and not request.user.is_authenticated:
+    #     cart = request.session.create()
     return cart
     # if request.user.is_authenticated:
     #     cart = request.user
@@ -22,6 +22,7 @@ def _cart_id(request):
     # return cart
 
 
+@login_required(login_url='common:login')
 def add_cart(request, coffee_id):
     product = Coffee.objects.get(CoffeeID=coffee_id)
     try:
@@ -49,7 +50,13 @@ def add_cart(request, coffee_id):
 
 
 def cart_detail(request, total=0, counter=0, cart_items=None):
-    cart = Cart.objects.get(cart_id=_cart_id(request))
+    try:
+        cart = Cart.objects.get(cart_id=_cart_id(request))
+    except ObjectDoesNotExist:  # Cart.DoesNotExist
+        cart = Cart.objects.create(
+            cart_id=_cart_id(request)
+        )
+        cart.save()
     Roasteryid = []
     try:
         cart = Cart.objects.get(cart_id=_cart_id(request))
@@ -87,7 +94,7 @@ def full_remove(request, coffee_id):
     return redirect('cart:cart_detail')
 
 
-@login_required(login_url='common:login')
+
 def add_order(request, total=0):
     email = request.user.email
     Order.objects.create(
