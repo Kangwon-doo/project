@@ -67,11 +67,9 @@ def result(request):
     return render(request,"test/result.html",context)
 
 def index(request):  # main page
-    ids = [i.CoffeeID for i in Coffee.objects.all()]
-    random_coffees = random.sample(ids, 8)
-    shuffled = Coffee.objects.filter(CoffeeID__in=random_coffees)
+    recent8 = Coffee.objects.order_by('-Created_date')[0:8]
     top5 = Coffee.objects.order_by('Stock')[0:5]
-    context = {'coffee_info': shuffled, 'top5':top5}
+    context = {'recent8': recent8, 'top5':top5}
     return render(request, 'main/mainpage.html', context)
 
 def mypage(request):
