@@ -97,7 +97,7 @@ DATABASES = {
         'PASSWORD': 'MShw1214!',
         'HOST': '127.0.0.1',  # 서버주소
         'PORT': '3306', # MySQL 포트 번호: 기본값 3306
-}
+    }
 }
 
 
@@ -217,7 +217,7 @@ EMAIL_HOST_USER, EMAIL_HOST_PASSWORD = get_secret("EMAIL_HOST_USER", "EMAIL_HOST
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-EMAIL_HOST = 'smtp.naver.com'
+EMAIL_HOST = 'smtp.gmail.com'
 
 # gmail과의 통신하는 포트
 EMAIL_PORT = '587'

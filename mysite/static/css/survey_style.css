@@ -87,7 +87,7 @@ form#survey_form tbody td > div > div {     /* 공통 */
 }
 
 /* button */    /* 공통*/
-button{
+form#survey_form button{
   background:#ffa53f;
   color:#fff;
   border:none;
@@ -99,11 +99,11 @@ button{
   transition:800ms ease all;
   outline:none;
 }
-button:hover{
+form#survey_form button:hover{
   background:#fff;
   color:#ffa53f;
 }
-button:before,button:after{
+form#survey_form button:before,button:after{
   content:'';
   position:absolute;
   top:0;
@@ -113,13 +113,13 @@ button:before,button:after{
   background: #ffa53f;
   transition:400ms ease all;
 }
-button:after{
+form#survey_form button:after{
   right:inherit;
   top:inherit;
   left:0;
   bottom:0;
 }
-button:hover:before,button:hover:after{
+form#survey_form button:hover:before,button:hover:after{
   width:100%;
   transition:800ms ease all;
 }
