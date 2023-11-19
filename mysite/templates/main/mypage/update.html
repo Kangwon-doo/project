@@ -1,0 +1,17 @@
+{% extends 'main/mypage.html' %}
+
+{% block mypageContent %}
+<div class = 'content' id = 'private_info'>
+    <h1>회원정보수정</h1>
+    <form action="" method="POST">
+        {% csrf_token %}
+            {% for field in form %}
+                <div class="form-group">
+                    {{ field.label }}
+                    {{field}}
+                </div>
+            {% endfor %}
+            <input type="submit" value="수정하기">
+        </form>
+</div>
+{% endblock %}

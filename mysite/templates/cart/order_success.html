@@ -1,0 +1,83 @@
+{%load static %}
+{%load humanize%}
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/cart.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+</head>
+
+{% block content %}
+<div>
+    <div class="text-center">
+        <h1 class="text-center my_title">Order Success!</h1>
+        <br>
+    </div>
+</div>
+<div class="row mx-auto">
+    <div class="col-12 cool-sm-12 col-md-12 col-lg-6 text-center">
+        <table class="table my_customer_table">
+            <thead class="my_custom_thread">
+            <tr>
+                <th colspan="5">
+                    구매한 아이템
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for cart_item in cart_items %}
+            <tr>
+                <td>
+                    <a href="/coffee/{{cart_item.product.CoffeeID}}"><img src="/static/coffee_img/{{cart_item.product.CoffeeID}}.jpg" alt="" class="float-left rounded custom_image" style="width:300px;"></a>
+                </td>
+                <td class="text-left">
+                    <div style="display:flex;">
+                        {% for roastery in Roasteryinfo %}
+                        {% if roastery.RoasteryID == cart_item.product.RoasteryID_id %}
+                        <img class="roas_img" src="/static/roastery_img/{{roastery.RoasteryName}}.jpg" style="width:50px; border-radius:5px; margin-right:8px;">
+                        {%endif%}
+                        {%endfor%}
+                        {% for roastery in Roasteryinfo %}
+                        {% if roastery.RoasteryID == cart_item.product.RoasteryID_id %}
+                        <p class="roas-name">{{roastery.RoasteryName}}</p>
+                        {%endif%}
+                        {%endfor%}
+                    </div>
+
+                    <h3>{{cart_item.product.CoffeeName}}</h3>
+
+                    용량 : {{cart_item.product.Capacity}}
+                    <br>
+                    가격 : {{ cart_item.product.Price|intcomma }}원
+                    <br><br>
+                    구매량 : {{cart_item.quantity}}개
+                </td>
+                <td>
+                    {{cart_item.sub_total|intcomma}}원
+                </td>
+                {%endfor%}
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-12 col-sm-12 col-md-12 col-lg-6 text-center">
+        <table class="table my_customer_table">
+            <thead class="my_custom_thread">
+            <tr>
+                <th>
+                    구매내역 확인
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td class="text-left">
+                    총 금액: <strong>{{total|intcomma}}원</strong>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="mx-auto">
+            <a href="{% url 'main:purchase' %}" class="btn btn-secondary btn-block my_custom_button">구매내역</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

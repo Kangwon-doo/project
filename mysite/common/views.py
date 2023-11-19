@@ -1,10 +1,9 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.views import PasswordResetView
 from django.shortcuts import render, redirect
+from .forms import CustomUserCreationForm
 from django.urls import reverse_lazy
-from django_registration.forms import User
-
-from .forms import UserForm, PasswordResetForm
+from .forms import PasswordResetForm
 from django.contrib.auth import views as auth_views
 
 
@@ -12,11 +11,9 @@ from django.contrib.auth import views as auth_views
 # Create your views here.
 
 def signup(request):
-    """
-    회원가입
-    """
+
     if request.method == "POST":
-        form = UserForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
@@ -25,8 +22,9 @@ def signup(request):
             login(request, user)
             return redirect('/')
     else:
-        form = UserForm()
-    return render(request, 'common/signup.html', {'form': form})
+        form = CustomUserCreationForm()
+        print(form.errors)
+    return render(request, 'common/signup_copy.html', {'form': form})
 
 
 # 비밀번호 초기화(ID, email 입력)

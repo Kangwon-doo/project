@@ -1,0 +1,125 @@
+{%load static %}
+{% load humanize %}
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/cart.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+</head>
+
+{% block content %}
+    {% if not cart_items %}
+        <div>
+            <div class="text-center">
+                <br>
+                <h1 class="text-center my_title">
+                    Your shopping cart is empty
+                </h1>
+                <br>
+                <p class="text-center">
+                    <a href="{% url 'products:coffee' %}">Continue Shopping</a>
+                </p>
+            </div>
+        </div>
+    {% else %}
+        <div>
+            <div class="text-center">
+                <br>
+                <h1 class="text-center my_title">
+                    Your Shopping Cart
+                </h1>
+                <br>
+            </div>
+        </div>
+        <div class="row mx-auto">
+            <form action="/order-created" method="POST">
+                {% csrf_token %}
+                <div class="col-12 cool-sm-12 col-md-12 col-lg-6 text-center">
+                    <table class="table my_customer_table">
+                        <thead class="my_custom_thread">
+                        <tr>
+                            <th colspan="5">
+                                Your items
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for cart_item in cart_items %}
+                        <tr>
+                            <td>
+                                <a href="/coffee/{{cart_item.product.CoffeeID}}"><img src="/static/coffee_img/{{cart_item.product.CoffeeID}}.jpg" alt="" class="float-left rounded custom_image" style="width:300px;"></a>
+                            </td>
+                            <td class="text-left">
+                                <div style="display:flex;">
+                                {% for roastery in Roasteryinfo %}
+                                    {% if roastery.RoasteryID == cart_item.product.RoasteryID_id %}
+                                        <img class="roas_img" src="/static/roastery_img/{{roastery.RoasteryName}}.jpg" style="width:50px; border-radius:5px; margin-right:8px;">
+                                    {%endif%}
+                                {%endfor%}
+                                {% for roastery in Roasteryinfo %}
+                                    {% if roastery.RoasteryID == cart_item.product.RoasteryID_id %}
+                                        <p class="roas-name">{{roastery.RoasteryName}}</p>
+                                    {%endif%}
+                                {%endfor%}
+                                </div>
+
+                                <h3>{{cart_item.product.CoffeeName}}</h3>
+
+                                용량 : {{cart_item.product.Capacity}}
+                                <br>
+                                가격 : {{ cart_item.product.Price|intcomma }}원
+                                <br><br>
+                                <div style="display:flex;">
+                                    <a href="{% url 'cart:cart_remove' cart_item.product.CoffeeID %}" class="custom_a" style="margin-right:10px;">
+                                        <span class="material-symbols-outlined">remove_circle</span>
+                                    </a>
+                                    {{cart_item.quantity}}
+                                    <a href="{% url 'cart:add_cart' cart_item.product.CoffeeID %}" class="custom_a" style="margin-left:10px;">
+                                        <span class="material-symbols-outlined">add_circle</span>
+                                    </a>&nbsp;
+                                </div>
+                            </td>
+                            <td>
+                                {{cart_item.sub_total|intcomma}}원
+                            </td>
+                            <td>
+                                <div style="display:flex;">
+                                <a href="{% url 'cart:full_remove' cart_item.product.CoffeeID %}" class="custom_a">
+                                    <span class="material-symbols-outlined">delete</span>
+                                </a>&nbsp;
+                                </div>
+                            </td>
+                        </tr>
+                        {%endfor%}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-6 text-center">
+                    <table class="table my_customer_table">
+                        <thead class="my_custom_thread">
+                        <tr>
+                            <th colspan="5">
+                                Checkout
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                구매  버튼을 누르기 전, 구매 갯수와 금액을 다시 확인하세요!
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left">
+                                구매 금액 : <strong>{{total|intcomma}}원</strong>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </form>
+            <div class="mx-auto">
+                <a href="{% url 'products:coffee' %}" class="btn btn-secondary btn-block my_custom_button">쇼핑 계속하기</a>
+                <a href="{% url 'cart:order-created'%}" class="btn btn-secondary btn-block my-custom_button">구매하기</a>
+            </div>
+        </div>
+    {% endif %}
+{%endblock%}

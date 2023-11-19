@@ -21,7 +21,6 @@ def most_similar(coffee_id, top_n=10):
 def cos_recommendation(user_input, top_n=4):
     column_mapping = {'바디감': 'body', '신맛': 'sour', '단맛': 'sweet', '쓴맛': 'bitter', '타입_디카페인': 'caf', '타입_블렌드': 'blend','향료_풍미':'향료'}  # 'notes'
     df.rename(columns=column_mapping, inplace=True)
-    print('ewew' , user_input)
     # Create a new dictionary
     new_dict = user_input.copy()
     # Add other keys with initial values
@@ -35,8 +34,7 @@ def cos_recommendation(user_input, top_n=4):
         del new_dict['notes']
     except:
         pass
-    
-    print('mmdmd' , new_dict)
+
     df_copy = df.copy()
     df_copy.loc[len(df)] = new_dict
     features_df = df_copy[

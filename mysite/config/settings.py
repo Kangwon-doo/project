@@ -97,7 +97,7 @@ DATABASES = {
         'PASSWORD': '1234',
         'HOST': '127.0.0.1',  # 서버주소
         'PORT': '3306', # MySQL 포트 번호: 기본값 3306
-}
+    }
 }
 
 
@@ -236,3 +236,4 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 SITE_ID = 1
 
+AUTH_USER_MODEL = 'main.CustomUser'
