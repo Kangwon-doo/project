@@ -34,7 +34,7 @@ def cos_recommendation(user_input, top_n=4):
         del new_dict['notes']
     except:
         pass
-    
+
     df_copy = df.copy()
     df_copy.loc[len(df)] = new_dict
     features_df = df_copy[

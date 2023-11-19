@@ -27,30 +27,14 @@
     <div class="container">
         <div class="about-content">
             <div class="row">
+                {% for i in coffee_info %}
                 <div class="col-sm-3 border">
                     <div  style = 'background-color: rgb(255, 165, 63); padding: 20px;'>
-                        <img src="../../static/images/about/coffee_banner1.jpg">
+                      <a href="/coffee/{{i.CoffeeID}}"><img src="/static/coffee_img/{{i.CoffeeID}}.jpg" alt="{{i.CoffeeID}}"></a>
                     </div>
-                    <p>콜롬비아 디카페인</p>
+                    <p>{{i.CoffeeName}}</p>
                 </div>
-                <div class="col-sm-3 border">
-                    <div style = 'background-color: rgb(255, 165, 63); padding: 20px;'>
-                        <img src="../../static/images/about/coffee_banner1.jpg">
-                    </div>
-                    <p>콜롬비아 디카페인</p>
-                </div>
-                <div class="col-sm-3 border">
-                    <div style = 'background-color: rgb(255, 165, 63); padding: 20px;'>
-                        <img src="../../static/images/about/coffee_banner1.jpg">
-                    </div>
-                    <p>콜롬비아 디카페인</p>
-                </div>
-                <div class="col-sm-3 border" >
-                    <div style = 'background-color: rgb(255, 165, 63); padding: 20px;'>
-                        <img src="../../static/images/about/coffee_banner1.jpg">
-                    </div>
-                    <p>콜롬비아 디카페인</p>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
@@ -59,35 +43,19 @@
 
 <section id="wondoo" class="about">
     <div class="section-heading text-center">
-        <h2>오늘 새로 들어온 원두</h2>
+        <h2>top5</h2>
     </div>
     <div class="container">
         <div class="about-content">
             <div class="row">
+                {% for i in top5 %}
                 <div class="col-sm-3 border">
                     <div  style = 'background-color: rgb(255, 165, 63); padding: 20px;'>
-                        <img src="../../static/images/about/coffee_banner1.jpg">
+                      <a href="/coffee/{{i.CoffeeID}}"><img src="/static/coffee_img/{{i.CoffeeID}}.jpg" alt="{{i.CoffeeID}}"></a>
                     </div>
-                    <p>콜롬비아 디카페인</p>
+                    <p>{{i.CoffeeName}}</p>
                 </div>
-                <div class="col-sm-3 border">
-                    <div style = 'background-color: rgb(255, 165, 63); padding: 20px;'>
-                        <img src="../../static/images/about/coffee_banner1.jpg">
-                    </div>
-                    <p>콜롬비아 디카페인</p>
-                </div>
-                <div class="col-sm-3 border">
-                    <div style = 'background-color: rgb(255, 165, 63); padding: 20px;'>
-                        <img src="../../static/images/about/coffee_banner1.jpg">
-                    </div>
-                    <p>콜롬비아 디카페인</p>
-                </div>
-                <div class="col-sm-3 border" >
-                    <div style = 'background-color: rgb(255, 165, 63); padding: 20px;'>
-                        <img src="../../static/images/about/coffee_banner1.jpg">
-                    </div>
-                    <p>콜롬비아 디카페인</p>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>

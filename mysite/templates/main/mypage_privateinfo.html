@@ -3,50 +3,58 @@
 
 <!--mypage start -->
     <div class = 'content' id = 'private_info'>
-        <div class = 'private_info_item'>
-            <span>닉네임</span>
-            <span><input type="text" class="form-control" placeholder="nickname_example"></span>
-            <span><button>변경</button></span>
-        </div>
-        <div class = 'private_info_item'>
-            <span>비밀번호</span>
-            <span>
-                <input type="password" class="form-control" placeholder="password" />
-            </span>
-        </div>
-        <div class = 'private_info_item'>
-            <span>이메일</span>
-            <span><input type="email" class="form-control" placeholder="email_example"></span>
-        </div>
-        <div class = 'private_info_item'>
-            <span>전화번호</span>
-            <span><input type="tel" class="form-control" placeholder="id_example"></span>
-        </div>
-        <div class = 'private_info_item'>
-            <span>주소</span>
-            <span>
-                  <input id="member_post"  type="text" placeholder="우편번호" readonly onclick="findAddr()">
-                  <input id="member_addr" type="text" placeholder="주소" readonly> <br>
-                  <input type="text" placeholder="상세주소">
-            </span>
-        </div>
-        <div class = 'private_info_item'>
-            <span>생년월일</span>
-            <span><input type="date" class="form-control" id="Date" min="1901-01-01"></span>
-        </div>
-        <div class = 'private_info_item'>
-            <span>성별</span>
-            <span>
-                <select name="gender" id="gender">
-                    <option value="w">여성</option>
-                    <option value="m">남성</option>
-                    <option value="none">선택안함</option>
-                </select>
-            </span>
-        </div>
-        <div id="mypage_submit_box" class = 'private_info_item'>
-            <button id="mypage_submit">변경사항 저장</button>
-        </div>
+        <form action="" method="POST">
+            <div class = 'private_info_item'>
+                <span>아이디</span>
+                <span><input type="text" name="username" class="form-control" placeholder="nickname_example"></span>
+                <span><button>중복확인</button></span>
+            </div>
+            <div class = 'private_info_item'>
+                <span>현재 비밀번호</span>
+                <span>
+                    <input type="password" name="password1" class="form-control" placeholder="password" />
+                </span>
+            </div>
+            <div class = 'private_info_item'>
+                <span>수정할 비밀번호</span>
+                <span>
+                    <input type="password" name="password2" class="form-control" placeholder="password" />
+                </span>
+            </div>
+            <div class = 'private_info_item'>
+                <span>이메일</span>
+                <span><input type="email" name="email" class="form-control" placeholder="email_example"></span>
+            </div>
+            <div class = 'private_info_item'>
+                <span>전화번호</span>
+                <span><input type="tel" name="phone" class="form-control" placeholder="id_example"></span>
+            </div>
+            <div class = 'private_info_item'>
+                <span>주소</span>
+                <span> <!--주소 값 넘겨받기 설정해야함-->
+                    <input id="member_post"  type="text" placeholder="우편번호" readonly onclick="findAddr()">
+                    <input id="member_addr" type="text" placeholder="주소" readonly> <br>
+                    <input type="text" placeholder="상세주소">
+                </span>
+            </div>
+            <div class = 'private_info_item'>
+                <span>생년월일</span>
+                <span><input type="date" class="form-control" id="Date" min="1901-01-01"></span>
+            </div>
+            <div class = 'private_info_item'>
+                <span>성별</span>
+                <span>
+                    <select name="gender" id="gender">
+                        <option value="w">여성</option>
+                        <option value="m">남성</option>
+                        <option value="none">선택안함</option>
+                    </select>
+                </span>
+            </div>
+            <div id="mypage_submit_box" class = 'private_info_item'>
+                <button id="mypage_submit">변경사항 저장</button>
+            </div>
+        </form>
     </div>
 <!--mypage privateinfo end -->
 

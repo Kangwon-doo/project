@@ -1,0 +1,86 @@
+{% extends 'main/mypage.html' %}
+{% load static %}
+
+{% block mypageHead %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/mypage/subscribe.css' %}">
+{% endblock %}
+
+
+{% block mypageContent %}
+<div class="info-container">
+    <h1>구독정보</h1>
+
+    <div class="subscription_info">
+        <h2>{{info.status}}</h2>
+        <p>{{info.startDate}} ~ {{info.endDate}}</p>
+    </div>
+
+    <div class="subscribe-change">
+    <a href="/subscribe/" class="">변경</a>
+    </div>
+
+    구독 원두
+    {% if guide == 1 %}
+    <div class="coffee_info">
+    아직 구독한 원두가 없습니다.
+    </div>
+    {% endif %}
+
+    {% if guide == 0 %}
+    <div class="coffee_info">
+        {% if alert == 1 %}
+            <p class="alert-message">구독 원두 수량을 초과했습니다.<p>
+        {% endif %}
+        <div class="coffee-content">
+            {% for item in coffee %}
+            <div class="coffee-item">
+                <a href="/coffee/{{item.CoffeeID}}"><img class="coffee-img" src="/static/coffee_img/{{item.CoffeeID}}.jpg"></a>
+                <h3>{{item.CoffeeName}}</h3>
+            </div>
+            {% endfor %}
+            <div class="coffee-item">
+                <h3>?</h3>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="deliever-btn">
+        <p id="message"></p>
+        <button class="deliever-button">원두 배송받기</button>
+    </div>
+    
+
+    구독 히스토리<br>
+    {% if info.ordered == '1' %}
+        주문날짜: {{info.orderDate}}
+        {% for item in coffee %}
+            <br>{{item.CoffeeName}} 
+        {% endfor %}
+    {% endif %}
+</div>
+
+
+<script>
+    $(document).ready(function() {
+        $('.deliever-button').click(function() {
+            var coffeeCount = $('.coffee-item').length;
+            if ({{info.ordered}} == '1') {
+                $('#message').text('이번달 배송이 완료되었습니다.');
+            } else if (coffeeCount == 4) {
+                $.ajax({
+                    headers: { "X-CSRFToken": '{{csrf_token}}' },
+                    url: '{% url 'main:subscribe' %}',
+                    type: 'POST',
+                    data: {'ordered': 1},
+                    dataType: 'json'
+                  });
+                console.log('Value sent successfully');
+                window.location.href = '/mypage/subscribe/';
+            } else {
+                $('#message').text('원두 개수가 부족합니다');
+            }
+        });
+    });
+</script>
+{% endblock %}

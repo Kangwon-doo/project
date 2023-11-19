@@ -92,12 +92,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'team_wondoodoo', # DB name
-        'USER': 'admin', # account name
-        'PASSWORD': 'admin1234',
-        'HOST': 'database-1.cql2hwaazxkg.ap-northeast-2.rds.amazonaws.com',  # 서버주소
+        'NAME': 'wondoodoo', # DB name
+        'USER': 'root', # account name
+        'PASSWORD': '1234',
+        'HOST': '127.0.0.1',  # 서버주소
         'PORT': '3306', # MySQL 포트 번호: 기본값 3306
-}
+    }
 }
 
 
@@ -217,7 +217,7 @@ EMAIL_HOST_USER, EMAIL_HOST_PASSWORD = get_secret("EMAIL_HOST_USER", "EMAIL_HOST
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-EMAIL_HOST = 'smtp.naver.com'
+EMAIL_HOST = 'smtp.gmail.com'
 
 # gmail과의 통신하는 포트
 EMAIL_PORT = '587'
