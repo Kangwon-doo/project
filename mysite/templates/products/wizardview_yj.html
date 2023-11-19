@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+
+{% block head %}
+{{ wizard.form.media }}
+{% endblock %}
+
+{% block content %}
+<p id="survey_page">Step {{ wizard.steps.step1 }} of {{ wizard.steps.count }}</p>
+<form action="" method="post" id="survey_form">{% csrf_token %}
+<table>
+{{ wizard.management_form }}
+{% if wizard.form.forms %}
+    {{ wizard.form.management_form }}
+    {% for form in wizard.form.forms %}
+        {{ form.as_table }}
+    {% endfor %}
+{% else %}
+    {{ wizard.form }}
+{% endif %}
+</table>
+{% if wizard.steps.prev %}
+    
+<button name="wizard_goto_step" type="submit" value="{{ wizard.steps.first }}">{% translate "first step" %}</button>
+<button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}">{% translate "prev step" %}</button>
+{% endif %}
+    <input type="submit" value="{% translate 'submit' %}"/>
+
+</form>
+<script>
+
+    $(document).ready(function(){
+        $('#id_1-Decaf input').change(function(){
+            $("#id_1-Decaf input").parent().removeClass("label_background");
+            $("#id_1-Decaf input:checked").parent().addClass("label_background");
+        })
+        $('#id_1-CoffeeType input').change(function(){
+            $("#id_1-CoffeeType input").parent().removeClass("label_background");
+            $("#id_1-CoffeeType input:checked").parent().addClass("label_background");
+        })
+        $('#id_1-CupNotes input').change(function(){
+            $("#id_1-CupNotes input").parent().removeClass("label_background");
+            $("#id_1-CupNotes input:checked").parent().addClass("label_background");
+        })
+    });
+
+</script>
+
+{% endblock %}
