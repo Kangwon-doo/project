@@ -203,64 +203,37 @@ footer {
 
 
 /* mypage 시작*/
-<<<<<<< HEAD
-#mypage {
-=======
 .mypage {
->>>>>>> 97aefe3bd4cce21f2a136298d5803c9855140e0e
     padding-right: 15px;
     padding-left: 15px;
     margin: 100px;
 }
-<<<<<<< HEAD
-#mypage .container {
-=======
 .mypage .container {
->>>>>>> 97aefe3bd4cce21f2a136298d5803c9855140e0e
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
 }
-<<<<<<< HEAD
- #mypage div.title {
-=======
  .mypage div#title {
->>>>>>> 97aefe3bd4cce21f2a136298d5803c9855140e0e
     font-size: xx-large;
     margin-top: 2em;
     margin-right: 2em;
     margin-bottom: 2em;
 }
-<<<<<<< HEAD
-#mypage #mypage_header {
-=======
 .mypage #mypage_header {
->>>>>>> 97aefe3bd4cce21f2a136298d5803c9855140e0e
     width: 100%;
     position: relative;
     height: 200px;
 }
-<<<<<<< HEAD
-#mypage #mypage_header #img_box{
-=======
 .mypage #mypage_header #img_box{
->>>>>>> 97aefe3bd4cce21f2a136298d5803c9855140e0e
     width: 200px;
     z-index: 100;
     position: absolute;
     margin-left: 30px;
 }
-<<<<<<< HEAD
-#mypage #mypage_header #img_box > img {
-    border-radius: 50%;
-}
-#mypage #mypage_header #idEmail_box{
-=======
 .mypage #mypage_header #img_box > img {
     border-radius: 50%;
 }
 .mypage #mypage_header #idEmail_box{
->>>>>>> 97aefe3bd4cce21f2a136298d5803c9855140e0e
     border: 3px solid #d2cdc5;
     border-radius: 2em;
     height: 100px;
@@ -268,34 +241,16 @@ footer {
     width: 100%;
     margin-top: 85px;
 }
-<<<<<<< HEAD
-#mypage #mypage_header #userid {
-=======
 .mypage #mypage_header #userid {
->>>>>>> 97aefe3bd4cce21f2a136298d5803c9855140e0e
     display: flex;
     flex-direction: row-reverse;
     padding: 20px 20px 5px 20px;
 }
-<<<<<<< HEAD
-#mypage #mypage_header #useremail {
-=======
 .mypage #mypage_header #useremail {
->>>>>>> 97aefe3bd4cce21f2a136298d5803c9855140e0e
     display: flex;
     flex-direction: row-reverse;
     padding: 5px 20px 20px 20px;
 }
-<<<<<<< HEAD
-#mypage #mypage_body {
-    display: flex;
-    margin: 50px;
-}
-#mypage #mypage_body .select_menu_box {
-    margin-right: 30px;
-}
-#mypage #mypage_body .select_menu_box .list-group {
-=======
 .mypage #mypage_body {
     display: flex;
     margin: 50px;
@@ -304,7 +259,6 @@ footer {
     margin-right: 30px;
 }
 .mypage #mypage_body .select_menu_box .list-group {
->>>>>>> 97aefe3bd4cce21f2a136298d5803c9855140e0e
     text-align: center;
 
     position: relative;
@@ -317,17 +271,10 @@ footer {
     z-index: 1;
     margin: 30px 40px 0px 0px;
 }
-<<<<<<< HEAD
-#mypage #mypage_body .select_menu_box .list-group .list-group-item {
-    padding: 20px;
-}
-#mypage #mypage_body .select_menu_box .list-group .list-group-item:active {
-=======
 .mypage #mypage_body .select_menu_box .list-group .list-group-item {
     padding: 20px;
 }
 .mypage #mypage_body .select_menu_box .list-group .list-group-item:active {
->>>>>>> 97aefe3bd4cce21f2a136298d5803c9855140e0e
     padding: 20px;
     background-color: rgb(255, 165, 63);
     border-color: rgb(255, 165, 63);
@@ -337,11 +284,7 @@ footer {
 
 }
 
-<<<<<<< HEAD
-#mypage #mypage_body .content {
-=======
 .mypage #mypage_body .content {
->>>>>>> 97aefe3bd4cce21f2a136298d5803c9855140e0e
     position: relative;
     display: table-cell;
     width: 700px;
@@ -354,18 +297,6 @@ footer {
     z-index: 1;
     margin-left: 30px;
 }
-<<<<<<< HEAD
-
-#mypage #mypage_body .content > div.private_info_item {
-    padding: 10px;
-    margin: 15px;
-}
-#mypage #mypage_body .content div#mypage_submit_box {
-    display: flex;
-    flex-direction: row-reverse;
-}
-#mypage #mypage_body .content div#mypage_submit_box button{
-=======
 .mypage #mypage_body .content .subtitle {
     width: 100%;
     height: 50px;
@@ -384,7 +315,6 @@ footer {
     flex-direction: row-reverse;
 }
 .mypage #mypage_body .content div#mypage_submit_box button{
->>>>>>> 97aefe3bd4cce21f2a136298d5803c9855140e0e
     background-color: rgb(255,165,63);
     color: white;
     padding: 15px;
@@ -417,9 +347,6 @@ footer {
 }
 
 /* 구매내역 */
-<<<<<<< HEAD
-
-=======
 /*=================review hidden=================*/
 
 .mypage .hidden {
@@ -480,44 +407,7 @@ footer {
   text-align: center;
   background: rgb(222, 138, 11);
 }
-#purchase table {
-    position: static;
-        width: 100%;
-    clear: both;
-    line-height: 17px;
-        font-size: 12px;
-    font-family: dotum;
-    color: #666;
-    border-collapse: collapse;
-        display: table;
-    border-collapse: separate;
-    box-sizing: border-box;
-    text-indent: initial;
-    line-height: normal;
-    font-weight: normal;
-    font-size: medium;
-    font-style: normal;
-    color: -internal-quirk-inherit;
-    text-align: start;
-    border-spacing: 2px;
-    border-color: gray;
-    white-space: normal;
-    font-variant: normal;
-}
-#purchase table colgroup {
-    display: table-column-group;
-        line-height: 17px;
-}
-#purchase table colgroup col {
-    width: 23px;
 
-}
-#purchase table tbody {
-    display: table-row-group;
-    vertical-align: middle;
-    border-color: inherit;
-}
->>>>>>> 97aefe3bd4cce21f2a136298d5803c9855140e0e
 
 
 

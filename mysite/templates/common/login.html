@@ -3,9 +3,7 @@
 {% load socialaccount %}
 {% block content %}
 <!-- login start -->
-
-
-<section id="signin" class="signin" xmlns="http://www.w3.org/1999/html">    <!-- signin -->
+<section id="signin" class="signin">    <!-- signin -->
     <div class="container my-3">
         <div class="title" style="margin-left: 530px;">로그인</div> <!-- 수정된 부분 -->
         <div id="signin_header">
@@ -23,26 +21,17 @@
                 <button style="margin-left: 520px;" type="submit" class="btn btn-primary">로그인</button>
                 <button type="button" onclick="location.href = '{% provider_login_url 'naver' %}'">
                     <img src="{% static 'logo/icon_naver.png' %}" alt="Naver Logo" style="width: 33px;">
-<<<<<<< HEAD
-                </button> <!-- 수정된 부분 -->
-=======
                 </button>
                 <button type="button" onclick="location.href = '{% provider_login_url 'kakao' %}'">
                     <img src="{% static 'logo/icon_kakao.png' %}" alt="Kakao Logo" style="width: 33px;">
-                </button><!-- 수정된 부분 -->
->>>>>>> 97aefe3bd4cce21f2a136298d5803c9855140e0e
+                </button>
             </form>
             <div>
-                <a style="margin-left: 800px;" >아이디/비밀번호 찾기</a>
-            </div>
-            <div>
-                <a style="margin-left: 300px;"  href="{% url 'common:signup' %}">회원가입</a>
+                <a style="margin-left: 800px;" href="{% url 'common:password_reset' %}" >아이디/비밀번호 찾기</a>
             </div>
         </div>
-    </div><!-- /.container-->
-
-</section>      <!-- signin -->
+        <a style="margin-left: 300px;" href="{% url 'common:signup' %}">회원가입</a>
+    </div>
+</section> <!-- signin -->
 <!-- login end -->
-
 {% endblock %}
-
