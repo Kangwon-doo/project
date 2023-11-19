@@ -2,6 +2,8 @@ from django.contrib.auth.models import PermissionsMixin
 from django.db import models
 from django.core.validators import MinLengthValidator, MaxValueValidator, MinValueValidator
 import datetime
+from django.contrib.auth.models import AbstractUser
+import uuid
 
 
 class Roastery(models.Model):
@@ -46,22 +48,9 @@ class Coffee(models.Model):
         db_table = "coffee"
 
 
-class Order(models.Model):
-    OrderID = models.IntegerField(primary_key=True)  # 주문 ID
-    CustomerID = models.ForeignKey("Customer", on_delete=models.CASCADE)  # 고객 ID
-    CoffeeID = models.ForeignKey("Coffee", on_delete=models.CASCADE)  # 커피 ID
-    Amount = models.IntegerField(null=False)  # 수량
-    OrderDate = models.DateTimeField()  # 주문 날짜
-
-    class Meta:
-        db_table = "order"
-
-
-class Customer(models.Model):
-    CustomerID = models.CharField(primary_key=True, max_length=12,
-                                  validators=[MinLengthValidator(8, '8자 이상으로 적어주세요!')])  # 고객 ID
+class CustomUser(AbstractUser):
     name = models.CharField(null=False, max_length=8)  # 닉네임
-    CustomerAddress = models.CharField(max_length=3000)  # 주소
+    CustomerAddress = models.CharField(null=True, max_length=3000)  # 주소
     Gender_CHOICES = [
         ("F", "여성"),
         ("M", "남성"),
@@ -71,18 +60,32 @@ class Customer(models.Model):
         choices=Gender_CHOICES,
         null=True
     )
-    BirthDate = models.DateTimeField(default=datetime.date)  # 생년월일
-    email = models.EmailField(max_length=40)  # 이메일
-    Password = models.TextField(validators=[MinLengthValidator(8, '8자 이상으로 적어주세요!')])  # 비밀번호
-    PhoneNumber = models.TextField(validators=[MinLengthValidator(10, '')])  # 전화번호
+    BirthDate = models.DateField(null=True)  # 생년월일
+    PhoneNumber = models.TextField(null=True, validators=[MinLengthValidator(10, '')])  # 전화번호
 
-    class Meta:
-        db_table = "customer"
 
+class Subscription(models.Model):
+    user = models.ForeignKey("CustomUser", on_delete=models.CASCADE)
+    status = models.CharField(null=False,max_length=4,default='')
+    startDate = models.DateField(null=False)
+    endDate = models.DateField(null=False)
+    payDate = models.DateField(null=False)
+
+
+class Preference(models.Model):
+    user = models.ForeignKey("CustomUser", on_delete=models.CASCADE)
+    caf = models.CharField(null=False,max_length=1,default='')
+    blend = models.CharField(null=False,max_length=1,default='')
+    notes = models.TextField(null=False,default='')
+    sour = models.CharField(null=False,max_length=1,default='')
+    sweet = models.CharField(null=False,max_length=1,default='')
+    bitter = models.CharField(null=False,max_length=1,default='')
+    body = models.CharField(null=False,max_length=1,default='')
+    
 
 class Reviews(models.Model):
     CoffeeID = models.ForeignKey(Coffee, on_delete=models.CASCADE)
-    CustomerID = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    user = models.ForeignKey("CustomUser", on_delete=models.CASCADE)
     # Stars = models.CharField(max_length=1, default=0) # 별점. 1~5점. 0점은 아직 리뷰를 남기지 않은 커피
     content = models.TextField()
     created_date = models.DateTimeField()
@@ -114,3 +117,52 @@ class test_preference(models.Model):
 
     class Meta:
         db_table = "mockuserinfo"
+
+
+class Cart(models.Model):
+    cart_id = models.CharField(max_length=250, blank=True)
+    date_added = models.DateField(auto_now_add=True)
+    class Meta:
+        db_table = 'Cart'
+        ordering = ['date_added']
+
+    def __str__(self):
+        return self.cart_id
+
+
+class CartItem(models.Model):
+    product = models.ForeignKey(Coffee, on_delete=models.CASCADE)
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
+    quantity = models.IntegerField()
+    active = models.BooleanField(default=True)
+    class Meta:
+        db_table = 'CartItem'
+
+    def sub_total(self):
+        return self.product.Price * self.quantity
+
+    def __str__(self):
+        return self.product
+
+
+class Order(models.Model):
+    OrderID = models.UUIDField(default=uuid.uuid4, primary_key=True, editable=False)
+    emailAddress = models.EmailField(max_length=250, blank=True)
+    created = models.DateTimeField(auto_now_add=True)
+    class Meta:
+        db_table = 'coffee_order'
+        ordering = ['-created']
+
+    def __str__(self):
+        return str(self.id)
+
+class OrderItem(models.Model):
+    email = models.EmailField()
+    OrderID = models.ForeignKey(Order, related_name='order_id', on_delete=models.CASCADE)
+    product = models.ForeignKey(Coffee, on_delete=models.CASCADE)
+    quantity = models.IntegerField()
+    class Meta:
+        db_table = 'OrderItem'
+
+    def __str__(self):
+        return self.product

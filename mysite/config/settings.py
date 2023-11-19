@@ -25,8 +25,7 @@ SECRET_KEY = 'django-insecure-2k@b6obpk+regleb6n-myoq*n$@s&wywf_v@jjmofff^!1dled
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -93,10 +92,10 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'wondoodoo', # DB name
-        'USER': 'root', # account name
-        'PASSWORD': 'seol0513',
-        'HOST': '127.0.0.1',  # 서버주소
+        'NAME': 'team_wondoodoo', # DB name
+        'USER': 'admin', # account name
+        'PASSWORD': 'admin1234',
+        'HOST': 'database-1.cql2hwaazxkg.ap-northeast-2.rds.amazonaws.com',  # 서버주소
         'PORT': '3306', # MySQL 포트 번호: 기본값 3306
 }
 }
@@ -169,8 +168,54 @@ SOCIALACCOUNT_PROVIDERS = {
             'key': ''
         },
         'SCOPE': ['profile', 'email'],
+    },
+    'kakao': {
+        'APP': {
+            'client_id': 'e9d0ada26ad976a23e15ac22c1e31f46',
+            'secret': '2RO6FIusRV8TnlJHZInt273ZEeESnQDU',
+        }
     }
 }
+
+
+
+# 시크릿 키 가져오기
+import os
+import json
+from django.core.exceptions import ImproperlyConfigured
+
+# 현재 파일의 디렉토리를 기반으로 secrets.json 파일의 경로 생성
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+SECRET_FILE = os.path.join(BASE_DIR,  'secrets.json')
+
+# secrets.json 파일에서 시크릿 키 및 기타 설정 로드
+with open(SECRET_FILE) as f:
+    secrets = json.load(f)
+
+def get_secret(*settings):
+    """
+    get_secret('setting_name') or get_secret('setting_name_1', 'setting_name_2')
+    """
+    secret_file = os.path.join(BASE_DIR, 'secrets.json')
+
+    if os.path.isfile(secret_file):
+        with open(secret_file) as f:
+            secrets = json.load(f)
+
+        if len(settings) == 1:
+            return secrets.get(settings[0], None)
+        else:
+            return [secrets.get(setting, None) for setting in settings]
+    else:
+        error_msg = f"Set the {', '.join(settings)} environment variable(s) in the secrets.json file."
+        raise ImproperlyConfigured(error_msg)
+
+# 사용 예시
+EMAIL_HOST_USER, EMAIL_HOST_PASSWORD = get_secret("EMAIL_HOST_USER", "EMAIL_HOST_PASSWORD")
+
+# -----------------------------------------------#
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 EMAIL_HOST = 'smtp.naver.com'
 
@@ -178,11 +223,11 @@ EMAIL_HOST = 'smtp.naver.com'
 EMAIL_PORT = '587'
 
 # 발신할 이메일
-EMAIL_HOST_USER = ''
+EMAIL_HOST_USER = get_secret('EMAIL_HOST_USER')
 
 
 # 발신할 메일의 비밀번호
-EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST_PASSWORD = get_secret('EMAIL_HOST_PASSWORD')
 # TLS 보안 방법
 EMAIL_USE_TLS = True
 
@@ -191,3 +236,4 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 SITE_ID = 1
 
+AUTH_USER_MODEL = 'main.CustomUser'

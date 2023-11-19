@@ -1,9 +1,0 @@
-{% if coffee_list %}
-    <ul>
-        {% for coffee in coffee_list %}
-        <li><a href="/coffee/{{coffee.CoffeeID}}/">{{coffee.CoffeeID}}</a></li>
-        {% endfor %}
-    </ul>
-{% else %}
-<p>커피 준비 중 입니다.</p>
-{% endif %}

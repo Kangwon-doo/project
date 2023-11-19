@@ -1,0 +1,356 @@
+.upper {
+    width: 800px;
+    display: flex;
+    margin: 0 auto;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    align-items: center;
+    /* background: #e8e8e8; */
+}
+
+.wrapper {
+    width: 800px;
+    margin: 0 auto;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    align-items: center;
+}
+
+.section1 {
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin: 0px auto;
+    margin-right: -5px;
+
+}
+
+.coffee_img {
+    height: 250px;
+    margin: 0px;
+}
+
+.roastery_img {
+    width: 300px;
+    height: auto;
+    margin: 0px;
+}
+
+.section2 {
+    width: 500px;
+    height:100%;
+    padding-left: 20px;
+    padding-bottom: 20px;
+    padding-right: 20px;
+    position: relative;
+    margin: 0px auto;
+}
+
+.section2-2 {
+    display: flex;
+}
+
+.section2-2-1 {
+    width: 100px;
+}
+
+.section2-3 {
+    display: flex;
+}
+
+
+h4 {
+    margin:0px;
+    margin-left: 20px;
+}
+
+h1 {
+    margin-bottom: 0%;
+}
+
+.section2-4 {
+    display: flex;
+}
+
+.roas-btn {
+    height: 45px;
+    border-radius: 10px;
+    background: rgb(255, 255, 255);
+    color: #000000;
+    font-size: 15px;
+    cursor: pointer;
+    display: flex;
+  }
+
+  .roas-name {
+    height: 45px;
+    text-align: center;
+    margin: auto;
+    margin-left: 10px;
+    line-height: 45px;
+  }
+
+#nav-btn {
+  margin: auto;
+  font-size: 30px;
+  color: #474747;
+}
+
+  .roas_img {
+    width: 30px;
+    height: auto;
+    margin: auto;
+  }
+
+a {
+    text-decoration-line: none; 
+}
+
+.btn1 {
+  width: 50%;
+  height: 50px;
+  margin: 20px 20px 0px 0px;
+  border: none;
+  border-radius: 5px;
+  background: rgb(255, 255, 255);
+  color: rgb(249, 160, 37);
+  border: 2px solid rgb(249, 160, 37);;
+  font-size: 15px;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.btn2 {
+    width: 50%;
+    height: 50px;
+    margin: 20px 20px 0px 0px;
+    border: none;
+    border-radius: 5px;
+    background: rgb(249, 160, 37);
+    color: #fff;
+    font-size: 15px;
+    letter-spacing: 1px;
+    cursor: pointer;
+  }
+
+  hr {
+    width: 800px;
+  }
+
+  .info-header {
+    width: 230px;
+    height: 50px;
+    background: rgb(249, 160, 37);
+    color: #fff;
+    border-radius: 20px;
+    line-height: 50px;
+    display: block;
+    text-align: center;
+    margin: auto;
+  }
+
+  .info {
+    width: 700px;
+    text-align: center;
+    margin: auto;
+    margin-top: 40px;
+    margin-bottom: 10px;
+  }
+
+  .info-title {
+    width: 70px;
+    height: 30px;
+    background: rgb(249, 160, 37);
+    color: #fff;
+    border-radius: 20px;
+    line-height: 30px;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .rec_img {
+    width: 150px;
+  }
+
+  .rec-btn {
+    width: 100px;
+    height: 70px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: rgb(249, 160, 37);
+    color: #fff;
+    font-size: 12px;
+    cursor: pointer;
+    margin: auto;
+    margin-bottom: 10px;
+  }
+
+  .rec-name {
+    margin-bottom: 25px;
+    margin-right: 20px;
+    background: #fff;
+  }
+
+
+      .swiper-container {
+        max-width: 700px;
+        width: 100%;
+        height: auto;
+        padding: 20px;
+        padding-right: 29px;
+        margin: auto;
+        overflow: hidden;
+      }
+
+      .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+
+        border-radius: 20px;
+        border: 1.8px solid rgb(212, 212, 212);
+
+        /* Center slide text vertically */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+      }
+
+      .swiper-slide img {
+        height: 200px;
+        object-fit: cover;
+      }
+
+    .info-section {
+        display: flex;
+        justify-content: center;
+    }
+
+    .info-wrapper {
+        width: 150px;
+        height: 200px;
+        text-align: center;
+        margin: 10px;
+        position: relative;
+    }
+
+    .info-val {
+      height: 40px;
+      line-height: 40px;
+      margin-bottom: 0px;
+    }
+
+    .material-symbols-outlined {
+        font-variation-settings:
+        'FILL' 0,
+        'wght' 200,
+        'GRAD' 0,
+        'opsz' 50;
+      }
+
+      .text-box {
+        display: none;
+        position: relative;
+        background: rgb(249, 160, 37);
+        opacity: 50%;
+        width: 150px;
+        color: #000000;
+        height: auto;
+        padding: 20px;
+        top: -2%;
+        left: -13%;
+        z-index: 1;
+        border-radius: 10px;
+    }
+
+    .text-box:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border: 13px solid transparent;
+        border-bottom-color: rgb(249, 160, 37);
+        border-top: 0;
+        margin-left: -13px;
+        margin-top: -10px;
+    }
+    
+    .info-wrapper:hover .text-box {
+        display: block; 
+    }
+    progress[value] {
+        --color: rgb(249, 160, 37); /* the progress color */
+        --background: rgb(230, 230, 230); /* the background color */
+      
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        border: none;
+        width: 20em;
+        margin: 0 10px;
+        border-radius: 0px;
+        background: var(--background);
+      }
+      progress[value]::-webkit-progress-bar {
+        border-radius: 10em;
+        background: var(--background);
+      }
+      progress[value]::-webkit-progress-value {
+        border-radius: 0px;
+        background: var(--color);
+      }
+      progress[value]::-moz-progress-bar {
+        border-radius: 10em;
+        background: var(--color);
+      }
+
+      .bar-label {
+        width: 100px;
+        text-align: center;
+      }
+
+      .bar {
+        display: flex;
+        margin: 10px auto;
+      }
+      
+      .bar-wrapper {
+        width: 80%;
+        margin: auto;
+        border: 2px solid #c3c3c3;
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        padding-top: 30px;
+        padding-bottom: 30px;
+        margin-bottom: 50px;
+      }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        border: 1px solid #d7d7d7;
+        padding: 10px;
+        padding-left: 15px;
+        text-align: left;
+        font-size: 14px;
+    }
+    .static {
+        background-color: #f6f6f6;
+        width: 20%;
+    }

@@ -1,0 +1,27 @@
+.guide {
+    width: 80%;
+    margin: auto;
+    margin-top: 3%;
+    background-color: rgb(255, 255, 255);
+    text-align: center;
+  }
+  .nav-btns{
+    width: 50%;
+    margin: auto;
+    margin-top: 3%;
+    display: flex;
+  }
+  .nav-btn {
+    width: 50%;
+    padding: 3%;
+    border-radius: 10px;
+    background-color: rgb(255, 187, 0);
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    margin: 1%;
+  }
+  .member-info {
+    margin-top: 10%;
+    margin-bottom: 10%;
+  }
