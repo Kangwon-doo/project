@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from products.cosine import cos_recommendation
 from django.contrib.auth.decorators import login_required
 from .models import Coffee
@@ -108,28 +108,13 @@ def update(request):
 def subscribe(request):
     user = request.user
     jsonDec = json.decoder.JSONDecoder()
-    coffee_info = request.GET.get('coffee_info')
     context = {}
-    alert = 0
     guide = 0
     
     # 구독 유무 확인
     try:
         info = Subscription.objects.get(user=user)
         subscribed_coffee = jsonDec.decode(info.coffee)
-        
-        # 원두 구독하기를 눌렀을 시
-        if coffee_info:
-            print(coffee_info)
-            # 구독한 원두 개수 확인
-            if len(subscribed_coffee) < 3 and coffee_info not in subscribed_coffee:
-                # 3개 미만일 시 / 중복이 아닐 시 구독 원두에 선택한 원두 추가하기
-                subscribed_coffee.append(coffee_info)
-                info.coffee = json.dumps(subscribed_coffee)
-                info.save()
-            elif len(subscribed_coffee) >= 3 and coffee_info not in subscribed_coffee:
-                # 3개 초과일 시 / 중복이 아닐 시 창 띄우기
-                alert = 1
             
         # 구독 원두 추출하기
         coffee = []
@@ -139,13 +124,16 @@ def subscribe(request):
         # 구독한 원두가 없을 시 문구 띄우기
         if len(coffee) == 0:
             guide = 1      
+            
+        # 구독 원두 개수 초과 확인
+        alert = info.alert
+        info.alert = 0
+        info.save()
         
         # 배송 받기
-        print('------1111')
         if request.method == "POST":
             order_val = request.POST.get('ordered')
             if order_val=='1':
-                print('------22222')
                 # 배송된 구독 정보로 처리
                 info.ordered = order_val
                 info.orderDate = datetime.today()
@@ -157,6 +145,52 @@ def subscribe(request):
         template = 'main/mypage/subscription_none.html'
 
     return render(request,template,context)
+
+
+# 구독 원두 추가
+@login_required(login_url='/common/login')
+def subscribe_add(request,coffee_id):
+    try:
+        # 구독 원두 정보 확인
+        jsonDec = json.decoder.JSONDecoder()
+        info = Subscription.objects.get(user=request.user) 
+        subscribed_coffee = jsonDec.decode(info.coffee)
+
+        # 구독한 원두 개수 확인
+        if len(subscribed_coffee) < 3 and coffee_id not in subscribed_coffee:
+            # 3개 미만일 시 / 중복이 아닐 시 구독 원두에 선택한 원두 추가하기
+            subscribed_coffee.append(coffee_id)
+            info.coffee = json.dumps(subscribed_coffee)
+            info.save()
+        elif len(subscribed_coffee) >= 3 and coffee_id not in subscribed_coffee:
+            # 3개 초과일 시 / 중복이 아닐 시 창 띄우기
+            info.alert = 1
+            info.save()
+    except:
+        pass
+                
+    return redirect('main:subscribe')
+
+
+
+# 구독 원두 삭제
+@login_required(login_url='/common/login')
+def subscribe_remove(request,coffee_id):
+    # 구독 원두 정보 확인
+    jsonDec = json.decoder.JSONDecoder()
+    info = Subscription.objects.get(user=request.user) 
+    subscribed_coffee = jsonDec.decode(info.coffee)
+    
+    # 원두 삭제
+    if coffee_id in subscribed_coffee:
+        subscribed_coffee.remove(coffee_id)
+    
+    info.coffee = json.dumps(subscribed_coffee)
+    info.alert = 0
+    info.save()
+    
+    return redirect('main:subscribe')
+
 
 
 # 구매 정보

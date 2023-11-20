@@ -32,8 +32,8 @@
     </div>
     <div class="btn-section">
         <a class="btn" href="/coffee/{{main_coffee.CoffeeID}}">원두 자세히 보러가기</a>
-        <a class="btn" href="">친구한테 공유하기</a>
-        <a class="btn" href="">이 원두 구독하기</a>
+        <a class="btn" onclick="copyUrl()">친구한테 공유하기</a>
+        <a class="btn" href="{% url 'main:subscribe_add' main_coffee.CoffeeID %}">이 원두 구독하기</a>
     </div>
     <div class="etc">
         <div class="guide">
@@ -52,4 +52,23 @@
         <a class="again-btn" href="/test">테스트 다시하기</a>
     </div>
 </div>
+
+<script>
+    function copyUrl() {
+        var currentUrl = window.location.href;
+
+        var tempInput = document.createElement('input');
+        tempInput.value = currentUrl;
+
+        document.body.appendChild(tempInput);
+
+        tempInput.select();
+        tempInput.setSelectionRange(0, 99999); 
+
+        document.execCommand('copy');
+        document.body.removeChild(tempInput);
+
+        alert('클립보드에 저장되었습니다: ' + currentUrl);
+    }
+</script>
 {% endblock %}

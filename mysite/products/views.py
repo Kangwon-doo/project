@@ -96,9 +96,25 @@ def coffee_detail(request, coffee_id):
 def roastery_detail(request, roastery_id): #로스터리ID
     roastery_info = Roastery.objects.get(RoasteryID = roastery_id)
     coffees = Coffee.objects.filter(RoasteryID = roastery_id)
-    context = {'roastery_info': roastery_info, 'coffees' : coffees}
-    roastery_info.RoasteryPhone = roastery_info.RoasteryPhone.replace("[", "").replace("]", "").replace("'", "")
+    
+    coffee_paginator = Paginator(coffees, 3)
+    page_num = request.GET.get('page')
 
+    try:
+        page = coffee_paginator.page(page_num)
+    except (PageNotAnInteger, EmptyPage):
+        # 오류날 시 디폴트 페이지
+        page = coffee_paginator.page(1)
+
+    total_page = coffee_paginator.num_pages
+    roastery_info.RoasteryPhone = roastery_info.RoasteryPhone.replace("[", "").replace("]", "").replace("'", "")
+    
+    context = {
+        'roastery_info': roastery_info,
+        'count': coffee_paginator.count,
+        'page': page,
+        'total_page': total_page
+    }
     return render(request, 'products/roastery_detail.html', context)
 
 

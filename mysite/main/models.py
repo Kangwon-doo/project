@@ -71,6 +71,10 @@ class Subscription(models.Model):
     startDate = models.DateField(null=False)
     endDate = models.DateField(null=False)
     payDate = models.DateField(null=False)
+    coffee = models.TextField(default='[]')  # 구독한 커피
+    ordered = models.CharField(null=False, max_length=1, default=0) # 주문 여부
+    orderDate = models.DateField(null=True) # 주문 날짜
+    alert = models.CharField(null=False, max_length=1, default=0) # 경고
 
 
 class Preference(models.Model):

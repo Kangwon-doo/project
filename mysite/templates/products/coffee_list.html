@@ -91,16 +91,21 @@
         </a>
         {% endfor %}
     </div>
-        <div class="page-links"> 
-            {% if page.has_previous %}
-            <a href="/coffee/?page={{page.previous_page_number}}">Previous Page</a>
-            {% endif %}
 
-            
-            {% if page.has_next %}
-            <a href="/coffee/?page={{page.next_page_number}}">Next Page</a>
-            {% endif %}
-        </div>
+    <div class="page-links"> 
+        {% if page.has_previous %}
+            {% with request.GET.urlencode as query_params %}
+                <a href="?{{ query_params|safe }}&page={{ page.previous_page_number }}">Previous Page</a>
+            {% endwith %}
+        {% endif %}
+
+        
+        {% if page.has_next %}
+            {% with request.GET.urlencode as query_params %}
+                <a href="?{{ query_params|safe }}&page={{ page.next_page_number }}">Next Page</a>
+            {% endwith %}
+        {% endif %}
+    </div>
 
 <script>
     // 값 저장
