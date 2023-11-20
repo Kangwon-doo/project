@@ -6,7 +6,10 @@
         <span>회원탈퇴</span>
     </div>
     <p>정말로 회원탈퇴하시겠습니까?</p>
-    <a href="{% url 'main:delete' %}" class="btn btn-danger">탈퇴하기</a>
+    <form action="{% url 'main:delete' %}" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="탈퇴하기">
+    </form>
 </div>
 
 <script>

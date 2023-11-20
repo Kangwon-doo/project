@@ -15,5 +15,5 @@ urlpatterns = [
     path('main/popup.html', views.servicePopup),
     path('review/create/<int:coffee_id>', views.review, name='submit'),
     path('mypage/delete/', views.delete, name='delete'),
-   # path('mypage/deleteProcess/', views.deleteProcess, name='deleteProcess'),
+    path('mypage/delete/complete/', views.delete_complete, name='delete_complete'),
 ]

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from products.cosine import cos_recommendation
 from django.contrib.auth.decorators import login_required
 from .models import Coffee
@@ -204,10 +204,12 @@ def delete(request):
         user = request.user
         user.delete()
         # 로그아웃 등의 추가적인 처리를 할 수 있습니다.
-        return render(request, 'main/mypage_delete.html')
+        return redirect('main:delete_complete')
 
     return render(request, 'main/mypage_delete_confirm.html')
 
+def delete_complete(request):
+    return render(request, 'main/mypage_delete_complete.html')
 
 
 # def deleteProcess(request):
