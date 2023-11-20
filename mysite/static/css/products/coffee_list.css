@@ -1,36 +1,133 @@
+.coffee-list-container {
+    width: 70%;
+    display: flex;
+    margin: auto;
+    margin-top: 10%;
+    margin-bottom: 5%;
+}
+
 .paginator {
-    width: 50%;
-    background-color: rgb(117, 150, 131);
+    width: 80%;
+}
+
+.paginator > h2 {
+    font-size: 110%;
+    margin-left: 3%;
+}
+
+.paginator-content {
+    width: 100%;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: center; 
 }
-.block {
-    width: 150px;
-    height: 270px;
+
+.paginator-content > .block {
+    width: 30%;
+    height: auto;
     background-color: rgb(236, 236, 236);
-    margin: 10px;
-    padding: 20px;
-    border-radius: 20px;
-    border: 2px solid #a9a9a9;
+    margin: 1%;
+    padding: 2%;
+    border: 2px solid #bdbdbd;
     text-decoration: none;
     color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
-img {
+
+.filter {
+    width: 20%;
+}
+
+.paginator-content > .block  > img {
     width: 100%;
 }
-h2 {
+
+.paginator-content > .block > .block-info {
+    margin-top: 4%;
+}
+
+.paginator-content > .block > .block-info > .block-info-coffee > h2 {
     width: 100%;
-    height: 65px;
     display : flex;
-    justify-content : center;
-    align-items : center;
-    font-size: 20px;
+    justify-content: left;
+    font-size:150%;
+    font-weight: bold;
     margin-bottom: 0px;
 }
-p {
-    margin-top: 10px;
-    height: 20px;
-    line-height: 20px;
+
+.paginator-content > .block > .block-info > .block-info-coffee > h3 {
+    width: 100%;
+    display : flex;
+    justify-content: left;
+    color: #535353;
+    font-weight: 500;
+    font-size:120%;
+    margin-bottom: 0px;
+}
+
+.paginator-content > .block > .block-info > p {
+    margin-top: 4%;
+    height: 10%;
+    font-size:100%;
+    display : flex;
+    justify-content: right;
+    line-height: 10%;
+}
+
+/* Media query for smaller window sizes */
+@media screen and (max-width: 768px) {
+    .paginator-content > .block > .block-info > h2 {
+        font-size: 120%; /* Adjust font size for smaller screens */
+    }
+
+    .paginator-content > .block > .block-info > h3 {
+        font-size: 100%; /* Adjust font size for smaller screens */
+    }
+
+    .page-links > a {
+        font-size: 100%; /* Adjust font size for smaller screens */
+    }
+}
+
+.page-links {
+    width: 94%;
+    display: flex;
+    margin: auto;
+    justify-content: space-between;
+
+}
+
+/* 버튼 */
+.page-links > a {
+    border: 1px solid #9d9d9d;
+    background-color: #f8f8f8;
+    color: black;
+    padding: 1%;
+    width: 7%;
+    text-align: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.page-num {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
 }
+
+.hr-style {
+    border: 0; /* Remove the default border */
+    height: 2px; /* Set the height of the line */
+    background-color: #d0d0d0; /* Set the color of the line */
+    margin: 10% 0; /* Add margin for spacing above and below the line */
+}
+
+#coffeeForm > h1 {
+    font-size: xx-large;
+    font-weight: bold;
+}
+
