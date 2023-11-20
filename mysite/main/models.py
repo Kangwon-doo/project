@@ -1,4 +1,5 @@
 from django.contrib.auth.models import PermissionsMixin
+from django.contrib.auth.models import PermissionsMixin
 from django.db import models
 from django.core.validators import MinLengthValidator, MaxValueValidator, MinValueValidator
 import datetime
@@ -85,9 +86,9 @@ class Preference(models.Model):
     
 
 class Reviews(models.Model):
-    CoffeeID = models.ForeignKey(Coffee, on_delete=models.CASCADE)
+    Coffee = models.ForeignKey("Coffee", on_delete=models.CASCADE)
     user = models.ForeignKey("CustomUser", on_delete=models.CASCADE)
-    # Stars = models.CharField(max_length=1, default=0) # 별점. 1~5점. 0점은 아직 리뷰를 남기지 않은 커피
+    Stars = models.CharField(max_length=1, default=0) # 별점. 1~5점. 0점은 아직 리뷰를 남기지 않은 커피
     content = models.TextField()
     created_date = models.DateTimeField()
 

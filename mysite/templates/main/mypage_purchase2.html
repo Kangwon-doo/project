@@ -57,18 +57,38 @@
                     <div class="reviewbox" style="display: none;">
                         <h2>소중한 의견</h2>
 
-                        <form id="reviewForm" action="/submit_review" method="post">
+                        <form id="reviewForm" action="/review/create/" method="post">
+                            {% csrf_token %}
+                            <div class="star_rating">
+                            <fieldset>
+                                <label for="{{item.product.CoffeeID}}_1">
+                                    <input type="radio" name="{{item.product.CoffeeID}}" value="1" id="{{item.product.CoffeeID}}_1">
+                                    <span>1</span>
+                                </label>
 
-                            <div class ="star_rating">
-                                <span class="star on" value="1"> </span>
-                                <span class="star" value="2"> </span>
-                                <span class="star" value="3"> </span>
-                                <span class="star" value="4"> </span>
-                                <span class="star" value="5"> </span>
-                                <input type="hidden" name="starRating" id="starRatingInput" value="" />
+                                <label for="{{item.product.CoffeeID}}_2">
+                                    <input type="radio" name="{{item.product.CoffeeID}}" value="2" id="{{item.product.CoffeeID}}_2">
+                                    <span>2</span>
+                                </label>
+
+                                <label for="{{item.product.CoffeeID}}_3">
+                                    <input type="radio" name="{{item.product.CoffeeID}}" value="3" id="{{item.product.CoffeeID}}_3">
+                                    <span>3</span>
+                                </label>
+
+                                <label for="{{item.product.CoffeeID}}_4">
+                                    <input type="radio" name="{{item.product.CoffeeID}}" value="4" id="{{item.product.CoffeeID}}_4">
+                                    <span>4</span>
+                                </label>
+
+                                <label for="{{item.product.CoffeeID}}_5">
+                                    <input type="radio" name="{{item.product.CoffeeID}}" value="5" id="{{item.product.CoffeeID}}_5">
+                                    <span>5</span>
+                                </label>
+                            </fieldset>
                             </div>
                             <div></div>
-                            <textarea class="star_box" placeholder="리뷰 내용을 작성해주세요." ></textarea>
+                            <textarea class="star_box" name = 'review_text' placeholder="리뷰 내용을 작성해주세요." ></textarea>
                             <div></div>
                             <input type="submit" class="btn02" value="리뷰 등록"/>
                             <div></div>

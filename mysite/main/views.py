@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from products.cosine import cos_recommendation
 from django.contrib.auth.decorators import login_required
-from .models import Coffee
+from django.http import HttpResponse
 import json
 from .models import Coffee, Order, OrderItem, Preference, Subscription, Roastery
 import random
@@ -72,8 +72,6 @@ def result(request):
     return render(request, "test/result.html", context)
 
 
-
-
 # 메인페이지
 
 def index(request):  # main page
@@ -81,26 +79,23 @@ def index(request):  # main page
     random_coffees = random.sample(ids, 8)
     shuffled = Coffee.objects.filter(CoffeeID__in=random_coffees)
     top5 = Coffee.objects.order_by('Stock')[0:5]
-    context = {'coffee_info': shuffled, 'top5':top5}
+    context = {'coffee_info': shuffled, 'top5': top5}
     return render(request, 'main/mainpage.html', context)
-
-
-
 
 
 # 마이페이지
 
 # 회원정보 수정
 @login_required(login_url='/common/login')
-def update(request): 
+def update(request):
     if request.method == "POST":
         form = CustomUserChangeForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
     else:
         form = CustomUserChangeForm(instance=request.user)
-    context = {'form':form}
-    return render(request, 'main/mypage/update.html',context)
+    context = {'form': form}
+    return render(request, 'main/mypage/update.html', context)
 
 
 # 구독 정보
@@ -112,12 +107,12 @@ def subscribe(request):
     context = {}
     alert = 0
     guide = 0
-    
+
     # 구독 유무 확인
     try:
         info = Subscription.objects.get(user=user)
         subscribed_coffee = jsonDec.decode(info.coffee)
-        
+
         # 원두 구독하기를 눌렀을 시
         if coffee_info:
             print(coffee_info)
@@ -130,33 +125,33 @@ def subscribe(request):
             elif len(subscribed_coffee) >= 3 and coffee_info not in subscribed_coffee:
                 # 3개 초과일 시 / 중복이 아닐 시 창 띄우기
                 alert = 1
-            
+
         # 구독 원두 추출하기
         coffee = []
         for id in subscribed_coffee:
             coffee.append(Coffee.objects.get(CoffeeID=id))
-        
+
         # 구독한 원두가 없을 시 문구 띄우기
         if len(coffee) == 0:
-            guide = 1      
-        
-        # 배송 받기
+            guide = 1
+
+            # 배송 받기
         print('------1111')
         if request.method == "POST":
             order_val = request.POST.get('ordered')
-            if order_val=='1':
+            if order_val == '1':
                 print('------22222')
                 # 배송된 구독 정보로 처리
                 info.ordered = order_val
                 info.orderDate = datetime.today()
                 info.save()
-                
-        context = {'user':user,'info':info,'coffee':coffee,'alert':alert,'guide':guide}
+
+        context = {'user': user, 'info': info, 'coffee': coffee, 'alert': alert, 'guide': guide}
         template = 'main/mypage/subscription.html'
     except:
         template = 'main/mypage/subscription_none.html'
 
-    return render(request,template,context)
+    return render(request, template, context)
 
 
 # 구매 정보
@@ -179,22 +174,23 @@ def purchase(request):
             if item.OrderID_id == order.OrderID:
                 total[order.OrderID] += (item.product.Price * item.quantity)
 
-    context = {'total': total, 'Roasteryinfo': Roasteryinfo, 'orderinfo': orderinfo, 'userinfo':userinfo, 'orderitems':orderitems}
-    return render(request, 'main/mypage/purchase.html', context)
+    context = {'total': total, 'Roasteryinfo': Roasteryinfo, 'orderinfo': orderinfo, 'userinfo': userinfo,
+               'orderitems': orderitems}
+    return render(request, 'main/mypage/purchase.html', context)  #     main/mypage/purchase.html
 
 
-def review(request, coffee_id):
-    user = request.user
+def review(request):
+    user = request.user.id
+    print(user)
     if request.method == 'POST':
-        starRating = request.POST.get('starRating')
+        # starRating = request.POST.get('starRating')
+        test = dict(request.POST)
+        print('raw_dict : ', test)
+        print('sep : ', {i: j[0] for i, j in test.items()})
     else:
         pass
-
-
+    return HttpResponse('test done')
 
 
 def servicePopup(request):
     return render(request, 'main/popup.html')
-
-
-
