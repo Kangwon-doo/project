@@ -21,7 +21,8 @@ from django.conf import settings
 
 
 urlpatterns = [
-    # path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),
+     path('admin/', include('django.contrib.auth.urls')),
     path('', include('main.urls'), name='main_page'),
     path('', include('products.urls'), name = 'products'),
     path('', include('subscribe.urls'), name = 'subscribe'),
@@ -29,4 +30,5 @@ urlpatterns = [
     path('cart/', include('cart.urls')),
     path('admin/', include('django.contrib.auth.urls')),
     path('common/', include('common.urls')),
+
 ]

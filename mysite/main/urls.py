@@ -1,6 +1,6 @@
 from django.urls import path
-
 from main import views
+
 
 app_name = 'main'
 
@@ -13,5 +13,7 @@ urlpatterns = [
     path('mypage/purchase/', views.purchase, name='purchase'),
     path('mypage/subscribe/', views.subscribe, name='subscribe'),
     path('main/popup.html', views.servicePopup),
-    path('review/create/<int:coffee_id>', views.review, name='submit')
+    path('review/create/<int:coffee_id>', views.review, name='submit'),
+    path('mypage/delete/', views.delete, name='delete'),
+   # path('mypage/deleteProcess/', views.deleteProcess, name='deleteProcess'),
 ]

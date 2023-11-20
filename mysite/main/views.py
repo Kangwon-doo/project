@@ -196,5 +196,22 @@ def review(request, coffee_id):
 def servicePopup(request):
     return render(request, 'main/popup.html')
 
+from django.contrib.auth.decorators import login_required
+
+@login_required(login_url='/common/login')
+def delete(request):
+    if request.method == "POST":
+        user = request.user
+        user.delete()
+        # 로그아웃 등의 추가적인 처리를 할 수 있습니다.
+        return render(request, 'main/mypage_delete.html')
+
+    return render(request, 'main/mypage_delete_confirm.html')
 
 
+
+# def deleteProcess(request):
+#     user = request.user
+#     user.delete()
+#     #auth_logout(request)
+#     return render(request, '/')

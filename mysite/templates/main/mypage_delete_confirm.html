@@ -1,0 +1,14 @@
+{% extends 'main/mypage.html' %}
+{% block mypageContent %}
+
+<div class='content' id='unregister'>
+    <div class="subtitle">
+        <span>회원탈퇴</span>
+    </div>
+    <p>정말로 회원탈퇴하시겠습니까?</p>
+    <a href="{% url 'main:delete' %}" class="btn btn-danger">탈퇴하기</a>
+</div>
+
+<script>
+</script>
+{% endblock %}
