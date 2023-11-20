@@ -185,8 +185,10 @@ def review(request):
     if request.method == 'POST':
         # starRating = request.POST.get('starRating')
         test = dict(request.POST)
+        del test['csrfmiddlewaretoken']
         print('raw_dict : ', test)
         print('sep : ', {i: j[0] for i, j in test.items()})
+        # sep :  {'2': '4', 'review_text': 'testtt'}
     else:
         pass
     return HttpResponse('test done')

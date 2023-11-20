@@ -107,6 +107,8 @@
                     </tr>
                     <tr>
                         <td colspan="3">
+                            <form id="reviewForm" action="/review/create/" method="post">
+                                {% csrf_token %}
                             <input type="button" name="answer"  onclick="showDiv('toggle_{{forloop.counter}}')" value="리뷰쓰기">
                             <div id="toggle_{{forloop.counter}}" style="display: none;">
                                 <h2>소중한 의견</h2>
@@ -132,11 +134,14 @@
                                     </label>
 
                                     <label for="{{item.product.CoffeeID}}_5">
-                                        <input type="radio" name="{{{item.product.CoffeeID}}" value="5" id="{{item.product.CoffeeID}}_5">
+                                        <input type="radio" name="{{item.product.CoffeeID}}" value="5" id="{{item.product.CoffeeID}}_5">
                                         <span class="star">5</span>
                                     </label>
                                 </fieldset>
+                                <textarea class="star_box" name = 'review_text' placeholder="리뷰 내용을 작성해주세요."></textarea>
+                                <input type="submit" class="btn02" value="리뷰 등록"/>
                             </div>
+                            </form>
                         </td>
                     </tr>
                     {%endif%}
