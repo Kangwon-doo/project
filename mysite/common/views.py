@@ -60,3 +60,4 @@ class PasswordResetConfirmView(auth_views.PasswordResetConfirmView):
     """
     template_name = 'common/password_change.html'
 
+# views.py

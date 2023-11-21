@@ -72,3 +72,4 @@ class CustomUserChangeForm(UserChangeForm):
             'CustomerAddress': '주소',
         }
 
+
