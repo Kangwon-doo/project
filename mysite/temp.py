@@ -71,9 +71,9 @@ with open(coffee_csv, newline='', encoding='utf-8') as csvfile:
                 Stock =number,
                 Created_date=date(2023, 10, 20)
             )
-            print('성공적으로 처리됐습니다.')
         except:
             pass
+    print('성공적으로 처리됐습니다.')
 
 # Retrieve all coffee IDs
 all_coffee_ids = Coffee.objects.values_list('CoffeeID', flat=True)

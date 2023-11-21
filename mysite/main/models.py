@@ -87,6 +87,7 @@ class Preference(models.Model):
 
 class Reviews(models.Model):
     Coffee = models.ForeignKey("Coffee", on_delete=models.CASCADE)
+    Order = models.ForeignKey("Order", on_delete=models.CASCADE)
     user = models.ForeignKey("CustomUser", on_delete=models.CASCADE)
     Stars = models.CharField(max_length=1, default=0) # 별점. 1~5점. 0점은 아직 리뷰를 남기지 않은 커피
     content = models.TextField()
@@ -94,6 +95,9 @@ class Reviews(models.Model):
 
     class Meta:
         db_table = "review"
+        constraints = [
+            models.UniqueConstraint(fields=['Coffee', 'Order', 'user'], name='unique_host_migration'),
+        ]
 
 
 class test_Reviews(models.Model):

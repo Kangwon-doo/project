@@ -144,6 +144,39 @@
 </div>
 
 <hr>
+<!--리뷰란-->
+<div class="wrapper">
+    {% if reviewinfo %}
+    <table>
+        {% for i in reviewinfo %}
+        <tr> <!-- 사용자 정보 와 별점-->
+            <td>
+                <img src="/static/logo/favicon.png"> <!-- 예시 프로필 사진-->
+            </td>
+            <td>
+                {% for u in userinfo %}
+                {% if u.id == i.user_id%}
+                {{u.name}}님의 리뷰
+                {%endif%}
+                {%endfor%}
+                <br>
+                {{i.Stars}} <img src="/static/images/star.png" style="width:20px; height:20px;">
+            </td>
+        </tr>
+        <tr> <!--리뷰 내용 -->
+            <td colspan="2">
+            {{i.content}}
+                <p style="text-align:right;">{{i.created_date|date:"o년 M d일"}}</p>
+            </td>
+        </tr>
+        {%endfor%}
+    </table>
+    {%else%} <!-- 이 커피에 남겨진 리뷰가 없음 -->
+    <div>리뷰가 아직 없습니다.</div>
+    {%endif%}
+</div>
+
+<hr>
 
 <!-- 상품 필수 표기 정보란 -->
 <div class="wrapper">

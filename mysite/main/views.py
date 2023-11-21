@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from products.cosine import cos_recommendation
 from django.contrib.auth.decorators import login_required
+from django.db import IntegrityError
 from django.http import HttpResponse
 import json
-from .models import Coffee, Order, OrderItem, Preference, Subscription, Roastery
+from .models import Coffee, Order, OrderItem, Preference, Subscription, Roastery, Reviews, CustomUser
 import random
 from django.contrib.auth.models import User
 from common.forms import CustomUserChangeForm
@@ -158,6 +159,7 @@ def subscribe(request):
 @login_required(login_url='/common/login')
 def purchase(request):
     userinfo = request.user
+    userid = request.user.id
     email = request.user.email
 
     orderinfo = Order.objects.filter(emailAddress=email)
@@ -174,24 +176,36 @@ def purchase(request):
             if item.OrderID_id == order.OrderID:
                 total[order.OrderID] += (item.product.Price * item.quantity)
 
+    Reviewinfo = Reviews.objects.filter(user=userid)
     context = {'total': total, 'Roasteryinfo': Roasteryinfo, 'orderinfo': orderinfo, 'userinfo': userinfo,
-               'orderitems': orderitems}
-    return render(request, 'main/mypage/purchase.html', context)  #     main/mypage/purchase.html
+               'orderitems': orderitems, 'Reviewinfo':Reviewinfo}
+    return render(request, 'main/mypage/purchase_yj.html', context)  # main/mypage/purchase.html
 
 
 def review(request):
-    user = request.user.id
-    print(user)
+    userid = request.user.id
+    print(userid)
     if request.method == 'POST':
-        # starRating = request.POST.get('starRating')
-        test = dict(request.POST)
-        del test['csrfmiddlewaretoken']
-        print('raw_dict : ', test)
-        print('sep : ', {i: j[0] for i, j in test.items()})
-        # sep :  {'2': '4', 'review_text': 'testtt'}
-    else:
-        pass
+        user_review = dict(request.POST)
+        del user_review['csrfmiddlewaretoken']
+        print('sep : ', {i: j[0] for i, j in user_review.items()})  # sep :  {'2': '4', 'review_text': 'testtt'} : 4점
+        input = {i: j[0] for i, j in user_review.items()}
+        input_keys = list(input.keys())
+        input_values = list(input.values())
+        try:
+            Reviews.objects.create(
+                Coffee_id=input_keys[1],
+                Order_id=input_values[0],
+                user_id=userid,
+                Stars=input_values[1],
+                content=input_values[2],
+                created_date=datetime.now()
+                )
+        except IntegrityError:
+            pass
+
     return HttpResponse('test done')
+# return redirect('cart:cart_detail')
 
 
 def servicePopup(request):
