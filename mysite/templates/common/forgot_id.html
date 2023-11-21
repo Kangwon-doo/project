@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<section id="password_reset" class="signin">
+    <div class="container my-3 " style="margin-top:145px;">
+        <div class='title'  style="margin-left: 500px;">아이디 찾기</div>
+
+        <form method="post" class="post-form" action= "{% url 'common:forgot_id' %}">
+            {% csrf_token %}
+            {% include "form_errors.html" %}
+            <div class="form-group"></div>
+            <div class="form-group">
+                <input placeholder="email" type="email" class="form-control" name="email" id="email"
+                       value="{{ form.email.value|default_if_none:'' }}" style="width: 500px; margin-left: 340px;">
+            </div>
+            <button style="margin-left: 550px;" type="submit" class="btn btn-primary">확인</button>
+        </form>
+    </div>
+</section>
+{% endblock %}
