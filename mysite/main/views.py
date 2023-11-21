@@ -1,9 +1,11 @@
 from django.shortcuts import render,redirect
 from products.cosine import cos_recommendation
 from django.contrib.auth.decorators import login_required
-from .models import Coffee
 import json
 from .models import Coffee, Order, OrderItem, Preference, Subscription, Roastery
+from django.db import IntegrityError
+from django.http import HttpResponse
+from .models import Coffee, Order, OrderItem, Preference, Subscription, Roastery, Reviews, CustomUser
 import random
 from django.contrib.auth.models import User
 from common.forms import CustomUserChangeForm
@@ -90,7 +92,6 @@ def result(request):
     return render(request, "test/result.html", context)
 
 
-
 # 메인페이지
 
 def index(request):  # main page
@@ -98,7 +99,7 @@ def index(request):  # main page
     random_coffees = random.sample(ids, 8)
     shuffled = Coffee.objects.filter(CoffeeID__in=random_coffees)
     top5 = Coffee.objects.order_by('Stock')[0:5]
-    context = {'coffee_info': shuffled, 'top5':top5}
+    context = {'coffee_info': shuffled, 'top5': top5}
     return render(request, 'main/mainpage.html', context)
 
 
@@ -214,6 +215,7 @@ def subscribe_remove(request,coffee_id):
 @login_required(login_url='/common/login')
 def purchase(request):
     userinfo = request.user
+    userid = request.user.id
     email = request.user.email
 
     orderinfo = Order.objects.filter(emailAddress=email)
@@ -230,22 +232,37 @@ def purchase(request):
             if item.OrderID_id == order.OrderID:
                 total[order.OrderID] += (item.product.Price * item.quantity)
 
-    context = {'total': total, 'Roasteryinfo': Roasteryinfo, 'orderinfo': orderinfo, 'userinfo':userinfo, 'orderitems':orderitems}
-    return render(request, 'main/mypage/purchase.html', context)
+    Reviewinfo = Reviews.objects.filter(user=userid)
+    context = {'total': total, 'Roasteryinfo': Roasteryinfo, 'orderinfo': orderinfo, 'userinfo': userinfo,
+               'orderitems': orderitems, 'Reviewinfo':Reviewinfo}
+    return render(request, 'main/mypage/purchase_yj.html', context)  # main/mypage/purchase.html
 
 
-def review(request, coffee_id):
-    user = request.user
+def review(request):
+    userid = request.user.id
+    print(userid)
     if request.method == 'POST':
-        starRating = request.POST.get('starRating')
-    else:
-        pass
+        user_review = dict(request.POST)
+        del user_review['csrfmiddlewaretoken']
+        print('sep : ', {i: j[0] for i, j in user_review.items()})  # sep :  {'2': '4', 'review_text': 'testtt'} : 4점
+        input = {i: j[0] for i, j in user_review.items()}
+        input_keys = list(input.keys())
+        input_values = list(input.values())
+        try:
+            Reviews.objects.create(
+                Coffee_id=input_keys[1],
+                Order_id=input_values[0],
+                user_id=userid,
+                Stars=input_values[1],
+                content=input_values[2],
+                created_date=datetime.now()
+                )
+        except IntegrityError:
+            pass
 
-
+    return HttpResponse('test done')
+# return redirect('cart:cart_detail')
 
 
 def servicePopup(request):
     return render(request, 'main/popup.html')
-
-
-

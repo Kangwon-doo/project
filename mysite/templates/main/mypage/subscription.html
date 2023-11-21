@@ -28,8 +28,13 @@
     {% endif %}
 
     {% if guide == 0 %}
+<<<<<<< HEAD
     <div class="coffee_info", id="coffee-box">
         {% if alert == '1' %}
+=======
+    <div class="coffee_info">
+        {% if alert == 1 %}
+>>>>>>> heewon
             <p class="alert-message">구독 원두 수량을 초과했습니다.<p>
         {% endif %}
         <div class="coffee-content">
@@ -37,9 +42,12 @@
             <div class="coffee-item">
                 <a href="/coffee/{{item.CoffeeID}}"><img class="coffee-img" src="/static/coffee_img/{{item.CoffeeID}}.jpg"></a>
                 <h3>{{item.CoffeeName}}</h3>
+<<<<<<< HEAD
                 <a href="{% url 'main:subscribe_remove' item.CoffeeID %}" class="custom_a">
                     <span class="material-symbols-outlined">delete</span>
                 </a>&nbsp;
+=======
+>>>>>>> heewon
             </div>
             {% endfor %}
             <div class="coffee-item">
