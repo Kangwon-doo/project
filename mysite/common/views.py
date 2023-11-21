@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy
 
-from .forms import  CustomUserCreationForm
+from .forms import CustomUserCreationForm
 # 아이디 찾기
 from django.conf import settings
 from django.contrib import messages
@@ -59,3 +59,4 @@ class PasswordResetConfirmView(auth_views.PasswordResetConfirmView):
     비밀번호 초기화 - 새로운 비밀번호 입력
     """
     template_name = 'common/password_change.html'
+

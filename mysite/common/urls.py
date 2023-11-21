@@ -16,7 +16,8 @@ urlpatterns = [
     # 비밀번호 변경
     #path('password_change/<uidb64>/<token>/', PasswordChangeView.as_view(template_name='common/password_change.html'), name='password_change'),
     # 비밀번호 초기화
-    path('password_reset/', auth_views.PasswordResetView.as_view(template_name='registration/password_reset_form.html'), name='password_reset'),    # 아이디 찾기
+    path('password_reset/', auth_views.PasswordResetView.as_view(template_name='registration/password_reset_form.html'), name='password_reset'),
+    # 아이디 찾기
     #path('forgot_id/',views.forgot_id,name='forgot_id')
 
 ]
