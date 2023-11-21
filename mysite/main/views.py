@@ -177,9 +177,12 @@ def purchase(request):
                 total[order.OrderID] += (item.product.Price * item.quantity)
 
     Reviewinfo = Reviews.objects.filter(user=userid)
+    coffeeids = [i.Coffee_id for i in Reviews.objects.filter(user=userid)]
+    orderids = [i.Order_id for i in Reviews.objects.filter(user=userid)]
+
     context = {'total': total, 'Roasteryinfo': Roasteryinfo, 'orderinfo': orderinfo, 'userinfo': userinfo,
-               'orderitems': orderitems, 'Reviewinfo':Reviewinfo}
-    return render(request, 'main/mypage/purchase_yj.html', context)  # main/mypage/purchase.html
+               'orderitems': orderitems, 'Reviewinfo':Reviewinfo, 'coffeeids': coffeeids, 'orderids':orderids}
+    return render(request, 'main/mypage/purchase_hw.html', context)  # main/mypage/purchase.html
 
 
 def review(request):

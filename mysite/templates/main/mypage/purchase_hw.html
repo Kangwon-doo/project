@@ -45,10 +45,37 @@
                             </td>
                             <td class="order_coffee_price"><span>{{item.sub_total|intcomma}}원</span></td>
                         </tr>
-                        {% if Reviewinfo %}
+                        {% if not Reviewinfo %}
+                        <!--리뷰가 0개 일 때 -->
                         <tr>
-                            {% for review in Reviewinfo %}
-                            {% if item.product.CoffeeID == review.Coffee_id and item.OrderID_id == review.Order_id%}
+                            <td colspan="3">
+                                <button onclick="toggleReviewForm(this)">리뷰쓰기</button>
+                                <div class="reviewbox" style="display: none;">
+                                    <h2>소중한 의견</h2>
+                                    <form id="reviewForm" action="/review/create/" method="POST">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="order_id" value="{{item.OrderID_id}}">
+                                        <div class ="star_rating">
+                                            <span class="star on" value="1"> </span>
+                                            <span class="star" value="2"> </span>
+                                            <span class="star" value="3"> </span>
+                                            <span class="star" value="4"> </span>
+                                            <span class="star" value="5"> </span>
+                                            <input type="hidden" name="{{item.product.CoffeeID}}" id="starRatingInput" value="" />
+                                        </div>
+                                        <div class="add_review">
+                                            <textarea class="star_box" name = "review_text" placeholder="리뷰 내용을 작성해주세요."></textarea>
+                                            <input type="submit" class="btn02" value="리뷰 등록"/>
+                                        </div>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        {% else %} <!-- 사용자가 쓴 리뷰가 존재할 때 -->
+                        {% if item.product.CoffeeID in coffeeids and item.OrderID_id in orderids %} <!-- 리뷰 중 해당 아이템에 대한 정보가 있다면-->
+                        {% for review in Reviewinfo %}
+                        {% if item.product.CoffeeID == review.Coffee_id and item.OrderID_id == review.Order_id %}
+                        <tr>
                             <td colspan="3">
                                 <button onclick="toggleReviewForm(this)">리뷰 보기</button>
                                 <div class="reviewbox" style="display: none;">
@@ -59,34 +86,10 @@
                                 작성일 : {{review.created_date|date:"o년 M d일 A h:i"}}
                                 </div>
                             </td>
-
-                            {% elif item.product.CoffeeID != review.Coffee_id and item.OrderID_id != review.Order_id %}
-                            <td colspan="3">
-                                <button onclick="toggleReviewForm(this)">리뷰쓰기</button>
-                                <div class="reviewbox" style="display: none;">
-                                    <h2>소중한 의견</h2>
-                                    <form id="reviewForm" action="/review/create/" method="POST">
-                                        {% csrf_token %}
-                                        <input type="hidden" name="order_id" value="{{item.OrderID_id}}">
-                                        <div class ="star_rating">
-                                            <span class="star on" value="1"> </span>
-                                            <span class="star" value="2"> </span>
-                                            <span class="star" value="3"> </span>
-                                            <span class="star" value="4"> </span>
-                                            <span class="star" value="5"> </span>
-                                            <input type="hidden" name="{{item.product.CoffeeID}}" id="starRatingInput" value="" />
-                                        </div>
-                                        <div class="add_review">
-                                            <textarea class="star_box" name = "review_text" placeholder="리뷰 내용을 작성해주세요."></textarea>
-                                            <input type="submit" class="btn02" value="리뷰 등록"/>
-                                        </div>
-                                    </form>
-                                </div>
-                            </td>
-                            {%endif%}
-                            {%endfor%}
                         </tr>
-                        {%elif not Reviewinfo%}
+                        {%endif%}
+                        {%endfor%}
+                        {%else %} <!-- 리뷰목록 중 해당 아이템에 대한 정보가 없다면-->
                         <tr>
                             <td colspan="3">
                                 <button onclick="toggleReviewForm(this)">리뷰쓰기</button>
@@ -111,9 +114,9 @@
                                 </div>
                             </td>
                         </tr>
-                        {%endif%}
-                        {%endif%}
-                        {%endfor%}
+                        {%endif%} <!-- 존재하는 리뷰에 대한 조건절 끝 -->
+                    {%endif%} <!-- 사용자가 작성한 리뷰 유무 조건절 끝-->
+                        {%endif%} {%endfor%} <!-- orderitem에 대해 -->
                         <tr>
                             <td></td> <!-- 원두 이미지 -->
                             <td></td> <!-- 원두 정보-->
@@ -131,7 +134,8 @@
             </div>
         </div>
     </div>
-{% endfor %}
+    {%endfor%} <!-- 전체 order에 대한 forloop 끝-->
+
 
 </div><!-- /.container-->
 </section><!--/.mypage-->
