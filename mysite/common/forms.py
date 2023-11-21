@@ -3,6 +3,8 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm,UserChangeForm
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
+import django.contrib.auth.forms as auth_forms
+from django.core.exceptions import ValidationError
 
 # 회원가입
 class CustomUserCreationForm(UserCreationForm):
@@ -65,9 +67,6 @@ class CustomUserChangeForm(UserChangeForm):
             'PhoneNumber': '전화번호',
             'CustomerAddress': '주소',
         }
-import django.contrib.auth.forms as auth_forms
-from django.core.exceptions import ValidationError
-
 
 class PasswordResetForm(auth_forms.PasswordResetForm):
     username = auth_forms.UsernameField(label='사용자 ID')

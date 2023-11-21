@@ -1,16 +1,20 @@
 from django.shortcuts import render, redirect
 from django.utils import timezone
-from django.http import HttpResponse, HttpResponseRedirect
 from formtools.wizard.views import SessionWizardView
 
 # import products
-from .forms import EmailForm, PreferenceForm, PredictionForm
-from main.models import Coffee, Roastery, Order, Reviews, test_Reviews, test_preference
+from .forms import EmailForm, PreferenceForm
+from main.models import Coffee, Roastery, test_Reviews, test_preference
 from .cosine import most_similar
 import random
-import json
 from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 from django.db.models import Q
+
+import pandas as pd
+import plotly.express as px
+from io import BytesIO
+import base64
+
 
 # Create your views here.
 def coffee(request):
@@ -79,17 +83,51 @@ def coffee(request):
 def MD(request):
     return render(request, 'main/MD.html')
 
-
+import plotly.graph_objects as go
 def coffee_detail(request, coffee_id):
     coffee_info = Coffee.objects.get(CoffeeID=coffee_id)
     roastery_name = Roastery.objects.all()
     similarity_ids = most_similar(coffee_id, 5)
     similarity = Coffee.objects.filter(CoffeeID__in=similarity_ids)
-    context = {'coffee_info' : coffee_info, 
-               'cosine_sim' : similarity, 
-               'roastery_name': roastery_name }
     coffee_info.Country = coffee_info.Country.replace("[", "").replace("]", "").replace("'", "")
     coffee_info.CupNote = coffee_info.CupNote.replace("[", "").replace("]", "").replace("'", "")
+    
+    categories = ['단맛', '신맛', '쓴맛', '바디감']
+    values = [int(coffee_info.Sweetness), int(coffee_info.Sourness), 
+              int(coffee_info.Bitterness), int(coffee_info.Body)]
+
+    fig = go.Figure()
+
+    fig.add_trace(go.Scatterpolar(
+        r=values + values[:1],
+        theta=categories + categories[:1],
+        fill='toself',
+        line=dict(color='orange'),
+    ))
+
+    fig.update_layout(
+        polar=dict(
+            radialaxis=dict(
+                visible=True,
+                range=[0, 5],  
+            ),
+        ),
+        width=400, 
+        height=400,
+    )
+
+    buffer = BytesIO()
+    fig.write_image(buffer, format='png')
+    buffer.seek(0)
+
+    chart_image = base64.b64encode(buffer.read()).decode('utf-8')
+    buffer.close()
+
+    context = {'coffee_info' : coffee_info, 
+               'cosine_sim' : similarity, 
+               'roastery_name': roastery_name,
+               'chart_image': chart_image }
+    
     return render(request, 'products/coffee_detail.html', context)
 
 

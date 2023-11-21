@@ -13,49 +13,52 @@
 
 {% block content %}
 
+<div class="coffee-container">
 <!-- 원두 메인 정보란 -->
 <div class="upper">
     <div class="section1">
         <img class="coffee_img" src="/static/coffee_img/{{coffee_info.CoffeeID}}.jpg" alt="{{coffee_info.CoffeeID}}">
     </div>
     <div class="section2">
-        <div class="section2-1">
-            <h1>{{coffee_info.CoffeeName}}</h1>
-        </div>
-        <div class="section2-2">
-            <div class="section2-2-1">
-                <p> 원산지 <br>
-                    용량 <br>
-                    가격 <br></p>
+        <div class="section2-wrapper">
+            <div class="section2-1">
+                <h1>{{coffee_info.CoffeeName}}</h1>
             </div>
-            <div class="section2-2-2">
-                <p>
-                    <span>{{coffee_info.Country}}</span><br>
-                    <span>{{coffee_info.Capacity}}</span><br>
-                    <span> {{coffee_info.Price|intcomma}} ₩</span><br>
-                </p>
+            <div class="section2-2">
+                <div class="section2-2-1">
+                    <p> 원산지 <br>
+                        용량 <br>
+                        가격 <br></p>
+                </div>
+                <div class="section2-2-2">
+                    <p>
+                        <span>{{coffee_info.Country}}</span><br>
+                        <span>{{coffee_info.Capacity}}</span><br>
+                        <span>₩ {{coffee_info.Price|intcomma}}</span><br>
+                    </p>
+                </div>
             </div>
-        </div>
-        <!-- 로스터리로 넘어가기 -->
-        <div class="section2-3">
-            <a class="roas-btn" href="/roastery/{{coffee_info.RoasteryID_id}}/">
-                {% for roastery in roastery_name %}
-                    {% if roastery.RoasteryID == coffee_info.RoasteryID_id %}
-                        <img class="roas_img" src="/static/roastery_img/{{roastery.RoasteryName}}.jpg">
-                    {%endif%}
-                {%endfor%}
-                {% for roastery in roastery_name %}
-                    {% if roastery.RoasteryID == coffee_info.RoasteryID_id %}
-                        <p class="roas-name">{{roastery.RoasteryName}}<p>
-                    {%endif%}
-                {%endfor%}
-                <div class="material-symbols-outlined" id="nav-btn">navigate_next</div>
-            </a>
-        </div>
-        <!-- 관련 버튼 -->
-        <div class="section2-4">
-            <button class="btn1"><a href="{% url 'cart:add_cart' coffee_info.CoffeeID %}">장바구니에 담기</a></button>
-            <button class="btn2"><a href="{% url 'main:subscribe_add' coffee_info.CoffeeID %}">원두 구독하기</a></button>
+            <!-- 로스터리로 넘어가기 -->
+            <div class="section2-3">
+                <a class="roas-btn" href="/roastery/{{coffee_info.RoasteryID_id}}/">
+                    {% for roastery in roastery_name %}
+                        {% if roastery.RoasteryID == coffee_info.RoasteryID_id %}
+                            <img class="roas_img" src="/static/roastery_img/{{roastery.RoasteryName}}.jpg">
+                        {%endif%}
+                    {%endfor%}
+                    {% for roastery in roastery_name %}
+                        {% if roastery.RoasteryID == coffee_info.RoasteryID_id %}
+                            <p class="roas-name">{{roastery.RoasteryName}}<p>
+                        {%endif%}
+                    {%endfor%}
+                    <div class="material-symbols-outlined" id="nav-btn">navigate_next</div>
+                </a>
+            </div>
+            <!-- 관련 버튼 -->
+            <div class="section2-4">
+                <button class="btn1"><a href="{% url 'cart:add_cart' coffee_info.CoffeeID %}">장바구니에 담기</a></button>
+                <button class="btn2"><a href="{% url 'main:subscribe_add' coffee_info.CoffeeID %}">원두 구독하기</a></button>
+            </div>
         </div>
     </div>
 </div>
@@ -64,7 +67,7 @@
 <hr/>
 
 <!-- 알고리즘 란 -->
-<div class="wrapper" style="position=relative;">
+<div class="detail-wrapper" style="position=relative;">
     <h2>이 제품과 비슷한 상품</h2>
     <div class="swiper-container mySwiper">
         <div class="slide-content">
@@ -85,7 +88,7 @@
 <hr/>
 
 <!-- 원두 상세 정보란 -->
-<div class="wrapper">
+<div class="detail-wrapper">
     <div class="info-header">
         <span class="info-header-text">원두 특징</span>
     </div>
@@ -123,30 +126,33 @@
     </div>
 
     <!-- 맛 표기 정보란 -->
-    <div class="bar-wrapper">
-        <div class="bar">
-            <div class="bar-label">단맛</div>
-            <progress value={{coffee_info.Sweetness}} max="5"></progress>
+    <div class="bar-chart-wrapper">
+        <div class="bar-wrapper">
+            <div class="bar">
+                <div class="bar-label">단맛</div>
+                <progress value={{coffee_info.Sweetness}} max="5"></progress>
+            </div>
+            <div class="bar">
+                <div class="bar-label">신맛</div>
+                <progress value={{coffee_info.Sourness}} max="5"></progress>
+            </div>
+            <div class="bar">
+                <div class="bar-label">쓴맛</div>
+                <progress value={{coffee_info.Bitterness}} max="5"></progress>
+            </div>
+            <div class="bar">
+                <div class="bar-label">바디감</div>
+                <progress value={{coffee_info.Body}} max="5"></progress>
+            </div>
         </div>
-        <div class="bar">
-            <div class="bar-label">신맛</div>
-            <progress value={{coffee_info.Sourness}} max="5"></progress>
-        </div>
-        <div class="bar">
-            <div class="bar-label">쓴맛</div>
-            <progress value={{coffee_info.Bitterness}} max="5"></progress>
-        </div>
-        <div class="bar">
-            <div class="bar-label">바디감</div>
-            <progress value={{coffee_info.Body}} max="5"></progress>
-        </div>
+        <img class="radar-chart" src="data:image/png;base64,{{ chart_image }}" alt="Radar Chart">
     </div>
 </div>
 
 <hr>
 
 <!-- 상품 필수 표기 정보란 -->
-<div class="wrapper">
+<div class="detail-wrapper">
     <h2>상품 필수 표기 정보</h2>
     <table>
         <tr>
@@ -176,6 +182,7 @@
     </table>
 </div>
 
+</div>
 
 <!-- 자바스크립트 파일 -->
 <script src="{% static 'js/swiper-bundle.min.js' %}"></script>

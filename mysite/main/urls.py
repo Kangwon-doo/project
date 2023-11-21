@@ -7,7 +7,7 @@ app_name = 'main'
 urlpatterns = [
     path('test/', views.test, name='test'),
     path('test/result/', views.result, name='result'),
-    path('', views.index),
+    path('', views.index, name='mainpage'),
     path('mypage/', views.update, name='mypage'),
     path('mypage/private_info/', views.update, name='update'),
     path('mypage/purchase/', views.purchase, name='purchase'),

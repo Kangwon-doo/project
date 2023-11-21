@@ -1,15 +1,19 @@
-.upper {
-    width: 800px;
-    display: flex;
-    margin: 0 auto;
-    margin-top: 40px;
-    margin-bottom: 40px;
-    align-items: center;
-    /* background: #e8e8e8; */
+.coffee-container {
+  width: 60%;
+  margin: auto;
+  margin-top: 10%;
+  margin-bottom: 5%;
 }
 
-.wrapper {
-    width: 800px;
+.upper {
+    width: 100%;
+    display: flex;
+    margin: 0 auto;
+    align-items: center;
+}
+
+.detail-wrapper {
+    width: 100%;
     margin: 0 auto;
     margin-top: 40px;
     margin-bottom: 40px;
@@ -17,16 +21,15 @@
 }
 
 .section1 {
+    width: 35%;
     display: flex;
     align-items: center;
     position: relative;
     margin: 0px auto;
-    margin-right: -5px;
-
 }
 
 .coffee_img {
-    height: 250px;
+    width: 100%;
     margin: 0px;
 }
 
@@ -37,13 +40,16 @@
 }
 
 .section2 {
-    width: 500px;
-    height:100%;
-    padding-left: 20px;
-    padding-bottom: 20px;
-    padding-right: 20px;
-    position: relative;
+    width: 65%;
+    display: flex;
+    flex-direction: column;
     margin: 0px auto;
+    justify-content: space-between;
+}
+
+.section2-wrapper {
+  width: 90%;
+  margin: auto;
 }
 
 .section2-2 {
@@ -51,43 +57,48 @@
 }
 
 .section2-2-1 {
-    width: 100px;
+    width: 15%;
 }
 
 .section2-3 {
     display: flex;
 }
 
-
-h4 {
-    margin:0px;
-    margin-left: 20px;
-}
-
-h1 {
-    margin-bottom: 0%;
+.section2-1 > h1 {
+    font-size: 200%;
+    margin-bottom: 5%;
 }
 
 .section2-4 {
     display: flex;
+    justify-content: space-between;
 }
 
 .roas-btn {
-    height: 45px;
-    border-radius: 10px;
+    width: 30%;
     background: rgb(255, 255, 255);
-    color: #000000;
+    color: #000000;    
     font-size: 15px;
     cursor: pointer;
     display: flex;
+    margin-top: 3%;
+    margin-bottom: 3%;
   }
 
   .roas-name {
-    height: 45px;
     text-align: center;
     margin: auto;
-    margin-left: 10px;
-    line-height: 45px;
+  }
+
+  .roas_img {
+    width: 20%;
+    height: auto;
+    margin: auto;
+    border-radius: 50%;
+  }
+
+  .section2-3 > a {
+    text-decoration-line: none; 
   }
 
 #nav-btn {
@@ -95,21 +106,10 @@ h1 {
   font-size: 30px;
   color: #474747;
 }
-
-  .roas_img {
-    width: 30px;
-    height: auto;
-    margin: auto;
-  }
-
-a {
-    text-decoration-line: none; 
-}
-
+ 
 .btn1 {
-  width: 50%;
+  width: 48%;
   height: 50px;
-  margin: 20px 20px 0px 0px;
   border: none;
   border-radius: 5px;
   background: rgb(255, 255, 255);
@@ -121,9 +121,8 @@ a {
 }
 
 .btn2 {
-    width: 50%;
+    width: 48%;
     height: 50px;
-    margin: 20px 20px 0px 0px;
     border: none;
     border-radius: 5px;
     background: rgb(249, 160, 37);
@@ -133,9 +132,15 @@ a {
     cursor: pointer;
   }
 
-  hr {
-    width: 800px;
-  }
+.btn1 > a {
+  text-decoration: none;
+  color:  rgb(249, 160, 37);
+}
+
+.btn2 > a {
+  text-decoration: none;
+  color: #fff;
+}
 
   .info-header {
     width: 230px;
@@ -290,53 +295,61 @@ a {
     .info-wrapper:hover .text-box {
         display: block; 
     }
-    progress[value] {
-        --color: rgb(249, 160, 37); /* the progress color */
-        --background: rgb(230, 230, 230); /* the background color */
-      
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-        border: none;
-        width: 20em;
-        margin: 0 10px;
-        border-radius: 0px;
-        background: var(--background);
-      }
-      progress[value]::-webkit-progress-bar {
-        border-radius: 10em;
-        background: var(--background);
-      }
-      progress[value]::-webkit-progress-value {
-        border-radius: 0px;
-        background: var(--color);
-      }
-      progress[value]::-moz-progress-bar {
-        border-radius: 10em;
-        background: var(--color);
-      }
 
-      .bar-label {
-        width: 100px;
-        text-align: center;
-      }
+progress {
+  width: 70%;
+}
 
-      .bar {
-        display: flex;
-        margin: 10px auto;
-      }
+progress[value] {
+    --color: rgb(249, 160, 37); /* the progress color */
+    --background: rgb(230, 230, 230); /* the background color */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: none;
+
+    background: var(--background);
+  }
+  progress[value]::-webkit-progress-bar {
+    border-radius: 10em;
+    background: var(--background);
+  }
+  progress[value]::-webkit-progress-value {
+    border-radius: 0px;
+    background: var(--color);
+  }
+  progress[value]::-moz-progress-bar {
+    border-radius: 10em;
+    background: var(--color);
+  }
+
+  .bar-chart-wrapper {
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
+    border: 2px solid #c3c3c3;
+    border-radius: 20px;
+    background-color: #d7d7d7;
+  }
+
+  .bar-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .bar-label {
+    width: 15%;
+  }
+
+  .bar {
+    width: 100%;
+    display: flex;
+    margin: 10px auto;
+  }
+  
       
-      .bar-wrapper {
-        width: 80%;
-        margin: auto;
-        border: 2px solid #c3c3c3;
-        border-radius: 20px;
-        display: flex;
-        flex-direction: column;
-        padding-top: 30px;
-        padding-bottom: 30px;
-        margin-bottom: 50px;
-      }
 
     table {
         border-collapse: collapse;

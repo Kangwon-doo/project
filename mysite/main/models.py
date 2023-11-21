@@ -44,6 +44,14 @@ class Coffee(models.Model):
     Price = models.IntegerField()  # 가격 정보
     Stock = models.IntegerField()  # 판매량
     Created_date = models.DateField()  # 원두 등록 날짜
+    flower = models.CharField(max_length=1)
+    fruit = models.CharField(max_length=1)
+    herb = models.CharField(max_length=1)
+    sweet = models.CharField(max_length=1)
+    nutty = models.CharField(max_length=1)
+    spice = models.CharField(max_length=1)
+    choco = models.CharField(max_length=1)
+    
     
     class Meta:
         db_table = "coffee"

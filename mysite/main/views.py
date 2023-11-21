@@ -65,12 +65,29 @@ def result(request):
         similarity_ids = cos_recommendation(favor, 4)
         similarity = Coffee.objects.filter(CoffeeID__in=similarity_ids)
 
-        context = {'main_coffee': similarity[0], 'sub_coffee': similarity[1:], 'user': user}
+        coffee = similarity[0]
+        
+        favor_type = ''
+        if coffee.sweet == '1':
+            favor_type = 'sweet'
+        elif coffee.flower == '1':
+            favor_type = 'flower'
+        elif coffee.fruit == '1':
+            favor_type = 'fruit'
+        elif coffee.herb == '1':
+            favor_type = 'herb'
+        elif coffee.nutty == '1':
+            favor_type = 'nutty'
+        elif coffee.spice == '1':
+            favor_type = 'spice'
+        elif coffee.choco  == '1':
+            favor_type = 'choco'
+            
+        context = {'main_coffee':coffee, 'sub_coffee':similarity[1:], 'user': user, 'type':favor_type}
     else:
         pass
 
     return render(request, "test/result.html", context)
-
 
 
 

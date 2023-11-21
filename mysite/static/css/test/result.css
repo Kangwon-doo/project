@@ -3,11 +3,10 @@ body {
     display: flex;
 }
 
-.container {
-    
+.result-container {
     margin: auto;
-    width: 800px;
-    margin-top: 0px;
+    width: 60%;
+    margin-top: 10%;
     background-color: #fff;
 }
 .main-img {
@@ -23,11 +22,11 @@ body {
     display: flex; 
     margin-bottom: 40px;
 }
-span {
-    height: 25px;
-    margin-top: 5px;
-    margin-right: 10px;
+
+.content > img {
+    height: 40px;
 }
+
 h2 {
     margin-top: 0px;
     margin-bottom: 0px;
