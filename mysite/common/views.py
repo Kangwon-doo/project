@@ -1,5 +1,4 @@
 from django.contrib.auth import authenticate, login
-#from django.contrib.auth.models import CustomUser
 from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy
