@@ -100,10 +100,7 @@ def index(request):  # main page
     shuffled = Coffee.objects.filter(CoffeeID__in=random_coffees)
     top5 = Coffee.objects.order_by('Stock')[0:5]
     context = {'coffee_info': shuffled, 'top5': top5}
-    return render(request, 'main/mainpage.html', context)
-
-
-
+    return render(request, 'main.html', context)
 
 
 # 마이페이지

@@ -48,46 +48,47 @@
                         {% if Reviewinfo %}
                         <tr>
                             {% for review in Reviewinfo %}
-                            {% if item.product.CoffeeID == review.Coffee_id and item.OrderID_id == review.Order_id %}
-                            <td colspan="3">
-                                <button onclick="toggleReviewForm(this)">리뷰 보기</button>
-                                <div class="reviewbox" style="display: none;">
-                                {{review.Stars}} <img src="/static/images/star.png" style="width:20px; height:20px;">
-                                <br>
-                                {{review.content}}
-                                <br>
-                                작성일 : {{review.created_date|date:"o년 M d일 A h:i"}}
-                                </div>
-                            </td>
+                                {% if item.product.CoffeeID == review.Coffee_id and item.OrderID_id == review.Order_id %}
+                                    <td colspan="3">
+                                        <button onclick="toggleReviewForm(this)" style="color:green;">리뷰 보기</button>
+                                        <div class="reviewbox" style="display: none;">
+                                        {{review.Stars}} <img src="/static/images/star.png" style="width:20px; height:20px;">
+                                        <br>
+                                        {{review.content}}
+                                        <br>
+                                        작성일 : {{review.created_date|date:"o년 M d일 A h:i"}}
+                                        </div>
+                                    </td>
 
-                            {% elif item.product.CoffeeID != review.Coffee_id and item.OrderID_id != review.Order_id %}
-                            <td colspan="3">
-                                <button onclick="toggleReviewForm(this)">리뷰쓰기</button>
-                                <div class="reviewbox" style="display: none;">
-                                    <h2>소중한 의견</h2>
-                                    <form id="reviewForm" action="/review/create/" method="POST">
-                                        {% csrf_token %}
-                                        <input type="hidden" name="order_id" value="{{item.OrderID_id}}">
-                                        <div class ="star_rating">
-                                            <span class="star on" value="1"> </span>
-                                            <span class="star" value="2"> </span>
-                                            <span class="star" value="3"> </span>
-                                            <span class="star" value="4"> </span>
-                                            <span class="star" value="5"> </span>
-                                            <input type="hidden" name="{{item.product.CoffeeID}}" id="starRatingInput" value="" />
+                                {% else %}
+                                    <td colspan="3">
+                                        <button onclick="toggleReviewForm(this)" style="color:blue;">리뷰쓰기</button>
+                                        <div class="reviewbox" style="display: none;">
+                                            <h2>소중한 의견</h2>
+                                            <form id="reviewForm" action="/review/create/" method="POST">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="order_id" value="{{item.OrderID_id}}">
+                                                <div class ="star_rating">
+                                                    <span class="star on" value="1"> </span>
+                                                    <span class="star" value="2"> </span>
+                                                    <span class="star" value="3"> </span>
+                                                    <span class="star" value="4"> </span>
+                                                    <span class="star" value="5"> </span>
+                                                    <input type="hidden" name="{{item.product.CoffeeID}}" id="starRatingInput" value="" />
+                                                </div>
+                                                <div class="add_review">
+                                                    <textarea class="star_box" name = "review_text" placeholder="리뷰 내용을 작성해주세요."></textarea>
+                                                    <input type="submit" class="btn02" value="리뷰 등록"/>
+                                                </div>
+                                            </form>
                                         </div>
-                                        <div class="add_review">
-                                            <textarea class="star_box" name = "review_text" placeholder="리뷰 내용을 작성해주세요."></textarea>
-                                            <input type="submit" class="btn02" value="리뷰 등록"/>
-                                        </div>
-                                    </form>
-                                </div>
-                            </td>
-                            {%endif%}
+                                    </td>
+                                {%endif%}
+
                             {%endfor%}
                         {%else%}
                             <td colspan="3">
-                                <button onclick="toggleReviewForm(this)">리뷰쓰기</button>
+                                <button onclick="toggleReviewForm(this)" style="color:red;">리뷰쓰기</button>
                                 <div class="reviewbox" style="display: none;">
                                     <h2>소중한 의견</h2>
                                     <form id="reviewForm" action="/review/create/" method="POST">

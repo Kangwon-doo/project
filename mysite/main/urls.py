@@ -15,5 +15,6 @@ urlpatterns = [
     path('mypage/subscribe/<int:coffee_id>/', views.subscribe_remove, name='subscribe_remove'),
     path('mypage/subscribe/add/<int:coffee_id>/', views.subscribe_add, name='subscribe_add'),
     path('main/popup.html', views.servicePopup),
-    path('review/create/<int:coffee_id>', views.review, name='submit')
+    path('review/create/<int:coffee_id>', views.review, name='submit'),
+    path('review/create/', views.review, name='submit')
 ]
