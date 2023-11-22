@@ -427,11 +427,8 @@ class Migration(migrations.Migration):
                 "db_table": "CartItem",
             },
         ),
-<<<<<<< HEAD
         migrations.AddConstraint(
             model_name='reviews',
             constraint=models.UniqueConstraint(fields=('Coffee', 'Order', 'user'), name='unique_host_migration'),
         ),
-=======
->>>>>>> seol
     ]

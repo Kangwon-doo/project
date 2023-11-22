@@ -1,6 +1,7 @@
 {% extends 'main/mypage.html' %}
 {% load static %}
-{%load humanize%}
+{% load humanize %}
+{% load condition %}
 {% block mypageContent %}
 
 <!-- purchase start -->
@@ -235,7 +236,7 @@
                         <button onclick="toggleReviewForm(this)">리뷰쓰기</button>
                         <div class="reviewbox" style="display: none;">
                             <h2>소중한 의견</h2>
-                            <form id="reviewForm" action="{% url 'main:submit' item.product.CoffeeID %}" method="POST">
+                            <form id="reviewForm" action="{% url 'main:submit' %}" method="POST">
                                 {% csrf_token %}
                                 <div class ="star_rating">
                                     <span class="star on" value="1"> </span>

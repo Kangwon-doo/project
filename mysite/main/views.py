@@ -227,7 +227,7 @@ def purchase(request):
                 total[order.OrderID] += (item.product.Price * item.quantity)
 
     context = {'total': total, 'Roasteryinfo': Roasteryinfo, 'orderinfo': orderinfo, 'userinfo':userinfo, 'orderitems':orderitems}
-    return render(request, 'main/mypage/purchase.html', context)
+    return render(request, 'main/mypage/purchase_hw.html', context)
 
 
 def review(request, coffee_id):

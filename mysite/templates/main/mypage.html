@@ -10,7 +10,6 @@
 {% endblock %}
 
 {% block content %}
-<<<<<<< HEAD
 
 <div class="mypage-container">
     <div class="row">
@@ -23,27 +22,7 @@
                     <li><a href="{% url 'main:update' %}" class="">개인정보</a></li>  
                     <li><a href="{% url 'main:purchase' %}" class="">구매내역</a></li>
                     <li><a href="{% url 'main:subscribe' %}" class="">구독정보</a></li>
-                    <li><a href="" class="">회원탈퇴</a></li>
-=======
-<!--mypage start -->
-<section id="mypage_privateinfo" class="mypage">
-    <div class="container">
-        <div id = title>마이페이지</div>
-        <div id = 'mypage_header'>
-            <div id = 'img_box'><img src = '../../static/images/about/profile_image.jpg'></div>
-            <div id = 'idEmail_box'>
-                <div id = 'userid'><span>{{request.user}}</span></div>
-                <div id = 'useremail'><span>{{request.user.email}}</span></div>
-            </div>
-        </div>
-        <div id = 'mypage_body'>
-            <div class = 'select_menu_box'>
-                <div class="list-group">
-                  <a href="{% url 'main:update' %}" id="privateinfo" class="list-group-item active">개인정보</a>                  
-                    <a href="{% url 'main:purchase' %}" id="purchase" class="list-group-item">구매내역</a>
-                    <a href="{% url 'main:subscribe' %}" id="subscribe" class="list-group-item">구독정보</a>
-                    <a href="{% url 'main:delete' %}" id='unregister' class="list-group-item">회원탈퇴</a>
->>>>>>> seol
+                    <li><a href="{% url 'main:delete' %}" class="">회원탈퇴</a></li>
                 </div>
             </div>
         </div>
