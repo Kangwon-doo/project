@@ -3,12 +3,6 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm,UserChangeForm
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
-#비번 변경
-from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib.auth import update_session_auth_hash
-from django.contrib import messages
-from django.shortcuts import redirect, render
-
 
 # 회원가입
 class CustomUserCreationForm(UserCreationForm):

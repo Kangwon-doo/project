@@ -5,10 +5,10 @@ from django.urls import reverse_lazy
 
 from .forms import CustomUserCreationForm
 # 아이디 찾기
-from django.conf import settings
-from django.contrib import messages
-from django.contrib.auth.models import User
-from django.core.mail import EmailMessage
+# from django.conf import settings
+# from django.contrib import messages
+# from django.contrib.auth.models import User
+# from django.core.mail import EmailMessage
 #비번 변경
 from django.contrib.auth import views as auth_views
 from django.contrib import messages
@@ -34,7 +34,7 @@ def signup(request):
 
 
 # 아이디 찾기
-
+#
 # def forgot_id(request):
 #     context = {}
 #
