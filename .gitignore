@@ -2,7 +2,9 @@
 db.sqlite3
 *.pyc
 __pycache__
-<<<<<<< HEAD
 
+<<<<<<< HEAD
 # secrets.json
 
+=======
+>>>>>>> ce4df5186259b4f4c4d6b4e101a517eac8a1def1
