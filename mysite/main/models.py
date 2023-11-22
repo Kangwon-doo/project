@@ -44,6 +44,14 @@ class Coffee(models.Model):
     Price = models.IntegerField()  # 가격 정보
     Stock = models.IntegerField()  # 판매량
     Created_date = models.DateField()  # 원두 등록 날짜
+    flower = models.CharField(max_length=1)
+    fruit = models.CharField(max_length=1)
+    herb = models.CharField(max_length=1)
+    sweet = models.CharField(max_length=1)
+    nutty = models.CharField(max_length=1)
+    spice = models.CharField(max_length=1)
+    choco = models.CharField(max_length=1)
+    
     
     class Meta:
         db_table = "coffee"
@@ -71,6 +79,10 @@ class Subscription(models.Model):
     startDate = models.DateField(null=False)
     endDate = models.DateField(null=False)
     payDate = models.DateField(null=False)
+    coffee = models.TextField(default='[]')  # 구독한 커피
+    ordered = models.CharField(null=False, max_length=1, default=0) # 주문 여부
+    orderDate = models.DateField(null=True) # 주문 날짜
+    alert = models.CharField(null=False, max_length=1, default=0) # 경고
 
 
 class Preference(models.Model):

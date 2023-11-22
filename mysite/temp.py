@@ -69,7 +69,14 @@ with open(coffee_csv, newline='', encoding='utf-8') as csvfile:
                 ProductInfo=row['제품문의 관련 주소 및 전화번호'],
                 Price=row['price'],
                 Stock =number,
-                Created_date=date(2023, 10, 20)
+                Created_date=date(2023, 10, 20),
+                flower = row['꽃'],
+                fruit = row['과일'],
+                herb = row['허브'],
+                sweet = row['달콤함'],
+                nutty = row['고소함'],
+                spice = row['향료'],
+                choco = row['초콜릿']
             )
             print('성공적으로 처리됐습니다.')
         except:

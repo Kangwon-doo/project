@@ -4,6 +4,10 @@ from django.contrib.auth.decorators import login_required
 from main.models import Subscription
 
 
+
+def index(request):
+    return render(request, 'base2.html')
+
 def guide(request):
 
     return render(request, 'subscription/subscribe_guide.html')

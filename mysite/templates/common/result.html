@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>메인사이트</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link rel="shortcut icon" href="#">
+<link rel="stylesheet" type="text/css" href="{% static 'css/test/result.css' %}">
+</head>
+<body>
+    <div class="result-container">
+        <div class="coffee">
+            <img class="main-img" src="/static/coffee_img/{{main_coffee.CoffeeID}}.jpg">
+            <div class="coffee-name">
+                <div class="content">
+                    <img src="/static/icon/blackoutline/{{type}}.png">
+                    <h2>{{main_coffee.CoffeeName}}</h2>
+                </div>
+            </div>
+            <div class="info-header">
+                <div class="info-btn">
+                    소개
+                </div>
+            </div>
+            <div class="coffee-info">
+                <div class="info-content">
+                    {{main_coffee.CoffeeInfo}}
+                </div>
+            </div>
+        </div>
+        <div class="btn-section">
+            <a class="btn" href="/coffee/{{main_coffee.CoffeeID}}">원두 자세히 보러가기</a>
+            <a class="btn" href="{% url 'main:subscribe_add' main_coffee.CoffeeID %}">이 원두 구독하기</a>
+            <a class="btn" href="/">홈화면으로 돌아가기</a>
+        </div>
+    </div>
+</body>
+</html>
