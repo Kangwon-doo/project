@@ -1,0 +1,38 @@
+{% extends 'main/mypage.html' %}
+{% block mypageContent %}
+
+<div class='content' id='unregister'>
+    <div class="subtitle">
+        <span>회원탈퇴</span>
+    </div>
+    <form action="{% url 'main:delete' %}" method="POST">
+        {% csrf_token %}
+        <p>정말로 회원탈퇴하시겠습니까?</p>
+        <input type="submit" value="탈퇴하기">
+    </form>
+</div>
+
+<script>
+</script>
+{% endblock %}
+
+<!-- {% extends 'main/mypage.html' %}
+<a href="{% url 'accounts:delete' %}">회원탈퇴</a>
+{% block mypageContent %}
+
+<div class = 'content' id ='unregister'>
+    <div class="subtitle">
+        <span>회원탈퇴</span>
+    </div>
+    <div>회원탈퇴 진행 프로세스(test)</div>
+    <form action= "{%url 'accounts:delete'%} " method="POST">
+        {% crsf_tocken %}
+        <P>정말로 회원탈퇴하시겠습니까?</P>
+        <input type="submit" value="회원탈퇴">
+    </form>
+</div>
+<script>
+</script>
+{% endblock %} -->
+
+
