@@ -1,14 +1,14 @@
 {% extends 'main/mypage.html' %}
 {% block mypageContent %}
 
-<div class='content' id='unregister'>
-    <div class="subtitle">
-        <span>회원탈퇴</span>
+<div class='content' id='unregister' >
+    <div class="subtitle" style="margin-top:30px;">
+        <!--<span style="margin-left: 250px; ">회원탈퇴</span>-->
     </div>
-    <p>정말로 회원탈퇴하시겠습니까?</p>
     <form action="{% url 'main:delete' %}" method="POST">
         {% csrf_token %}
-        <input type="submit" value="탈퇴하기">
+        <p style="margin-left: 230px; margin-bottom:3px;">정말로 회원탈퇴하시겠습니까?</p>
+        <button style="margin-left: 280px;" class="btn btn-primary" onclick="alert('정말로 탈퇴하시겠습니까?');return True;">탈퇴하기</button>
     </form>
 </div>
 

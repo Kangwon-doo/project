@@ -1,3 +1,5 @@
+from urllib import request
+
 from django.shortcuts import render, redirect
 from products.cosine import cos_recommendation
 from django.contrib.auth.decorators import login_required
@@ -217,3 +219,4 @@ def delete_complete(request):
 #     user.delete()
 #     #auth_logout(request)
 #     return render(request, '/')
+
