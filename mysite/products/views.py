@@ -85,7 +85,7 @@ def coffee_detail(request, coffee_id):
     roastery_name = Roastery.objects.all()
     similarity_ids = most_similar(coffee_id, 5)
     similarity = Coffee.objects.filter(CoffeeID__in=similarity_ids)
-    reviewinfo = Reviews.objects.filter(Coffee_id=coffee_id).order_by('created_date')
+    reviewinfo = Reviews.objects.filter(Coffee_id=coffee_id).order_by('created_date')[:5]
     userinfo = CustomUser.objects.all()
     context = {'coffee_info' : coffee_info, 
                'cosine_sim' : similarity, 
