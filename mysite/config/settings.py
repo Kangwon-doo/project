@@ -95,7 +95,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'team_wondoodoo', # DB name
         'USER': 'admin', # account name
-        'PASSWORD': 'admin',
+        'PASSWORD': 'admin1234',
         'HOST': 'database-1.cql2hwaazxkg.ap-northeast-2.rds.amazonaws.com',  # 서버주소
         'PORT': '3306', # MySQL 포트 번호: 기본값 3306
     }
