@@ -23,10 +23,7 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-<<<<<<< HEAD
-=======
-     path('admin/', include('django.contrib.auth.urls')),
->>>>>>> 02bb419cc691690f39c40ae5037d654b30a9e4d3
+    #path('admin/', include('django.contrib.auth.urls')),
     path('', include('main.urls'), name='main_page'),
     path('', include('products.urls'), name = 'products'),
     path('', include('subscribe.urls'), name = 'subscribe'),
@@ -34,13 +31,9 @@ urlpatterns = [
     path('cart/', include('cart.urls')),
     path('common/', include('django.contrib.auth.urls')),
     path('common/', include('common.urls')),
-<<<<<<< HEAD
     # 비번찾기 관련
     path('password/', include('django.contrib.auth.urls')),
     path('password_reset/done/',auth_views.PasswordResetDoneView.as_view(template_name='common/password_reset_done.html'),name='password_reset_done'),
     path('reset/<uidb64>/<token>/',auth_views.PasswordResetConfirmView.as_view(template_name='common/password_reset_confirm.html'),name='password_reset_confirm'),
     path('reset/done/',auth_views.PasswordResetCompleteView.as_view(template_name='common/password_reset_complete.html'),name='password_reset_complete'),
-=======
-
->>>>>>> 02bb419cc691690f39c40ae5037d654b30a9e4d3
 ]
