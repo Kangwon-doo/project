@@ -1,6 +1,7 @@
 {% extends 'main/mypage.html' %}
 {% load static %}
 {%load humanize%}
+{% load condition %}
 {% block mypageContent %}
 
 <!-- purchase start -->
@@ -72,10 +73,11 @@
                             </td>
                         </tr>
                         {% else %} <!-- 사용자가 쓴 리뷰가 존재할 때 -->
-                        {% if item.product.CoffeeID in coffeeids and item.OrderID_id in orderids %} <!-- 리뷰 중 해당 아이템에 대한 정보가 있다면-->
-                        {% for review in Reviewinfo %}
-                        {% if item.product.CoffeeID == review.Coffee_id and item.OrderID_id == review.Order_id %}
+                        {% if item_pairs|get_item:item.id in str_pair %}
+                        <!-- 리뷰 중 해당 아이템에 대한 정보가 있다면-->
                         <tr>
+                            {% for review in Reviewinfo %}
+                            {% if item.product.CoffeeID == review.Coffee_id and item.OrderID_id == review.Order_id %}
                             <td colspan="3">
                                 <button onclick="toggleReviewForm(this)">리뷰 보기</button>
                                 <div class="reviewbox" style="display: none;">
@@ -86,10 +88,10 @@
                                 작성일 : {{review.created_date|date:"o년 M d일 A h:i"}}
                                 </div>
                             </td>
+                            {%endif%}
+                            {%endfor%}
                         </tr>
-                        {%endif%}
-                        {%endfor%}
-                        {%else %} <!-- 리뷰목록 중 해당 아이템에 대한 정보가 없다면-->
+                        {%else %}
                         <tr>
                             <td colspan="3">
                                 <button onclick="toggleReviewForm(this)">리뷰쓰기</button>
@@ -114,7 +116,8 @@
                                 </div>
                             </td>
                         </tr>
-                        {%endif%} <!-- 존재하는 리뷰에 대한 조건절 끝 -->
+
+                        {%endif%} <!-- 리뷰쓰기/보기에 대한 조건절 끝 -->
                     {%endif%} <!-- 사용자가 작성한 리뷰 유무 조건절 끝-->
                         {%endif%} {%endfor%} <!-- orderitem에 대해 -->
                         <tr>

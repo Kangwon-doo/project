@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from products.cosine import cos_recommendation
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
@@ -164,6 +164,8 @@ def purchase(request):
 
     orderinfo = Order.objects.filter(emailAddress=email)
     orderitems = OrderItem.objects.filter(email=email)
+    Reviewinfo = Reviews.objects.filter(user=userid)
+
     Roasteryid = []
     total = {}
     for cart_item in orderitems:
@@ -176,13 +178,16 @@ def purchase(request):
             if item.OrderID_id == order.OrderID:
                 total[order.OrderID] += (item.product.Price * item.quantity)
 
-    Reviewinfo = Reviews.objects.filter(user=userid)
-    coffeeids = [i.Coffee_id for i in Reviews.objects.filter(user=userid)]
-    orderids = [i.Order_id for i in Reviews.objects.filter(user=userid)]
+    str_pair = ["{}_{}".format(i.Coffee_id, i.Order_id) for i in Reviews.objects.filter(user=userid)]
+
+    item_pairs = {}
+    for item in orderitems:
+        string = "{}_{}".format(item.product.CoffeeID, item.OrderID_id)
+        item_pairs[item.id] = string
 
     context = {'total': total, 'Roasteryinfo': Roasteryinfo, 'orderinfo': orderinfo, 'userinfo': userinfo,
-               'orderitems': orderitems, 'Reviewinfo':Reviewinfo, 'coffeeids': coffeeids, 'orderids':orderids}
-    return render(request, 'main/mypage/purchase_hw.html', context)  # main/mypage/purchase.html
+               'orderitems': orderitems, 'Reviewinfo': Reviewinfo, 'str_pair':str_pair, 'item_pairs' : item_pairs}
+    return render(request, 'main/mypage/purchase_hw.html', context)
 
 
 def review(request):
@@ -203,12 +208,11 @@ def review(request):
                 Stars=input_values[1],
                 content=input_values[2],
                 created_date=datetime.now()
-                )
+            )
         except IntegrityError:
             pass
 
-    return HttpResponse('test done')
-# return redirect('cart:cart_detail')
+    return redirect('main:purchase')
 
 
 def servicePopup(request):

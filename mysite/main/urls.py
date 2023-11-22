@@ -10,7 +10,7 @@ urlpatterns = [
     path('', views.index),
     path('mypage/', views.update, name='mypage'),
     path('mypage/private_info/', views.update, name='update'),
-    path('mypage/purchase/', views.purchase, name='purchase'),
+    path('mypage/purchase/', views.purchase, name='purchase'), # 구매내역 페이지
     path('mypage/subscribe/', views.subscribe, name='subscribe'),
     path('main/popup.html', views.servicePopup),
     path('review/create/', views.review, name='submit')
