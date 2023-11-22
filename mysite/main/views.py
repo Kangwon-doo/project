@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from products.cosine import cos_recommendation
 from django.contrib.auth.decorators import login_required
+from .models import Coffee
 import json
 from .models import Coffee, Order, OrderItem, Preference, Subscription, Roastery
 from django.db import IntegrityError

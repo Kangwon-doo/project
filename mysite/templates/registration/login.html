@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load socialaccount %}
+{% block content %}
+<!-- login start -->
+<section id="signin" class="signin">    <!-- signin -->
+    <div class="container my-3">
+        <div class="title" style="margin-left: 530px;">로그인</div> <!-- 수정된 부분 -->
+        <div id="signin_header">
+        </div>
+        <div id="signin_body">
+            <form method="post" class="post-form" action="{% url 'common:login' %}">
+                {% csrf_token %}
+                {% include "form_errors.html" %}
+                <div class="form-group">
+                    <input placeholder="ID" type="text" class="form-control" name="username" id="username" style="width: 500px; margin-left: 350px;"  value="{{ form.username.value|default_if_none:'' }}">
+                </div>
+                <div class="form-group">
+                    <input placeholder="비밀번호" type="password" class="form-control" name="password" id="password" style="width: 500px; margin-left: 350px;" value="{{ form.password.value|default_if_none:'' }}">
+                </div>
+                <button style="margin-left: 520px;" type="submit" class="btn btn-primary">로그인</button>
+                <button type="button" onclick="location.href = '{% provider_login_url 'naver' %}'">
+                    <img src="{% static 'logo/icon_naver.png' %}" alt="Naver Logo" style="width: 33px;">
+                </button>
+                <button type="button" onclick="location.href = '{% provider_login_url 'kakao' %}'">
+                    <img src="{% static 'logo/icon_kakao.png' %}" alt="Kakao Logo" style="width: 33px;">
+                </button>
+            </form>
+            <div>
+                <a style="margin-left: 800px;" href="{% url 'common:password_reset' %}" }>아이디/비밀번호 찾기</a>
+            </div>
+        </div>
+        <a style="margin-left: 300px;" href="{% url 'common:signup' %}">회원가입</a>
+    </div>
+</section> <!-- signin -->
+<!-- login end -->
+{% endblock %}
