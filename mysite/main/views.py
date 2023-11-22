@@ -262,3 +262,4 @@ def delete_complete(request):
 #     user.delete()
 #     #auth_logout(request)
 #     return render(request, '/')
+
