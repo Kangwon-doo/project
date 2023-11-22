@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import CustomUser
 from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy
@@ -34,7 +35,7 @@ def signup(request):
 
 
 # 아이디 찾기
-#
+
 # def forgot_id(request):
 #     context = {}
 #
@@ -60,4 +61,4 @@ class PasswordResetConfirmView(auth_views.PasswordResetConfirmView):
     """
     template_name = 'common/password_change.html'
 
-# views.py
+
