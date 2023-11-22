@@ -5,11 +5,7 @@ from django.urls import path
 from django.contrib.auth import views as auth_views
 from . import views
 
-<<<<<<< HEAD
 app_name = 'common'
-=======
-app_name = "common"
->>>>>>> heewon
 
 urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='common/login.html'), name='login'),
@@ -21,8 +17,5 @@ urlpatterns = [
     path('password_reset/', views.PasswordResetView.as_view(), name='password_reset'),
 	path('password_reset/done/', views.PasswordResetDoneView.as_view(), name='password_reset_done'),
 	path('password_reset_confirm/<uidb64>/<token>/', views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
-<<<<<<< HEAD
 
-=======
->>>>>>> heewon
 ]

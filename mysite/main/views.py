@@ -4,10 +4,6 @@ from django.contrib.auth.decorators import login_required
 from .models import Coffee
 import json
 from .models import Coffee, Order, OrderItem, Preference, Subscription, Roastery
-from django.db import IntegrityError
-from django.http import HttpResponse
-import json
-from .models import Coffee, Order, OrderItem, Preference, Subscription, Roastery, Reviews, CustomUser
 import random
 from django.contrib.auth.models import User
 from common.forms import CustomUserChangeForm
@@ -81,9 +77,11 @@ def result(request):
 # 메인페이지
 
 def index(request):  # main page
-    recent = Coffee.objects.order_by('-Created_date')[0:8]
+    ids = [i.CoffeeID for i in Coffee.objects.all()]
+    random_coffees = random.sample(ids, 8)
+    shuffled = Coffee.objects.filter(CoffeeID__in=random_coffees)
     top5 = Coffee.objects.order_by('Stock')[0:5]
-    context = {'coffee_info': recent, 'top5': top5}
+    context = {'coffee_info': shuffled, 'top5':top5}
     return render(request, 'main/mainpage.html', context)
 
 
@@ -165,13 +163,10 @@ def subscribe(request):
 @login_required(login_url='/common/login')
 def purchase(request):
     userinfo = request.user
-    userid = request.user.id
     email = request.user.email
 
     orderinfo = Order.objects.filter(emailAddress=email)
     orderitems = OrderItem.objects.filter(email=email)
-    Reviewinfo = Reviews.objects.filter(user=userid)
-
     Roasteryid = []
     total = {}
     for cart_item in orderitems:
@@ -184,42 +179,41 @@ def purchase(request):
             if item.OrderID_id == order.OrderID:
                 total[order.OrderID] += (item.product.Price * item.quantity)
 
-    str_pair = ["{}_{}".format(i.Coffee_id, i.Order_id) for i in Reviews.objects.filter(user=userid)]
-
-    item_pairs = {}
-    for item in orderitems:
-        string = "{}_{}".format(item.product.CoffeeID, item.OrderID_id)
-        item_pairs[item.id] = string
-
-    context = {'total': total, 'Roasteryinfo': Roasteryinfo, 'orderinfo': orderinfo, 'userinfo': userinfo,
-               'orderitems': orderitems, 'Reviewinfo': Reviewinfo, 'str_pair':str_pair, 'item_pairs' : item_pairs}
-    return render(request, 'main/mypage/purchase_hw.html', context)
+    context = {'total': total, 'Roasteryinfo': Roasteryinfo, 'orderinfo': orderinfo, 'userinfo':userinfo, 'orderitems':orderitems}
+    return render(request, 'main/mypage/purchase.html', context)
 
 
-def review(request):
-    userid = request.user.id
-    print(userid)
+def review(request, coffee_id):
+    user = request.user
     if request.method == 'POST':
-        user_review = dict(request.POST)
-        del user_review['csrfmiddlewaretoken']
-        print('sep : ', {i: j[0] for i, j in user_review.items()})  # sep :  {'2': '4', 'review_text': 'testtt'} : 4점
-        input = {i: j[0] for i, j in user_review.items()}
-        input_keys = list(input.keys())
-        input_values = list(input.values())
-        try:
-            Reviews.objects.create(
-                Coffee_id=input_keys[1],
-                Order_id=input_values[0],
-                user_id=userid,
-                Stars=input_values[1],
-                content=input_values[2],
-                created_date=datetime.now()
-            )
-        except IntegrityError:
-            pass
+        starRating = request.POST.get('starRating')
+    else:
+        pass
 
-    return redirect('main:purchase')
+
 
 
 def servicePopup(request):
     return render(request, 'main/popup.html')
+
+from django.contrib.auth.decorators import login_required
+
+@login_required(login_url='/common/login')
+def delete(request):
+    if request.method == "POST":
+        user = request.user
+        user.delete()
+        # 로그아웃 등의 추가적인 처리를 할 수 있습니다.
+        return redirect('main:delete_complete')
+
+    return render(request, 'main/mypage_delete_confirm.html')
+
+def delete_complete(request):
+    return render(request, 'main/mypage_delete_complete.html')
+
+
+# def deleteProcess(request):
+#     user = request.user
+#     user.delete()
+#     #auth_logout(request)
+#     return render(request, '/')
