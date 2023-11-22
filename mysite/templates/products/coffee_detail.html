@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/swiper-bundle.min.css' %}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="shortcut icon" href="#">
+    <style>.next-tbody { display: none;}</style>
 {% endblock %}
 
 {% block content %}
@@ -162,8 +163,11 @@
 <hr>
 <!--리뷰란-->
 <div class="wrapper">
-    {% if reviewinfo %}
+    {% if not reviewinfo %}
+    <div>리뷰가 아직 없습니다.</div>
+    {% elif reviewinfo.count  < 3%} <!-- 리뷰수가 최대 2개 일 때-->
     <table>
+        <tbody>
         {% for i in reviewinfo %}
         <tr> <!-- 사용자 정보 와 별점-->
             <td>
@@ -186,10 +190,66 @@
             </td>
         </tr>
         {%endfor%}
+        </tbody>
     </table>
-    {%else%} <!-- 이 커피에 남겨진 리뷰가 없음 -->
-    <div>리뷰가 아직 없습니다.</div>
-    {%endif%}
+
+    {%else%} <!-- 리뷰가 3개이상 -->
+    <table>
+        <tbody>
+            {% for i in reviewinfo|slice:":2" %}
+            <tr> <!-- 사용자 정보 와 별점-->
+                <td>
+                    <img src="/static/logo/favicon.png"> <!-- 예시 프로필 사진-->
+                </td>
+                <td>
+                    {% for u in userinfo %}
+                    {% if u.id == i.user_id%}
+                    {{u.name}}님의 리뷰
+                    {%endif%}
+                    {%endfor%}
+                    <br>
+                    {{i.Stars}} <img src="/static/images/star.png" style="width:20px; height:20px;">
+                </td>
+            </tr>
+            <tr> <!--리뷰 내용 -->
+                <td colspan="2">
+                {{i.content}}
+                    <p style="text-align:right;">{{i.created_date|date:"o년 M d일"}}</p>
+                </td>
+            </tr>
+            {%endfor%}
+        </tbody>
+        <tbody>
+            <tr>
+                <td colspan="2" class="show-more-button">Show more</td>
+            </tr>
+        </tbody>
+        <tbody>
+            {% for i in reviewinfo|slice:"2:" %}
+            <tr> <!-- 사용자 정보 와 별점-->
+                <td>
+                    <img src="/static/logo/favicon.png"> <!-- 예시 프로필 사진-->
+                </td>
+                <td>
+                    {% for u in userinfo %}
+                    {% if u.id == i.user_id%}
+                    {{u.name}}님의 리뷰
+                    {%endif%}
+                    {%endfor%}
+                    <br>
+                    {{i.Stars}} <img src="/static/images/star.png" style="width:20px; height:20px;">
+                </td>
+            </tr>
+            <tr> <!--리뷰 내용 -->
+                <td colspan="2">
+                {{i.content}}
+                    <p style="text-align:right;">{{i.created_date|date:"o년 M d일"}}</p>
+                </td>
+            </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+    {%endif%} <!-- 리뷰 수에 따른 조건절 끝-->
 </div>
 
 <hr>
@@ -247,4 +307,15 @@
 </script>
 <script src="{% static 'js/swiper-bundle.min.js' %}"></script>
 <script src="{% static 'js/products/coffee.js' %}"></script>
+<script>
+    $(document).on("click", ".show-more-button", function() {
+      if ($(this).text() == "Show more") {
+        $(this).text("Show less");
+        $(this).closest('table').children(".next-tbody").css('display', 'block');
+      } else {
+        $(this).text("Show more");
+        $(this).closest('table').children(".next-tbody").css('display', 'none');
+      }
+    });
+</script>
 {% endblock %}

@@ -125,10 +125,15 @@ def coffee_detail(request, coffee_id):
     chart_image = base64.b64encode(buffer.read()).decode('utf-8')
     buffer.close()
 
+    reviewinfo = Reviews.objects.filter(Coffee_id=coffee_id).order_by('created_date')[:5]
+    userinfo = CustomUser.objects.all()
+    
     context = {'coffee_info' : coffee_info, 
                'cosine_sim' : similarity, 
                'roastery_name': roastery_name,
-               'chart_image': chart_image }
+               'chart_image': chart_image,
+               'reviewinfo': reviewinfo,
+               'userinfo':userinfo }
     
     return render(request, 'products/coffee_detail.html', context)
 

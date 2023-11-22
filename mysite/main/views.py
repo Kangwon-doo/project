@@ -95,11 +95,9 @@ def result(request):
 # 메인페이지
 
 def index(request):  # main page
-    ids = [i.CoffeeID for i in Coffee.objects.all()]
-    random_coffees = random.sample(ids, 8)
-    shuffled = Coffee.objects.filter(CoffeeID__in=random_coffees)
+    recent = Coffee.objects.order_by('-Created_date')[0:8]
     top5 = Coffee.objects.order_by('Stock')[0:5]
-    context = {'coffee_info': shuffled, 'top5': top5}
+    context = {'coffee_info': recent, 'top5': top5}
     return render(request, 'main.html', context)
 
 
@@ -217,6 +215,8 @@ def purchase(request):
 
     orderinfo = Order.objects.filter(emailAddress=email)
     orderitems = OrderItem.objects.filter(email=email)
+    Reviewinfo = Reviews.objects.filter(user=userid)
+
     Roasteryid = []
     total = {}
     for cart_item in orderitems:
@@ -229,10 +229,16 @@ def purchase(request):
             if item.OrderID_id == order.OrderID:
                 total[order.OrderID] += (item.product.Price * item.quantity)
 
-    Reviewinfo = Reviews.objects.filter(user=userid)
+    str_pair = ["{}_{}".format(i.Coffee_id, i.Order_id) for i in Reviews.objects.filter(user=userid)]
+
+    item_pairs = {}
+    for item in orderitems:
+        string = "{}_{}".format(item.product.CoffeeID, item.OrderID_id)
+        item_pairs[item.id] = string
+
     context = {'total': total, 'Roasteryinfo': Roasteryinfo, 'orderinfo': orderinfo, 'userinfo': userinfo,
-               'orderitems': orderitems, 'Reviewinfo':Reviewinfo}
-    return render(request, 'main/mypage/purchase_yj.html', context)  # main/mypage/purchase.html
+               'orderitems': orderitems, 'Reviewinfo': Reviewinfo, 'str_pair':str_pair, 'item_pairs' : item_pairs}
+    return render(request, 'main/mypage/purchase_hw.html', context)
 
 
 def review(request):
@@ -253,12 +259,11 @@ def review(request):
                 Stars=input_values[1],
                 content=input_values[2],
                 created_date=datetime.now()
-                )
+            )
         except IntegrityError:
             pass
 
-    return HttpResponse('test done')
-# return redirect('cart:cart_detail')
+    return redirect('main:purchase')
 
 
 def servicePopup(request):
