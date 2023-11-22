@@ -67,22 +67,32 @@
 <hr/>
 
 <!-- 알고리즘 란 -->
-<div class="detail-wrapper" style="position=relative;">
+<div class="coffee-swiper-wrapper">
     <h2>이 제품과 비슷한 상품</h2>
-    <div class="swiper-container mySwiper">
-        <div class="slide-content">
+    <div class="swiper-container">
+    <!-- Swiper -->
+        <div class="swiper">
             <div class="swiper-wrapper">
                 {% for rec in cosine_sim %}
-                    <div class="item swiper-slide">
-                        <img class="rec_img" src="/static/coffee_img/{{rec.CoffeeID}}.jpg">
-                        <h4 class="rec-name">{{rec.CoffeeName}}</h4>
-                        <a class="rec-btn" href="/coffee/{{rec.CoffeeID}}/">보러가기</a>
+                    <div class="card h-100 swiper-slide">
+                    <a href="/coffee/{{rec.CoffeeID}}"><img src="/static/coffee_img/{{rec.CoffeeID}}.jpg" alt="{{i.CoffeeID}}" class="card-img-top"></a>
+                    <div class="card-body">
+                        <h5 class="card-title">{{rec.CoffeeName}}</h5>
+                        <p class="card-text">로스터리 이름</p>
+                        <p class="card-text"><small class="text-body-secondary">{{rec.Price}}</small></p>
+                    </div>
                     </div>
                 {% endfor %}
             </div>
-        </div> 
+            <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
+            <!-- Add Arrows -->
+            <div class="swiper-button-next" style="color:grey;"></div>
+            <div class="swiper-button-prev" style="color:grey;"></div>
+        </div>
     </div>
 </div>
+
 
 <!-- 구분선 -->
 <hr/>
@@ -218,6 +228,23 @@
 </div>
 
 <!-- 자바스크립트 파일 -->
+<script type="module">
+    var swiper = new Swiper('.swiper', {
+        slidesPerView: 4,
+        spaceBetween: 10,
+        slidesPerGroup: 4,
+        loop: true,
+        loopFillGroupWithBlank: true,
+        pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+        },
+        navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+        },
+    });
+</script>
 <script src="{% static 'js/swiper-bundle.min.js' %}"></script>
 <script src="{% static 'js/products/coffee.js' %}"></script>
 {% endblock %}

@@ -1,140 +1,82 @@
 {% extends 'main/mypage.html' %}
 {% load static %}
-{%load humanize%}
+{% load humanize %}
+
+{% block mypageHead %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/mypage/history.css' %}">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+{% endblock %}
+
+
 {% block mypageContent %}
 
 <!-- purchase start -->
-<div class="content" id="purchase">
+<div class="history-wrapper">
     <div class="subtitle">
-        <span>{{userinfo.username}}님의 구매 내역</span>
+        <h2>{{userinfo.username}}님의 구매 내역</h2>
     </div>
 
-    {% for order in orderinfo %}
-    <div class = 'private_info_item'>
-        <div id="order_info_head">
-            <span class="text-left my_title">주문 번호: {{order.OrderID}}</span>
-            <span class="text-left my_title">구매 일자: {{order.created|date:"o년 M d일 A h:i"}}</span>
-        </div>
-        <div class="row mx-auto" id="order_info_body">
-            <div class="text-center">
-                <table class="table my_customer_table">
-                    <tbody>
-                        {% for item in orderitems %}
+
+    <div class="accordion" id="accordionPanelsStayOpenExample">
+        {% for order in orderinfo %}
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse{{ order.OrderID }}" aria-expanded="true" aria-controls="panelsStayOpen-collapse{{ order.OrderID }}">
+                        <span class="text-left my_title">주문 번호: {{ order.OrderID }}</span>
+                        <span class="text-left my_title">구매 일자: {{ order.created|date:"o년 M d일 A h:i" }}</span>
+                    </button>
+                </h2>
+    
+                <div id="panelsStayOpen-collapse{{ order.OrderID }}" class="accordion-collapse collapse show">
+                    <div class="accordion-body">
+                        <ul class="list-group">
+                            {% for item in orderitems %}
                         {% if item.OrderID_id == order.OrderID %}
-                        <tr>
-                            <td style="width: 30%;">
-                                <a href="/coffee/{{item.product.CoffeeID}}">
-                                    <img src="/static/coffee_img/{{item.product.CoffeeID}}.jpg" alt="" class="float-left rounded custom_image">
-                                </a>
-                            </td>
-                            <td class="text-left order_coffee_info">
-                                <div>
-                                    {% for roastery in Roasteryinfo %}
-                                    {% if roastery.RoasteryID == item.product.RoasteryID_id %}
-                                    <img class="roas_img" src="/static/roastery_img/{{roastery.RoasteryName}}.jpg">
-                                    <span class="roas-name">{{roastery.RoasteryName}}</span>
-                                    {%endif%}
-                                    {%endfor%}
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <a href="/coffee/{{item.product.CoffeeID}}">
+                                        <img src="/static/coffee_img/{{item.product.CoffeeID}}.jpg" alt="" class="coffee-img">
+                                    </a>
                                 </div>
-                                <div class="order_coffee_item">
-                                    <span class="order_coffee_name">{{item.product.CoffeeName}}</span>
-                                    <span>용량 : {{item.product.Capacity}}</span>
-                                    <span>가격 : {{item.product.Price|intcomma}}원</span>
-                                    <span>구매량 : {{item.quantity}}개</span>
+            
+                                <div class="col-md-7 info">
+                                    <h2 class="coffee-name">{{item.product.CoffeeName}}</h2>
+            
+                                    <div class="roastery">
+                                        {% for roastery in Roasteryinfo %}
+                                        {% if roastery.RoasteryID == item.product.RoasteryID_id %}
+                                        <img class="roas_img" src="/static/roastery_img/{{roastery.RoasteryName}}.jpg">
+                                        <span class="roas-name">{{roastery.RoasteryName}}</span>
+                                        {%endif%}
+                                        {%endfor%}
+                                    <div>
+                        
+                                    <div class="coffee-info">
+                                        <ul>
+                                            <li>용량 : {{item.product.Capacity}}</li>
+                                            <li>가격 : {{item.product.Price|intcomma}}원</li>
+                                            <li>구매량 : {{item.quantity}}개</li>
+                                        </ul>
+                                    </div>
                                 </div>
-                            </td>
-                            <td class="order_coffee_price"><span>{{item.sub_total|intcomma}}원</span></td>
-                        </tr>
-                        {% if Reviewinfo %}
-                        <tr>
-                            {% for review in Reviewinfo %}
-                                {% if item.product.CoffeeID == review.Coffee_id and item.OrderID_id == review.Order_id %}
-                                    <td colspan="3">
-                                        <button onclick="toggleReviewForm(this)" style="color:green;">리뷰 보기</button>
-                                        <div class="reviewbox" style="display: none;">
-                                        {{review.Stars}} <img src="/static/images/star.png" style="width:20px; height:20px;">
-                                        <br>
-                                        {{review.content}}
-                                        <br>
-                                        작성일 : {{review.created_date|date:"o년 M d일 A h:i"}}
-                                        </div>
-                                    </td>
-
-                                {% else %}
-                                    <td colspan="3">
-                                        <button onclick="toggleReviewForm(this)" style="color:blue;">리뷰쓰기</button>
-                                        <div class="reviewbox" style="display: none;">
-                                            <h2>소중한 의견</h2>
-                                            <form id="reviewForm" action="/review/create/" method="POST">
-                                                {% csrf_token %}
-                                                <input type="hidden" name="order_id" value="{{item.OrderID_id}}">
-                                                <div class ="star_rating">
-                                                    <span class="star on" value="1"> </span>
-                                                    <span class="star" value="2"> </span>
-                                                    <span class="star" value="3"> </span>
-                                                    <span class="star" value="4"> </span>
-                                                    <span class="star" value="5"> </span>
-                                                    <input type="hidden" name="{{item.product.CoffeeID}}" id="starRatingInput" value="" />
-                                                </div>
-                                                <div class="add_review">
-                                                    <textarea class="star_box" name = "review_text" placeholder="리뷰 내용을 작성해주세요."></textarea>
-                                                    <input type="submit" class="btn02" value="리뷰 등록"/>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </td>
-                                {%endif%}
-
-                            {%endfor%}
-                        {%else%}
-                            <td colspan="3">
-                                <button onclick="toggleReviewForm(this)" style="color:red;">리뷰쓰기</button>
-                                <div class="reviewbox" style="display: none;">
-                                    <h2>소중한 의견</h2>
-                                    <form id="reviewForm" action="/review/create/" method="POST">
-                                        {% csrf_token %}
-                                        <input type="hidden" name="order_id" value="{{item.OrderID_id}}">
-                                        <div class ="star_rating">
-                                            <span class="star on" value="1"> </span>
-                                            <span class="star" value="2"> </span>
-                                            <span class="star" value="3"> </span>
-                                            <span class="star" value="4"> </span>
-                                            <span class="star" value="5"> </span>
-                                            <input type="hidden" name="{{item.product.CoffeeID}}" id="starRatingInput" value="" />
-                                        </div>
-                                        <div class="add_review">
-                                            <textarea class="star_box" name = "review_text" placeholder="리뷰 내용을 작성해주세요."></textarea>
-                                            <input type="submit" class="btn02" value="리뷰 등록"/>
-                                        </div>
-                                    </form>
-                                </div>
-                            </td>
-                        </tr>
-                        {%endif%}
+                            </div>
+            
+                            <span>{{item.sub_total|intcomma}}원</span>
+            
+                        </li>
                         {%endif%}
                         {%endfor%}
-                        <tr>
-                            <td></td> <!-- 원두 이미지 -->
-                            <td></td> <!-- 원두 정보-->
-                            <td>
-                                {%for id, value in total.items%}
-                                {% if id == order.OrderID %}
-                                총 구매 금액 : {{value|intcomma}}원
-                                {%endif%}
-                                {%endfor%}
-                            </td> <!-- 가격 정보 -->
-                            <td></td>  <!--리뷰 공간-->
-                        </tr>
-                    </tbody>
-                </table>
+                        </ul>
+                    </div>
+                </div>
             </div>
-        </div>
+        {% endfor %}
     </div>
-{% endfor %}
+    
 
-</div><!-- /.container-->
-</section><!--/.mypage-->
-<!--purchase end -->
+    
+
 
 <script>
     function toggleReviewForm(button) {
