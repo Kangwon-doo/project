@@ -1,0 +1,47 @@
+id,email,Caffeine,CoffeeType,CupNoteCategories,Body,Sourness,Sweetness,Bitterness
+3,hwhj1214@naver.com,0,1,"['초콜릿', '고소함']",4,1,4,2
+4,syjflora@gmail.com,1,0,"['초콜릿', '달콤함', '고소함']",3,3,3,3
+5,aiwithsj@gmail.com,0,0,['고소함'],4,2,3,3
+6,katherine@gmail.com,0,0,['고소함'],5,1,1,4
+7,seunghyun@test.com,0,1,"['달콤함', '고소함']",3,1,5,2
+8,yoojung.seol@gmail.com,0,1,"['꽃', '초콜릿', '달콤함', '고소함']",3,3,3,3
+9,gangwondu55@gmail.com,0,0,"['꽃', '과일', '향료']",3,3,3,3
+10,miju1218@naver.com,0,0,['초콜릿'],3,1,5,2
+11,lsb9938@naver.com,0,0,"['과일', '초콜릿', '향료', '고소함']",3,2,2,1
+13,pururun3@gmail.com,0,0,['허브'],3,2,3,3
+16,pururun@gmail.com,0,0,['꽃'],3,3,3,3
+17,putty@gmail.com,0,0,['고소함'],3,2,3,2
+18,00qudwo@gmail.com,0,1,['초콜릿'],3,3,3,3
+20,jhaemi44@gmail.com,0,1,['고소함'],5,2,1,3
+21,domgy0112@naver.com,0,1,['고소함'],4,2,1,2
+22,5tjfla@naver.com,0,1,['고소함'],3,1,1,3
+23,6tjfla@naver.com,1,0,"['과일', '초콜릿', '달콤함']",2,1,5,4
+24,sjkim@everlogistics.com,0,0,['고소함'],4,2,3,2
+25,test123@test.com,1,1,"['초콜릿', '고소함']",5,3,1,4
+26,info@everlogistics.com,0,1,['고소함'],5,2,2,4
+27,tttest123@test.com,1,1,"['꽃', '초콜릿', '향료', '달콤함']",4,4,5,3
+28,sjkim@hanmail.net,0,1,['고소함'],4,2,3,2
+29,gmlwl4006@gmail.com,1,0,"['향료', '고소함', '허브']",5,4,2,4
+30,kimhwnj@hanmail.net,1,0,"['꽃', '과일']",3,2,3,1
+33,bh4788@naver.com,0,0,"['과일', '초콜릿', '고소함']",3,3,2,3
+34,kimhwnj1@hanmail.net,1,1,['꽃'],3,2,2,2
+40,kimhwnj2@hanmaol.net,0,0,['향료'],3,3,3,3
+41,kimhwnj@hanmail.net,0,1,['고소함'],4,2,3,2
+42,kimhwnj2@hanmail.net,0,1,['고소함'],4,2,3,2
+43,kimhwnj@gmail.com,0,1,['고소함'],4,2,3,2
+44,noriiya@naver.com,0,0,"['고소함', '허브']",4,2,4,3
+45,heezj_i@naver.com,0,0,"['향료', '고소함', '허브']",5,4,3,4
+46,babo@naver.com,0,1,"['초콜릿', '달콤함']",3,1,4,2
+47,melme900@gmail.com,0,1,"['꽃', '과일', '초콜릿', '달콤함']",2,3,3,3
+48,jwmansevvvv@naver.com,1,0,['고소함'],3,3,3,3
+50,eunbi010614@gmail.com,0,0,"['달콤함', '고소함']",3,2,3,2
+51,jameskimjaewon.abc@gmail.com,0,0,['초콜릿'],5,1,5,5
+52,mycat@gmail.com,1,0,"['초콜릿', '고소함', '허브']",3,2,1,5
+53,james1@gmail.com,0,1,"['초콜릿', '향료', '달콤함', '고소함']",2,1,5,4
+54,james2@gmail.com,1,0,"['초콜릿', '향료', '달콤함', '고소함']",2,1,5,5
+55,kim5836js@naver.com,0,0,['과일'],3,4,3,2
+56,sypark02178@gmail.com,0,0,"['꽃', '초콜릿', '고소함']",4,4,3,2
+57,zbfld1230@gmail.com,0,1,['달콤함'],2,1,3,2
+58,mellkutee@gmail.com,1,0,"['초콜릿', '달콤함']",2,1,3,3
+59,ribbon627@naver.com,0,0,"['초콜릿', '고소함']",5,1,1,5
+61,katherine1@gmail.com,0,0,"['초콜릿', '고소함']",4,1,4,5

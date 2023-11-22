@@ -5,7 +5,7 @@ from formtools.wizard.views import SessionWizardView
 
 # import products
 from .forms import EmailForm, PreferenceForm, PredictionForm
-from main.models import Coffee, Roastery, Order, Reviews, test_Reviews, test_preference
+from main.models import Coffee, Roastery, Order, Reviews, test_Reviews, test_preference, CustomUser
 from .cosine import most_similar
 import random
 import json
@@ -85,9 +85,14 @@ def coffee_detail(request, coffee_id):
     roastery_name = Roastery.objects.all()
     similarity_ids = most_similar(coffee_id, 5)
     similarity = Coffee.objects.filter(CoffeeID__in=similarity_ids)
+    reviewinfo = Reviews.objects.filter(Coffee_id=coffee_id).order_by('created_date')[:5]
+    userinfo = CustomUser.objects.all()
     context = {'coffee_info' : coffee_info, 
                'cosine_sim' : similarity, 
-               'roastery_name': roastery_name }
+               'roastery_name': roastery_name,
+               'reviewinfo': reviewinfo,
+               'userinfo': userinfo
+               }
     coffee_info.Country = coffee_info.Country.replace("[", "").replace("]", "").replace("'", "")
     coffee_info.CupNote = coffee_info.CupNote.replace("[", "").replace("]", "").replace("'", "")
     return render(request, 'products/coffee_detail.html', context)

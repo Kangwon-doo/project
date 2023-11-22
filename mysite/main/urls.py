@@ -13,7 +13,7 @@ urlpatterns = [
     path('mypage/purchase/', views.purchase, name='purchase'),
     path('mypage/subscribe/', views.subscribe, name='subscribe'),
     path('main/popup.html', views.servicePopup),
-    path('review/create/<int:coffee_id>', views.review, name='submit'),
     path('mypage/delete/', views.delete, name='delete'),
     path('mypage/delete/complete/', views.delete_complete, name='delete_complete'),
+    path('review/create/', views.review, name='submit')
 ]

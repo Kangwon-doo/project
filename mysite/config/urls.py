@@ -21,8 +21,12 @@ from django.conf import settings
 
 
 urlpatterns = [
+<<<<<<< HEAD
     path('admin/', admin.site.urls),
      path('admin/', include('django.contrib.auth.urls')),
+=======
+    # path('admin/', admin.site.urls),
+>>>>>>> heewon
     path('', include('main.urls'), name='main_page'),
     path('', include('products.urls'), name = 'products'),
     path('', include('subscribe.urls'), name = 'subscribe'),
@@ -30,5 +34,8 @@ urlpatterns = [
     path('cart/', include('cart.urls')),
     path('admin/', include('django.contrib.auth.urls')),
     path('common/', include('common.urls')),
+<<<<<<< HEAD
 
+=======
+>>>>>>> heewon
 ]

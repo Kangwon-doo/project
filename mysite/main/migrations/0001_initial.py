@@ -328,12 +328,19 @@ class Migration(migrations.Migration):
                         verbose_name="ID",
                     ),
                 ),
+                ("Stars", models.CharField(default=0, max_length=1)),
                 ("content", models.TextField()),
                 ("created_date", models.DateTimeField()),
                 (
-                    "CoffeeID",
+                    "Coffee",
                     models.ForeignKey(
                         on_delete=django.db.models.deletion.CASCADE, to="main.coffee"
+                    ),
+                ),
+                (
+                    "Order",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="main.order"
                     ),
                 ),
                 (
@@ -446,5 +453,11 @@ class Migration(migrations.Migration):
             options={
                 "db_table": "CartItem",
             },
+        ),
+        migrations.AddConstraint(
+            model_name="reviews",
+            constraint=models.UniqueConstraint(
+                fields=("Coffee", "Order", "user"), name="unique_host_migration"
+            ),
         ),
     ]
