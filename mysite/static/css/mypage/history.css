@@ -1,0 +1,15 @@
+.coffee-img {
+    width: 10vw;
+}
+
+.roas_img {
+    width: 2vw;
+    border-radius: 50%;
+}
+
+.coffee-info > ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
