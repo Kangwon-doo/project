@@ -93,10 +93,10 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'team_wondoodoo', # DB name
-        'USER': 'admin', # account name
-        'PASSWORD': 'admin1234',
-        'HOST': 'database-1.cql2hwaazxkg.ap-northeast-2.rds.amazonaws.com',  # 서버주소
+        'NAME': 'wondoodoo', # DB name
+        'USER': 'root', # account name
+        'PASSWORD': '1234',
+        'HOST': '127.0.0.1',  # 서버주소
         'PORT': '3306', # MySQL 포트 번호: 기본값 3306
     }
 }
@@ -155,7 +155,7 @@ AUTHENTICATION_BACKENDS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-
+LOGOUT_REDIRECT_URL = '/'
 LOGIN_REDIRECT_URL = '/'   # social login redirect
 ACCOUNT_LOGOUT_REDIRECT_URL = '/'  # logout redirect
 ACCOUNT_LOGOUT_ON_GET = True

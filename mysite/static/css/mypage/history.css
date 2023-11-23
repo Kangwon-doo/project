@@ -13,3 +13,99 @@
     padding: 0;
 }
 
+.coffee-info-2 {
+    display:flex;
+    justify-content: space-between;
+}
+
+hr {
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+}
+
+.d-inline-flex {
+    margin-top: 0px;
+}
+
+.add_review {
+    display: flex;
+    flex-direction: column;
+}
+
+textarea {
+    width: 100%;
+    height: 10vh;
+    margin-bottom: 1vh;
+}
+
+.reviewbox {
+    width: 100%;
+}
+
+#wondoo {
+    background-color:green;
+    color:white;
+    margin-top:1vh;
+}
+.sorry_img {
+    width: 12vw;
+    margin:auto;
+    margin-bottom:3vh;
+}
+h4 {
+    color: rgb(181, 181, 181);
+}
+.wrapper {
+    display: flex;
+    margin-top: 10vh;
+}
+.wrap {
+    margin: auto;
+    justify-content: center;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+/*======================== review star===============*/
+
+ .star_rating {
+    width: 100%;
+    box-sizing: border-box;
+    display: inline-flex;
+    float: left;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+.star_rating .star {
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+    display: inline-block;
+    background: url('https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FE2bww%2FbtsviSSBz4Q%2F5UYnwSWgTlFt6CEFZ1L3Q0%2Fimg.png') no-repeat;
+    background-size: 100%;
+    box-sizing: border-box;
+  }
+.star_rating .star.on {
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+    display: inline-block;
+    background: url('https://blog.kakaocdn.net/dn/b2d6gV/btsvbDoal87/XH5b17uLeEJcBP3RV3FyDk/img.png') no-repeat;
+    background-size: 100%;
+    box-sizing: border-box;
+  }
+  
+.star_box {
+    box-sizing: border-box;
+    background: #F3F4F8;
+    border: 0;
+    border-radius: 10px;
+    font-size: 13px;
+    font-family: sans-serif;
+  }

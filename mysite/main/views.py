@@ -210,10 +210,12 @@ def subscribe_remove(request,coffee_id):
 @login_required(login_url='/common/login')
 def purchase(request):
     userinfo = request.user
-    email = request.user.email
+    userid = request.user.id
 
-    orderinfo = Order.objects.filter(emailAddress=email)
-    orderitems = OrderItem.objects.filter(email=email)
+    orderinfo = Order.objects.filter(user_id=userid)
+    orderitems = OrderItem.objects.filter(user_id=userid)
+    Reviewinfo = Reviews.objects.filter(user=userid)
+
     Roasteryid = []
     total = {}
     for cart_item in orderitems:
@@ -226,16 +228,39 @@ def purchase(request):
             if item.OrderID_id == order.OrderID:
                 total[order.OrderID] += (item.product.Price * item.quantity)
 
-    context = {'total': total, 'Roasteryinfo': Roasteryinfo, 'orderinfo': orderinfo, 'userinfo':userinfo, 'orderitems':orderitems}
+    str_pair = ["{}_{}".format(i.Coffee_id, i.Order_id) for i in Reviews.objects.filter(user=userid)]
+
+    item_pairs = {}
+    for item in orderitems:
+        string = "{}_{}".format(item.product.CoffeeID, item.OrderID_id)
+        item_pairs[item.id] = string
+
+    context = {'total': total, 'Roasteryinfo': Roasteryinfo, 'orderinfo': orderinfo, 'userinfo': userinfo,
+               'orderitems': orderitems, 'Reviewinfo': Reviewinfo, 'str_pair':str_pair, 'item_pairs': item_pairs}
     return render(request, 'main/mypage/purchase_hw.html', context)
 
 
-def review(request, coffee_id):
-    user = request.user
+def review(request):
+    userid = request.user.id
     if request.method == 'POST':
-        starRating = request.POST.get('starRating')
-    else:
-        pass
+        user_review = dict(request.POST)
+        del user_review['csrfmiddlewaretoken']
+        input = {i: j[0] for i, j in user_review.items()}
+        input_keys = list(input.keys())
+        input_values = list(input.values())
+        try:
+            Reviews.objects.create(
+                Coffee_id=input_keys[1],
+                Order_id=input_values[0],
+                user_id=userid,
+                Stars=input_values[1],
+                content=input_values[2],
+                created_date=datetime.now()
+            )
+        except IntegrityError:
+            pass
+
+    return redirect('main:purchase')
 
 
 def servicePopup(request):

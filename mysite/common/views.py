@@ -29,7 +29,6 @@ def signup(request):
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
-
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username = username, password = raw_password)
             login(request, user)
@@ -130,7 +129,7 @@ class PasswordResetDoneView(auth_views.PasswordResetDoneView):
 
 # new 비밀번호 입력
 # 아이디 찾기
-
+#
 # def forgot_id(request):
 #     context = {}
 #
@@ -156,4 +155,4 @@ class PasswordResetConfirmView(auth_views.PasswordResetConfirmView):
     """
     template_name = 'common/password_change.html'
 
-
+# views.py
