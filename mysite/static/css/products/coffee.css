@@ -39,6 +39,11 @@
     margin: 0px;
 }
 
+.cardheight {
+  height: 45vh;
+}
+
+
 .section2 {
     width: 65%;
     display: flex;
@@ -178,7 +183,6 @@
   .swiper2 {
     width: 100%;
     height: 100%;
-  
   }
   
   .swiper-slide {

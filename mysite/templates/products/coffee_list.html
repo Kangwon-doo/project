@@ -100,20 +100,20 @@
 
     <div class="paginator">
         <h2> 총 {{count}}개의 원두</h2>
+
         <div class="paginator-content">
             {% for coffee in page.object_list %}
-            <a class="block" href="/coffee/{{coffee.CoffeeID}}/">
-                <img src="/static/coffee_img/{{coffee.CoffeeID}}.jpg">
-                <div class="block-info">
-                    <div class="block-info-coffee">
-                        <h2>{{coffee.CoffeeName}}</h2>
-                        <h3>로스터리 이름</h3>
-                    </div>
-                    <p>₩ {{coffee.Price}}</p>
+
+            <div class="card col-md-4 cardheight">
+                <a href="/coffee/{{coffee.CoffeeID}}"><img src="/static/coffee_img/{{coffee.CoffeeID}}.jpg" alt="{{coffee.CoffeeID}}" class="card-img-top"></a>
+                <div class="card-body">
+                    <h5 class="card-title">{{coffee.CoffeeName}}</h5>
+                    <p class="card-text">{{coffee.RoasteryID.RoasteryName}}</p>
+                    <p class="card-text"><small class="text-body-secondary">₩ {{coffee.Price}}</small></p>
                 </div>
-            </a>
+            </div>
+
             {% endfor %}
-        </div>
 
         <div class="page-links"> 
             {% if page.has_previous %}
@@ -131,8 +131,10 @@
                     <a href="?{{ query_params|safe }}&page={{ page.next_page_number }}">다음</a>
                 {% endwith %}
             {% endif %}    
-        </div>   
+        </div>  
+
     </div>
+
 </div>
 
 

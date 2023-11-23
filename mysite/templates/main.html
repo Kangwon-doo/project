@@ -121,8 +121,8 @@
                         <a href="/coffee/{{i.CoffeeID}}"><img src="/static/coffee_img/{{i.CoffeeID}}.jpg" alt="{{i.CoffeeID}}" class="card-img-top"></a>
                         <div class="card-body">
                             <h5 class="card-title">{{i.CoffeeName}}</h5>
-                            <p class="card-text">로스터리 이름</p>
-                            <p class="card-text"><small class="text-body-secondary">{{i.Price}}</small></p>
+                            <p class="card-text">{{i.RoasteryID.RoasteryName}}</p>
+                            <p class="card-text"><small class="text-body-secondary">₩ {{i.Price}}</small></p>
                         </div>
                         </div>
                     {% endfor %}
@@ -145,8 +145,8 @@
                             <a href="/coffee/{{i.CoffeeID}}"><img src="/static/coffee_img/{{i.CoffeeID}}.jpg" alt="{{i.CoffeeID}}" class="card-img-top"></a>
                             <div class="card-body">
                             <h5 class="card-title">{{i.CoffeeName}}</h5>
-                            <p class="card-text">로스터리 이름</p>
-                            <p class="card-text"><small class="text-body-secondary">{{i.Price}}</small></p>
+                            <p class="card-text">{{i.RoasteryID.RoasteryName}}</p>
+                            <p class="card-text"><small class="text-body-secondary">₩ {{i.Price}}</small></p>
                             </div>
                         </div>
                     {% endfor %}

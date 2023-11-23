@@ -142,7 +142,7 @@ def roastery_detail(request, roastery_id): #로스터리ID
     roastery_info = Roastery.objects.get(RoasteryID = roastery_id)
     coffees = Coffee.objects.filter(RoasteryID = roastery_id)
     
-    coffee_paginator = Paginator(coffees, 3)
+    coffee_paginator = Paginator(coffees, 9)
     page_num = request.GET.get('page')
 
     try:
