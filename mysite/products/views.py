@@ -109,7 +109,7 @@ def roastery_detail(request, roastery_id): #로스터리ID
 
 class SurveyWizardView(SessionWizardView):
     form_list = [EmailForm, PreferenceForm]
-    template_name = 'products/wizardview_yj.html'
+    template_name = 'products/wizardview.html'
 
     def done(self, form_list, **kwargs):
         form_data = [form.cleaned_data for form in form_list]
