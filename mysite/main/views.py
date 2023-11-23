@@ -158,10 +158,9 @@ def subscribe(request):
 def purchase(request):
     userinfo = request.user
     userid = request.user.id
-    email = request.user.email
 
-    orderinfo = Order.objects.filter(emailAddress=email)
-    orderitems = OrderItem.objects.filter(email=email)
+    orderinfo = Order.objects.filter(user_id=userid)
+    orderitems = OrderItem.objects.filter(user_id=userid)
     Reviewinfo = Reviews.objects.filter(user=userid)
 
     Roasteryid = []
@@ -184,7 +183,7 @@ def purchase(request):
         item_pairs[item.id] = string
 
     context = {'total': total, 'Roasteryinfo': Roasteryinfo, 'orderinfo': orderinfo, 'userinfo': userinfo,
-               'orderitems': orderitems, 'Reviewinfo': Reviewinfo, 'str_pair':str_pair, 'item_pairs' : item_pairs}
+               'orderitems': orderitems, 'Reviewinfo': Reviewinfo, 'str_pair':str_pair, 'item_pairs': item_pairs}
     return render(request, 'main/mypage/purchase_hw.html', context)
 
 
