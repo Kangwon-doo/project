@@ -44,9 +44,28 @@
 <div class="wrapper">
     <h2>이 로스터리의 원두들</h2>
     <div class="item">
-        {% for coffee in coffees %}
-        <li><a href="/coffee/{{coffee.CoffeeID}}/">{{coffee.CoffeeName}}</a></li>
-        {% endfor %}
+
+        <div class="paginator">
+            {% for coffee in page.object_list %}
+            <a class="block" href="/coffee/{{coffee.CoffeeID}}/">
+                <img src="/static/coffee_img/{{coffee.CoffeeID}}.jpg">
+                <h2>{{coffee.CoffeeName}}</h2>
+                <p>{{coffee.Price}}</p>
+            </a>
+            {% endfor %}
+        </div>
+        
+        <div class="page-links"> 
+            {% if page.has_previous %}
+            <a href="?page={{page.previous_page_number}}">Previous Page</a>
+            {% endif %}
+    
+            
+            {% if page.has_next %}
+            <a href="?page={{page.next_page_number}}">Next Page</a>
+            {% endif %}
+        </div>
+
     </div>
 </div>
 

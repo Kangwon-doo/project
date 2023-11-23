@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load humanize %}
 {% load static %}
 
 {% block head %}
@@ -8,99 +9,133 @@
 {% endblock %}
 
 {% block content %}
-    <h2> Total Number of Coffee: {{count}}</h2>
-    <h2> Page number: {{page.paginator.num_pages}}</h2>
 
-    <form id="coffeeForm" method="GET" action="{% url 'products:coffee' %}">
-        <!-- 카페인 -->
-        <div class="checklist">
-            <input class="checkval" type="checkbox" id="cafCheckbox" name="caf">
-            <input type="hidden" name="caf_hidden" id="cafHidden" value="{% if request.GET.caf == 'on' %}on{% endif %}">
-            <label for="caf">
-                카페인
-            </label>
-        </div>
-        <div class="checklist">
-            <input class="checkval" type="checkbox" id="decafCheckbox" name="decaf">
-            <input type="hidden" name="decaf_hidden" id="decafHidden" value="{% if request.GET.decaf == 'on' %}on{% endif %}">
-            <label for="decaf">
-                디카페인
-            </label>
-        </div>
-        
-        <!-- 커피타입 -->
-        <div class="checklist">
-            <input class="checkval" type="checkbox" id="singleCheckbox" name="single">
-            <input type="hidden" name="single_hidden" id="singleHidden" value="{% if request.GET.single == 'on' %}on{% endif %}">
-            <label for="single">
-                싱글오리진
-            </label>
-        </div>
-        <div class="checklist">
-            <input class="checkval" type="checkbox" id="blendCheckbox" name="blend">
-            <input type="hidden" name="blend_hidden" id="blendHidden" value="{% if request.GET.blend == 'on' %}on{% endif %}">
-            <label for="blend">
-                블렌드
-            </label>
-        </div>
+<div class="header"><h1>원두</h1></div>
 
-        <!-- 로스팅 강도 -->
-        <div class="checklist">
-            <input class="checkval" type="checkbox" id="lightCheckbox" name="light">
-            <input type="hidden" name="light_hidden" id="lightHidden" value="{% if request.GET.light == 'on' %}on{% endif %}">
-            <label for="light">
-                라이트
-            </label>
-        </div>
-        <div class="checklist">
-            <input class="checkval" type="checkbox" id="lightmediumCheckbox" name="lightmedium">
-            <input type="hidden" name="lightmedium_hidden" id="lightmediumHidden" value="{% if request.GET.lightmedium == 'on' %}on{% endif %}">
-            <label for="lightmedium">
-                라이트미디엄
-            </label>
-        </div>
-        <div class="checklist">
-            <input class="checkval" type="checkbox" id="mediumCheckbox" name="medium">
-            <input type="hidden" name="medium_hidden" id="mediumHidden" value="{% if request.GET.medium == 'on' %}on{% endif %}">
-            <label for="medium">
-                미디엄
-            </label>
-        </div>
-        <div class="checklist">
-            <input class="checkval" type="checkbox" id="mediumdarkCheckbox" name="mediumdark">
-            <input type="hidden" name="mediumdark_hidden" id="mediumdarkHidden" value="{% if request.GET.mediumdark == 'on' %}on{% endif %}">
-            <label for="mediumdark">
-                미디엄다크
-            </label>
-        </div>
-        <div class="checklist">
-            <input class="checkval" type="checkbox" id="darkCheckbox" name="dark">
-            <input type="hidden" name="dark_hidden" id="darkHidden" value="{% if request.GET.dark == 'on' %}on{% endif %}">
-            <label for="dark">
-                다크
-            </label>
-        </div>        
-    </form>
+<hr class="hr-header">
+
+<div class="coffee-list-container">
+    <div class="filter">
+        <form id="coffeeForm" method="GET" action="{% url 'products:coffee' %}">
+            <!-- 카페인 -->
+            <h1>필터</h1>
+
+            <hr class="hr-style">
+
+            <div class="checklist">
+                <input class="checkval" type="checkbox" id="cafCheckbox" name="caf">
+                <input type="hidden" name="caf_hidden" id="cafHidden" value="{% if request.GET.caf == 'on' %}on{% endif %}">
+                <label for="caf">
+                    카페인
+                </label>
+            </div>
+            <div class="checklist">
+                <input class="checkval" type="checkbox" id="decafCheckbox" name="decaf">
+                <input type="hidden" name="decaf_hidden" id="decafHidden" value="{% if request.GET.decaf == 'on' %}on{% endif %}">
+                <label for="decaf">
+                    디카페인
+                </label>
+            </div>
+
+            <hr class="hr-style">
+            
+            <!-- 커피타입 -->
+            <div class="checklist">
+                <input class="checkval" type="checkbox" id="singleCheckbox" name="single">
+                <input type="hidden" name="single_hidden" id="singleHidden" value="{% if request.GET.single == 'on' %}on{% endif %}">
+                <label for="single">
+                    싱글오리진
+                </label>
+            </div>
+            <div class="checklist">
+                <input class="checkval" type="checkbox" id="blendCheckbox" name="blend">
+                <input type="hidden" name="blend_hidden" id="blendHidden" value="{% if request.GET.blend == 'on' %}on{% endif %}">
+                <label for="blend">
+                    블렌드
+                </label>
+            </div>
+
+            <hr class="hr-style">
+            
+            <!-- 로스팅 강도 -->
+            <div class="checklist">
+                <input class="checkval" type="checkbox" id="lightCheckbox" name="light">
+                <input type="hidden" name="light_hidden" id="lightHidden" value="{% if request.GET.light == 'on' %}on{% endif %}">
+                <label for="light">
+                    라이트
+                </label>
+            </div>
+            <div class="checklist">
+                <input class="checkval" type="checkbox" id="lightmediumCheckbox" name="lightmedium">
+                <input type="hidden" name="lightmedium_hidden" id="lightmediumHidden" value="{% if request.GET.lightmedium == 'on' %}on{% endif %}">
+                <label for="lightmedium">
+                    라이트미디엄
+                </label>
+            </div>
+            <div class="checklist">
+                <input class="checkval" type="checkbox" id="mediumCheckbox" name="medium">
+                <input type="hidden" name="medium_hidden" id="mediumHidden" value="{% if request.GET.medium == 'on' %}on{% endif %}">
+                <label for="medium">
+                    미디엄
+                </label>
+            </div>
+            <div class="checklist">
+                <input class="checkval" type="checkbox" id="mediumdarkCheckbox" name="mediumdark">
+                <input type="hidden" name="mediumdark_hidden" id="mediumdarkHidden" value="{% if request.GET.mediumdark == 'on' %}on{% endif %}">
+                <label for="mediumdark">
+                    미디엄다크
+                </label>
+            </div>
+            <div class="checklist">
+                <input class="checkval" type="checkbox" id="darkCheckbox" name="dark">
+                <input type="hidden" name="dark_hidden" id="darkHidden" value="{% if request.GET.dark == 'on' %}on{% endif %}">
+                <label for="dark">
+                    다크
+                </label>
+            </div>     
+            
+            <hr class="hr-style">
+               
+        </form>
+    </div>
 
     <div class="paginator">
-        {% for coffee in page.object_list %}
-        <a class="block" href="/coffee/{{coffee.CoffeeID}}/">
-            <img src="/static/coffee_img/{{coffee.CoffeeID}}.jpg">
-            <h2>{{coffee.CoffeeName}}</h2>
-            <p>{{coffee.Price}}</p>
-        </a>
-        {% endfor %}
-    </div>
+        <h2> 총 {{count}}개의 원두</h2>
+        <div class="paginator-content">
+            {% for coffee in page.object_list %}
+            <a class="block" href="/coffee/{{coffee.CoffeeID}}/">
+                <img src="/static/coffee_img/{{coffee.CoffeeID}}.jpg">
+                <div class="block-info">
+                    <div class="block-info-coffee">
+                        <h2>{{coffee.CoffeeName}}</h2>
+                        <h3>{{coffee.RoasteryID.RoasteryName}}</h3>
+                    </div>
+                    <p>₩ {{coffee.Price|intcomma}}</p>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+
         <div class="page-links"> 
             {% if page.has_previous %}
-            <a href="/coffee/?page={{page.previous_page_number}}">Previous Page</a>
+                {% with request.GET.urlencode as query_params %}
+                    <a href="?{{ query_params|safe }}&page={{ page.previous_page_number }}">이전</a>
+                {% endwith %}
             {% endif %}
-
             
+            <div class="page-num">
+                <h2> {{page.number}} 페이지 / {{total_page}} 페이지</h2>
+            </div>
+
             {% if page.has_next %}
-            <a href="/coffee/?page={{page.next_page_number}}">Next Page</a>
-            {% endif %}
-        </div>
+                {% with request.GET.urlencode as query_params %}
+                    <a href="?{{ query_params|safe }}&page={{ page.next_page_number }}">다음</a>
+                {% endwith %}
+            {% endif %}    
+        </div>   
+    </div>
+</div>
+
 
 <script>
     // 값 저장

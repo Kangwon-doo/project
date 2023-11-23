@@ -1,0 +1,73 @@
+.mypage-container {
+    width: 70%;
+    margin: auto;
+    margin-top: 10vh;
+    
+}
+
+.profile-links {
+    background-color: rgb(112, 79, 63);
+    padding: 30px 20px;
+    text-align: center;
+    margin: auto;
+    margin: 0 20px 0 20px;
+    border-radius: 10px;
+}
+
+.profile-links > img {
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.profile-links > li {
+    display: block;
+    margin: 10px 0;
+}
+
+.profile-links > li > h2 {
+    color: white;
+    margin: 20px 0;
+    margin-bottom: 0px;
+
+}
+
+.profile-links > li > p {
+    color: white;
+    margin-top: 0px;
+    margin-bottom: 30px;
+}
+
+.profile-links > li > a {
+    color: white;
+    text-decoration: none;
+    margin: 10px 0;
+    display: inline-block;
+}
+
+@media (max-width:1200px){
+    .profile-links {
+        background-color: rgb(112, 79, 63);
+        padding: 30px 20px;
+        text-align: center;
+        margin: 50px 50px 0 50px;
+        border-radius: 10x;
+    }
+}
+
+@media (max-width:991px){
+    .profile-links {
+        background-color: rgb(112, 79, 63);
+        padding: 30px 20px;
+        text-align: center;
+        margin: 20px 0 0 0;
+        border-radius: 10x;
+    }
+}
+
+@media (max-width:600px){
+    .profile-links {
+        margin: 0;
+    }
+}

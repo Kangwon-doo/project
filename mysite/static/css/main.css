@@ -1,0 +1,88 @@
+#carouselExampleAutoplaying {
+    width: 100vw;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.carousel-item > img {
+    object-fit: cover;
+    object-position: center;
+    height: 80vh;
+    overflow: hidden;
+  }
+
+.navbar{
+  transition: 0.3s;
+  height: 8vh;
+}
+
+.navbar-scrolled {
+  background-color: rgb(36, 83, 42);
+  box-shadow: 0 3px 10px rgba(0
+  , 0, 0, 0.15);
+}
+
+.nav-item {
+  color: white;
+  text-decoration: none;
+}
+
+.coffee-container-wrapper {
+  width: 70%;
+  margin: auto;
+}
+
+.coffee-swiper-wrapper {
+  width: 70vw;
+  margin: auto;
+}
+
+.swiper-container {
+  background: #eee;
+  font-size: 14px;
+  color: #000;
+  padding: 0;
+  position: relative;
+  height: 53vh;
+}
+
+.swiper,
+.swiper2 {
+  width: 100%;
+  height: 100%;
+
+}
+
+.swiper-slide {
+  font-size: 18px;
+  background: #fff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  transition: all 100ms ease-in;
+  transform: scale(1);
+}
+
+.swiper-slide:hover {
+  box-shadow: 0px 0px 60px #949494;
+  z-index: 50;
+  -webkit-transition: all 200ms ease-in;
+  -webkit-transform: scale(1.2);
+  -ms-transition: all 200ms ease-in;
+  -ms-transform: scale(1.2);
+  -moz-transition: all 200ms ease-in;
+  -moz-transform: scale(1.2);
+  transition: all 200ms ease-in;
+  transform: scale(1.5);
+}

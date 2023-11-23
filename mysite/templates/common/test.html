@@ -1,0 +1,111 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>원두두</title>
+    <!-- css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/common/test.css' %}">
+    <link rel="shortcut icon" href="#">
+</head>
+<body>
+  <div class="body">
+    <div class="test-container">
+
+        <!-- 질문 폼 -->
+        <div class="form-outer">
+            <form action="{% url "common:signup_test_result" %}" method="GET">
+                {% csrf_token %}
+                <!-- 첫번째 질문 -->
+                <div class="page slidepage">
+                    <div class="title">
+                        <h2>카페인을 원하시나요?</h2>
+                    </div>
+                    <div class="fieldbox">
+                        <button class="field1 hidden" onclick="change_firbtn(event)" name="decaf" type="button" id="valbtn" value="0">디카페인</button>
+                        <button class="field1 hidden" onclick="change_firbtn(event)" type="button" id="valbtn" value="1">카페인</button>
+                    </div>
+                    <div class="field-btns">
+                        <button class="hiddenbtn" type="button">이전</button>
+                        <button class="nextBtn" id="btn" type="button">다음</button>
+                    </div>
+                </div>
+                
+                <!-- 두번째 질문 -->
+                <div class="page">
+                    <div class="title">
+                        <h2>원하시는 원두 타입을 고르세요</h2>
+                        </div>
+                    <div class="fieldbox">
+                        <button class="field2" onclick="change_secbtn(event)" type="button" id="valbtn" value="0">싱글오리진</button>
+                        <button class="field2" onclick="change_secbtn(event)" type="button" id="valbtn" value="1">블렌드</button>
+                    </div>
+                    <div class="field-btns">
+                        <button class="prev-1 prev" id="btn" type="button">이전</button>
+                        <button class="next-1 next" id="btn" type="button">다음</button>
+                    </div>
+                </div>
+                
+                <!-- 세번째 질문 -->
+                <div class="page">
+                    <div class="title">
+                        <h2>원하시는 컵노트를 고르세요</h2>
+                    </div>
+                    <div class="fieldbox">
+                        <button class="field3" onclick="change_thirbtn(this)" type="button" id="valbtn" value="꽃">꽃</button>
+                        <button class="field3" onclick="change_thirbtn(this)" type="button" id="valbtn" value="초콜릿">초콜릿</button>
+                        <button class="field3" onclick="change_thirbtn(this)" type="button" id="valbtn" value="고소함">고소한</button>
+                        <button class="field3" onclick="change_thirbtn(this)" type="button" id="valbtn" value="달콤함">달콤한</button>
+                        <button class="field3" onclick="change_thirbtn(this)" type="button" id="valbtn" value="허브">허브</button>
+                        <button class="field3" onclick="change_thirbtn(this)" type="button" id="valbtn" value="과일">과일</button>
+                        <button class="field3" onclick="change_thirbtn(this)" type="button" id="valbtn" value="향료">향료</button>
+                    </div>
+                    <div class="field-btns">
+                        <button class="prev-2 prev" id="btn" type="button">이전</button>
+                        <button class="next-2 next" id="btn" type="button">다음</button>
+                    </div>
+                </div>
+
+                <!-- 네번째 질문 -->
+                <div class="page">
+                    <div class="title">
+                        <h2>맛의 강도를 골라주세요</h2>
+                    </div>
+                    <!--슬라이드 바-->
+                    <div class="fieldbox tohide hidden">
+                        <div class="slidecontainer">
+                            <input type="range" id="sour" min="1" max="5" value="3" class="slider">
+                            <p>신맛: <span id="sour-value"></span></p>
+                        </div>
+                        <div class="slidecontainer">
+                            <input type="range" id="sweet" min="1" max="5" value="3" class="slider">
+                            <p>단맛: <span id="sweet-value"></span></p>
+                        </div>
+                        <div class="slidecontainer">
+                            <input type="range" id="bitter" min="1" max="5" value="3" class="slider">
+                            <p>쓴맛: <span id="bitter-value"></span></p>
+                        </div>
+                        <div class="slidecontainer">
+                            <input type="range" id="body" min="1" max="5" value="3" class="slider">
+                            <p>바디감: <span id="body-value"></span></p>
+                        </div>
+                    </div>
+                    <div class="field-btns">
+                        <button class="prev-3 prev" id="btn" type="button">이전</button>
+                        <input type="submit" onclick="send_result(event)" id="subbtn" value="추천받기"></input>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- 자바스크립트 파일 -->
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script src="{% static 'js/common/test.js' %}"></script>
+<script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" data-auto-a11y="true" ></script>
+
+</body>
+</html>

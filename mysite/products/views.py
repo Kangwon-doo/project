@@ -1,16 +1,22 @@
 from django.shortcuts import render, redirect
 from django.utils import timezone
-from django.http import HttpResponse, HttpResponseRedirect
 from formtools.wizard.views import SessionWizardView
 
 # import products
+from .forms import EmailForm, PreferenceForm
+from main.models import Coffee, Roastery, test_Reviews, test_preference
 from .forms import EmailForm, PreferenceForm, PredictionForm
-from main.models import Coffee, Roastery, Order, Reviews, test_Reviews, test_preference, CustomUser
+from main.models import Coffee, Roastery, Order, Reviews, test_Reviews, test_preference,CustomUser
 from .cosine import most_similar
 import random
-import json
 from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 from django.db.models import Q
+
+import pandas as pd
+import plotly.express as px
+from io import BytesIO
+import base64
+
 
 # Create your views here.
 def coffee(request):
@@ -79,31 +85,81 @@ def coffee(request):
 def MD(request):
     return render(request, 'main/MD.html')
 
-
+import plotly.graph_objects as go
 def coffee_detail(request, coffee_id):
     coffee_info = Coffee.objects.get(CoffeeID=coffee_id)
     roastery_name = Roastery.objects.all()
     similarity_ids = most_similar(coffee_id, 5)
     similarity = Coffee.objects.filter(CoffeeID__in=similarity_ids)
+    coffee_info.Country = coffee_info.Country.replace("[", "").replace("]", "").replace("'", "")
+    coffee_info.CupNote = coffee_info.CupNote.replace("[", "").replace("]", "").replace("'", "")
+    
+    categories = ['단맛', '신맛', '쓴맛', '바디감']
+    values = [int(coffee_info.Sweetness), int(coffee_info.Sourness), 
+              int(coffee_info.Bitterness), int(coffee_info.Body)]
+
+    fig = go.Figure()
+
+    fig.add_trace(go.Scatterpolar(
+        r=values + values[:1],
+        theta=categories + categories[:1],
+        fill='toself',
+        line=dict(color='orange'),
+    ))
+
+    fig.update_layout(
+        polar=dict(
+            radialaxis=dict(
+                visible=True,
+                range=[0, 5],  
+            ),
+        ),
+        width=400, 
+        height=400,
+    )
+
+    buffer = BytesIO()
+    fig.write_image(buffer, format='png')
+    buffer.seek(0)
+
+    chart_image = base64.b64encode(buffer.read()).decode('utf-8')
+    buffer.close()
+
     reviewinfo = Reviews.objects.filter(Coffee_id=coffee_id).order_by('created_date')[:5]
     userinfo = CustomUser.objects.all()
+    
     context = {'coffee_info' : coffee_info, 
                'cosine_sim' : similarity, 
                'roastery_name': roastery_name,
+               'chart_image': chart_image,
                'reviewinfo': reviewinfo,
-               'userinfo': userinfo
-               }
-    coffee_info.Country = coffee_info.Country.replace("[", "").replace("]", "").replace("'", "")
-    coffee_info.CupNote = coffee_info.CupNote.replace("[", "").replace("]", "").replace("'", "")
+               'userinfo':userinfo }
+    
     return render(request, 'products/coffee_detail.html', context)
 
 
 def roastery_detail(request, roastery_id): #로스터리ID
     roastery_info = Roastery.objects.get(RoasteryID = roastery_id)
     coffees = Coffee.objects.filter(RoasteryID = roastery_id)
-    context = {'roastery_info': roastery_info, 'coffees' : coffees}
-    roastery_info.RoasteryPhone = roastery_info.RoasteryPhone.replace("[", "").replace("]", "").replace("'", "")
+    
+    coffee_paginator = Paginator(coffees, 3)
+    page_num = request.GET.get('page')
 
+    try:
+        page = coffee_paginator.page(page_num)
+    except (PageNotAnInteger, EmptyPage):
+        # 오류날 시 디폴트 페이지
+        page = coffee_paginator.page(1)
+
+    total_page = coffee_paginator.num_pages
+    roastery_info.RoasteryPhone = roastery_info.RoasteryPhone.replace("[", "").replace("]", "").replace("'", "")
+    
+    context = {
+        'roastery_info': roastery_info,
+        'count': coffee_paginator.count,
+        'page': page,
+        'total_page': total_page
+    }
     return render(request, 'products/roastery_detail.html', context)
 
 

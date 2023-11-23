@@ -1,0 +1,229 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>WONDOODOO</title>
+    <!-- google icon -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+	<!--style.css-->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/swiper-bundle.min.css' %}">
+</head>
+
+<body>
+    <!--캐러셀-->
+    <div id="carouselExample" class="carousel slide carousel-fade" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+        </div>
+
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="{% static 'img/latte.jpg' %}" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="{% static "img/latteart.jpg" %}" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="{% static "img/drip_coffee.jpg" %}" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="{% static "img/table.jpg" %}" class="d-block w-100" alt="...">
+            </div>
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    <!--내비게이션 바-->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+        <a class="navbar-brand" href="#">WONDOODOO</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/coffee">원두</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="goMD()">MD상품</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/test">원두추천받기</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/subscribe">정기구독</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">ABOUT</a>
+            </li>
+            </ul>
+
+            <ul class="nav icon-elements" data-in="fadeInDown" data-out="fadeOutUp">                    
+                {% if user.is_authenticated %}
+                <li class="nav-icon" style="cursor: pointer"> 
+                    <a href="{% url 'main:mypage' %}"><span class="material-icons" style="color: white;">person</span></a>
+                </li>
+                {% endif %}
+                {% if user.is_authenticated %}
+                    {% if item_count > 0 %}
+                    <li class="nav-icon" style="cursor: pointer">
+                        <a href="{% url 'cart:cart_detail' %}"><span class="material-icons" style="color: white;">local_mall</span>({{item_count}})</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-icon" style="cursor: pointer">
+                        <a href="{% url 'cart:cart_detail' %}"><span class="material-icons" style="color: white;">local_mall</span></a>
+                    </li>
+                    {% endif %}
+                {% endif %}
+
+                {% if user.is_authenticated %}
+                <li class="nav-icon" style="cursor: pointer">
+                    <a class="nav-link" href="{% url 'common:logout' %}"><span class="material-icons" style="color: white;">logout</span></a>
+                </li>
+                {% else %}
+                <li class="nav-item" style="cursor: pointer">
+                    <a href="{% url 'common:login' %}">로그인</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+        </div>
+    </nav>
+
+
+    <!--원두-->
+    <div class="coffee-swiper-wrapper">
+
+        <h2>오늘 새로 들어온 원두</h2>
+        <div class="swiper-container">
+        <!-- Swiper -->
+            <div class="swiper">
+                <div class="swiper-wrapper">
+                    {% for i in coffee_info %}
+                        <div class="card h-100 swiper-slide">
+                        <a href="/coffee/{{i.CoffeeID}}"><img src="/static/coffee_img/{{i.CoffeeID}}.jpg" alt="{{i.CoffeeID}}" class="card-img-top"></a>
+                        <div class="card-body">
+                            <h5 class="card-title">{{i.CoffeeName}}</h5>
+                            <p class="card-text">로스터리 이름</p>
+                            <p class="card-text"><small class="text-body-secondary">{{i.Price}}</small></p>
+                        </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <!-- Add Pagination -->
+                <div class="swiper-pagination"></div>
+                <!-- Add Arrows -->
+                <div class="swiper-button-next" style="color:grey;"></div>
+                <div class="swiper-button-prev" style="color:grey;"></div>
+            </div>
+        </div>
+
+        <h2>추천하는 원두</h2>
+        <div class="swiper-container">
+        <!-- Swiper -->
+            <div class="swiper rec">
+                <div class="swiper-wrapper">
+                    {% for i in top5 %}
+                        <div class="card  h-100 swiper-slide">
+                            <a href="/coffee/{{i.CoffeeID}}"><img src="/static/coffee_img/{{i.CoffeeID}}.jpg" alt="{{i.CoffeeID}}" class="card-img-top"></a>
+                            <div class="card-body">
+                            <h5 class="card-title">{{i.CoffeeName}}</h5>
+                            <p class="card-text">로스터리 이름</p>
+                            <p class="card-text"><small class="text-body-secondary">{{i.Price}}</small></p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <!-- Add Pagination -->
+                <div class="swiper-pagination pag2"></div>
+                <!-- Add Arrows -->
+                <div class="swiper-button-next nextbtn2" style="color:grey;"></div>
+                <div class="swiper-button-prev prevbtn2" style="color:grey;"></div>
+            </div>
+        </div>
+    </div>
+
+
+
+<script type="module">
+
+    var swiper = new Swiper('.swiper', {
+        slidesPerView: 4,
+        spaceBetween: 10,
+        slidesPerGroup: 4,
+        loop: true,
+        loopFillGroupWithBlank: true,
+        pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+        },
+        navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+        },
+    });
+
+    var swiper2 = new Swiper('.rec', {
+        slidesPerView: 4,
+        spaceBetween: 10,
+        slidesPerGroup: 4,
+        loop: true,
+        loopFillGroupWithBlank: true,
+        pagination: {
+        el: '.pag2',
+        clickable: true,
+        },
+        navigation: {
+        nextEl: '.nextbtn2',
+        prevEl: '.prevbtn2',
+        },
+    });
+    </script>
+
+<script>
+    const navEl = document.querySelector('.navbar')
+    
+    window.addEventListener('scroll', () => {
+        if (window.scrollY >= 56) {
+            navEl.classList.add('navbar-scrolled');
+        }
+        else if (window.scrollY < 56) {
+            navEl.classList.remove('navbar-scrolled');
+        }
+    });
+
+    function goSignin() {
+        window.location = "/signin/";
+    }
+    function goMD() {
+        window.location = "/products/MD/";
+    }
+    function servicePopup(){
+        var newWin = window.open("/main/popup.html", " ", "width=600, height=600");
+        if(newWin == null){     //팝업이 차단되어 있다면 if문 실행
+            alert("팝업이 차단되어 있습니다. 팝업차단을 해제하고 새로고침해 주세요.");
+        }
+    }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+<script src="{% static 'js/swiper-bundle.min.js' %}"></script>
+</body>
+</html>

@@ -1,153 +1,198 @@
 {% extends 'main/mypage.html' %}
 {% load static %}
-{%load humanize%}
+{% load humanize %}
 {% load condition %}
+
+{% block mypageHead %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/mypage/history.css' %}">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+{% endblock %}
+
 {% block mypageContent %}
 
 <!-- purchase start -->
-<div class="content" id="purchase">
-    <div class="subtitle">
-        <span>{{userinfo.username}}님의 구매 내역</span>
+<div class="history-wrapper">
+    {% if not orderinfo %}
+    
+    <div class="wrapper">
+        <div class="wrap">
+            <img class="sorry_img" src="/static/images/about/sorry.png">
+            <h4><b>구매한 원두가 없습니다.</b></h4>
+            <a href="/coffee"><button type="button" class="btn" id="wondoo">원두 보러가기</button></a>
+        </div>
     </div>
 
-    {% for order in orderinfo %}
-    <div class = 'private_info_item'>
-        <div id="order_info_head">
-            <span class="text-left my_title">주문 번호: {{order.OrderID}}</span>
-            <span class="text-left my_title">구매 일자: {{order.created|date:"o년 M d일 A h:i"}}</span>
-        </div>
-        <div class="row mx-auto" id="order_info_body">
-            <div class="text-center">
-                <table class="table my_customer_table">
-                    <tbody>
+    {% else %}
+    <div class="subtitle">
+        <h2>{{userinfo.name}}님의 구매 내역</h2>
+    </div>
+
+    <div class="accordion" id="accordionPanelsStayOpenExample">
+        {% for order in orderinfo %}
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse{{ order.OrderID }}" aria-expanded="true" aria-controls="panelsStayOpen-collapse{{ order.OrderID }}">
+                        <span class="text-left my_title">주문 번호: {{ order.OrderID }}</span>
+                        <span class="text-left my_title">구매 일자: {{ order.created|date:"o년 M d일 A h:i" }}</span>
+                    </button>
+                </h2>
+    
+                <div id="panelsStayOpen-collapse{{ order.OrderID }}" class="accordion-collapse collapse show">
+                    <div class="accordion-body">
+                        <ul class="list-group">
                         {% for item in orderitems %}
                         {% if item.OrderID_id == order.OrderID %}
-                        <tr>
-                            <td style="width: 30%;">
-                                <a href="/coffee/{{item.product.CoffeeID}}">
-                                    <img src="/static/coffee_img/{{item.product.CoffeeID}}.jpg" alt="" class="float-left rounded custom_image">
-                                </a>
-                            </td>
-                            <td class="text-left order_coffee_info">
-                                <div>
-                                    {% for roastery in Roasteryinfo %}
-                                    {% if roastery.RoasteryID == item.product.RoasteryID_id %}
-                                    <img class="roas_img" src="/static/roastery_img/{{roastery.RoasteryName}}.jpg">
-                                    <span class="roas-name">{{roastery.RoasteryName}}</span>
-                                    {%endif%}
-                                    {%endfor%}
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <a href="/coffee/{{item.product.CoffeeID}}">
+                                        <img src="/static/coffee_img/{{item.product.CoffeeID}}.jpg" alt="" class="coffee-img">
+                                    </a>
                                 </div>
-                                <div class="order_coffee_item">
-                                    <span class="order_coffee_name">{{item.product.CoffeeName}}</span>
-                                    <span>용량 : {{item.product.Capacity}}</span>
-                                    <span>가격 : {{item.product.Price|intcomma}}원</span>
-                                    <span>구매량 : {{item.quantity}}개</span>
-                                </div>
-                            </td>
-                            <td class="order_coffee_price"><span>{{item.sub_total|intcomma}}원</span></td>
-                        </tr>
-                        {% if not Reviewinfo %}
-                        <!--리뷰가 0개 일 때 -->
-                        <tr>
-                            <td colspan="3">
-                                <button onclick="toggleReviewForm(this)">리뷰쓰기</button>
-                                <div class="reviewbox" style="display: none;">
-                                    <h2>소중한 의견</h2>
-                                    <form id="reviewForm" action="/review/create/" method="POST">
-                                        {% csrf_token %}
-                                        <input type="hidden" name="order_id" value="{{item.OrderID_id}}">
-                                        <div class ="star_rating">
-                                            <span class="star on" value="1"> </span>
-                                            <span class="star" value="2"> </span>
-                                            <span class="star" value="3"> </span>
-                                            <span class="star" value="4"> </span>
-                                            <span class="star" value="5"> </span>
-                                            <input type="hidden" name="{{item.product.CoffeeID}}" id="starRatingInput" value="" />
-                                        </div>
-                                        <div class="add_review">
-                                            <textarea class="star_box" name = "review_text" placeholder="리뷰 내용을 작성해주세요."></textarea>
-                                            <input type="submit" class="btn02" value="리뷰 등록"/>
-                                        </div>
-                                    </form>
-                                </div>
-                            </td>
-                        </tr>
-                        {% else %} <!-- 사용자가 쓴 리뷰가 존재할 때 -->
-                        {% if item_pairs|get_item:item.id in str_pair %}
-                        <!-- 리뷰 중 해당 아이템에 대한 정보가 있다면-->
-                        <tr>
-                            {% for review in Reviewinfo %}
-                            {% if item.product.CoffeeID == review.Coffee_id and item.OrderID_id == review.Order_id %}
-                            <td colspan="3">
-                                <button onclick="toggleReviewForm(this)">리뷰 보기</button>
-                                <div class="reviewbox" style="display: none;">
-                                {{review.Stars}} <img src="/static/images/star.png" style="width:20px; height:20px;">
-                                <br>
-                                {{review.content}}
-                                <br>
-                                작성일 : {{review.created_date|date:"o년 M d일 A h:i"}}
-                                </div>
-                            </td>
-                            {%endif%}
-                            {%endfor%}
-                        </tr>
-                        {%else %}
-                        <tr>
-                            <td colspan="3">
-                                <button onclick="toggleReviewForm(this)">리뷰쓰기</button>
-                                <div class="reviewbox" style="display: none;">
-                                    <h2>소중한 의견</h2>
-                                    <form id="reviewForm" action="/review/create/" method="POST">
-                                        {% csrf_token %}
-                                        <input type="hidden" name="order_id" value="{{item.OrderID_id}}">
-                                        <div class ="star_rating">
-                                            <span class="star on" value="1"> </span>
-                                            <span class="star" value="2"> </span>
-                                            <span class="star" value="3"> </span>
-                                            <span class="star" value="4"> </span>
-                                            <span class="star" value="5"> </span>
-                                            <input type="hidden" name="{{item.product.CoffeeID}}" id="starRatingInput" value="" />
-                                        </div>
-                                        <div class="add_review">
-                                            <textarea class="star_box" name = "review_text" placeholder="리뷰 내용을 작성해주세요."></textarea>
-                                            <input type="submit" class="btn02" value="리뷰 등록"/>
-                                        </div>
-                                    </form>
-                                </div>
-                            </td>
-                        </tr>
+            
+                                <div class="col-md-8 info">
+                                    <h2 class="coffee-name">{{item.product.CoffeeName}}</h2>
+            
+                                    <div class="roastery">
+                                        {% for roastery in Roasteryinfo %}
+                                        {% if roastery.RoasteryID == item.product.RoasteryID_id %}
+                                        <img class="roas_img" src="/static/roastery_img/{{roastery.RoasteryName}}.jpg">
+                                        <span class="roas-name">{{roastery.RoasteryName}}</span>
+                                        {%endif%}
+                                        {%endfor%}
+                                    <div>
+                        
+                                    <div class="coffee-info">
+                                        <ul>
+                                            <li>용량 : {{item.product.Capacity}}</li>
+                                            <li>가격 : {{item.product.Price|intcomma}}원</li>
+                                            <li>구매량 : {{item.quantity}}개</li>
+                                        </ul>
+                                    </div>
 
-                        {%endif%} <!-- 리뷰쓰기/보기에 대한 조건절 끝 -->
-                    {%endif%} <!-- 사용자가 작성한 리뷰 유무 조건절 끝-->
-                        {%endif%} {%endfor%} <!-- orderitem에 대해 -->
-                        <tr>
-                            <td></td> <!-- 원두 이미지 -->
-                            <td></td> <!-- 원두 정보-->
-                            <td>
-                                {%for id, value in total.items%}
-                                {% if id == order.OrderID %}
-                                총 구매 금액 : {{value|intcomma}}원
-                                {%endif%}
-                                {%endfor%}
-                            </td> <!-- 가격 정보 -->
-                            <td></td>  <!--리뷰 공간-->
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+                                    <hr>
+
+                                    <div class="coffee-info-2">
+                                        <h5>총 구매금액:</h5>
+                                        <h5><b>{{item.sub_total|intcomma}}원</b></h5>
+                                    </div>
+                                    
+
+                                    {% if not Reviewinfo %} <!--리뷰가 0개 일 때 -->
+
+                                    <!--토글버튼-->
+                                    <p class="d-inline-flex gap-1">
+                                        <div class="d-grid gap-2">
+                                            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample{{ order.OrderID }}{{ item.product.CoffeeID }}" aria-expanded="false" aria-controls="collapseExample">
+                                                리뷰쓰기
+                                            </button>
+                                        </div>
+                                    </p>
+                                    
+                                    <!--리뷰창-->
+                                    <div class="collapse" id="collapseExample{{ order.OrderID }}{{ item.product.CoffeeID }}">
+                                        <div class="card card-body">
+                                            <div class="reviewbox">
+                                                <h5>소중한 의견</h5>
+                                                <form id="reviewForm" action="/review/create/" method="POST">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" name="order_id" value="{{item.OrderID_id}}">
+                                                    <div class ="star_rating">
+                                                        <span class="star on" value="1"> </span>
+                                                        <span class="star" value="2"> </span>
+                                                        <span class="star" value="3"> </span>
+                                                        <span class="star" value="4"> </span>
+                                                        <span class="star" value="5"> </span>
+                                                        <input type="hidden" name="{{item.product.CoffeeID}}" id="starRatingInput" value="" />
+                                                    </div>
+                                                    <div class="add_review">
+                                                        <textarea class="star_box" name = "review_text" placeholder="리뷰 내용을 작성해주세요."></textarea>
+                                                        <input type="submit" class="btn btn-primary btn-sm" value="리뷰 등록"/>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {% else %} <!-- 사용자가 쓴 리뷰가 존재할 때 -->
+                                        {% if item_pairs|get_item:item.id in str_pair %}
+                                        <!-- 리뷰 중 해당 아이템에 대한 정보가 있다면-->
+                                            {% for review in Reviewinfo %}
+                                            {% if item.product.CoffeeID == review.Coffee_id and item.OrderID_id == review.Order_id %}
+                                                <!--토글버튼-->    
+                                                <p class="d-inline-flex gap-1">
+                                                    <div class="d-grid gap-2">
+                                                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample{{ order.OrderID }}{{ item.product.CoffeeID }}" aria-expanded="false" aria-controls="collapseExample">
+                                                        리뷰 보기
+                                                    </button>
+                                                    <div>
+                                                </p>
+                                                <!--리뷰창-->
+                                                <div class="collapse" id="collapseExample{{ order.OrderID }}{{ item.product.CoffeeID }}">
+                                                    <div class="card card-body">
+                                                        <div class="reviewbox">
+                                                            {{review.Stars}} <img src="/static/images/about/star.png" style="width:20px; height:20px;">
+                                                            
+                                                            <p>{{review.content}}</p>
+                                                            
+                                                            작성일 : {{review.created_date|date:"o년 M d일 A h:i"}}
+                                                         </div>
+                                                    </div>
+                                                </div>
+                                            {%endif%}
+                                            {%endfor%}
+                                        {% else %}
+                                            <!--토글버튼-->
+                                            <p class="d-inline-flex gap-1">
+                                                <div class="d-grid gap-2">
+                                                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample{{ order.OrderID }}{{ item.product.CoffeeID }}" aria-expanded="false" aria-controls="collapseExample">
+                                                        리뷰쓰기
+                                                    </button>
+                                                </div>
+                                            </p>
+                                            <!--리뷰창-->
+                                            <div class="collapse" id="collapseExample{{ order.OrderID }}{{ item.product.CoffeeID }}">
+                                                <div class="card card-body">
+                                                    <div class="reviewbox">
+                                                        <h5>소중한 의견</h5>
+                                                        <form id="reviewForm" action="/review/create/" method="POST">
+                                                            {% csrf_token %}
+                                                            <input type="hidden" name="order_id" value="{{item.OrderID_id}}">
+                                                            <div class ="star_rating">
+                                                                <span class="star on" value="1"> </span>
+                                                                <span class="star" value="2"> </span>
+                                                                <span class="star" value="3"> </span>
+                                                                <span class="star" value="4"> </span>
+                                                                <span class="star" value="5"> </span>
+                                                                <input type="hidden" name="{{item.product.CoffeeID}}" id="starRatingInput" value="" />
+                                                            </div>
+                                                            <div class="add_review">
+                                                                <textarea class="star_box" name = "review_text" placeholder="리뷰 내용을 작성해주세요."></textarea>
+                                                                <input type="submit" class="btn btn-primary btn-sm" value="리뷰 등록"/>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {%endif%}
+                                    {%endif%} <!--리뷰 끝 -->  
+                                </div>
+                            </div>
+                        </li>
+                        {%endif%}
+                        {%endfor%}
+                        </ul>  
+                    </div>
+                </div>
+            </div>    
+        {%endfor%} <!--order 끝 -->             
     </div>
-    {%endfor%} <!-- 전체 order에 대한 forloop 끝-->
+</div>
+{%endif%}
 
-
-</div><!-- /.container-->
-</section><!--/.mypage-->
-<!--purchase end -->
-
+        
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- jQuery 라이브러리 -->
 <script>
-    function toggleReviewForm(button) {
-        $(button).siblings('.reviewbox').toggle();
-    }
     // 별점 선택 및 리뷰 제출 : https://shorturl.at/cuGM8
     $(document).ready(function() {
         // 별점 선택 시 동작
@@ -186,6 +231,5 @@
     });
 
 </script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- jQuery 라이브러리 -->
-<script src="{% static 'js/scripts.js' %}"></script> <!-- 사용자 정의 JavaScript 파일 -->
+
 {% endblock %}
