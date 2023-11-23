@@ -1,14 +1,9 @@
 from django.shortcuts import render,redirect
 from products.cosine import cos_recommendation
 from django.contrib.auth.decorators import login_required
-from .models import Coffee
 import json
-from .models import Coffee, Order, OrderItem, Preference, Subscription, Roastery
 from django.db import IntegrityError
-from django.http import HttpResponse
 from .models import Coffee, Order, OrderItem, Preference, Subscription, Roastery, Reviews, CustomUser
-import random
-from django.contrib.auth.models import User
 from common.forms import CustomUserChangeForm
 from datetime import datetime
 
@@ -99,6 +94,25 @@ def index(request):  # main page
     recent = Coffee.objects.order_by('-Created_date')[0:8]
     top5 = Coffee.objects.order_by('Stock')[0:5]
     context = {'coffee_info': recent, 'top5': top5}
+
+    """회원에게만 제공되는 원두 추천 (8개)"""
+    user = request.user
+    jsonDec = json.decoder.JSONDecoder()
+
+    if user.is_authenticated: # 로그인 상태라면
+        user_favor = Preference.objects.get(user=user)
+        favor = {'caf': user_favor.caf,
+                 'blend': user_favor.blend,
+                 'notes': jsonDec.decode(user_favor.notes),
+                 'sour': user_favor.sour,
+                 'sweet': user_favor.sweet,
+                 'bitter': user_favor.bitter,
+                 'body': user_favor.body}
+
+        recommended_ids = cos_recommendation(favor, 8)
+        recommended_coffees = Coffee.objects.filter(CoffeeID__in=recommended_ids)
+        context = {'coffee_info': recent, 'top5': top5, 'recommended_coffees': recommended_coffees}
+
     return render(request, 'main.html', context)
 
 # 마이페이지
