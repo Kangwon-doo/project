@@ -164,7 +164,7 @@ class CartItem(models.Model):
 
 class Order(models.Model):
     OrderID = models.UUIDField(default=uuid.uuid4, primary_key=True, editable=False)
-    emailAddress = models.EmailField(max_length=250, blank=True)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
     class Meta:
         db_table = 'coffee_order'
@@ -174,7 +174,7 @@ class Order(models.Model):
         return str(self.id)
 
 class OrderItem(models.Model):
-    email = models.EmailField()
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     OrderID = models.ForeignKey(Order, related_name='order_id', on_delete=models.CASCADE)
     product = models.ForeignKey(Coffee, on_delete=models.CASCADE)
     quantity = models.IntegerField()
