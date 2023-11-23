@@ -8,7 +8,7 @@ from django.core.exceptions import ObjectDoesNotExist
 def _cart_id(request):
     cart = request.session.session_key
     if not cart and request.user.is_authenticated:
-        user = request.user
+        user = request.user.id
         cart = user
     return cart
 
@@ -88,11 +88,12 @@ def full_remove(request, coffee_id):
 
 
 def add_order(request, total=0):
-    email = request.user.email
+    userid = request.user.id
+
     Order.objects.create(
-        emailAddress=email
+        user_id=userid
     )
-    orderinfo = Order.objects.filter(emailAddress=email).latest('created')
+    orderinfo = Order.objects.filter(user_id=userid).latest('created')
     orderinfo = orderinfo.__dict__
     orderid = orderinfo['OrderID']
     cart = Cart.objects.get(cart_id=_cart_id(request))
@@ -104,7 +105,7 @@ def add_order(request, total=0):
         coffee_id = item['product_id']
         product = coffee_id
         OrderItem.objects.create(
-            email=email,
+            user_id=userid,
             OrderID_id=orderid,
             product_id=product,
             quantity=item['quantity']
