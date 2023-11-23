@@ -2,11 +2,9 @@ from django.shortcuts import render, redirect
 from products.cosine import cos_recommendation
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
-from django.http import HttpResponse
 import json
 from .models import Coffee, Order, OrderItem, Preference, Subscription, Roastery, Reviews, CustomUser
 import random
-from django.contrib.auth.models import User
 from common.forms import CustomUserChangeForm
 from datetime import datetime
 
@@ -189,11 +187,9 @@ def purchase(request):
 
 def review(request):
     userid = request.user.id
-    print(userid)
     if request.method == 'POST':
         user_review = dict(request.POST)
         del user_review['csrfmiddlewaretoken']
-        print('sep : ', {i: j[0] for i, j in user_review.items()})  # sep :  {'2': '4', 'review_text': 'testtt'} : 4점
         input = {i: j[0] for i, j in user_review.items()}
         input_keys = list(input.keys())
         input_values = list(input.values())
