@@ -1,7 +1,43 @@
 {% extends 'main/mypage.html' %}
 
+{% block mypageHead %}
+
+<style>
+    .btn {
+        background-color:green;
+        color:white;
+        margin-top:1vh;
+    }
+    .sorry_img {
+        width: 12vw;
+        margin:auto;
+        margin-bottom:3vh;
+    }
+    h4 {
+        color: rgb(181, 181, 181);
+    }
+    .wrapper {
+        display: flex;
+        margin-top: 10vh;
+    }
+    .wrap {
+        margin: auto;
+        justify-content: center;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+    }
+    
+</style>
+
+{% endblock %}
+
 {% block mypageContent %}
-
-<h1> 구독 정보가 없습니다! 구독하세요 </h1>
-
+<div class="wrapper">
+    <div class="wrap">
+        <img class="sorry_img" src="/static/images/about/sorry.png">
+        <h4><b>아직 구독정보가 없습니다</b></h4>
+        <a href="/subscribe"><button type="button" class="btn" id="wondoo">구독하러 가기</button></a>
+    </div>
+</div>
 {% endblock %}

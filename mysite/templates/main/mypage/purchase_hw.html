@@ -12,10 +12,20 @@
 
 <!-- purchase start -->
 <div class="history-wrapper">
+    {% if not orderinfo %}
+    
+    <div class="wrapper">
+        <div class="wrap">
+            <img class="sorry_img" src="/static/images/about/sorry.png">
+            <h4><b>구매한 원두가 없습니다.</b></h4>
+            <a href="/coffee"><button type="button" class="btn" id="wondoo">원두 보러가기</button></a>
+        </div>
+    </div>
+
+    {% else %}
     <div class="subtitle">
         <h2>{{userinfo.name}}님의 구매 내역</h2>
     </div>
-
 
     <div class="accordion" id="accordionPanelsStayOpenExample">
         {% for order in orderinfo %}
@@ -121,9 +131,9 @@
                                                 <div class="collapse" id="collapseExample{{ order.OrderID }}{{ item.product.CoffeeID }}">
                                                     <div class="card card-body">
                                                         <div class="reviewbox">
-                                                            {{review.Stars}} <img src="/static/images/star.png" style="width:20px; height:20px;">
+                                                            {{review.Stars}} <img src="/static/images/about/star.png" style="width:20px; height:20px;">
                                                             
-                                                            {{review.content}}
+                                                            <p>{{review.content}}</p>
                                                             
                                                             작성일 : {{review.created_date|date:"o년 M d일 A h:i"}}
                                                          </div>
@@ -178,7 +188,7 @@
         {%endfor%} <!--order 끝 -->             
     </div>
 </div>
-
+{%endif%}
 
         
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- jQuery 라이브러리 -->
