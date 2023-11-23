@@ -29,13 +29,13 @@
                 <img src="{% static 'img/latte.jpg' %}" class="d-block w-100" alt="...">
             </div>
             <div class="carousel-item">
-                <img src="{% static "img/latteart.jpg" %}" class="d-block w-100" alt="...">
+                <img src="{% static 'img/latteart.jpg' %}" class="d-block w-100" alt="...">
             </div>
             <div class="carousel-item">
-                <img src="{% static "img/drip_coffee.jpg" %}" class="d-block w-100" alt="...">
+                <img src="{% static 'img/drip_coffee.jpg' %}" class="d-block w-100" alt="...">
             </div>
             <div class="carousel-item">
-                <img src="{% static "img/table.jpg" %}" class="d-block w-100" alt="...">
+                <img src="{% static 'img/table.jpg' %}" class="d-block w-100" alt="...">
             </div>
         </div>
 
@@ -62,7 +62,7 @@
                 <a class="nav-link active" aria-current="page" href="/coffee">원두</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="goMD()">MD상품</a>
+                <a class="nav-link active" aria-current="page" href="/products/MD">MD상품</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="/test">원두추천받기</a>
@@ -109,7 +109,7 @@
 
 
     <!--원두-->
-    <div class="coffee-swiper-wrapper">
+    <div class="coffee-swiper-wrapper" style="margin-top:50px;">
 
         <h2>오늘 새로 들어온 원두</h2>
         <div class="swiper-container">
@@ -121,7 +121,7 @@
                         <a href="/coffee/{{i.CoffeeID}}"><img src="/static/coffee_img/{{i.CoffeeID}}.jpg" alt="{{i.CoffeeID}}" class="card-img-top"></a>
                         <div class="card-body">
                             <h5 class="card-title">{{i.CoffeeName}}</h5>
-                            <p class="card-text">로스터리 이름</p>
+                            <p class="card-text">{{i.RoasteryID.RoasteryName}}</p>
                             <p class="card-text"><small class="text-body-secondary">{{i.Price}}</small></p>
                         </div>
                         </div>
@@ -135,17 +135,18 @@
             </div>
         </div>
 
-        <h2>추천하는 원두</h2>
+        {% if user.is_authenticated %}
+        <h2 style="margin-top:150px;">회원에게만 제공하는 추천 원두</h2>
         <div class="swiper-container">
         <!-- Swiper -->
             <div class="swiper rec">
                 <div class="swiper-wrapper">
-                    {% for i in top5 %}
+                    {% for i in recommended_coffees %}
                         <div class="card  h-100 swiper-slide">
                             <a href="/coffee/{{i.CoffeeID}}"><img src="/static/coffee_img/{{i.CoffeeID}}.jpg" alt="{{i.CoffeeID}}" class="card-img-top"></a>
                             <div class="card-body">
                             <h5 class="card-title">{{i.CoffeeName}}</h5>
-                            <p class="card-text">로스터리 이름</p>
+                            <p class="card-text">{{i.RoasteryID.RoasteryName}}</p>
                             <p class="card-text"><small class="text-body-secondary">{{i.Price}}</small></p>
                             </div>
                         </div>
@@ -158,6 +159,7 @@
                 <div class="swiper-button-prev prevbtn2" style="color:grey;"></div>
             </div>
         </div>
+        {%endif%}
     </div>
 
 
@@ -212,9 +214,7 @@
     function goSignin() {
         window.location = "/signin/";
     }
-    function goMD() {
-        window.location = "/products/MD/";
-    }
+
     function servicePopup(){
         var newWin = window.open("/main/popup.html", " ", "width=600, height=600");
         if(newWin == null){     //팝업이 차단되어 있다면 if문 실행
