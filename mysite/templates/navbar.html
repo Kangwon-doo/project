@@ -11,7 +11,7 @@
             <a class="nav-link active" aria-current="page" href="/coffee">원두</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="goMD()">MD상품</a>
+            <a class="nav-link active" aria-current="page" href="/products/MD/">MD상품</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="/test">원두추천받기</a>
@@ -60,9 +60,7 @@
     function goSignin() {
         window.location = "/signin/";
     }
-    function goMD() {
-        window.location = "/products/MD/";
-    }
+
     function servicePopup(){
         var newWin = window.open("/main/popup.html", " ", "width=600, height=600");
         if(newWin == null){     //팝업이 차단되어 있다면 if문 실행
