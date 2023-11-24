@@ -19,7 +19,7 @@
                     <input placeholder="비밀번호" type="password" class="form-control" name="password" id="password" style="width: 500px; margin-left: 350px;" value="{{ form.password.value|default_if_none:'' }}">
                 </div>
                 <button style="margin-left: 520px;" type="submit" class="btn btn-primary">로그인</button>
-                <button type="button" onclick="location.href = '{% provider_login_url 'naver' %}'">
+                <button style="margin-top:15px;" type="button" onclick="location.href = '{% provider_login_url 'naver' %}'">
                     <img src="{% static 'logo/icon_naver.png' %}" alt="Naver Logo" style="width: 33px;">
                 </button>
                 <button type="button" onclick="location.href = '{% provider_login_url 'kakao' %}'">
