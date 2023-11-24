@@ -124,6 +124,14 @@
             </div>
             </div>
         </div>
+    
+    {% else %}
+    <div class="sub_info">
+        <div class="content">
+            <img class="sorry_img" src="/static/images/about/sorry.png">
+            <h5>아직 구독 이력이 없습니다.</h5>  
+        </div>
+    </div>
     {% endif %}
 </div>
 
@@ -149,6 +157,7 @@
                     data: {'ordered': 1},
                     dataType: 'json'
                   });
+                console.log("배송완료");
                 window.location.href = '/mypage/subscribe/';
             } else {
                 alert.classList.remove('alert-hidden');

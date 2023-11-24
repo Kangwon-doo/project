@@ -148,9 +148,11 @@ def subscribe(request):
             order_val = request.POST.get('ordered')
             if order_val=='1':
                 # 배송된 구독 정보로 처리
+                print(info.ordered)
                 info.ordered = order_val
                 info.orderDate = datetime.today()
                 info.save()
+                print(info.ordered)
                 
         context = {'user':user,'info':info,'coffee':coffee,'alert':alert,'guide':guide}
         template = 'main/mypage/subscription.html'
