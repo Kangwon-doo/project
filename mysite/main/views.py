@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from products.cosine import cos_recommendation
+from products.cosine import cos_recommendation, collaborative_rec
 from django.contrib.auth.decorators import login_required
 import json
 from django.db import IntegrityError
@@ -7,6 +7,15 @@ from .models import Coffee, Order, OrderItem, Preference, Subscription, Roastery
 from common.forms import CustomUserChangeForm
 from datetime import datetime
 
+import numpy as np
+from keras.models import load_model
+
+# load model
+model = load_model('model/test_model.hdf5')
+model.embeddings = {
+    'userid': model.get_layer('user_embedding').weights[0].numpy(),  # U (943, 30)
+    'coffeeid': model.get_layer('coffee_embedding').weights[0].numpy()  # V (1682, 30)
+}
 
 # 원두 추천 받기 서비스
 
@@ -100,18 +109,26 @@ def index(request):  # main page
     jsonDec = json.decoder.JSONDecoder()
 
     if user.is_authenticated: # 로그인 상태라면
-        user_favor = Preference.objects.get(user=user)
-        favor = {'caf': user_favor.caf,
-                 'blend': user_favor.blend,
-                 'notes': jsonDec.decode(user_favor.notes),
-                 'sour': user_favor.sour,
-                 'sweet': user_favor.sweet,
-                 'bitter': user_favor.bitter,
-                 'body': user_favor.body}
+        review_count = len(Reviews.objects.filter(user_id=user.id))
+        if review_count == 0:
+            user_favor = Preference.objects.get(user=user)
+            favor = {'caf': user_favor.caf,
+                     'blend': user_favor.blend,
+                     'notes': jsonDec.decode(user_favor.notes),
+                     'sour': user_favor.sour,
+                     'sweet': user_favor.sweet,
+                     'bitter': user_favor.bitter,
+                     'body': user_favor.body}
 
-        recommended_ids = cos_recommendation(favor, 8)
-        recommended_coffees = Coffee.objects.filter(CoffeeID__in=recommended_ids)
-        context = {'coffee_info': recent, 'top5': top5, 'recommended_coffees': recommended_coffees}
+            recommended_ids = cos_recommendation(favor, 8)
+            recommended_coffees = Coffee.objects.filter(CoffeeID__in=recommended_ids)
+            context = {'coffee_info': recent, 'top5': top5, 'recommended_coffees': recommended_coffees}
+
+        else:
+            user_id = user.id - 1
+            recommended_ids = collaborative_rec(model, userid=user_id)
+            recommended_coffees = Coffee.objects.filter(CoffeeID__in=recommended_ids)
+            context = {'coffee_info': recent, 'top5': top5, 'recommended_coffees': recommended_coffees}
 
     return render(request, 'main.html', context)
 
