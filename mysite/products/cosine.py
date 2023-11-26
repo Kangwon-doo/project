@@ -1,11 +1,12 @@
 import pandas as pd
-import pymysql
+from sqlalchemy import create_engine
 import numpy as np
+import ast
 import json
-from keras.models import load_model
 from sklearn.metrics.pairwise import cosine_similarity
 
 df = pd.read_csv('data/features.csv')
+survey_users = pd.read_csv('data/survey_users.csv')
 features = df.loc[:, df.columns != 'id']
 coffees = df.reset_index(drop=False)
 coffees = coffees.rename(columns={"index": "coffeeid"})
@@ -16,32 +17,29 @@ mysql_user = 'root'
 mysql_password = 'MShw1214!'
 mysql_db = 'wondoodoo'
 
-conn = pymysql.connect(host=mysql_host, user=mysql_user, password=mysql_password, database=mysql_db)
+engine = create_engine(f"mysql+pymysql://{mysql_user}:{mysql_password}@{mysql_host}/{mysql_db}")
 
+# 쿼리 작성
+review_query = f"SELECT * FROM review;"
+users_query = f"SELECT * FROM main_preference;"
 try:
-    # 쿼리 작성
-    review_query = f"SELECT * FROM review;"
-    users_query = f"SELECT * FROM main_preference;"
-
     # MySQL에서 데이터 읽어오기
     users = pd.read_sql(users_query,
-                        conn)  # ['id', 'caf', 'blend', 'notes', 'sour', 'sweet', 'bitter', 'body', 'user_id']
+                        engine)  # ['id', 'caf', 'blend', 'notes', 'sour', 'sweet', 'bitter', 'body', 'user_id']
     users.reset_index(drop=False, inplace=True)
     jsonDec = json.decoder.JSONDecoder()
-    users['notes']=users['notes'].apply(jsonDec.decode)
+    users['notes'] = users['notes'].apply(jsonDec.decode)
 
     ratings = pd.read_sql(review_query,
-                          conn)  # 'id', 'Stars', 'content', 'created_date', 'Coffee_id', 'Order_id', 'user_id'
+                          engine)  # 'id', 'Stars', 'content', 'created_date', 'Coffee_id', 'Order_id', 'user_id'
     ratings = ratings[['user_id', 'Coffee_id', 'Stars', 'created_date']]
-
-    # print(f"데이터({users.shape})를 성공적으로 불러왔습니다.")
 
 except Exception as e:
     print(f"오류 발생: {e}")
 
 finally:
     # 연결 닫기
-    conn.close()
+    engine.dispose()
 
 ratings['userid'] = ratings.merge(users, on='user_id')['index']
 ratings['coffeeid'] = ratings.merge(coffees, how='left', left_on='Coffee_id', right_on='id')['coffeeid']
@@ -119,6 +117,43 @@ def compute_scores(query_embedding, item_embeddings, measure=DOT):
     return scores
 
 
+def notes_categorising(data):
+    try:
+        data['notes'] = data['notes'].apply(ast.literal_eval)
+    except ValueError:
+        pass
+    # Add other keys with initial values
+    new_keys = ['꽃', '과일', '달콤함', '허브', '고소함', '향료', '초콜릿']
+    for key in new_keys:
+        data[key] = 0
+    # Iterate through the 'notes' list and add new keys to 'new_dict'
+    for index, row in data.iterrows():
+        for note in row['notes']:
+            data.at[index, note] = 1
+    try:
+        del data['notes']
+    except:
+        pass
+
+
+def similar_user(userid):
+    new_user = users[users.index == userid-1]
+    new_user.drop(columns='userid', inplace=True)
+    notes_categorising(new_user)
+
+    survey_copy = survey_users.copy()
+    notes_categorising(survey_copy)
+
+    survey_copy = pd.concat([survey_copy, new_user], ignore_index=True)
+
+    embeddings = survey_copy.values
+    cosine_similarity_matrix = cosine_similarity(embeddings, embeddings)
+
+    survey_copy['cosine_similarity'] = cosine_similarity_matrix[-1]
+    result_df = survey_copy[survey_copy.index != survey_copy.index[-1]].sort_values(by='cosine_similarity', ascending=False)[:1]
+    return result_df.index[0]
+
+
 def collaborative_rec(model, measure=DOT, exclude_rated=True, k=8, userid=0):
     scores = compute_scores(
         model.embeddings["userid"][userid], model.embeddings["coffeeid"], measure)
@@ -134,4 +169,3 @@ def collaborative_rec(model, measure=DOT, exclude_rated=True, k=8, userid=0):
 
     result_df = df_copy.sort_values([score_key], ascending=False).head(k)
     return result_df['id'].tolist()
-

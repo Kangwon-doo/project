@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from products.cosine import cos_recommendation, collaborative_rec
+from products.cosine import cos_recommendation, collaborative_rec, similar_user
 from django.contrib.auth.decorators import login_required
 import json
 from django.db import IntegrityError
@@ -110,7 +110,7 @@ def index(request):  # main page
 
     if user.is_authenticated: # 로그인 상태라면
         review_count = len(Reviews.objects.filter(user_id=user.id))
-        if review_count == 0:
+        if review_count == 0:  # 리뷰가 아직 없는 고객
             user_favor = Preference.objects.get(user=user)
             favor = {'caf': user_favor.caf,
                      'blend': user_favor.blend,
@@ -124,8 +124,8 @@ def index(request):  # main page
             recommended_coffees = Coffee.objects.filter(CoffeeID__in=recommended_ids)
             context = {'coffee_info': recent, 'top5': top5, 'recommended_coffees': recommended_coffees}
 
-        else:
-            user_id = user.id - 1
+        else: # 리뷰가 존재하는 고객
+            user_id = similar_user(user.id)
             recommended_ids = collaborative_rec(model, userid=user_id)
             recommended_coffees = Coffee.objects.filter(CoffeeID__in=recommended_ids)
             context = {'coffee_info': recent, 'top5': top5, 'recommended_coffees': recommended_coffees}
