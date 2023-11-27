@@ -1,12 +1,41 @@
 {% extends 'base.html' %}
+
+{% block head %}
+<style>
+    .header {
+        width: 70%;
+        margin: auto;
+        margin-top: 10vh;
+        margin-bottom: 2%;
+        font-weight: bold;
+    }
+    .hr-header {
+        width: 70%;
+        margin: auto;
+        margin-bottom: 2%;
+    }
+    .MDcontainer {
+        width: 70%;
+        display: flex;
+        margin: auto;
+        justify-content:center;
+    }
+    .img_box > img {
+        width: 30vw;
+    }
+</style>
+{% endblock %}
+
 {% block content %}
 
-<section id="MD">
-    <div class="container">
-        <div class = title><span>MD상품</span></div>
-        <div id="img_box">
-            <img src="../../static/images/about/ready.gif">
-        </div>
+<div class="header"><h1>MD상품</h1></div>
+
+<hr class="hr-header">
+
+<div class="MDcontainer">
+    <div class="img_box">
+        <img src="/static/images/about/ready.gif">
     </div>
-</section>
+</div>
+
 {% endblock %}

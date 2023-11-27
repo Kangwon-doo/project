@@ -1,4 +1,11 @@
 from django.shortcuts import render,redirect
+from products.cosine import cos_recommendation
+from django.contrib.auth.decorators import login_required
+from .models import Coffee
+import json
+from .models import Coffee, Order, OrderItem, Preference, Subscription, Roastery
+from django.db import IntegrityError
+from django.http import HttpResponse
 from products.cosine import cos_recommendation, collaborative_rec, similar_user
 from django.contrib.auth.decorators import login_required
 import json
@@ -179,6 +186,7 @@ def subscribe(request):
             order_val = request.POST.get('ordered')
             if order_val=='1':
                 # 배송된 구독 정보로 처리
+                print(info.ordered)
                 info.ordered = order_val
                 info.orderDate = datetime.today()
                 info.save()

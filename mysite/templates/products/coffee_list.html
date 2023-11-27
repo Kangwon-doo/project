@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load humanize %}
 {% load static %}
+{% load humanize %}
 
 {% block head %}
 <title>메인사이트</title>
@@ -62,35 +63,35 @@
                 <input class="checkval" type="checkbox" id="lightCheckbox" name="light">
                 <input type="hidden" name="light_hidden" id="lightHidden" value="{% if request.GET.light == 'on' %}on{% endif %}">
                 <label for="light">
-                    라이트
+                    라이트 로스팅
                 </label>
             </div>
             <div class="checklist">
                 <input class="checkval" type="checkbox" id="lightmediumCheckbox" name="lightmedium">
                 <input type="hidden" name="lightmedium_hidden" id="lightmediumHidden" value="{% if request.GET.lightmedium == 'on' %}on{% endif %}">
                 <label for="lightmedium">
-                    라이트미디엄
+                    라이트미디엄 로스팅
                 </label>
             </div>
             <div class="checklist">
                 <input class="checkval" type="checkbox" id="mediumCheckbox" name="medium">
                 <input type="hidden" name="medium_hidden" id="mediumHidden" value="{% if request.GET.medium == 'on' %}on{% endif %}">
                 <label for="medium">
-                    미디엄
+                    미디엄 로스팅
                 </label>
             </div>
             <div class="checklist">
                 <input class="checkval" type="checkbox" id="mediumdarkCheckbox" name="mediumdark">
                 <input type="hidden" name="mediumdark_hidden" id="mediumdarkHidden" value="{% if request.GET.mediumdark == 'on' %}on{% endif %}">
                 <label for="mediumdark">
-                    미디엄다크
+                    미디엄다크 로스팅
                 </label>
             </div>
             <div class="checklist">
                 <input class="checkval" type="checkbox" id="darkCheckbox" name="dark">
                 <input type="hidden" name="dark_hidden" id="darkHidden" value="{% if request.GET.dark == 'on' %}on{% endif %}">
                 <label for="dark">
-                    다크
+                    다크 로스팅
                 </label>
             </div>     
             
@@ -100,31 +101,39 @@
     </div>
 
     <div class="paginator">
-        <h2> 총 {{count}}개의 원두</h2>
+        <p> 총 {{count}}개의 원두</p>
+
         <div class="paginator-content">
-            {% for coffee in page.object_list %}
-            <a class="block" href="/coffee/{{coffee.CoffeeID}}/">
-                <img src="/static/coffee_img/{{coffee.CoffeeID}}.jpg">
-                <div class="block-info">
-                    <div class="block-info-coffee">
-                        <h2>{{coffee.CoffeeName}}</h2>
-                        <h3>{{coffee.RoasteryID.RoasteryName}}</h3>
+            {% for i in page.object_list %}
+
+            <div class="card col-md-4 cardheight">
+                <a href="/coffee/{{i.CoffeeID}}"><img src="/static/coffee_img/{{i.CoffeeID}}.jpg" alt="{{i.CoffeeID}}" class="card-img-top"></a>
+                <div class="card-body">
+                    <div class="content1">
+                        <h5 class="card-title truncate">{{i.CoffeeName}}</h5>
                     </div>
-                    <p>₩ {{coffee.Price|intcomma}}</p>
+                    <div class="card-text roas-name-content">{{i.RoasteryID.RoasteryName}}</div>
+                    <div class="content2">
+                        <p class="card-text"><small class="text-body-secondary">{{i.Price|intcomma}}원</small></p>
+                    </div>
                 </div>
-            </a>
+            </div>
+
+         
+
             {% endfor %}
-        </div>
 
         <div class="page-links"> 
             {% if page.has_previous %}
                 {% with request.GET.urlencode as query_params %}
                     <a href="?{{ query_params|safe }}&page={{ page.previous_page_number }}">이전</a>
                 {% endwith %}
+            {% else %}
+                    <div class="hide">이전</div>
             {% endif %}
             
             <div class="page-num">
-                <h2> {{page.number}} 페이지 / {{total_page}} 페이지</h2>
+                <p> {{page.number}}/{{total_page}}</p>
             </div>
 
             {% if page.has_next %}
@@ -132,8 +141,10 @@
                     <a href="?{{ query_params|safe }}&page={{ page.next_page_number }}">다음</a>
                 {% endwith %}
             {% endif %}    
-        </div>   
+        </div>  
+
     </div>
+
 </div>
 
 

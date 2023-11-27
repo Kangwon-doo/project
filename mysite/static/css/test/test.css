@@ -1,39 +1,34 @@
-.body {
-    background-color: rgb(255, 255, 255);
+body {
+    background-color: rgb(228, 208, 188);
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
 .test-container { /* 폼 전체 */
-  width: 1000px;
+  margin-top: 12.5vh;
+  width: 60vw;
   text-align: center;
-  background: #ffffff;
-}
-
-.bar {
-  height: 100px;
 }
 
 .title {
-  height: 70px;
+  height: 40px;
   text-align: center;
-  line-height: 70px;
-  margin-bottom: 30px;
-  background-color: #ffffff;
+  line-height: 40px;
+
 }
 
 #btn,
 #subbtn { /* 이동 버튼 */
-  width: 100px;
-  height: 50px;
-  margin-top: 30px;
-  border: none;
-  border-radius: 5px;
-  background: rgb(78, 89, 132);
-  color: #fff;
+  width: 80px;
+  height: 40px;
+  margin-top: 20px;
+  border: 2px solid rgb(113, 89, 69);
+  border-radius: 10px;
+  background: none;
+  color: rgb(113, 89, 69);
   font-size: 12px;
-  letter-spacing: 2px;
+  letter-spacing: 1zpx;
   cursor: pointer;
   transition: 0.3s ease;
 }
@@ -41,8 +36,16 @@
 .fieldbox { /* 선택 박스 container */
   display: flex;
   margin: auto;
-  background-color: rgb(255, 255, 255);
-  margin-bottom: 30px;
+  height: 61vh;
+  margin-top: 3vh;
+}
+
+.fieldbox2 { /* 선택 박스 container */
+  display: flex;
+  margin: auto;
+  height: 61vh;
+  margin-top: 3vh;
+  flex-direction: column;
 }
 
 .field1:active,
@@ -51,22 +54,51 @@
 .field2.active,
 .field3:active,
 .field3.active {
-  background-color:rgb(255, 187, 85);
-  color: #fff;
-  transition: 0.4s ease;
+  border: 4px solid rgb(74, 117, 73);
+  color: rgb(74, 117, 73);
+  
+}
+
+.row-wrap {
+  margin: auto;
+}
+
+.field-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.field3 > div > img {
+  width: 5vw;
+  margin-bottom: 3vh;
+}
+
+.field3 {
+  width: 170px;
+  height: 170px;
+  margin: auto;
+  border: 4px solid rgb(165, 165, 165);
+  background: none;
+  font-size: 15px;
+  cursor: pointer;                        
+  position: relative;
+}
+
+.row1{
+  margin-bottom: 5px;
 }
 
 .field1,
-.field2,
-.field3 {
+.field2 {
   width: 200px;
-  height: 300px;
+  height: 270px;
   margin: auto;
-  background: #f4f5f7;
-  border: 1px solid rgb(77,77,77);
-  border-radius: 20px;
+  border: 4px solid rgb(165, 165, 165);
+  background: none;
   font-size: 15px;
-  color: #000;
+  color: rgb(125, 125, 125);
   cursor: pointer;
   align-items: center;
   justify-content: center;
@@ -80,7 +112,6 @@
 .test-container .form-outer {
   width: 100%;
   overflow: hidden;
-  background-color: rgb(255, 255, 255)
 }
 
 .form-outer form {
@@ -101,21 +132,22 @@
   visibility: hidden;
 }
 
-
 /* 커스텀 슬라이드 바 */
 .slidecontainer {
   width: 100%;
-  margin-top: 15%;
+  margin: auto;
+  margin-bottom: 8vh;
 }
 
 .slider {
   transform: rotate(270deg);
   -webkit-appearance: none; /* 기본 CSS 스타일을 적용하지 않기 위해서 */
   width: 100%; /* 슬라이더 길이 */
-  height: 13px; /* 슬라이더 두께 */
+  height: 1vw; /* 슬라이더 두께 */
   border-radius: 5px; /* 슬라이더 모서리를 약간 둥글게 */
-  background: #ccc; /* 슬라이더 색상 */
+  background: #b4b4b4; /* 슬라이더 색상 */
   outline: none; /* 슬라이더 테두리 없이 */
+  margin-bottom: 17vh;
 }
 
 /* 슬라이더 핸들(클릭해서 드래그하는 부분) 커스텀 
@@ -127,11 +159,6 @@ Firefox 브라우저를 위해서는 -moz- 를 사용하세요 */
   width: 25px; /* 슬라이더 핸들 길이 */
   height: 25px; /* 슬라이더 핸들 높이 */
   border-radius: 50%; /* 핸들 모양을 원모양으로 만들기 위함 */
-  background: rgb(255, 187, 85); /* 슬라이더 핸들 색상 */
+  background: rgb(74, 117, 73); /* 슬라이더 핸들 색상 */
   cursor: pointer; /* 슬라이더 핸들에 마우스를 갖다대면 포인터로 변경 */
 }
-
-p {
-  margin-top: 100px;
-}
-

@@ -41,7 +41,7 @@ def signup(request):
 @login_required(login_url='/common/login')
 def signup_test(request):
     
-    return render(request, "common/test.html")
+    return render(request, "common/test2.html")
     
 @login_required(login_url='/common/login')
 def signup_result(request):
