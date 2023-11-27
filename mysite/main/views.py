@@ -1,11 +1,4 @@
 from django.shortcuts import render,redirect
-from products.cosine import cos_recommendation
-from django.contrib.auth.decorators import login_required
-from .models import Coffee
-import json
-from .models import Coffee, Order, OrderItem, Preference, Subscription, Roastery
-from django.db import IntegrityError
-from django.http import HttpResponse
 from products.cosine import cos_recommendation, collaborative_rec, similar_user
 from django.contrib.auth.decorators import login_required
 import json
@@ -13,8 +6,6 @@ from django.db import IntegrityError
 from .models import Coffee, Order, OrderItem, Preference, Subscription, Roastery, Reviews, CustomUser
 from common.forms import CustomUserChangeForm
 from datetime import datetime
-
-import numpy as np
 from keras.models import load_model
 
 # load model
