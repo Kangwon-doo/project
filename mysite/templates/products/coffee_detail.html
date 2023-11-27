@@ -34,7 +34,7 @@
                     <p>
                         <span>{{coffee_info.Country}}</span><br>
                         <span>{{coffee_info.Capacity}}</span><br>
-                        <span>₩ {{coffee_info.Price|intcomma}}</span><br>
+                        <span>{{coffee_info.Price|intcomma}}원</span><br>
                     </p>
                 </div>
             </div>
@@ -68,27 +68,36 @@
 
 <!-- 알고리즘 란 -->
 <div class="coffee-swiper-wrapper">
-    <h2>이 제품과 비슷한 상품</h2>
+
+    <div class="guide-title">
+        <h2>이 원두와 비슷한 원두</h2>
+        <p>비슷한 스타일의 원두를 확인해보세요.</p>
+    </div>
+
     <div class="swiper-container">
     <!-- Swiper -->
-        <div class="swiper">
+        <div class="swiper sample-slider">
             <div class="swiper-wrapper">
-                {% for rec in cosine_sim %}
-                    <div class="card h-100 swiper-slide">
-                    <a href="/coffee/{{rec.CoffeeID}}"><img src="/static/coffee_img/{{rec.CoffeeID}}.jpg" alt="{{i.CoffeeID}}" class="card-img-top"></a>
+                {% for i in cosine_sim %}
+                <div class="card h-100 swiper-slide">
+                    <a href="/coffee/{{i.CoffeeID}}"><img src="/static/coffee_img/{{i.CoffeeID}}.jpg" alt="{{i.CoffeeID}}" class="card-img-top"></a>
                     <div class="card-body">
-                        <h5 class="card-title">{{rec.CoffeeName}}</h5>
-                        <p class="card-text">로스터리 이름</p>
-                        <p class="card-text"><small class="text-body-secondary">{{rec.Price}}</small></p>
+                        <div class="content1">
+                            <h5 class="card-title">{{i.CoffeeName}}</h5>
+                        </div>
+                        <div class="card-text roas-name-content">{{i.RoasteryID.RoasteryName}}</div>
+                        <div class="content2">
+                            <p class="card-text"><small class="text-body-secondary">{{i.Price|intcomma}}원</small></p>
+                        </div>
                     </div>
-                    </div>
+                </div>
                 {% endfor %}
             </div>
             <!-- Add Pagination -->
             <div class="swiper-pagination"></div>
             <!-- Add Arrows -->
-            <div class="swiper-button-next" style="color:grey;"></div>
-            <div class="swiper-button-prev" style="color:grey;"></div>
+            <div class="swiper-button-next" style="color:#949494;"></div>
+            <div class="swiper-button-prev" style="color:#949494;"></div>
         </div>
     </div>
 </div>
@@ -295,8 +304,7 @@
         loop: true,
         loopFillGroupWithBlank: true,
         pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
+        el: '.swiper-pagination'
         },
         navigation: {
         nextEl: '.swiper-button-next',

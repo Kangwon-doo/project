@@ -4,70 +4,74 @@
 {% block head %}
 <title>메인사이트</title>
 <!-- css -->
-<link rel="stylesheet" type="text/css" href="{% static 'css/products/coffee.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/products/roastery.css' %}">
 {% endblock %}
 
 {% block content %}
-<div class="upper">
-    <div class="section1">
-        <img class=".roastery_img" src="/static/roastery_img/{{roastery_info.RoasteryName}}.jpg" alt="{{roastery_info.RoasteryName}}">
-    </div>
-    <div class="section2">
-        <div class="section2-1">
-            <h1>{{roastery_info.RoasteryName}}</h1>
+
+<div class="coffee-container">
+    <div class="upper">
+        <div class="section1">
+            <img class="roastery_img" src="/static/roastery_img/{{roastery_info.RoasteryName}}.jpg" alt="{{roastery_info.RoasteryName}}">
         </div>
-        <div class="section2-2">
-            <div class="section2-2-1">
-                <p>
-                    <span>주소</span><br>
-                    <span>전화번호</span>
-                </p>
+        <div class="section2">
+            <div class="section2-wrapper">
+                <div class="section2-1">
+                    <h1>{{roastery_info.RoasteryName}}</h1>
+                </div>
+                <div class="section2-2">
+                    <div class="section2-2-1">
+                        <p>
+                            <span>주소</span><br>
+                            <span>전화번호</span>
+                        </p>
+                    </div>
+                    <div class="section2-2-2">
+                        <p>
+                            <span>{{roastery_info.RoasteryAddress}}</span><br>
+                            <span>{{roastery_info.RoasteryPhone}}</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="info-title">
+                    <span class="info-header-text">소개</span>
+                </div>
+                <div class="section2-3">
+                        {{roastery_info.RoasteryInfo}}
+                </div>
             </div>
-            <div class="section2-2-2">
-                <p>
-                    <span>{{roastery_info.RoasteryAddress}}</span><br>
-                    <span>{{roastery_info.RoasteryPhone}}</span>
-                </p>
-            </div>
-        </div>
-        <div class="info-title">
-            <span class="info-header-text">소개</span>
-        </div>
-        <div class="section2-3">
-                {{roastery_info.RoasteryInfo}}
         </div>
     </div>
-</div>
 
-<hr/>
+    <hr/>
 
-<div class="wrapper">
-    <h2>이 로스터리의 원두들</h2>
-    <div class="item">
-
-        <div class="paginator">
+    <div class="paginator">
+        <h4> 총 {{count}}개의 원두</h4>
+        <div class="paginator-content">
             {% for coffee in page.object_list %}
-            <a class="block" href="/coffee/{{coffee.CoffeeID}}/">
-                <img src="/static/coffee_img/{{coffee.CoffeeID}}.jpg">
-                <h2>{{coffee.CoffeeName}}</h2>
-                <p>{{coffee.Price}}</p>
-            </a>
+            <div class="card col-md-3 cardheight">
+                <a href="/coffee/{{coffee.CoffeeID}}"><img src="/static/coffee_img/{{coffee.CoffeeID}}.jpg" alt="{{coffee.CoffeeID}}" class="card-img-top"></a>
+                <div class="card-body">
+                    <h5 class="card-title">{{coffee.CoffeeName}}</h5>
+                    <p class="card-text">{{coffee.RoasteryID.RoasteryName}}</p>
+                    <p class="card-text"><small class="text-body-secondary">₩ {{coffee.Price}}</small></p>
+                </div>
+            </div>
             {% endfor %}
-        </div>
+            <div class="page-links"> 
+                {% if page.has_previous %}
+                <a href="?page={{page.previous_page_number}}">Previous Page</a>
+                {% endif %}
         
-        <div class="page-links"> 
-            {% if page.has_previous %}
-            <a href="?page={{page.previous_page_number}}">Previous Page</a>
-            {% endif %}
-    
-            
-            {% if page.has_next %}
-            <a href="?page={{page.next_page_number}}">Next Page</a>
-            {% endif %}
-        </div>
-
+                
+                {% if page.has_next %}
+                <a href="?page={{page.next_page_number}}">Next Page</a>
+                {% endif %}
+            </div>
+        </div> 
     </div>
 </div>
+
 
 <hr/>
 

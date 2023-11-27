@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block mypageHead %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/swiper-bundle.min.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'css/mypage/subscribe.css' %}">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 {% endblock %}
@@ -11,71 +12,142 @@
 <div class="info-container">
     <h1>구독정보</h1>
 
+    <hr>
+
     <div class="subscription_info">
-        <h2>{{info.status}}</h2>
-        <p>{{info.startDate}} ~ {{info.endDate}}</p>
+        <div class="content">
+            <span>
+                <h2><b>{{info.status}}</b></h2>
+                {{info.startDate}} ~ {{info.endDate}}
+            </span>
+        </div>
+        <div class="subscribe-change">
+            <a href="/subscribe/"><button type="button" class="btn btn-outline-success">변경</button></a>
+        </div>
     </div>
 
-    <div class="subscribe-change">
-    <a href="/subscribe/" class="">변경</a>
-    </div>
+    
 
-    구독 원두
+    <hr>
+
+    <h3>구독원두</h3>
     {% if guide == 1 %}
-    <div class="coffee_info">
-    아직 구독한 원두가 없습니다.
+    <div class="sub_info">
+        <div class="content">
+            <img class="sorry_img" src="/static/images/about/sorry.png">
+            <h5>아직 구독한 원두가 없습니다.</h5>  
+        </div>
     </div>
     {% endif %}
 
     {% if guide == 0 %}
-    <div class="coffee_info", id="coffee-box">
-        {% if alert == '1' %}
-            <p class="alert-message">구독 원두 수량을 초과했습니다.<p>
-        {% endif %}
-        <div class="coffee-content">
-            {% for item in coffee %}
-            <div class="coffee-item">
-                <a href="/coffee/{{item.CoffeeID}}"><img class="coffee-img" src="/static/coffee_img/{{item.CoffeeID}}.jpg"></a>
-                <h3>{{item.CoffeeName}}</h3>
-                <a href="{% url 'main:subscribe_remove' item.CoffeeID %}" class="custom_a">
-                    <span class="material-symbols-outlined">delete</span>
-                </a>&nbsp;
-            </div>
-            {% endfor %}
-            <div class="coffee-item">
-                <h3>?</h3>
+    <div class="coffee-swiper-wrapper">
+        <div class="swiper-container">
+        <!-- Swiper -->
+            <div class="swiper">
+                <div class="swiper-wrapper">
+                    {% for item in coffee %}
+                        <div class="card h-100 swiper-slide">
+                        <a href="/coffee/{{item.CoffeeID}}"><img class="card-img-top" src="/static/coffee_img/{{item.CoffeeID}}.jpg" ></a>
+                        <div class="card-body coffee-item">
+                            <h5 class="card-title">{{item.CoffeeName}}</h5>
+                            <p class="card-text">{{item.RoasteryID.RoasteryName}}</p>
+                            {% if info.ordered == '0' %}
+                            <a href="{% url 'main:subscribe_remove' item.CoffeeID %}" class="custom_a card-text">
+                                <span class="material-symbols-outlined">delete</span>
+                            </a>&nbsp;
+                            {% endif %}
+                        </div>
+                        </div>
+                    {% endfor %}
+                    <div class="card h-100 swiper-slide">
+                        <div class="card-body coffee-item">
+                            추천원두
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+    {% if alert == '1' %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert" >
+            <div id="alertPlaceholder">구독 원두 수량을 초과했습니다.</div>
+            <button type="button" class="btn-close" aria-label="Close"></button>
+        </div>
+    {% endif %}
     {% endif %}
 
     <div class="deliever-btn">
-        <div class="alert alert-warning alert-dismissible fade show alert-hidden" role="alert" >
+        <div class="alert alert-dismissible fade show alert-hidden" role="alert" id="alert-mesesage">
             <div id="alertPlaceholder"></div>
             <button type="button" class="btn-close" aria-label="Close"></button>
         </div>
-        <button class="deliever-button">원두 배송받기</button>
+        <button type="button" class="btn btn-outline-success" id="deliever-button">원두 배송받기</button>
     </div>
     
+    <hr>
 
-    구독 히스토리<br>
+    <h3>구독 히스토리</h3>
     {% if info.ordered == '1' %}
-        주문날짜: {{info.orderDate}}
-        {% for item in coffee %}
-            <br>{{item.CoffeeName}} 
-        {% endfor %}
+        <div class="accordion" id="accordionPanelsStayOpenExample">
+            <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                    주문날짜: {{info.orderDate}}
+                </button>
+            </h2>
+            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
+                <div class="accordion-body">
+
+                    <ul class="list-group">
+                        {% for item in coffee %}
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <a href="/coffee/{{item.CoffeeID}}">
+                                            <img src="/static/coffee_img/{{item.CoffeeID}}.jpg" alt="" class="coffee-img">
+                                        </a>
+                                    </div>
+                
+                                    <div class="col-md-8 info">
+                                        <h2 class="coffee-name">{{item.CoffeeName}}</h2>
+                                        <div class="roastery">
+                                            <img class="roas_img" src="/static/roastery_img/{{item.RoasteryID.RoasteryName}}.jpg">
+                                            <span class="roas-name">{{item.RoasteryID.RoasteryName}}</span>
+                                        <div>
+                                    </div>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>  
+                </div>
+            </div>
+            </div>
+        </div>
+    
+    {% else %}
+    <div class="sub_info">
+        <div class="content">
+            <img class="sorry_img" src="/static/images/about/sorry.png">
+            <h5>아직 구독 이력이 없습니다.</h5>  
+        </div>
+    </div>
     {% endif %}
 </div>
+
+
+
 
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script>
     const alert = document.querySelector('.alert')
     
     $(document).ready(function() {
-        $('.deliever-button').click(function() {
+        $('#deliever-button').click(function() {
             var coffeeCount = $('.coffee-item').length;
             if ({{info.ordered}} == '1') {
-                navEl.classList.add('navbar-scrolled');
+                alert.classList.remove('alert-hidden');
+                alert.classList.add('alert-danger');
                 $('#alertPlaceholder').text('이번달 배송이 완료되었습니다.');
             } else if (coffeeCount == 4) {
                 $.ajax({
@@ -85,10 +157,11 @@
                     data: {'ordered': 1},
                     dataType: 'json'
                   });
-                console.log('Value sent successfully');
+                console.log("배송완료");
                 window.location.href = '/mypage/subscribe/';
             } else {
                 alert.classList.remove('alert-hidden');
+                alert.classList.add('alert-warning');
                 $('#alertPlaceholder').text('원두 개수가 부족합니다');
             }
         });
@@ -96,6 +169,15 @@
         $('.btn-close').click(function() {
             alert.classList.add('alert-hidden');
         });
+    });
+</script>
+<script src="{% static 'js/swiper-bundle.min.js' %}"></script>
+<!-- 자바스크립트 파일 -->
+<script type="module">
+    var swiper = new Swiper('.swiper', {
+        slidesPerView: 4,
+        spaceBetween: 10,
+        slidesPerGroup: 4,
     });
 </script>
 {% endblock %}

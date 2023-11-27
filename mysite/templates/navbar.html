@@ -11,7 +11,7 @@
             <a class="nav-link active" aria-current="page" href="/coffee">원두</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="goMD()">MD상품</a>
+            <a class="nav-link active" aria-current="page" href="/products/MD/">MD상품</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="/test">원두추천받기</a>
@@ -20,38 +20,38 @@
             <a class="nav-link active" aria-current="page" href="/subscribe">정기구독</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">ABOUT</a>
+            <a class="nav-link active" aria-current="page" href="/products/MD/">ABOUT</a>
           </li>
         </ul>
 
         <ul class="nav icon-elements" data-in="fadeInDown" data-out="fadeOutUp">                    
-            {% if user.is_authenticated %}
-            <li class="nav-icon" style="cursor: pointer"> 
-                <a href="{% url 'main:mypage' %}"><span class="material-icons" style="color: white;">person</span></a>
-            </li>
-            {% endif %}
-            {% if user.is_authenticated %}
-                {% if item_count > 0 %}
-                <li class="nav-icon" style="cursor: pointer">
-                    <a href="{% url 'cart:cart_detail' %}"><span class="material-icons" style="color: white;">local_mall</span>({{item_count}})</a>
-                </li>
-                {% else %}
-                <li class="nav-icon" style="cursor: pointer">
-                    <a href="{% url 'cart:cart_detail' %}"><span class="material-icons" style="color: white;">local_mall</span></a>
-                </li>
-                {% endif %}
-            {% endif %}
+          {% if user.is_authenticated %}
+          <li class="nav-icon" style="cursor: pointer"> 
+              <a href="{% url 'main:mypage' %}" class="nav-link active"><span class="material-icons" style="color: white;">person</span></a>
+          </li>
+          {% endif %}
+          {% if user.is_authenticated %}
+              {% if item_count > 0 %}
+              <li class="nav-icon" style="cursor: pointer">
+                  <a href="{% url 'cart:cart_detail' %}" class="nav-link active"><span class="material-icons" style="color: white;">local_mall</span>({{item_count}})</a>
+              </li>
+              {% else %}
+              <li class="nav-icon" style="cursor: pointer">
+                  <a href="{% url 'cart:cart_detail' %}" class="nav-link active"><span class="material-icons" style="color: white;">local_mall</span></a>
+              </li>
+              {% endif %}
+          {% endif %}
 
-            {% if user.is_authenticated %}
-            <li class="nav-icon" style="cursor: pointer">
-                <a class="nav-link" href="{% url 'common:logout' %}"><span class="material-icons" style="color: white;">logout</span></a>
-            </li>
-            {% else %}
-            <li class="nav-item" style="cursor: pointer">
-                <a href="{% url 'common:login' %}">로그인</a>
-            </li>
-            {% endif %}
-        </ul>
+          {% if user.is_authenticated %}
+          <li class="nav-icon" style="cursor: pointer">
+              <a class="nav-link active" href="{% url 'common:logout' %}"><span class="material-icons" style="color: white;">logout</span></a>
+          </li>
+          {% else %}
+          <li class="nav-item" style="cursor: pointer">
+              <a href="{% url 'common:login' %}" class="nav-link active" style="color: white; text-decoration:none;">로그인</a>
+          </li>
+          {% endif %}
+      </ul>
       </div>
     </div>
   </nav>
@@ -60,9 +60,7 @@
     function goSignin() {
         window.location = "/signin/";
     }
-    function goMD() {
-        window.location = "/products/MD/";
-    }
+
     function servicePopup(){
         var newWin = window.open("/main/popup.html", " ", "width=600, height=600");
         if(newWin == null){     //팝업이 차단되어 있다면 if문 실행

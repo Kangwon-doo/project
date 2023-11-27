@@ -4,34 +4,25 @@
 .subscription_info {
     display: flex;
     justify-content: space-between;
-    padding: 5px;
-    border: 2px solid #adadad;
+    align-items: center;
+}
+
+.coffee-img {
+    width: 10vw;
+}
+
+.roas_img {
+    width: 2vw;
+    border-radius: 50%;
+}
+
+
+.subscription_info > .content {
+    text-align: left;
 }
 
 .alert-hidden {
     display: none;
-}
-
-.coffee_info {
-    border: 2px solid #9c9c9c;
-}
-
-.coffee-content {
-    width: 100%;
-    display: flex;
-}
-
-.coffee-item {
-    width: 25%;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    align-items: center;
-    border: 1px solid #878787;
-}
-
-.coffee-img {
-    width: 90%;
 }
 
 .deliever-btn {
@@ -39,25 +30,72 @@
     text-align: right;
 }
 
-.deliever-btn > button {
-    background-color: orange;
-    color: white;
-    padding: 1%;
-    margin: 1%;
-    margin-top: 0px;
+#alert-mesesage {
+    margin-top: 1.5vh;
 }
 
-#message {
-    color: red;
-}
+.coffee-swiper-wrapper {
+    width: 100%;
+    margin: auto;
+    margin-bottom: 1.5vh;
+  }
 
-.subscribe-change {
+  .swiper-container {
+    background: #eee;
+    font-size: 14px;
+    color: #000;
+    padding: 0;
+    position: relative;
+    height: 38vh;
+  }
+  
+  .swiper,
+  .swiper2 {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .swiper-slide {
+    font-size: 18px;
+    background: #fff;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
-    text-align: right;
-}
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    transition: all 100ms ease-in;
+  }
+  
+  .swiper-slide:hover {
+    box-shadow: 0px 0px 60px #d0d0d0;
+  }
 
-.subscribe-change > a {
-    background-color: orange;
-    color: white;
-    padding: 1%;
+  .sub_info {
+    background-color: #e6e6e6;
+    border-radius: 15px;
+    height: 25vh;
+    display: flex;
+    margin-bottom: 1.5vh;
+  }
+
+  .sub_info > .content {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sorry_img {
+    width: 6vw;
+    margin: auto;
+    margin-bottom: 2vh;
+  }
+.sub_info > .content >h5 {
+    font-size: medium;
 }

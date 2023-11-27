@@ -1,0 +1,80 @@
+.coffee-container {
+    width: 60vw;
+    margin: auto;
+    margin-top: 10vh;
+    margin-bottom: 5%;
+  }
+
+  .section1 {
+    width: 35%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin: 0px auto;
+}
+
+.roastery_img {
+    width: 80%;
+    margin: auto;
+}
+
+.upper {
+    width: 100%;
+    display: flex;
+    margin: 0 auto;
+}
+  
+  .section2 {
+    width: 65%;
+    display: flex;
+    flex-direction: column;
+    margin: 0px auto;
+}
+
+.section2-wrapper {
+  width: 90%;
+  margin: auto;
+}
+
+.section2-2 {
+    display: flex;
+}
+
+.section2-2-1 {
+    width: 15%;
+}
+
+.section2-3 {
+    display: flex;
+}
+
+.section2-1 > h1 {
+    font-size: 200%;
+    margin-bottom: 5%;
+}
+
+.section2-4 {
+    display: flex;
+    justify-content: space-between;
+}
+
+.paginator-content {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.info-title {
+    background-color: rgb(131, 103, 87);
+    color: white;
+    width: 4vw;
+    padding: 1vh;
+    border-radius: 15px;
+    margin-bottom: 1vh;
+    text-align: center;
+}
+
+.cardheight {
+    height: 50vh;
+}
