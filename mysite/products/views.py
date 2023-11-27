@@ -4,13 +4,9 @@ from formtools.wizard.views import SessionWizardView
 
 # import products
 from .forms import EmailForm, PreferenceForm
-<<<<<<< HEAD
-from main.models import Coffee, Roastery, test_Reviews, test_preference
-from .forms import EmailForm, PreferenceForm, PredictionForm
-from main.models import Coffee, Roastery, Order, Reviews, test_Reviews, test_preference,CustomUser
-=======
+
 from main.models import Coffee, Roastery, Reviews, test_Reviews, test_preference,CustomUser
->>>>>>> heewon
+
 from .cosine import most_similar
 import random
 from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
