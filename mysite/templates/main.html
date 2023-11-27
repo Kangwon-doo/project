@@ -1,4 +1,5 @@
 {% load static %}
+{% load humanize %}
 
 <!doctype html>
 <html lang="en">
@@ -12,6 +13,15 @@
 	<!--style.css-->
 	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/swiper-bundle.min.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+	<style>@font-face {
+        font-family: 'Pretendard-Regular';
+        src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+        font-weight: 400;
+        font-style: normal;
+    }</style>
 </head>
 
 <body>
@@ -62,7 +72,7 @@
                 <a class="nav-link active" aria-current="page" href="/coffee">원두</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="goMD()">MD상품</a>
+                <a class="nav-link active" aria-current="page" href="/products/MD/">MD상품</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="/test">원두추천받기</a>
@@ -71,35 +81,35 @@
                 <a class="nav-link active" aria-current="page" href="/subscribe">정기구독</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">ABOUT</a>
+                <a class="nav-link active" aria-current="page" href="/products/MD/">ABOUT</a>
             </li>
             </ul>
 
             <ul class="nav icon-elements" data-in="fadeInDown" data-out="fadeOutUp">                    
                 {% if user.is_authenticated %}
                 <li class="nav-icon" style="cursor: pointer"> 
-                    <a href="{% url 'main:mypage' %}"><span class="material-icons" style="color: white;">person</span></a>
+                    <a href="{% url 'main:mypage' %}" class="nav-link active"><span class="material-icons" style="color: white;">person</span></a>
                 </li>
                 {% endif %}
                 {% if user.is_authenticated %}
                     {% if item_count > 0 %}
                     <li class="nav-icon" style="cursor: pointer">
-                        <a href="{% url 'cart:cart_detail' %}"><span class="material-icons" style="color: white;">local_mall</span>({{item_count}})</a>
+                        <a href="{% url 'cart:cart_detail' %}" class="nav-link active"><span class="material-icons" style="color: white;">local_mall</span>({{item_count}})</a>
                     </li>
                     {% else %}
                     <li class="nav-icon" style="cursor: pointer">
-                        <a href="{% url 'cart:cart_detail' %}"><span class="material-icons" style="color: white;">local_mall</span></a>
+                        <a href="{% url 'cart:cart_detail' %}" class="nav-link active"><span class="material-icons" style="color: white;">local_mall</span></a>
                     </li>
                     {% endif %}
                 {% endif %}
 
                 {% if user.is_authenticated %}
                 <li class="nav-icon" style="cursor: pointer">
-                    <a class="nav-link" href="{% url 'common:logout' %}"><span class="material-icons" style="color: white;">logout</span></a>
+                    <a class="nav-link active" href="{% url 'common:logout' %}"><span class="material-icons" style="color: white;">logout</span></a>
                 </li>
                 {% else %}
                 <li class="nav-item" style="cursor: pointer">
-                    <a href="{% url 'common:login' %}">로그인</a>
+                    <a href="{% url 'common:login' %}" class="nav-link active">로그인</a>
                 </li>
                 {% endif %}
             </ul>
@@ -111,7 +121,10 @@
     <!--원두-->
     <div class="coffee-swiper-wrapper">
 
-        <h2>오늘 새로 들어온 원두</h2>
+        <div class="guide-title">
+            <h2>오늘 새로 들어온 원두</h2>
+            <p>새로운 스타일의 원두를 확인해보세요.</p>
+        </div>
         <div class="swiper-container">
         <!-- Swiper -->
             <div class="swiper">
@@ -120,44 +133,54 @@
                         <div class="card h-100 swiper-slide">
                         <a href="/coffee/{{i.CoffeeID}}"><img src="/static/coffee_img/{{i.CoffeeID}}.jpg" alt="{{i.CoffeeID}}" class="card-img-top"></a>
                         <div class="card-body">
-                            <h5 class="card-title">{{i.CoffeeName}}</h5>
-                            <p class="card-text">로스터리 이름</p>
-                            <p class="card-text"><small class="text-body-secondary">{{i.Price}}</small></p>
+                            <div class="content1">
+                                <h5 class="card-title">{{i.CoffeeName}}</h5>
+                            </div>
+                            <div class="card-text roas-name">{{i.RoasteryID.RoasteryName}}</div>
+                            <div class="content2">
+                                <p class="card-text"><small class="text-body-secondary">{{i.Price|intcomma}}원</small></p>
+                            </div>
                         </div>
                         </div>
                     {% endfor %}
                 </div>
-                <!-- Add Pagination -->
-                <div class="swiper-pagination"></div>
                 <!-- Add Arrows -->
                 <div class="swiper-button-next" style="color:grey;"></div>
                 <div class="swiper-button-prev" style="color:grey;"></div>
             </div>
         </div>
 
-        <h2>추천하는 원두</h2>
+        {% if user.is_authenticated %}
+        <div class="guide-title">
+            <h2>추천하는 원두</h2>
+            <p>{{request.user.name}}님의 입맛에 딱 알맞는 원두에요.</p>
+        </div>
+
         <div class="swiper-container">
         <!-- Swiper -->
             <div class="swiper rec">
                 <div class="swiper-wrapper">
-                    {% for i in top5 %}
-                        <div class="card  h-100 swiper-slide">
-                            <a href="/coffee/{{i.CoffeeID}}"><img src="/static/coffee_img/{{i.CoffeeID}}.jpg" alt="{{i.CoffeeID}}" class="card-img-top"></a>
-                            <div class="card-body">
-                            <h5 class="card-title">{{i.CoffeeName}}</h5>
-                            <p class="card-text">로스터리 이름</p>
-                            <p class="card-text"><small class="text-body-secondary">{{i.Price}}</small></p>
+                    {% for i in recommended_coffees %}
+                    <div class="card h-100 swiper-slide">
+                        <a href="/coffee/{{i.CoffeeID}}"><img src="/static/coffee_img/{{i.CoffeeID}}.jpg" alt="{{i.CoffeeID}}" class="card-img-top"></a>
+                        <div class="card-body">
+                            <div class="content1">
+                                <h5 class="card-title">{{i.CoffeeName}}</h5>
+                            </div>
+                            <div class="card-text roas-name">{{i.RoasteryID.RoasteryName}}</div>
+                            <div class="content2">
+                                <p class="card-text"><small class="text-body-secondary">{{i.Price|intcomma}}원</small></p>
                             </div>
                         </div>
+                    </div>
                     {% endfor %}
                 </div>
-                <!-- Add Pagination -->
-                <div class="swiper-pagination pag2"></div>
                 <!-- Add Arrows -->
-                <div class="swiper-button-next nextbtn2" style="color:grey;"></div>
-                <div class="swiper-button-prev prevbtn2" style="color:grey;"></div>
+                <div class="swiper-button-next nextbtn2" style="color:#949494;"></div>
+                <div class="swiper-button-prev prevbtn2" style="color:#949494;"></div>
             </div>
         </div>
+        {%endif%}
     </div>
 
 
@@ -170,10 +193,6 @@
         slidesPerGroup: 4,
         loop: true,
         loopFillGroupWithBlank: true,
-        pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-        },
         navigation: {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
@@ -186,10 +205,6 @@
         slidesPerGroup: 4,
         loop: true,
         loopFillGroupWithBlank: true,
-        pagination: {
-        el: '.pag2',
-        clickable: true,
-        },
         navigation: {
         nextEl: '.nextbtn2',
         prevEl: '.prevbtn2',
@@ -211,9 +226,6 @@
 
     function goSignin() {
         window.location = "/signin/";
-    }
-    function goMD() {
-        window.location = "/products/MD/";
     }
     function servicePopup(){
         var newWin = window.open("/main/popup.html", " ", "width=600, height=600");
