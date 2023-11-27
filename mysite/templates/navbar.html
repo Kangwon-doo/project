@@ -48,7 +48,7 @@
           </li>
           {% else %}
           <li class="nav-item" style="cursor: pointer">
-              <a href="{% url 'common:login' %}" class="nav-link active">로그인</a>
+              <a href="{% url 'common:login' %}" class="nav-link active" style="color: white; text-decoration:none;">로그인</a>
           </li>
           {% endif %}
       </ul>
@@ -60,9 +60,7 @@
     function goSignin() {
         window.location = "/signin/";
     }
-    function goMD() {
-        window.location = "/products/MD/";
-    }
+
     function servicePopup(){
         var newWin = window.open("/main/popup.html", " ", "width=600, height=600");
         if(newWin == null){     //팝업이 차단되어 있다면 if문 실행

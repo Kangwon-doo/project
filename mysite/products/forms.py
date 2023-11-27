@@ -44,9 +44,3 @@ class PreferenceForm(forms.Form):
 
     Body = forms.IntegerField(label='바디감',
         widget=forms.NumberInput(attrs={'type': 'range', 'step': '1', 'min': '1', 'max': '5', 'value': '3'}))
-
-
-class PredictionForm(forms.ModelForm):
-    class Meta:
-        model = test_Reviews
-        fields = ('CoffeeID', 'Stars', 'created_date')

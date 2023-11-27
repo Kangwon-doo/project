@@ -133,6 +133,7 @@
                         <div class="card h-100 swiper-slide">
                         <a href="/coffee/{{i.CoffeeID}}"><img src="/static/coffee_img/{{i.CoffeeID}}.jpg" alt="{{i.CoffeeID}}" class="card-img-top"></a>
                         <div class="card-body">
+<<<<<<< HEAD
                             <div class="content1">
                                 <h5 class="card-title">{{i.CoffeeName}}</h5>
                             </div>
@@ -140,27 +141,32 @@
                             <div class="content2">
                                 <p class="card-text"><small class="text-body-secondary">{{i.Price|intcomma}}원</small></p>
                             </div>
+=======
+                            <h5 class="card-title">{{i.CoffeeName}}</h5>
+                            <p class="card-text">{{i.RoasteryID.RoasteryName}}</p>
+                            <p class="card-text"><small class="text-body-secondary">{{i.Price}}</small></p>
+>>>>>>> heewon
                         </div>
                         </div>
                     {% endfor %}
                 </div>
                 <!-- Add Arrows -->
-                <div class="swiper-button-next" style="color:#949494;"></div>
-                <div class="swiper-button-prev" style="color:#949494;"></div>
+                <div class="swiper-button-next" style="color:grey;"></div>
+                <div class="swiper-button-prev" style="color:grey;"></div>
             </div>
         </div>
 
-        <div class="blank-space"></div>
-
+        {% if user.is_authenticated %}
         <div class="guide-title">
             <h2>추천하는 원두</h2>
             <p>{{request.user.name}}님의 입맛에 딱 알맞는 원두에요.</p>
         </div>
+
         <div class="swiper-container">
         <!-- Swiper -->
             <div class="swiper rec">
                 <div class="swiper-wrapper">
-                    {% for i in top5 %}
+                    {% for i in recommended_coffees %}
                     <div class="card h-100 swiper-slide">
                         <a href="/coffee/{{i.CoffeeID}}"><img src="/static/coffee_img/{{i.CoffeeID}}.jpg" alt="{{i.CoffeeID}}" class="card-img-top"></a>
                         <div class="card-body">
@@ -180,6 +186,7 @@
                 <div class="swiper-button-prev prevbtn2" style="color:#949494;"></div>
             </div>
         </div>
+        {%endif%}
     </div>
 
 
@@ -225,9 +232,6 @@
 
     function goSignin() {
         window.location = "/signin/";
-    }
-    function goMD() {
-        window.location = "/products/MD/";
     }
     function servicePopup(){
         var newWin = window.open("/main/popup.html", " ", "width=600, height=600");
