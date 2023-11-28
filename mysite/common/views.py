@@ -22,9 +22,9 @@ from sqlalchemy import create_engine
 import pandas as pd
 
 # MySQL 연결 정보
-mysql_host = 'localhost'
+mysql_host = '127.0.0.1'
 mysql_user = 'root'
-mysql_password = 'MShw1214!'
+mysql_password = '6618'
 mysql_db = 'wondoodoo'
 
 engine = create_engine(f"mysql+pymysql://{mysql_user}:{mysql_password}@{mysql_host}/{mysql_db}")
@@ -133,7 +133,7 @@ def signup_result(request):
         elif coffee.choco  == '1':
             favor_type = 'choco'
             
-        context = {'main_coffee':coffee, 'user':user, 'type':favor_type}
+        context = {'main_coffee':coffee, 'sub_coffee':similarity[1:],   'user':user, 'type':favor_type}
     else:
         pass
 

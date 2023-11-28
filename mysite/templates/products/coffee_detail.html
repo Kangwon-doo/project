@@ -168,34 +168,38 @@
     </div>
 </div>
 
-<hr>
 
 <!--리뷰란-->
 <div class="wrapper">
     {% if not reviewinfo %}
     <div>리뷰가 아직 없습니다.</div>
     {% elif reviewinfo.count  < 3%} <!-- 리뷰수가 최대 2개 일 때-->
+    <div class="guide-title">
+        <h2>리뷰</h2>
+    </div>
+
     <table>
         <tbody>
         {% for i in reviewinfo %}
         <tr> <!-- 사용자 정보 와 별점-->
             <td>
-                <img src="/static/logo/favicon.png"> <!-- 예시 프로필 사진-->
+                <div>
+                    <img class="prof-img" src="/static/images/clients/profile1.jpg"> <!-- 예시 프로필 사진-->
+                    {% for u in userinfo %}
+                    {% if u.id == i.user_id%}
+                    {{u.name}}님
+                    {%endif%}
+                    {%endfor%}
+                    <img src="/static/images/about/star.png" style="width:20px; height:20px;">     {{i.Stars}}.0 
+                </div>
             </td>
-            <td>
-                {% for u in userinfo %}
-                {% if u.id == i.user_id%}
-                {{u.name}}님의 리뷰
-                {%endif%}
-                {%endfor%}
-                <br>
-                {{i.Stars}} <img src="/static/images/star.png" style="width:20px; height:20px;">
+            <td style="width:13%;">
+                <p style="text-align:right;">{{i.created_date|date:"o년 M d일"}}</p>
             </td>
         </tr>
         <tr> <!--리뷰 내용 -->
             <td colspan="2">
-            {{i.content}}
-                <p style="text-align:right;">{{i.created_date|date:"o년 M d일"}}</p>
+                {{i.content}}
             </td>
         </tr>
         {%endfor%}
@@ -217,7 +221,7 @@
                     {%endif%}
                     {%endfor%}
                     <br>
-                    {{i.Stars}} <img src="/static/images/star.png" style="width:20px; height:20px;">
+                    {{i.Stars}} <img src="/static/images/about/star.png" style="width:20px; height:20px;">
                 </td>
             </tr>
             <tr> <!--리뷰 내용 -->
@@ -246,7 +250,7 @@
                     {%endif%}
                     {%endfor%}
                     <br>
-                    {{i.Stars}} <img src="/static/images/star.png" style="width:20px; height:20px;">
+                    {{i.Stars}} <img src="/static/images/about/star.png" style="width:20px; height:20px;">
                 </td>
             </tr>
             <tr> <!--리뷰 내용 -->
@@ -264,7 +268,11 @@
 
 <!-- 상품 필수 표기 정보란 -->
 <div class="detail-wrapper">
-    <h2>상품 필수 표기 정보</h2>
+    
+    <div class="guide-title">
+        <h2>상품 필수 표기 정보</h2>
+    </div>
+
     <table>
         <tr>
             <td class="static">식품의 유형</td>

@@ -1,12 +1,12 @@
-body {
+.body {
     background-color: rgb(255, 227, 187);
     display: flex;
 }
 
 .result-container {
     margin: auto;
-    width: 60%;
-    margin-top: 10%;
+    width: 70%;
+    margin-top: 8vh;
     background-color: #fff;
 }
 .main-img {
@@ -21,7 +21,7 @@ body {
     background-color: rgb(255, 255, 255);
     display: flex; 
     margin-bottom: 40px;
-  
+    margin-top: 2vh;  
 }
 
 .content > img {
@@ -40,7 +40,7 @@ h2 {
     display: flex;
 }
 .info-content {
-    width: 450px;
+    width: 60%;
     margin: auto;
     text-align: center;
 }
@@ -58,6 +58,7 @@ h2 {
     display: block;
     text-align: center;
     margin: auto;
+    font-size: 15px;
 }
 .btn-section,
 .again {
@@ -67,29 +68,42 @@ h2 {
     margin-top: 40px;
 }
 
-.btn {
-    width: 300px; /* Set the width of the links */
-    height: 20px;
-    text-align: center; /* Center the text horizontally within the links */
+.btn1 {
+    width: 300px; 
+    height: 50px;
+    border-radius: 15px;
+    background: rgb(255, 255, 255);
+    border: 2px solid rgb(129, 96, 76);
+    font-size: 15px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    color: rgb(129, 96, 76);
+  }
+
+.btn1 > a {
     text-decoration: none;
-    border: 2px solid rgb(217, 217, 217);
-    color: #6b6b6b;
-    border-radius: 20px;
-    padding: 20px;
-    margin-bottom: 10px; /* Add some margin between the links */
+    color: rgb(129, 96, 76);
 }
 
 .again-btn {
-    width: 300px;
-    height: 20px;
-    text-align: center; 
-    text-decoration: none;
-    background: rgb(249, 160, 37);
-    color: #fff;
+    width: 300px; 
+    height: 50px;
+    border: none;
     border-radius: 20px;
-    padding: 20px;
+    background: rgb(249, 160, 37);
+    font-size: 15px;
+    letter-spacing: 1px;
+    cursor: pointer;
     margin-bottom: 80px; 
+    color: #fff;
+  }
+
+.again-btn > a {
+    text-decoration: none;
+    color: #fff;
 }
+
 .etc {
     display: flex;
     flex-direction: column;
@@ -101,6 +115,7 @@ h2 {
 .etc-coffee {
     display: flex;
     margin: auto;
+    width: 70%;
 }
 
 .coffee-wrapper {
@@ -117,7 +132,42 @@ h2 {
     margin-bottom: 30px;
     color: #313131;
 }
-.etc-img {
-    width: 160px;
-    margin: auto;
-}
+
+
+.card {
+    background-color: #f4f4f4;
+    border-radius: 5px;
+    margin: 0.5vw;
+  }
+  
+  .card > a > img {
+    background-color: #fff;
+  }
+
+  .cardheight {
+    height:53vh;
+  }
+
+  
+.roas-name-content {
+    font-weight:lighter;
+    font-size: medium;
+    color: #464646;
+  }
+  
+  .content1 {
+    height: 8vh;
+  }
+
+  .truncate {
+    width: 100%;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+  }
+  
+  .guide > h3 {
+    margin-top: 4vh;
+    margin-bottom: 3vh;
+  }

@@ -95,9 +95,10 @@ def coffee_detail(request, coffee_id):
     coffee_info.Country = coffee_info.Country.replace("[", "").replace("]", "").replace("'", "")
     coffee_info.CupNote = coffee_info.CupNote.replace("[", "").replace("]", "").replace("'", "")
     
-    categories = ['신맛', '쓴맛', '바디감','단맛']
-    values = [int(coffee_info.Sourness), int(coffee_info.Bitterness), 
-              int(coffee_info.Body), int(coffee_info.Sweetness)]
+    categories = ['바디감','단맛','신맛', '쓴맛']
+    values = [ int(coffee_info.Body), int(coffee_info.Sweetness),
+    int(coffee_info.Sourness),int(coffee_info.Bitterness) ] 
+              
 
     fig = go.Figure()
 
