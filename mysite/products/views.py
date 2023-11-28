@@ -12,7 +12,6 @@ from .cosine import most_similar
 import random
 from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 from django.db.models import Q
-
 import pandas as pd
 import plotly.express as px
 from io import BytesIO
