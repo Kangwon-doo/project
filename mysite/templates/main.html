@@ -153,7 +153,11 @@
         {% if user.is_authenticated %}
         <div class="guide-title">
             <h2>추천하는 원두</h2>
+            {% if user.name %}
             <p>{{request.user.name}}님의 입맛에 딱 알맞는 원두에요.</p>
+            {% else %}
+            <p>회원님의 입맛에 딱 알맞는 원두에요.</p>
+            {% endif %}
         </div>
 
         <div class="swiper-container">
