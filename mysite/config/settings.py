@@ -155,7 +155,7 @@ AUTHENTICATION_BACKENDS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-LOGIN_REDIRECT_URL = '/common/signup/test'# social login redirect
+LOGIN_REDIRECT_URL = '/'  # login redirect
 LOGOUT_REDIRECT_URL = '/'
 ACCOUNT_LOGOUT_REDIRECT_URL = '/'  # logout redirect
 ACCOUNT_LOGOUT_ON_GET = True

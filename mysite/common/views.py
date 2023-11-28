@@ -53,7 +53,6 @@ def signup(request):
 def signup_test(request):
     user = request.user
     social_ids = socialaccount['user_id'].tolist()
-    print(social_ids)
     if user.id in social_ids: # social login 회원이라면
         print('카카오 회원')
         userinfo = Preference.objects.get(user=user)
