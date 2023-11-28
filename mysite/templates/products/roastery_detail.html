@@ -46,7 +46,7 @@
     <hr/>
 
     <div class="paginator">
-        <h4> 총 {{count}}개의 원두</h4>
+        <p> 총 {{count}}개의 원두</p>
         <div class="paginator-content">
             {% for coffee in page.object_list %}
             <div class="card col-md-3 cardheight">
@@ -71,8 +71,4 @@
         </div> 
     </div>
 </div>
-
-
-<hr/>
-
 {% endblock %}

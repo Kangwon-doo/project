@@ -12,9 +12,9 @@ coffees = df.reset_index(drop=False)
 coffees = coffees.rename(columns={"index": "coffeeid"})
 
 # MySQL 연결 정보
-mysql_host = 'localhost'
+mysql_host = '127.0.0.1'
 mysql_user = 'root'
-mysql_password = 'MShw1214!'
+mysql_password = '6618'
 mysql_db = 'wondoodoo'
 
 engine = create_engine(f"mysql+pymysql://{mysql_user}:{mysql_password}@{mysql_host}/{mysql_db}")

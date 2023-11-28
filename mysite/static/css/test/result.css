@@ -21,6 +21,7 @@ body {
     background-color: rgb(255, 255, 255);
     display: flex; 
     margin-bottom: 40px;
+  
 }
 
 .content > img {
