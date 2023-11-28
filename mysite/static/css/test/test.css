@@ -1,8 +1,10 @@
 body {
-    background-color: rgb(228, 208, 188);
     display: flex;
     align-items: center;
     justify-content: center;
+    font-family: 'Noto Sans KR';
+    font-weight:300;
+    background-color: #ede8e2;
   }
 
 .test-container { /* 폼 전체 */

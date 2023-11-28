@@ -5,7 +5,6 @@ from .models import Coffee
 import json
 from .models import Coffee, Order, OrderItem, Preference, Subscription, Roastery
 from django.db import IntegrityError
-from django.http import HttpResponse
 from products.cosine import cos_recommendation, collaborative_rec, similar_user
 from django.contrib.auth.decorators import login_required
 import json
@@ -13,9 +12,8 @@ from django.db import IntegrityError
 from .models import Coffee, Order, OrderItem, Preference, Subscription, Roastery, Reviews, CustomUser
 from common.forms import CustomUserChangeForm
 from datetime import datetime
-
-import numpy as np
 from keras.models import load_model
+import random
 
 # load model
 model = load_model('model/test_model.hdf5')
@@ -161,6 +159,16 @@ def subscribe(request):
     jsonDec = json.decoder.JSONDecoder()
     context = {}
     guide = 0
+    user_favor = Preference.objects.get(user=user)
+    favor = {'caf': user_favor.caf,
+             'blend': user_favor.blend,
+             'notes': jsonDec.decode(user_favor.notes),
+             'sour': user_favor.sour,
+             'sweet': user_favor.sweet,
+             'bitter': user_favor.bitter,
+             'body': user_favor.body}
+
+    similarity_ids = cos_recommendation(favor, 10)
     
     # 구독 유무 확인
     try:
@@ -184,13 +192,23 @@ def subscribe(request):
         # 배송 받기
         if request.method == "POST":
             order_val = request.POST.get('ordered')
+            if info.status == '일반':
+                sample_id = random.sample(similarity_ids, 1)
+            else:
+                sample_id = random.sample(similarity_ids, 2)
+                
             if order_val=='1':
                 # 배송된 구독 정보로 처리
                 print(info.ordered)
                 info.ordered = order_val
                 info.orderDate = datetime.today()
+                                
+                subscribed_coffee = jsonDec.decode(info.coffee)
+                for coffee in sample_id:
+                    subscribed_coffee.append(coffee)
+                    info.coffee = json.dumps(subscribed_coffee)
                 info.save()
-                
+           
         context = {'user':user,'info':info,'coffee':coffee,'alert':alert,'guide':guide}
         template = 'main/mypage/subscription.html'
     except:

@@ -4,14 +4,14 @@ from formtools.wizard.views import SessionWizardView
 
 # import products
 from .forms import EmailForm, PreferenceForm
-
+from main.models import Coffee, Roastery, test_Reviews, test_preference
+from .forms import EmailForm, PreferenceForm
+from main.models import Coffee, Roastery, Order, Reviews, test_Reviews, test_preference,CustomUser
 from main.models import Coffee, Roastery, Reviews, test_Reviews, test_preference,CustomUser
-
 from .cosine import most_similar
 import random
 from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 from django.db.models import Q
-
 import pandas as pd
 import plotly.express as px
 from io import BytesIO
@@ -89,14 +89,15 @@ import plotly.graph_objects as go
 def coffee_detail(request, coffee_id):
     coffee_info = Coffee.objects.get(CoffeeID=coffee_id)
     roastery_name = Roastery.objects.all()
-    similarity_ids = most_similar(coffee_id, 5)
+    similarity_ids = most_similar(coffee_id, 8)
     similarity = Coffee.objects.filter(CoffeeID__in=similarity_ids)
     coffee_info.Country = coffee_info.Country.replace("[", "").replace("]", "").replace("'", "")
     coffee_info.CupNote = coffee_info.CupNote.replace("[", "").replace("]", "").replace("'", "")
     
-    categories = ['단맛', '신맛', '쓴맛', '바디감']
-    values = [int(coffee_info.Sweetness), int(coffee_info.Sourness), 
-              int(coffee_info.Bitterness), int(coffee_info.Body)]
+    categories = ['바디감','단맛','신맛', '쓴맛']
+    values = [ int(coffee_info.Body), int(coffee_info.Sweetness),
+    int(coffee_info.Sourness),int(coffee_info.Bitterness) ] 
+              
 
     fig = go.Figure()
 
@@ -104,7 +105,7 @@ def coffee_detail(request, coffee_id):
         r=values + values[:1],
         theta=categories + categories[:1],
         fill='toself',
-        line=dict(color='orange'),
+        line=dict(color='brown'),
     ))
 
     fig.update_layout(

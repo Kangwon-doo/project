@@ -21,12 +21,16 @@
   }
 
   .front {
-    background: rgb(240, 240, 240); 
+    background: rgb(247, 245, 243); 
     text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
     border: 2px solid rgb(255, 162, 0); 
+  }
+
+  .front > p {
+    color: #939393;
   }
 
   .back { 
@@ -46,7 +50,7 @@
     position: relative;
     display: flex;
     margin: auto;
-    margin-top: 3%;
+    margin-top: 1vh;
   }
   p {
     margin-bottom: 0px;
@@ -67,7 +71,12 @@
   .guide {
     width: 80%;
     margin: auto;
-    margin-top: 3%;
+    margin-top: 13vh;
     background-color: rgb(255, 255, 255);
     text-align: center;
+  }
+
+  .guide-info > p {
+    color: #939393;
+    margin-top: 3vh;
   }

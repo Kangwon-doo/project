@@ -154,13 +154,18 @@ AUTHENTICATION_BACKENDS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+<<<<<<< HEAD
 
 
 LOGIN_REDIRECT_URL = '/common/signup/test'   # social login redirect
+=======
+LOGIN_REDIRECT_URL = '/'
+>>>>>>> 7617ee221fe2f326a88b1702ddfa9eb05a77f932
 LOGOUT_REDIRECT_URL = '/'
 ACCOUNT_LOGOUT_REDIRECT_URL = '/'  # logout redirect
 ACCOUNT_LOGOUT_ON_GET = True
 SOCIALACCOUNT_LOGIN_ON_GET = True
+#SOCIALACCOUNT_AUTO_SIGNUP_REDIRECT = 'http://127.0.0.1:8000/test/'
 
 SOCIALACCOUNT_PROVIDERS = {
     'naver': {

@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 {% load humanize %}
 {% load static %}
-{% load humanize %}
 
 {% block head %}
 <title>메인사이트</title>
@@ -118,11 +117,9 @@
                     </div>
                 </div>
             </div>
-
-         
-
             {% endfor %}
-
+        </div>
+        
         <div class="page-links"> 
             {% if page.has_previous %}
                 {% with request.GET.urlencode as query_params %}

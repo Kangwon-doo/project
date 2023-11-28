@@ -1,7 +1,6 @@
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
-from django.urls import reverse_lazy
 
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
@@ -19,6 +18,18 @@ from .forms import CustomUserCreationForm
 #비번 변경
 from django.contrib.auth import views as auth_views
 
+from sqlalchemy import create_engine
+import pandas as pd
+
+# MySQL 연결 정보
+mysql_host = 'database-1.cql2hwaazxkg.ap-northeast-2.rds.amazonaws.com'
+mysql_user = 'admin'
+mysql_password = 'admin1234'
+mysql_db = 'team_wondoodoo'
+
+engine = create_engine(f"mysql+pymysql://{mysql_user}:{mysql_password}@{mysql_host}/{mysql_db}")
+query = f"SELECT * FROM socialaccount_socialaccount;"
+socialaccount = pd.read_sql(query,engine)
 
 
 # Create your views here.
@@ -40,8 +51,21 @@ def signup(request):
 
 @login_required(login_url='/common/login')
 def signup_test(request):
-    
-    return render(request, "common/test.html")
+    user = request.user
+    social_ids = socialaccount['user_id'].tolist()
+    print(social_ids)
+    if user.id in social_ids: # social login 회원이라면
+        print('카카오 회원')
+        userinfo = Preference.objects.get(user=user)
+        if userinfo:
+            print('정보 있음')
+            set_redirect = '/'
+        else:
+            print('정보 없음')
+            set_redirect = '/common/signup/test'
+        return redirect(set_redirect)
+    else:
+        return render(request, "common/test.html")
     
 @login_required(login_url='/common/login')
 def signup_result(request):
@@ -109,7 +133,7 @@ def signup_result(request):
         elif coffee.choco  == '1':
             favor_type = 'choco'
             
-        context = {'main_coffee':coffee, 'user':user, 'type':favor_type}
+        context = {'main_coffee':coffee, 'sub_coffee':similarity[1:],   'user':user, 'type':favor_type}
     else:
         pass
 
