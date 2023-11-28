@@ -13,8 +13,6 @@ from django.db import IntegrityError
 from .models import Coffee, Order, OrderItem, Preference, Subscription, Roastery, Reviews, CustomUser
 from common.forms import CustomUserChangeForm
 from datetime import datetime
-
-import numpy as np
 from keras.models import load_model
 
 # load model
