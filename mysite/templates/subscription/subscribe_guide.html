@@ -11,7 +11,8 @@
   <div class="guide" style="margin-top:80px;">
     <div class="guide-info">
       <h1>정기구독</h1>
-      <p>어쩌고 저쩌고 정기구독에 대한 설명을 적습니다.</p>
+      <p>선택하신 일자에 맞춰 3일 내 로스팅 한 원두 상품 200g을 매달 받으실 수 있습니다.<br>배송비 무료
+</p>
     </div>
   </div>
 
@@ -30,10 +31,7 @@
           <form action="result" method="POST">
             {% csrf_token %}
             <h3>혜택</h3>
-            <p class="subscribe-info">Lorem, ipsum dolor sit amet consectetur
-              adipisicing elit. Magni laboriosam eligendi optio voluptates totam
-              tenetur eum debitis sit dolorum! Aliquam animi inventore libero
-              earum repudiandae cumque accusamus, aut quos saepe!</p>
+            <p class="subscribe-info">매달 <strong>한</strong> 종류의 추천 원두 샘플을 추가로 받으실 수 있습니다.(100g)</p>
             <input type="hidden" name="status" value="일반">
             <input type="submit" value="구독하기" class="subscribe-btn"></input>
           </form>
@@ -54,10 +52,7 @@
           <form action="result?next={{ request.path }}" method="POST">
             {% csrf_token %}
             <h3>혜택</h3>
-            <p class="subscribe-info">Lorem, ipsum dolor sit amet consectetur
-              adipisicing elit. Magni laboriosam eligendi optio voluptates totam
-              tenetur eum debitis sit dolorum! Aliquam animi inventore libero
-              earum repudiandae cumque accusamus, aut quos saepe!</p>
+            <p class="subscribe-info">매달 <strong>두</strong> 종류의 추천 원두 샘플을 추가로 받으실 수 있습니다.(100g*2)</p>
             <input type="hidden" name="status" value="프리미엄">
             <input type="submit" value="구독하기" class="subscribe-btn"></input>
           </form>
@@ -78,10 +73,9 @@
           <form action="result" method="POST">
             {% csrf_token %}
             <h3>혜택</h3>
-            <p class="subscribe-info">Lorem, ipsum dolor sit amet consectetur
-              adipisicing elit. Magni laboriosam eligendi optio voluptates totam
-              tenetur eum debitis sit dolorum! Aliquam animi inventore libero
-              earum repudiandae cumque accusamus, aut quos saepe!</p>
+            <p class="subscribe-info">매달 <strong>두</strong> 종류의 추천 원두 샘플을 추가로 받으실 수 있습니다.(100g*2)<br>
+              + 모든 상품 구매 시 20% 할인<br>
+              + 생일 선물*원하시는 원두 상품 1건</p>
             <input type="hidden" name="status" value="블랙라벨">
             <input type="submit" value="구독하기" class="subscribe-btn"></input>
           </form>
