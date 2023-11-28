@@ -4,21 +4,14 @@ from formtools.wizard.views import SessionWizardView
 
 # import products
 from .forms import EmailForm, PreferenceForm
-<<<<<<< HEAD
-
-from main.models import Coffee, Roastery, Reviews, test_Reviews, test_preference,CustomUser
-
-=======
 from main.models import Coffee, Roastery, test_Reviews, test_preference
 from .forms import EmailForm, PreferenceForm
 from main.models import Coffee, Roastery, Order, Reviews, test_Reviews, test_preference,CustomUser
 from main.models import Coffee, Roastery, Reviews, test_Reviews, test_preference,CustomUser
->>>>>>> 5f6d94468105b09445a9d18aaa872f06bf7f39ba
 from .cosine import most_similar
 import random
 from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 from django.db.models import Q
-
 import pandas as pd
 import plotly.express as px
 from io import BytesIO

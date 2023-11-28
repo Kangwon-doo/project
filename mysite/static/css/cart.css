@@ -1,0 +1,107 @@
+.cart-container {
+    margin: auto;
+    margin-top: 10vh;
+    width: 70vw;
+}
+
+.my_custom_thread {
+    font-weight: normal;
+    text-transform: uppercase;
+    letter-spacing: .2em;
+}
+
+.my_customer_table {
+    width: 100%;
+    font-size: 14px;
+}
+
+.text-left-content {
+    width: 37vw;
+    margin: auto;
+    margin-top: 4vh;
+}
+
+.custom_image {
+    width: 10vw;
+}
+
+.price {
+    width: 5vw;
+    margin-top: 4vh;
+    text-align: center;
+}
+
+.price > p {
+    font-weight: bold;
+    margin-bottom: 1vh;
+}
+
+.section2-3 {
+    display: flex;
+}
+
+.roas-btn {
+    height: 6vh;
+      color: #000000;    
+      font-size: 15px;
+      cursor: pointer;
+      display: flex;
+      margin-top: 2vh;
+      margin-bottom: 5vh;
+      background: white;
+    }
+  
+    .roas-name {
+      margin: auto;
+      margin-right: 0.5vw;
+    }
+  
+    .roas_img {
+      height: 6vh;
+      margin: auto;
+      margin-right: 1vw;
+      border-radius: 50%;
+    }
+  
+    .section2-3 > a {
+      text-decoration-line: none; 
+    }
+
+    #nav-btn {
+        margin: auto;
+        font-size: 30px;
+        color: #474747;
+      }
+
+.my_custom_button,
+.my-custom_button {
+    background-color: rgb(129, 96, 76);
+    border: none;
+}
+
+.header2 {
+    background-color: aliceblue;
+    margin-top: 20vh;
+    margin-bottom: 20vh;
+}
+
+.sorry_img {
+    width: 12vw;
+    margin:auto;
+    margin-bottom:3vh;
+}
+
+.wrap > h5 {
+    color: rgb(181, 181, 181);
+    margin-bottom: 9vh;
+}
+
+.wrap {
+    height: 50vh;
+    margin: auto;
+    justify-content: center;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+

@@ -47,22 +47,22 @@
             <div class="swiper">
                 <div class="swiper-wrapper">
                     {% for item in coffee %}
-                        <div class="card h-100 swiper-slide">
+                        <div class="card h-100 swiper-slide cardheight">
                         <a href="/coffee/{{item.CoffeeID}}"><img class="card-img-top" src="/static/coffee_img/{{item.CoffeeID}}.jpg" ></a>
                         <div class="card-body coffee-item">
-                            <h5 class="card-title">{{item.CoffeeName}}</h5>
-                            <p class="card-text">{{item.RoasteryID.RoasteryName}}</p>
+                            <h5 class="card-title truncate">{{item.CoffeeName}}</h5>
+                            <p class="card-text truncate"><small>{{item.RoasteryID.RoasteryName}}</small></p>
                             {% if info.ordered == '0' %}
                             <a href="{% url 'main:subscribe_remove' item.CoffeeID %}" class="custom_a card-text">
                                 <span class="material-symbols-outlined">delete</span>
-                            </a>&nbsp;
+                            </a>
                             {% endif %}
                         </div>
                         </div>
                     {% endfor %}
-                    <div class="card h-100 swiper-slide">
-                        <div class="card-body coffee-item">
-                            추천원두
+                    <div class="card h-100 swiper-slide cardheight">
+                        <div class="card-body coffee-item rec">
+                            <span>추천원두</span>
                         </div>
                     </div>
                 </div>
@@ -109,7 +109,6 @@
                                             <img src="/static/coffee_img/{{item.CoffeeID}}.jpg" alt="" class="coffee-img">
                                         </a>
                                     </div>
-                
                                     <div class="col-md-8 info">
                                         <h2 class="coffee-name">{{item.CoffeeName}}</h2>
                                         <div class="roastery">
@@ -138,7 +137,17 @@
 
 
 
-
+<script src="{% static 'js/swiper-bundle.min.js' %}"></script>
+<!-- 자바스크립트 파일 -->
+<script type="module">
+    var swiper = new Swiper('.swiper', {
+        slidesPerView: 4,
+        spaceBetween: 10,
+        slidesPerGroup: 4,
+        loop: true,
+        loopFillGroupWithBlank: true,
+    });
+</script>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script>
     const alert = document.querySelector('.alert')
@@ -172,13 +181,5 @@
         });
     });
 </script>
-<script src="{% static 'js/swiper-bundle.min.js' %}"></script>
-<!-- 자바스크립트 파일 -->
-<script type="module">
-    var swiper = new Swiper('.swiper', {
-        slidesPerView: 4,
-        spaceBetween: 10,
-        slidesPerGroup: 4,
-    });
-</script>
+
 {% endblock %}

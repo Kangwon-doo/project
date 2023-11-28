@@ -1,126 +1,5 @@
-{% extends "base.html" %}  <!--회원 가입시의 기호정보 입력 창-->
 {% load static %}
 
-<<<<<<< HEAD
-
-{% block head %}
-    <title>메인사이트</title>
-    <!-- css -->
-    <link rel="stylesheet" type="text/css" href="{% static 'css/test/test.css' %}">
-    <link rel="shortcut icon" href="#">
-{% endblock %}
-
-{% block content %}
-<div class="body">
-    <div class="test-container">
-        <!-- 질문 폼 -->
-        <div class="form-outer">
-            <form action="{% url 'common:signup_test_result' %}" method="GET">
-                {% csrf_token %}
-                <!-- 첫번째 질문 -->
-                <div class="page slidepage">
-                    <div class="title">
-                        <h3>카페인을 원하시나요?</h3>
-                    </div>
-                    <div class="fieldbox">
-                        <button class="field1 hidden" onclick="change_firbtn(event)" name="decaf" type="button" id="valbtn" value="0">
-                            디카페인
-                        </button>
-                        <button class="field1 hidden" onclick="change_firbtn(event)" type="button" id="valbtn" value="1">카페인</button>
-                    </div>
-                    <div class="field-btns">
-                        <button class="hiddenbtn" type="button">이전</button>
-                        <button class="nextBtn" id="btn" type="button">다음</button>
-                    </div>
-                </div>
-
-                <!-- 두번째 질문 -->
-                <div class="page">
-                    <div class="title">
-                        <h3>원하시는 원두 타입을 고르세요</h3>
-                        </div>
-                    <div class="fieldbox">
-                        <button class="field2" onclick="change_secbtn(event)" type="button" id="valbtn" value="0">싱글오리진</button>
-                        <button class="field2" onclick="change_secbtn(event)" type="button" id="valbtn" value="1">블렌드</button>
-                    </div>
-                    <div class="field-btns">
-                        <button class="prev-1 prev" id="btn" type="button">이전</button>
-                        <button class="next-1 next" id="btn" type="button">다음</button>
-                    </div>
-                </div>
-
-                <!-- 세번째 질문 -->
-                <div class="page">
-                    <div class="title">
-                        <h3>원하시는 컵노트를 고르세요</h3>
-                    </div>
-                    <div class="fieldbox2">
-                        <div class="row-wrap">
-                            <div class="row1">
-                                <button class="field3" onclick="change_thirbtn(this)" type="button" id="valbtn" value="꽃">
-                                    <div class="field-content">
-                                        <img src="/static/icon/blackoutline/flower.png" alt="{{coffee.CoffeeID}}" class="card-img-top">
-                                        <span>꽃</span>
-                                    </div>
-                                </button>
-                                <button class="field3" onclick="change_thirbtn(this)" type="button" id="valbtn" value="초콜릿">
-                                    <div class="field-content">
-                                        <img src="/static/icon/blackoutline/choco.png" alt="{{coffee.CoffeeID}}" class="card-img-top">
-                                        <span>초콜릿</span>
-                                    </div>
-                                </button>
-                                <button class="field3" onclick="change_thirbtn(this)" type="button" id="valbtn" value="고소함">
-                                    <div class="field-content">
-                                        <img src="/static/icon/blackoutline/nutty.png" alt="{{coffee.CoffeeID}}" class="card-img-top">
-                                        <span>고소한</span>
-                                    </div>
-                                </button>
-                            </div>
-                            <div class="row2">
-                                <button class="field3" onclick="change_thirbtn(this)" type="button" id="valbtn" value="달콤함">
-                                    <div class="field-content">
-                                        <img src="/static/icon/blackoutline/sweet.png" alt="{{coffee.CoffeeID}}" class="card-img-top">
-                                        <span>달콤한</span>
-                                    </div>
-                                </button>
-                                <button class="field3" onclick="change_thirbtn(this)" type="button" id="valbtn" value="허브">
-                                    <div class="field-content">
-                                        <img src="/static/icon/blackoutline/herb.png" alt="{{coffee.CoffeeID}}" class="card-img-top">
-                                        <span>허브</span>
-                                    </div>
-                                </button>
-                                <button class="field3" onclick="change_thirbtn(this)" type="button" id="valbtn" value="과일">
-                                    <div class="field-content">
-                                        <img src="/static/icon/blackoutline/fruit.png" alt="{{coffee.CoffeeID}}" class="card-img-top">
-                                        <span>과일</span>
-                                    </div>
-                                </button>
-                                <button class="field3" onclick="change_thirbtn(this)" type="button" id="valbtn" value="향료">
-                                    <div class="field-content">
-                                        <img src="/static/icon/blackoutline/spice.png" alt="{{coffee.CoffeeID}}" class="card-img-top">
-                                        <span>향료</span>
-                                    </div>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="field-btns">
-                        <button class="prev-2 prev" id="btn" type="button">이전</button>
-                        <button class="next-2 next" id="btn" type="button">다음</button>
-                    </div>
-                </div>
-
-                <!-- 네번째 질문 -->
-                <div class="page">
-                    <div class="title">
-                        <h3>맛의 강도를 골라주세요</h3>
-                    </div>
-                    <!--슬라이드 바-->
-                    <div class="fieldbox tohide hidden">
-                        <div class="slidecontainer">
-                            <input type="range" id="sour" min="1" max="5" value="3" class="slider">
-                            <p>신맛: <span id="sour-value"></span></p>
-=======
 <!doctype html>
 <html lang="en">
   <head>
@@ -165,7 +44,6 @@
                                 디카페인
                             </button>
                             <button class="field1 hidden" onclick="change_firbtn(event)" type="button" id="valbtn" value="1">카페인</button>
->>>>>>> 5f6d94468105b09445a9d18aaa872f06bf7f39ba
                         </div>
                         <div class="field-btns">
                             <button class="hiddenbtn" type="button">이전</button>
@@ -288,11 +166,7 @@
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="{% static 'js/common/test.js' %}"></script>
 <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" data-auto-a11y="true" ></script>
-<<<<<<< HEAD
-{% endblock %}
-=======
 </body>
 </html>
 
 
->>>>>>> 5f6d94468105b09445a9d18aaa872f06bf7f39ba
