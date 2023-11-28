@@ -125,6 +125,7 @@ def notes_categorising(data):
     # Add other keys with initial values
     new_keys = ['꽃', '과일', '달콤함', '허브', '고소함', '향료', '초콜릿']
     for key in new_keys:
+        # data.loc[:, key] = 0
         data[key] = 0
     # Iterate through the 'notes' list and add new keys to 'new_dict'
     for index, row in data.iterrows():
