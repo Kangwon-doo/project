@@ -53,14 +53,11 @@ def signup(request):
 def signup_test(request):
     user = request.user
     social_ids = socialaccount['user_id'].tolist()
-    if user.id in social_ids: # social login 회원이라면
-        print('카카오 회원')
+    if user.id in social_ids:  # social login 회원이라면
         userinfo = Preference.objects.get(user=user)
         if userinfo:
-            print('정보 있음')
             set_redirect = '/'
         else:
-            print('정보 없음')
             set_redirect = '/common/signup/test'
         return redirect(set_redirect)
     else:
