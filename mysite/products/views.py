@@ -94,11 +94,26 @@ def coffee_detail(request, coffee_id):
     coffee_info.Country = coffee_info.Country.replace("[", "").replace("]", "").replace("'", "")
     coffee_info.CupNote = coffee_info.CupNote.replace("[", "").replace("]", "").replace("'", "")
     
-    categories = ['바디감','단맛','신맛', '쓴맛']
+    categories = ['body','sweet','sour', 'bitter']
     values = [ int(coffee_info.Body), int(coffee_info.Sweetness),
     int(coffee_info.Sourness),int(coffee_info.Bitterness) ] 
-              
-
+                
+    favor_type = '달콤함'
+    if coffee_info.sweet == '1':
+        favor_type = '달콤함'
+    elif coffee_info.flower == '1':
+        favor_type = '꽃'
+    elif coffee_info.fruit == '1':
+        favor_type = '과일'
+    elif coffee_info.herb == '1':
+        favor_type = '허브'
+    elif coffee_info.nutty == '1':
+        favor_type = '고소함'
+    elif coffee_info.spice == '1':
+        favor_type = '향료'
+    elif coffee_info.choco  == '1':
+        favor_type = '초코'
+        
     fig = go.Figure()
 
     fig.add_trace(go.Scatterpolar(
@@ -109,14 +124,31 @@ def coffee_detail(request, coffee_id):
     ))
 
     fig.update_layout(
-        polar=dict(
-            radialaxis=dict(
-                visible=True,
-                range=[0, 5],  
+    polar=dict(
+        radialaxis=dict(
+            visible=True,
+            range=[0, 5],
+            tickfont=dict(
+                family='Arial',  # Set the font family
+                size=12,  # Set the font size
+                color='black'  # Set the font color
             ),
         ),
-        width=400, 
-        height=400,
+        angularaxis=dict(
+            tickfont=dict(
+                family='Arial',
+                size=12,
+                color='black'
+            ),
+        ),
+    ),
+    font=dict(
+        family='Arial',  # Set the default font family for the entire chart
+        size=14,  # Set the default font size
+        color='black'  # Set the default font color
+    ),
+    width=400,
+    height=400,
     )
 
     buffer = BytesIO()
@@ -134,7 +166,8 @@ def coffee_detail(request, coffee_id):
                'roastery_name': roastery_name,
                'chart_image': chart_image,
                'reviewinfo': reviewinfo,
-               'userinfo':userinfo }
+               'userinfo':userinfo,
+               'favor_type':favor_type}
     
     return render(request, 'products/coffee_detail.html', context)
 

@@ -83,7 +83,7 @@
                     <a href="/coffee/{{i.CoffeeID}}"><img src="/static/coffee_img/{{i.CoffeeID}}.jpg" alt="{{i.CoffeeID}}" class="card-img-top"></a>
                     <div class="card-body">
                         <div class="content1">
-                            <h5 class="card-title">{{i.CoffeeName}}</h5>
+                            <h5 class="card-title truncate">{{i.CoffeeName}}</h5>
                         </div>
                         <div class="card-text roas-name-content">{{i.RoasteryID.RoasteryName}}</div>
                         <div class="content2">
@@ -125,7 +125,7 @@
         {% endif %}
         {% if coffee_info.RoastingPoint %}
         <div class="info-wrapper">
-            <h5 class="info-val">{{coffee_info.RoastingPoint}} 로스팅</h5>
+            <h5 class="info-val">{{coffee_info.RoastingPoint}}</h5>
             <span class="material-symbols-outlined" style="font-size:100px;">emoji_food_beverage</span>
         </div>
         {% endif %}
@@ -137,7 +137,7 @@
         {% endif %}
         {% if coffee_info.CupNote %}
         <div class="info-wrapper" id="cupnote-wrapper">
-            <h5 class="info-val">과일,허브</h5>
+            <h5 class="info-val">{{favor_type}}</h5>
             <span class="material-symbols-outlined" style="font-size:100px;">nutrition</span>
             <div class="text-box">{{coffee_info.CupNote}}</div>
         </div>
@@ -172,6 +172,9 @@
 <!--리뷰란-->
 <div class="wrapper">
     {% if not reviewinfo %}
+    <div class="guide-title">
+        <h2>리뷰</h2>
+    </div>
     <div>리뷰가 아직 없습니다.</div>
     {% elif reviewinfo.count  < 3%} <!-- 리뷰수가 최대 2개 일 때-->
     <div class="guide-title">
