@@ -13,10 +13,10 @@ import pandas as pd
 from django.core.exceptions import ObjectDoesNotExist
 
 # MySQL 연결 정보
-mysql_host = 'localhost'
-mysql_user = 'root'
-mysql_password = 'MShw1214!'
-mysql_db = 'wondoodoo'
+mysql_host = 'database-1.cql2hwaazxkg.ap-northeast-2.rds.amazonaws.com'
+mysql_user = 'admin'
+mysql_password = 'admin1234'
+mysql_db = 'team_wondoodoo'
 engine = create_engine(f"mysql+pymysql://{mysql_user}:{mysql_password}@{mysql_host}/{mysql_db}")
 query = f"SELECT * FROM socialaccount_socialaccount;"
 socialaccount = pd.read_sql(query, engine)
