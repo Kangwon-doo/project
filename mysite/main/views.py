@@ -103,16 +103,23 @@ def result(request):
 
 
 # 메인페이지
-
+​
 def index(request):  # main page
     recent = Coffee.objects.order_by('-Created_date')[0:8]
     top5 = Coffee.objects.order_by('Stock')[0:5]
     context = {'coffee_info': recent, 'top5': top5}
-
-    """회원에게만 제공되는 원두 추천 (8개)"""
+​
     user = request.user
     jsonDec = json.decoder.JSONDecoder()
-
+    """회원에게만 제공되는 원두 추천 (8개)"""
+    if user.is_authenticated:
+        social_ids = socialaccount['user_id'].tolist()
+        try:
+            userinfo = Preference.objects.get(user=user)
+        except ObjectDoesNotExist:
+            set_redirect = '/common/signup/test'
+            return redirect(set_redirect)
+​
     if user.is_authenticated: # 로그인 상태라면
         review_count = len(Reviews.objects.filter(user_id=user.id))
         if review_count == 0:  # 리뷰가 아직 없는 고객
@@ -124,17 +131,17 @@ def index(request):  # main page
                      'sweet': user_favor.sweet,
                      'bitter': user_favor.bitter,
                      'body': user_favor.body}
-
+​
             recommended_ids = cos_recommendation(favor, 8)
             recommended_coffees = Coffee.objects.filter(CoffeeID__in=recommended_ids)
             context = {'coffee_info': recent, 'top5': top5, 'recommended_coffees': recommended_coffees}
-
+​
         else: # 리뷰가 존재하는 고객
             user_id = similar_user(user.id)
             recommended_ids = collaborative_rec(model, userid=user_id)
             recommended_coffees = Coffee.objects.filter(CoffeeID__in=recommended_ids)
             context = {'coffee_info': recent, 'top5': top5, 'recommended_coffees': recommended_coffees}
-
+​
     return render(request, 'main.html', context)
 
 # 마이페이지
