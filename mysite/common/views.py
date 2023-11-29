@@ -51,17 +51,8 @@ def signup(request):
 
 @login_required(login_url='/common/login')
 def signup_test(request):
-    user = request.user
-    social_ids = socialaccount['user_id'].tolist()
-    if user.id in social_ids:  # social login 회원이라면
-        userinfo = Preference.objects.get(user=user)
-        if userinfo:
-            set_redirect = '/'
-        else:
-            set_redirect = '/common/signup/test'
-        return redirect(set_redirect)
-    else:
-        return render(request, "common/test.html")
+
+    return render(request, "common/test.html")
     
 @login_required(login_url='/common/login')
 def signup_result(request):
