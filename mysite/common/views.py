@@ -22,10 +22,10 @@ from sqlalchemy import create_engine
 import pandas as pd
 
 # MySQL 연결 정보
-mysql_host = 'database-1.cql2hwaazxkg.ap-northeast-2.rds.amazonaws.com'
-mysql_user = 'admin'
-mysql_password = 'admin1234'
-mysql_db = 'team_wondoodoo'
+mysql_host = '127.0.0.1'
+mysql_user = 'root'
+mysql_password = '1234'
+mysql_db = 'wondoodoo'
 
 engine = create_engine(f"mysql+pymysql://{mysql_user}:{mysql_password}@{mysql_host}/{mysql_db}")
 query = f"SELECT * FROM socialaccount_socialaccount;"
