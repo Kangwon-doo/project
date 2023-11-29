@@ -76,5 +76,32 @@
 }
 
 .cardheight {
-    height: 50vh;
+    height: 52vh;
 }
+
+.truncate {
+    width: 100%;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+  }
+
+.roas-name-content {
+    font-weight:lighter;
+    font-size: medium;
+    color: #464646;
+  }
+  
+  .content1 {
+    height: 8vh;
+  }
+  
+  .card {
+    background-color: #f4f4f4;
+    border-radius: 5px;
+  }
+  
+  .card > a > img {
+    background-color: #fff;
+  }

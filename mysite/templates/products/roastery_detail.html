@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load humanize %}
 
 {% block head %}
 <title>메인사이트</title>
@@ -48,13 +49,17 @@
     <div class="paginator">
         <p> 총 {{count}}개의 원두</p>
         <div class="paginator-content">
-            {% for coffee in page.object_list %}
+            {% for i in page.object_list %}
             <div class="card col-md-3 cardheight">
-                <a href="/coffee/{{coffee.CoffeeID}}"><img src="/static/coffee_img/{{coffee.CoffeeID}}.jpg" alt="{{coffee.CoffeeID}}" class="card-img-top"></a>
+                <a href="/coffee/{{i.CoffeeID}}"><img src="/static/coffee_img/{{i.CoffeeID}}.jpg" alt="{{i.CoffeeID}}" class="card-img-top"></a>
                 <div class="card-body">
-                    <h5 class="card-title">{{coffee.CoffeeName}}</h5>
-                    <p class="card-text">{{coffee.RoasteryID.RoasteryName}}</p>
-                    <p class="card-text"><small class="text-body-secondary">₩ {{coffee.Price}}</small></p>
+                    <div class="content1">
+                        <h5 class="card-title truncate">{{i.CoffeeName}}</h5>
+                    </div>
+                    <div class="card-text roas-name-content">{{i.RoasteryID.RoasteryName}}</div>
+                    <div class="content2">
+                        <p class="card-text"><small class="text-body-secondary">{{i.Price|intcomma}}원</small></p>
+                    </div>
                 </div>
             </div>
             {% endfor %}

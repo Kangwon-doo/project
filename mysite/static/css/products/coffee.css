@@ -246,6 +246,15 @@
     background-color: #fff;
   }
 
+  
+  .truncate {
+    width: 100%;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+  }
+
     .info-section {
       width: 100%;
         display: flex;
