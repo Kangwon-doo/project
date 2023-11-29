@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-2k@b6obpk+regleb6n-myoq*n$@s&wywf_v@jjmofff^!1dled'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [''www.wondoodoo.shop', '43.202.94.184'']
 
 # Application definition
 
