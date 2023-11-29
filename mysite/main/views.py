@@ -1,20 +1,25 @@
 from django.shortcuts import render,redirect
-from products.cosine import cos_recommendation
-from django.contrib.auth.decorators import login_required
-from .models import Coffee
-import json
-from .models import Coffee, Order, OrderItem, Preference, Subscription, Roastery
-from django.db import IntegrityError
 from products.cosine import cos_recommendation, collaborative_rec, similar_user
 from django.contrib.auth.decorators import login_required
 import json
+import random
 from django.db import IntegrityError
 from .models import Coffee, Order, OrderItem, Preference, Subscription, Roastery, Reviews, CustomUser
 from common.forms import CustomUserChangeForm
 from datetime import datetime
 from keras.models import load_model
-import random
-
+from sqlalchemy import create_engine
+import pandas as pd
+from django.core.exceptions import ObjectDoesNotExist
+​
+# MySQL 연결 정보
+mysql_host = 'localhost'
+mysql_user = 'root'
+mysql_password = 'MShw1214!'
+mysql_db = 'wondoodoo'
+engine = create_engine(f"mysql+pymysql://{mysql_user}:{mysql_password}@{mysql_host}/{mysql_db}")
+query = f"SELECT * FROM socialaccount_socialaccount;"
+socialaccount = pd.read_sql(query, engine)
 # load model
 model = load_model('model/test_model.hdf5')
 model.embeddings = {
@@ -125,12 +130,12 @@ def index(request):  # main page
         if review_count == 0:  # 리뷰가 아직 없는 고객
             user_favor = Preference.objects.get(user=user)
             favor = {'caf': user_favor.caf,
-                     'blend': user_favor.blend,
-                     'notes': jsonDec.decode(user_favor.notes),
-                     'sour': user_favor.sour,
-                     'sweet': user_favor.sweet,
-                     'bitter': user_favor.bitter,
-                     'body': user_favor.body}
+                    'blend': user_favor.blend,
+                    'notes': jsonDec.decode(user_favor.notes),
+                    'sour': user_favor.sour,
+                    'sweet': user_favor.sweet,
+                    'bitter': user_favor.bitter,
+                    'body': user_favor.body}
 ​
             recommended_ids = cos_recommendation(favor, 8)
             recommended_coffees = Coffee.objects.filter(CoffeeID__in=recommended_ids)
