@@ -165,16 +165,16 @@ SOCIALACCOUNT_LOGIN_ON_GET = True
 SOCIALACCOUNT_PROVIDERS = {
     'naver': {
         'APP': {
-            'client_id': 'Dbzg6QTeSU86m_TrAXRO',
-            'secret': '_tlzW4aBti',
+            'client_id': '*',
+            'secret': '*',
             'key': ''
         },
         'SCOPE': ['profile', 'email'],
     },
     'kakao': {
         'APP': {
-            'client_id': 'e9d0ada26ad976a23e15ac22c1e31f46',
-            'secret': '2RO6FIusRV8TnlJHZInt273ZEeESnQDU',
+            'client_id': '*',
+            'secret': '*',
         }
     }
 }
